@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "videoId": "dQw4w9WgXcQ",
+    "title": "Forsaj Club 2024 Teaser",
+    "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "03:32",
+    "created_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "videoId": "dQw4w9WgXcQ",
+    "title": "Dakar 2026 Hazırlıqları",
+    "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "03:32",
+    "created_at": "2024-01-02T00:00:00Z"
+  },
+  {
+    "id": 3,
+    "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "videoId": "dQw4w9WgXcQ",
+    "title": "Offroad Texnika Dərsləri",
+    "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "03:32",
+    "created_at": "2024-01-03T00:00:00Z"
+  },
+  {
+    "id": 201,
+    "title": "Qobu Offroad Test Lap",
+    "youtubeUrl": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+    "videoId": "M7lc1UVf-VE",
+    "duration": "04:27",
+    "thumbnail": "https://img.youtube.com/vi/M7lc1UVf-VE/maxresdefault.jpg",
+    "created_at": "2026-02-25T18:00:00.000Z"
+  },
+  {
+    "id": 202,
+    "title": "Şamaxı Dağ Etabı Highlights",
+    "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "videoId": "dQw4w9WgXcQ",
+    "duration": "03:33",
+    "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "created_at": "2026-02-24T17:30:00.000Z"
+  },
+  {
+    "id": 203,
+    "title": "Mud Zone Slow-Mo Recap",
+    "youtubeUrl": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "videoId": "aqz-KE-bpKQ",
+    "duration": "02:18",
+    "thumbnail": "https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg",
+    "created_at": "2026-02-23T15:10:00.000Z"
+  },
+  {
+    "id": 204,
+    "title": "Rock Trail Driver Cam",
+    "youtubeUrl": "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    "videoId": "ysz5S6PUM-U",
+    "duration": "05:02",
+    "thumbnail": "https://img.youtube.com/vi/ysz5S6PUM-U/maxresdefault.jpg",
+    "created_at": "2026-02-22T14:05:00.000Z"
+  }
+]

@@ -1,0 +1,4043 @@
+{
+  "schemaVersion": 14,
+  "updatedAt": "2026-02-25T19:26:51.140Z",
+  "resources": {
+    "site-content": [
+      {
+        "id": "about",
+        "title": "HAQQIMIZDA",
+        "sections": [
+          {
+            "id": "lbl-pi-lotlar-842",
+            "type": "text",
+            "label": "PİLOTLAR",
+            "value": "PİLOTLAR"
+          },
+          {
+            "id": "lbl-stats-pilots-12",
+            "type": "text",
+            "label": "STATS_PILOTS",
+            "value": "STATS_PILOTS"
+          },
+          {
+            "id": "lbl-yari-lar-107",
+            "type": "text",
+            "label": "YARIŞLAR",
+            "value": "YARIŞLAR"
+          },
+          {
+            "id": "lbl-stats-races-570",
+            "type": "text",
+            "label": "STATS_RACES",
+            "value": "STATS_RACES"
+          },
+          {
+            "id": "lbl-g-ncl-r-76",
+            "type": "text",
+            "label": "GƏNCLƏR",
+            "value": "GƏNCLƏR"
+          },
+          {
+            "id": "lbl-stats-youth-230",
+            "type": "text",
+            "label": "STATS_YOUTH",
+            "value": "STATS_YOUTH"
+          },
+          {
+            "id": "lbl-t-hl-k-si-zli-k-479",
+            "type": "text",
+            "label": "TƏHLÜKƏSİZLİK",
+            "value": "TƏHLÜKƏSİZLİK"
+          },
+          {
+            "id": "lbl-ekstremal-i-dman-908",
+            "type": "text",
+            "label": "EKSTREMAL İDMANDA CA...",
+            "value": "EKSTREMAL İDMANDA CAN SAĞLIĞI BİZİM BİR NÖMRƏLİ QAYDAMIZDIR. BÜTÜN TEXNİKALARIMIZ FIA STANDARTLARINA UYĞUN YOXLANILIR."
+          },
+          {
+            "id": "lbl-forsaj-bi-r-klub-174",
+            "type": "text",
+            "label": "FORSAJ BİR KLUBDAN D...",
+            "value": "FORSAJ BİR KLUBDAN DAHA ÇOX, SADİQ VƏ BÖYÜK BİR AİLƏDİR. BİRİMİZ HAMIMIZ, HAMIMIZ BİRİMİZ ÜÇÜN!"
+          },
+          {
+            "id": "lbl-t-bi-ti-qoru-361",
+            "type": "text",
+            "label": "TƏBİƏTİ QORU",
+            "value": "TƏBİƏTİ QORU"
+          },
+          {
+            "id": "lbl-bi-z-offroad-ed--342",
+            "type": "text",
+            "label": "BİZ OFFROAD EDƏRKƏN ...",
+            "value": "BİZ OFFROAD EDƏRKƏN TƏBİƏTƏ ZƏRƏR VERMƏMƏYİ ÖZÜMÜZƏ BORC BİLİRİK. EKOLOJİ BALANS BİZİM ÜÇÜN MÜQƏDDƏSDİR."
+          },
+          {
+            "id": "lbl-m-k-mm-lli-k-223",
+            "type": "text",
+            "label": "MÜKƏMMƏLLİK",
+            "value": "MÜKƏMMƏLLİK"
+          },
+          {
+            "id": "lbl-h-r-yari-da-h--238",
+            "type": "text",
+            "label": "HƏR YARIŞDA, HƏR DÖN...",
+            "value": "HƏR YARIŞDA, HƏR DÖNGƏDƏ DAHA YAXŞI OLMAĞA ÇALIŞIRIQ. TƏLİMLƏRİMİZ PEŞƏKAR İNSTRUKTORLAR TƏRƏFİNDƏN İDARƏ OLUNUR."
+          },
+          {
+            "id": "lbl-haqqimizda-16",
+            "type": "text",
+            "label": "HAQQIMIZDA",
+            "value": "HAQQIMIZDA"
+          },
+          {
+            "id": "lbl-forsaj-club-494",
+            "type": "text",
+            "label": "FORSAJ CLUB",
+            "value": "FORSAJ CLUB"
+          },
+          {
+            "id": "lbl-klubumuz-sad-c--90",
+            "type": "text",
+            "label": "Klubumuz sadəcə bir ...",
+            "value": "Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq."
+          },
+          {
+            "id": "attr-forsaj-club-detail-405",
+            "type": "text",
+            "label": "KEY: attr-forsaj-club-detail-405",
+            "value": "Forsaj Club Detail"
+          },
+          {
+            "id": "lbl-bi-zi-m-mi-ssi-yami-445",
+            "type": "text",
+            "label": "BİZİM MİSSİYAMIZ",
+            "value": "BİZİM MİSSİYAMIZ"
+          },
+          {
+            "id": "lbl-az-rbaycan-n-h--532",
+            "type": "text",
+            "label": "Azərbaycanın hər bir...",
+            "value": "Azərbaycanın hər bir guşəsində offroad idmanını təbliğ etmək, yerli pilotları beynəlxalq standartlara uyğun yetişdirmək və təbiəti qoruyaraq ekstremal adrenalin təcrübəsi bəxş etmək."
+          },
+          {
+            "id": "lbl-h-d-fi-mi-z-daka-157",
+            "type": "text",
+            "label": "HƏDƏFİMİZ: DAKAR RAL...",
+            "value": "HƏDƏFİMİZ: DAKAR RALLİ 2026"
+          },
+          {
+            "id": "lbl-bi-zi-m-baxi-imiz-459",
+            "type": "text",
+            "label": "BİZİM BAXIŞIMIZ",
+            "value": "BİZİM BAXIŞIMIZ"
+          },
+          {
+            "id": "lbl-regionun-n-b-y-759",
+            "type": "text",
+            "label": "Regionun ən böyük mo...",
+            "value": "Regionun ən böyük motorsport hubuna çevrilmək, rəqəmsal və fiziki infrastrukturlarla pilotlarımızı dəstəkləmək və motorsportu hər kəs üçün əlçatan bir ehtirasa çevirmək."
+          },
+          {
+            "id": "lbl-qafqazin-li-der--28",
+            "type": "text",
+            "label": "QAFQAZIN LİDER KLUBU...",
+            "value": "QAFQAZIN LİDER KLUBUNA ÇEVRİLMƏK"
+          },
+          {
+            "id": "lbl-fundamental-pri--211",
+            "type": "text",
+            "label": "FUNDAMENTAL PRİNSİPL...",
+            "value": "FUNDAMENTAL PRİNSİPLƏR"
+          },
+          {
+            "id": "lbl--sas-d-y-rl-ri-m-994",
+            "type": "text",
+            "label": "ƏSAS DƏYƏRLƏRİMİZ",
+            "value": "ƏSAS DƏYƏRLƏRİMİZ"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "news",
+        "title": "XƏBƏRLƏR",
+        "sections": [
+          {
+            "id": "SECTION_TITLE",
+            "type": "text",
+            "label": "KEY: SECTION_TITLE",
+            "value": "SON XƏBƏRLƏR"
+          },
+          {
+            "id": "lbl-section-title-921",
+            "type": "text",
+            "label": "SECTION_TITLE",
+            "value": "SECTION_TITLE"
+          },
+          {
+            "id": "SECTION_SUBTITLE",
+            "type": "text",
+            "label": "KEY: SECTION_SUBTITLE",
+            "value": "Motorsport və Offroad dünyasından yeniliklər"
+          },
+          {
+            "id": "lbl-section-subtitl-190",
+            "type": "text",
+            "label": "SECTION_SUBTITLE",
+            "value": "SECTION_SUBTITLE"
+          },
+          {
+            "id": "VIEW_ALL_BTN",
+            "type": "text",
+            "label": "KEY: VIEW_ALL_BTN",
+            "value": "HAMISI"
+          },
+          {
+            "id": "lbl-view-all-btn-459",
+            "type": "text",
+            "label": "VIEW_ALL_BTN",
+            "value": "VIEW_ALL_BTN"
+          },
+          {
+            "id": "FEATURED_LABEL",
+            "type": "text",
+            "label": "KEY: FEATURED_LABEL",
+            "value": "SON XƏBƏR"
+          },
+          {
+            "id": "lbl-featured-label-994",
+            "type": "text",
+            "label": "FEATURED_LABEL",
+            "value": "FEATURED_LABEL"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "newspage",
+        "title": "Xəbər Səhifəsi",
+        "sections": [
+          {
+            "id": "BTN_BACK",
+            "type": "text",
+            "label": "KEY: BTN_BACK",
+            "value": "GERİ QAYIT"
+          },
+          {
+            "id": "lbl-btn-back-203",
+            "type": "text",
+            "label": "BTN_BACK",
+            "value": "BTN_BACK"
+          },
+          {
+            "id": "SHARE_LABEL",
+            "type": "text",
+            "label": "KEY: SHARE_LABEL",
+            "value": "BU XƏBƏRİ PAYLAŞIN"
+          },
+          {
+            "id": "lbl-share-label-927",
+            "type": "text",
+            "label": "SHARE_LABEL",
+            "value": "SHARE_LABEL"
+          },
+          {
+            "id": "OTHER_NEWS",
+            "type": "text",
+            "label": "KEY: OTHER_NEWS",
+            "value": "DİGƏR XƏBƏRLƏR"
+          },
+          {
+            "id": "lbl-other-news-401",
+            "type": "text",
+            "label": "OTHER_NEWS",
+            "value": "OTHER_NEWS"
+          },
+          {
+            "id": "BTN_ALL_NEWS",
+            "type": "text",
+            "label": "KEY: BTN_ALL_NEWS",
+            "value": "BÜTÜN XƏBƏRLƏR"
+          },
+          {
+            "id": "lbl-btn-all-news-107",
+            "type": "text",
+            "label": "BTN_ALL_NEWS",
+            "value": "BTN_ALL_NEWS"
+          },
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "KEY: PAGE_TITLE",
+            "value": "XƏBƏRLƏR"
+          },
+          {
+            "id": "lbl-page-title-82",
+            "type": "text",
+            "label": "PAGE_TITLE",
+            "value": "PAGE_TITLE"
+          },
+          {
+            "id": "lbl-page-subtitle-932",
+            "type": "text",
+            "label": "PAGE_SUBTITLE",
+            "value": "PAGE_SUBTITLE"
+          },
+          {
+            "id": "NO_NEWS",
+            "type": "text",
+            "label": "KEY: NO_NEWS",
+            "value": "HƏLƏ Kİ XƏBƏR YOXDUR"
+          },
+          {
+            "id": "lbl-no-news-15",
+            "type": "text",
+            "label": "NO_NEWS",
+            "value": "NO_NEWS"
+          },
+          {
+            "id": "BTN_READ_NEWS",
+            "type": "text",
+            "label": "KEY: BTN_READ_NEWS",
+            "value": "XƏBƏRİ OXU"
+          },
+          {
+            "id": "lbl-btn-read-news-847",
+            "type": "text",
+            "label": "BTN_READ_NEWS",
+            "value": "BTN_READ_NEWS"
+          },
+          {
+            "id": "LABEL_LATEST",
+            "type": "text",
+            "label": "KEY: LABEL_LATEST",
+            "value": "SON XƏBƏR"
+          },
+          {
+            "id": "lbl-label-latest-417",
+            "type": "text",
+            "label": "LABEL_LATEST",
+            "value": "LABEL_LATEST"
+          },
+          {
+            "id": "BTN_READ",
+            "type": "text",
+            "label": "KEY: BTN_READ",
+            "value": "OXU"
+          },
+          {
+            "id": "lbl-btn-read-511",
+            "type": "text",
+            "label": "BTN_READ",
+            "value": "BTN_READ"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "eventspage",
+        "title": "Tədbirlər Səhifəsi",
+        "sections": [
+          {
+            "id": "lbl-f-rdi-i-tirak--578",
+            "type": "text",
+            "label": "Fərdi İştirakçı",
+            "value": "Fərdi İştirakçı"
+          },
+          {
+            "id": "lbl-club-4x4-413",
+            "type": "text",
+            "label": "Club 4X4",
+            "value": "Club 4X4"
+          },
+          {
+            "id": "lbl-extreme-4x4-347",
+            "type": "text",
+            "label": "Extreme 4X4",
+            "value": "Extreme 4X4"
+          },
+          {
+            "id": "lbl-forsaj-club-438",
+            "type": "text",
+            "label": "Forsaj Club",
+            "value": "Forsaj Club"
+          },
+          {
+            "id": "lbl-offroad-az-117",
+            "type": "text",
+            "label": "Offroad.az",
+            "value": "Offroad.az"
+          },
+          {
+            "id": "lbl-overland-4x4-638",
+            "type": "text",
+            "label": "Overland 4X4",
+            "value": "Overland 4X4"
+          },
+          {
+            "id": "lbl-patrolclub-az-358",
+            "type": "text",
+            "label": "PatrolClub.az",
+            "value": "PatrolClub.az"
+          },
+          {
+            "id": "lbl-victory-club-693",
+            "type": "text",
+            "label": "Victory Club",
+            "value": "Victory Club"
+          },
+          {
+            "id": "lbl-z-f-r-4x4-club-32",
+            "type": "text",
+            "label": "Zəfər 4X4 Club",
+            "value": "Zəfər 4X4 Club"
+          },
+          {
+            "id": "MODAL_TITLE",
+            "type": "text",
+            "label": "KEY: MODAL_TITLE",
+            "value": "YARIŞDA İŞTİRAK"
+          },
+          {
+            "id": "lbl-modal-title-998",
+            "type": "text",
+            "label": "MODAL_TITLE",
+            "value": "MODAL_TITLE"
+          },
+          {
+            "id": "JOIN_AS_PILOT",
+            "type": "text",
+            "label": "KEY: JOIN_AS_PILOT",
+            "value": "PİLOT KİMİ QATIL"
+          },
+          {
+            "id": "JOIN_PILOT_DESC",
+            "type": "text",
+            "label": "KEY: JOIN_PILOT_DESC",
+            "value": "TEXNİKİ REQLAMENTƏ UYĞUN OLARAQ"
+          },
+          {
+            "id": "JOIN_AS_SPECTATOR",
+            "type": "text",
+            "label": "KEY: JOIN_AS_SPECTATOR",
+            "value": "İZLƏYİCİ KİMİ QATIL"
+          },
+          {
+            "id": "JOIN_SPECTATOR_DESC",
+            "type": "text",
+            "label": "KEY: JOIN_SPECTATOR_DESC",
+            "value": "YARIŞI TRİBUNADAN İZLƏ"
+          },
+          {
+            "id": "BTN_BACK",
+            "type": "text",
+            "label": "KEY: BTN_BACK",
+            "value": "GERİ QAYIT"
+          },
+          {
+            "id": "lbl-btn-back-167",
+            "type": "text",
+            "label": "BTN_BACK",
+            "value": "BTN_BACK"
+          },
+          {
+            "id": "PILOT_REG_TITLE",
+            "type": "text",
+            "label": "KEY: PILOT_REG_TITLE",
+            "value": "PİLOT QEYDİYYATI"
+          },
+          {
+            "id": "lbl-pilot-reg-title-768",
+            "type": "text",
+            "label": "PILOT_REG_TITLE",
+            "value": "PILOT_REG_TITLE"
+          },
+          {
+            "id": "lbl-tam-ad-583",
+            "type": "text",
+            "label": "Tam ad",
+            "value": "Tam ad"
+          },
+          {
+            "id": "lbl-pilot-registrat-94",
+            "type": "text",
+            "label": "Pilot Registration",
+            "value": "Pilot Registration"
+          },
+          {
+            "id": "lbl-toyota-578",
+            "type": "text",
+            "label": "Toyota",
+            "value": "Toyota"
+          },
+          {
+            "id": "lbl-post-911",
+            "type": "text",
+            "label": "POST",
+            "value": "POST"
+          },
+          {
+            "id": "lbl-content-type-745",
+            "type": "text",
+            "label": "Content-Type",
+            "value": "Content-Type"
+          },
+          {
+            "id": "lbl-qeydiyyat-m-rac-212",
+            "type": "text",
+            "label": "Qeydiyyat müraciətin...",
+            "value": "Qeydiyyat müraciətiniz uğurla göndərildi!"
+          },
+          {
+            "id": "lbl-gond-rilm-zama-490",
+            "type": "text",
+            "label": "Gondərilmə zamanı xə...",
+            "value": "Gondərilmə zamanı xəta baş verdi."
+          },
+          {
+            "id": "FIELD_NAME",
+            "type": "text",
+            "label": "KEY: FIELD_NAME",
+            "value": "AD VƏ SOYAD"
+          },
+          {
+            "id": "lbl-field-name-142",
+            "type": "text",
+            "label": "FIELD_NAME",
+            "value": "FIELD_NAME"
+          },
+          {
+            "id": "PLACEHOLDER_NAME",
+            "type": "text",
+            "label": "KEY: PLACEHOLDER_NAME",
+            "value": "Tam ad daxil edin"
+          },
+          {
+            "id": "lbl-placeholder-nam-107",
+            "type": "text",
+            "label": "PLACEHOLDER_NAME",
+            "value": "PLACEHOLDER_NAME"
+          },
+          {
+            "id": "FIELD_PHONE",
+            "type": "text",
+            "label": "KEY: FIELD_PHONE",
+            "value": "TELEFON"
+          },
+          {
+            "id": "lbl-field-phone-118",
+            "type": "text",
+            "label": "FIELD_PHONE",
+            "value": "FIELD_PHONE"
+          },
+          {
+            "id": "FIELD_CAR_MODEL",
+            "type": "text",
+            "label": "KEY: FIELD_CAR_MODEL",
+            "value": "AVTOMOBİLİN MARKA/MODELİ"
+          },
+          {
+            "id": "lbl-field-car-model-313",
+            "type": "text",
+            "label": "FIELD_CAR_MODEL",
+            "value": "FIELD_CAR_MODEL"
+          },
+          {
+            "id": "PLACEHOLDER_CAR",
+            "type": "text",
+            "label": "KEY: PLACEHOLDER_CAR",
+            "value": "Məs: Toyota LC 105"
+          },
+          {
+            "id": "lbl-placeholder-car-909",
+            "type": "text",
+            "label": "PLACEHOLDER_CAR",
+            "value": "PLACEHOLDER_CAR"
+          },
+          {
+            "id": "FIELD_TIRE_SIZE",
+            "type": "text",
+            "label": "KEY: FIELD_TIRE_SIZE",
+            "value": "TƏKƏR ÖLÇÜSÜ"
+          },
+          {
+            "id": "lbl-field-tire-size-394",
+            "type": "text",
+            "label": "FIELD_TIRE_SIZE",
+            "value": "FIELD_TIRE_SIZE"
+          },
+          {
+            "id": "PLACEHOLDER_TIRE",
+            "type": "text",
+            "label": "KEY: PLACEHOLDER_TIRE",
+            "value": "Məs: 35 DÜYM"
+          },
+          {
+            "id": "lbl-placeholder-tir-382",
+            "type": "text",
+            "label": "PLACEHOLDER_TIRE",
+            "value": "PLACEHOLDER_TIRE"
+          },
+          {
+            "id": "FIELD_ENGINE",
+            "type": "text",
+            "label": "KEY: FIELD_ENGINE",
+            "value": "MÜHƏRRİK HƏCMİ"
+          },
+          {
+            "id": "lbl-field-engine-420",
+            "type": "text",
+            "label": "FIELD_ENGINE",
+            "value": "FIELD_ENGINE"
+          },
+          {
+            "id": "PLACEHOLDER_ENGINE",
+            "type": "text",
+            "label": "KEY: PLACEHOLDER_ENGINE",
+            "value": "Məs: 4.4L"
+          },
+          {
+            "id": "lbl-placeholder-eng-907",
+            "type": "text",
+            "label": "PLACEHOLDER_ENGINE",
+            "value": "PLACEHOLDER_ENGINE"
+          },
+          {
+            "id": "FIELD_CLUB",
+            "type": "text",
+            "label": "KEY: FIELD_CLUB",
+            "value": "TƏMSİL ETDİYİ KLUB"
+          },
+          {
+            "id": "lbl-field-club-83",
+            "type": "text",
+            "label": "FIELD_CLUB",
+            "value": "FIELD_CLUB"
+          },
+          {
+            "id": "BTN_COMPLETE_REG",
+            "type": "text",
+            "label": "KEY: BTN_COMPLETE_REG",
+            "value": "QEYDİYYATI TAMAMLA"
+          },
+          {
+            "id": "lbl-btn-complete-re-938",
+            "type": "text",
+            "label": "BTN_COMPLETE_REG",
+            "value": "BTN_COMPLETE_REG"
+          },
+          {
+            "id": "STATUS_UPCOMING",
+            "type": "text",
+            "label": "KEY: STATUS_UPCOMING",
+            "value": "GƏLƏCƏK YARIŞ"
+          },
+          {
+            "id": "STATUS_PAST",
+            "type": "text",
+            "label": "KEY: STATUS_PAST",
+            "value": "BAŞA ÇATIB"
+          },
+          {
+            "id": "BTN_JOIN_EVENT",
+            "type": "text",
+            "label": "KEY: BTN_JOIN_EVENT",
+            "value": "TƏDBİRƏ QOŞUL"
+          },
+          {
+            "id": "SECTION_DESC",
+            "type": "text",
+            "label": "KEY: SECTION_DESC",
+            "value": "TƏSVİR"
+          },
+          {
+            "id": "lbl-section-desc-294",
+            "type": "text",
+            "label": "SECTION_DESC",
+            "value": "SECTION_DESC"
+          },
+          {
+            "id": "DESC_PLACEHOLDER",
+            "type": "text",
+            "label": "KEY: DESC_PLACEHOLDER",
+            "value": "Bu tədbir haqqında ətraflı məlumat tezliklə paylaşılacaq."
+          },
+          {
+            "id": "lbl-desc-placeholde-267",
+            "type": "text",
+            "label": "DESC_PLACEHOLDER",
+            "value": "DESC_PLACEHOLDER"
+          },
+          {
+            "id": "DOWNLOAD_TITLE",
+            "type": "text",
+            "label": "KEY: DOWNLOAD_TITLE",
+            "value": "TƏLİMATI YÜKLƏ"
+          },
+          {
+            "id": "lbl-download-title-367",
+            "type": "text",
+            "label": "DOWNLOAD_TITLE",
+            "value": "DOWNLOAD_TITLE"
+          },
+          {
+            "id": "DOWNLOAD_DESC",
+            "type": "text",
+            "label": "KEY: DOWNLOAD_DESC",
+            "value": "YARIŞA HAZIRLIQ VƏ TEXNİKİ REQLAMENT HAQQINDA BÜTÜN MƏLUMATLAR BU SƏNƏDDƏ QEYD OLUNUB."
+          },
+          {
+            "id": "lbl-download-desc-218",
+            "type": "text",
+            "label": "DOWNLOAD_DESC",
+            "value": "DOWNLOAD_DESC"
+          },
+          {
+            "id": "BTN_DOWNLOAD_PDF",
+            "type": "text",
+            "label": "KEY: BTN_DOWNLOAD_PDF",
+            "value": "PDF YÜKLƏ"
+          },
+          {
+            "id": "lbl-btn-download-pd-425",
+            "type": "text",
+            "label": "BTN_DOWNLOAD_PDF",
+            "value": "BTN_DOWNLOAD_PDF"
+          },
+          {
+            "id": "SECTION_RULES",
+            "type": "text",
+            "label": "KEY: SECTION_RULES",
+            "value": "QAYDALAR VƏ TƏLƏBLƏR"
+          },
+          {
+            "id": "lbl-section-rules-516",
+            "type": "text",
+            "label": "SECTION_RULES",
+            "value": "SECTION_RULES"
+          },
+          {
+            "id": "RULES_PLACEHOLDER",
+            "type": "text",
+            "label": "KEY: RULES_PLACEHOLDER",
+            "value": "Yarış qaydaları iştirakçılara brifinq zamanı elan ediləcək."
+          },
+          {
+            "id": "lbl-rules-placehold-395",
+            "type": "text",
+            "label": "RULES_PLACEHOLDER",
+            "value": "RULES_PLACEHOLDER"
+          },
+          {
+            "id": "SIDEBAR_QUESTION_TITLE",
+            "type": "text",
+            "label": "KEY: SIDEBAR_QUESTION_TITLE",
+            "value": "SUALINIZ VAR?"
+          },
+          {
+            "id": "lbl-sidebar-questio-985",
+            "type": "text",
+            "label": "SIDEBAR_QUESTION_TIT...",
+            "value": "SIDEBAR_QUESTION_TITLE"
+          },
+          {
+            "id": "SIDEBAR_QUESTION_DESC",
+            "type": "text",
+            "label": "KEY: SIDEBAR_QUESTION_DESC",
+            "value": "YARIŞLA BAĞLI ƏLAVƏ SUALLARINIZ ÜÇÜN BİZİMLƏ ƏLAQƏ SAXLAYIN."
+          },
+          {
+            "id": "lbl-sidebar-questio-757",
+            "type": "text",
+            "label": "SIDEBAR_QUESTION_DES...",
+            "value": "SIDEBAR_QUESTION_DESC"
+          },
+          {
+            "id": "BTN_CONTACT",
+            "type": "text",
+            "label": "KEY: BTN_CONTACT",
+            "value": "ƏLAQƏ"
+          },
+          {
+            "id": "lbl-btn-contact-115",
+            "type": "text",
+            "label": "BTN_CONTACT",
+            "value": "BTN_CONTACT"
+          },
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "KEY: PAGE_TITLE",
+            "value": "TƏDBİRLƏR"
+          },
+          {
+            "id": "lbl-page-title-830",
+            "type": "text",
+            "label": "PAGE_TITLE",
+            "value": "PAGE_TITLE"
+          },
+          {
+            "id": "lbl-page-subtitle-369",
+            "type": "text",
+            "label": "PAGE_SUBTITLE",
+            "value": "PAGE_SUBTITLE"
+          },
+          {
+            "id": "lbl-tab-planned-900",
+            "type": "text",
+            "label": "TAB_PLANNED",
+            "value": "TAB_PLANNED"
+          },
+          {
+            "id": "TAB_PAST",
+            "type": "text",
+            "label": "KEY: TAB_PAST",
+            "value": "KEÇMİŞ TƏDBİRLƏR"
+          },
+          {
+            "id": "lbl-tab-past-360",
+            "type": "text",
+            "label": "TAB_PAST",
+            "value": "TAB_PAST"
+          },
+          {
+            "id": "LABEL_FEATURED",
+            "type": "text",
+            "label": "KEY: LABEL_FEATURED",
+            "value": "OFFROAD FEATURED"
+          },
+          {
+            "id": "lbl-label-featured-18",
+            "type": "text",
+            "label": "LABEL_FEATURED",
+            "value": "LABEL_FEATURED"
+          },
+          {
+            "id": "BTN_MORE_INFO",
+            "type": "text",
+            "label": "KEY: BTN_MORE_INFO",
+            "value": "DAHA ƏTRAFLI"
+          },
+          {
+            "id": "lbl-btn-more-info-464",
+            "type": "text",
+            "label": "BTN_MORE_INFO",
+            "value": "BTN_MORE_INFO"
+          },
+          {
+            "id": "BTN_VIEW_DETAILS",
+            "type": "text",
+            "label": "KEY: BTN_VIEW_DETAILS",
+            "value": "ƏTRAFLI BAX"
+          },
+          {
+            "id": "lbl-btn-view-detail-269",
+            "type": "text",
+            "label": "BTN_VIEW_DETAILS",
+            "value": "BTN_VIEW_DETAILS"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "driverspage",
+        "title": "Sürücülər Səhifəsi",
+        "sections": [
+          {
+            "id": "CAT_RANKING_SUFFIX",
+            "type": "text",
+            "label": "KEY: CAT_RANKING_SUFFIX",
+            "value": "REYTİNQ"
+          },
+          {
+            "id": "lbl-cat-ranking-suf-233",
+            "type": "text",
+            "label": "CAT_RANKING_SUFFIX",
+            "value": "CAT_RANKING_SUFFIX"
+          },
+          {
+            "id": "lbl-cat-subtitle-813",
+            "type": "text",
+            "label": "CAT_SUBTITLE",
+            "value": "CAT_SUBTITLE"
+          },
+          {
+            "id": "BACK_BUTTON",
+            "type": "text",
+            "label": "KEY: BACK_BUTTON",
+            "value": "GERİ QAYIT"
+          },
+          {
+            "id": "lbl-back-button-902",
+            "type": "text",
+            "label": "BACK_BUTTON",
+            "value": "BACK_BUTTON"
+          },
+          {
+            "id": "POINTS_LABEL",
+            "type": "text",
+            "label": "KEY: POINTS_LABEL",
+            "value": "XAL"
+          },
+          {
+            "id": "lbl-points-label-114",
+            "type": "text",
+            "label": "POINTS_LABEL",
+            "value": "POINTS_LABEL"
+          },
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "KEY: PAGE_TITLE",
+            "value": "SÜRÜCÜLƏR"
+          },
+          {
+            "id": "lbl-page-title-59",
+            "type": "text",
+            "label": "PAGE_TITLE",
+            "value": "PAGE_TITLE"
+          },
+          {
+            "id": "lbl-page-subtitle-660",
+            "type": "text",
+            "label": "PAGE_SUBTITLE",
+            "value": "PAGE_SUBTITLE"
+          },
+          {
+            "id": "PODIUM_LABEL",
+            "type": "text",
+            "label": "KEY: PODIUM_LABEL",
+            "value": "PODIUM LEADERS"
+          },
+          {
+            "id": "lbl-podium-label-948",
+            "type": "text",
+            "label": "PODIUM_LABEL",
+            "value": "PODIUM_LABEL"
+          },
+          {
+            "id": "PTS_LABEL",
+            "type": "text",
+            "label": "KEY: PTS_LABEL",
+            "value": "PTS"
+          },
+          {
+            "id": "lbl-pts-label-922",
+            "type": "text",
+            "label": "PTS_LABEL",
+            "value": "PTS_LABEL"
+          },
+          {
+            "id": "GRID_LABEL",
+            "type": "text",
+            "label": "KEY: GRID_LABEL",
+            "value": "TOP 10 GRID"
+          },
+          {
+            "id": "lbl-grid-label-335",
+            "type": "text",
+            "label": "GRID_LABEL",
+            "value": "GRID_LABEL"
+          },
+          {
+            "id": "FULL_STANDINGS_TITLE",
+            "type": "text",
+            "label": "KEY: FULL_STANDINGS_TITLE",
+            "value": "TAM SIRALAMA"
+          },
+          {
+            "id": "lbl-full-standings--76",
+            "type": "text",
+            "label": "FULL_STANDINGS_TITLE",
+            "value": "FULL_STANDINGS_TITLE"
+          },
+          {
+            "id": "FULL_STANDINGS_SUB",
+            "type": "text",
+            "label": "KEY: FULL_STANDINGS_SUB",
+            "value": "BÜTÜN PİLOTLAR"
+          },
+          {
+            "id": "lbl-full-standings--929",
+            "type": "text",
+            "label": "FULL_STANDINGS_SUB",
+            "value": "FULL_STANDINGS_SUB"
+          },
+          {
+            "id": "VIEW_ALL_BTN",
+            "type": "text",
+            "label": "KEY: VIEW_ALL_BTN",
+            "value": "HAMISINA BAX"
+          },
+          {
+            "id": "lbl-view-all-btn-662",
+            "type": "text",
+            "label": "VIEW_ALL_BTN",
+            "value": "VIEW_ALL_BTN"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "gallerypage",
+        "title": "Qalereya",
+        "sections": [
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "KEY: PAGE_TITLE",
+            "value": "QALEREYA"
+          },
+          {
+            "id": "lbl-page-title-717",
+            "type": "text",
+            "label": "PAGE_TITLE",
+            "value": "PAGE_TITLE"
+          },
+          {
+            "id": "lbl-page-subtitle-902",
+            "type": "text",
+            "label": "PAGE_SUBTITLE",
+            "value": "PAGE_SUBTITLE"
+          },
+          {
+            "id": "TAB_PHOTOS",
+            "type": "text",
+            "label": "KEY: TAB_PHOTOS",
+            "value": "FOTOLAR"
+          },
+          {
+            "id": "lbl-tab-photos-507",
+            "type": "text",
+            "label": "TAB_PHOTOS",
+            "value": "TAB_PHOTOS"
+          },
+          {
+            "id": "TAB_VIDEOS",
+            "type": "text",
+            "label": "KEY: TAB_VIDEOS",
+            "value": "VİDEOLAR"
+          },
+          {
+            "id": "lbl-tab-videos-736",
+            "type": "text",
+            "label": "TAB_VIDEOS",
+            "value": "TAB_VIDEOS"
+          },
+          {
+            "id": "lbl-dynamic-collect-613",
+            "type": "text",
+            "label": "DYNAMIC_COLLECTION",
+            "value": "DYNAMIC_COLLECTION"
+          },
+          {
+            "id": "TOTAL_LABEL",
+            "type": "text",
+            "label": "KEY: TOTAL_LABEL",
+            "value": "TOPLAM"
+          },
+          {
+            "id": "lbl-total-label-269",
+            "type": "text",
+            "label": "TOTAL_LABEL",
+            "value": "TOTAL_LABEL"
+          },
+          {
+            "id": "TYPE_PHOTO",
+            "type": "text",
+            "label": "KEY: TYPE_PHOTO",
+            "value": "FOTO"
+          },
+          {
+            "id": "lbl-type-photo-514",
+            "type": "text",
+            "label": "TYPE_PHOTO",
+            "value": "TYPE_PHOTO"
+          },
+          {
+            "id": "TYPE_VIDEO",
+            "type": "text",
+            "label": "KEY: TYPE_VIDEO",
+            "value": "VİDEO"
+          },
+          {
+            "id": "lbl-type-video-779",
+            "type": "text",
+            "label": "TYPE_VIDEO",
+            "value": "TYPE_VIDEO"
+          },
+          {
+            "id": "NO_PHOTOS",
+            "type": "text",
+            "label": "KEY: NO_PHOTOS",
+            "value": "HƏLƏ Kİ FOTO ƏLAVƏ EDİLMƏYİB"
+          },
+          {
+            "id": "lbl-no-photos-55",
+            "type": "text",
+            "label": "NO_PHOTOS",
+            "value": "NO_PHOTOS"
+          },
+          {
+            "id": "NO_VIDEOS",
+            "type": "text",
+            "label": "KEY: NO_VIDEOS",
+            "value": "HƏLƏ Kİ VİDEO ƏLAVƏ EDİLMƏYİB"
+          },
+          {
+            "id": "lbl-no-videos-748",
+            "type": "text",
+            "label": "NO_VIDEOS",
+            "value": "NO_VIDEOS"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "rulespage",
+        "title": "Qaydalar",
+        "sections": [
+          {
+            "id": "RULES_PILOT_TITLE",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_TITLE",
+            "value": "PİLOT PROTOKOLU"
+          },
+          {
+            "id": "lbl-rules-pilot-tit-627",
+            "type": "text",
+            "label": "RULES_PILOT_TITLE",
+            "value": "RULES_PILOT_TITLE",
+            "url": "pilot"
+          },
+          {
+            "id": "RULES_PILOT_SUB1",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_SUB1",
+            "value": "İSTİFADƏÇİ ÖHDƏLİKLƏRİ"
+          },
+          {
+            "id": "lbl-rules-pilot-sub-55",
+            "type": "text",
+            "label": "RULES_PILOT_SUB1",
+            "value": "RULES_PILOT_SUB1"
+          },
+          {
+            "id": "RULES_PILOT_DESC1",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_DESC1",
+            "value": "HƏR BİR İŞTİRAKÇI FEDERASİYANIN MÜƏYYƏN ETDİYİ BÜTÜN TEXNİKİ VƏ ETİK NORMALARI QEYD-ŞƏRTSİZ QƏBUL EDİR."
+          },
+          {
+            "id": "lbl-rules-pilot-des-707",
+            "type": "text",
+            "label": "RULES_PILOT_DESC1",
+            "value": "RULES_PILOT_DESC1"
+          },
+          {
+            "id": "RULES_PILOT_SUB2",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_SUB2",
+            "value": "DİSKVALİFİKASİYA"
+          },
+          {
+            "id": "lbl-rules-pilot-sub-64",
+            "type": "text",
+            "label": "RULES_PILOT_SUB2",
+            "value": "RULES_PILOT_SUB2"
+          },
+          {
+            "id": "RULES_PILOT_DESC2",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_DESC2",
+            "value": "PROTOKOLDAN KƏNARA ÇIXMAQ VƏ YA HAKİM QƏRARLARINA ETİRAZ ETMƏK DƏRHAL DİSKVALİFİKASİYA İLƏ NƏTİCƏLƏNƏ BİLƏR."
+          },
+          {
+            "id": "lbl-rules-pilot-des-497",
+            "type": "text",
+            "label": "RULES_PILOT_DESC2",
+            "value": "RULES_PILOT_DESC2"
+          },
+          {
+            "id": "RULES_PILOT_SUB3",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_SUB3",
+            "value": "TEXNİKİ TƏLƏBLƏR"
+          },
+          {
+            "id": "lbl-rules-pilot-sub-753",
+            "type": "text",
+            "label": "RULES_PILOT_SUB3",
+            "value": "RULES_PILOT_SUB3"
+          },
+          {
+            "id": "RULES_PILOT_DESC3",
+            "type": "text",
+            "label": "KEY: RULES_PILOT_DESC3",
+            "value": "BÜTÜN AVADANLIQLAR YARIŞDAN 24 SAAT ƏVVƏL TEXNİKİ KOMİSSİYA TƏRƏFİNDƏN YOXLANILMALI VƏ TƏHLÜKƏSİZLİK SERTİFİKATI İLƏ TƏMİN EDİLMƏLİDİR."
+          },
+          {
+            "id": "lbl-rules-pilot-des-98",
+            "type": "text",
+            "label": "RULES_PILOT_DESC3",
+            "value": "RULES_PILOT_DESC3"
+          },
+          {
+            "id": "RULES_TECH_TITLE",
+            "type": "text",
+            "label": "KEY: RULES_TECH_TITLE",
+            "value": "TEXNİKİ NORMARTİVLƏR"
+          },
+          {
+            "id": "lbl-rules-tech-titl-698",
+            "type": "text",
+            "label": "RULES_TECH_TITLE",
+            "value": "RULES_TECH_TITLE",
+            "url": "technical"
+          },
+          {
+            "id": "RULES_TECH_SUB1",
+            "type": "text",
+            "label": "KEY: RULES_TECH_SUB1",
+            "value": "TƏKƏR ÖLÇÜLƏRİ"
+          },
+          {
+            "id": "lbl-rules-tech-sub1-225",
+            "type": "text",
+            "label": "RULES_TECH_SUB1",
+            "value": "RULES_TECH_SUB1"
+          },
+          {
+            "id": "RULES_TECH_DESC1",
+            "type": "text",
+            "label": "KEY: RULES_TECH_DESC1",
+            "value": "PRO CLASS ÜÇÜN MAKSİMUM TƏKƏR ÖLÇÜSÜ 37 DÜYM, AMATEUR CLASS ÜÇÜN İSƏ 33 DÜYM OLARAQ MÜƏYYƏN EDİLMİŞDİR."
+          },
+          {
+            "id": "lbl-rules-tech-desc-633",
+            "type": "text",
+            "label": "RULES_TECH_DESC1",
+            "value": "RULES_TECH_DESC1"
+          },
+          {
+            "id": "RULES_TECH_SUB2",
+            "type": "text",
+            "label": "KEY: RULES_TECH_SUB2",
+            "value": "MÜHƏRRİK GÜCÜ"
+          },
+          {
+            "id": "lbl-rules-tech-sub2-132",
+            "type": "text",
+            "label": "RULES_TECH_SUB2",
+            "value": "RULES_TECH_SUB2"
+          },
+          {
+            "id": "RULES_TECH_DESC2",
+            "type": "text",
+            "label": "KEY: RULES_TECH_DESC2",
+            "value": "MÜHƏRRİK ÜZƏRİNDƏ APARILAN MODİFİKASİYALAR KATEQORİYA ÜZRƏ LİMİTLƏRİ AŞMAMALIDIR. TURBO SİSTEMLƏRİ YALNIZ XÜSUSİ KLASLARDA İCAZƏLİDİR."
+          },
+          {
+            "id": "lbl-rules-tech-desc-349",
+            "type": "text",
+            "label": "RULES_TECH_DESC2",
+            "value": "RULES_TECH_DESC2"
+          },
+          {
+            "id": "RULES_TECH_SUB3",
+            "type": "text",
+            "label": "KEY: RULES_TECH_SUB3",
+            "value": "ASQI SİSTEMİ"
+          },
+          {
+            "id": "lbl-rules-tech-sub3-81",
+            "type": "text",
+            "label": "RULES_TECH_SUB3",
+            "value": "RULES_TECH_SUB3"
+          },
+          {
+            "id": "lbl-rules-tech-desc-196",
+            "type": "text",
+            "label": "RULES_TECH_DESC3",
+            "value": "RULES_TECH_DESC3"
+          },
+          {
+            "id": "RULES_SAFETY_TITLE",
+            "type": "text",
+            "label": "KEY: RULES_SAFETY_TITLE",
+            "value": "TƏHLÜKƏSİZLİK QAYDALARI"
+          },
+          {
+            "id": "lbl-rules-safety-ti-950",
+            "type": "text",
+            "label": "RULES_SAFETY_TITLE",
+            "value": "RULES_SAFETY_TITLE",
+            "url": "safety"
+          },
+          {
+            "id": "RULES_SAFETY_SUB1",
+            "type": "text",
+            "label": "KEY: RULES_SAFETY_SUB1",
+            "value": "KARKAS TƏLƏBİ"
+          },
+          {
+            "id": "lbl-rules-safety-su-641",
+            "type": "text",
+            "label": "RULES_SAFETY_SUB1",
+            "value": "RULES_SAFETY_SUB1"
+          },
+          {
+            "id": "lbl-rules-safety-de-559",
+            "type": "text",
+            "label": "RULES_SAFETY_DESC1",
+            "value": "RULES_SAFETY_DESC1"
+          },
+          {
+            "id": "RULES_SAFETY_SUB2",
+            "type": "text",
+            "label": "KEY: RULES_SAFETY_SUB2",
+            "value": "YANĞIN SÖNDÜRMƏ"
+          },
+          {
+            "id": "lbl-rules-safety-su-719",
+            "type": "text",
+            "label": "RULES_SAFETY_SUB2",
+            "value": "RULES_SAFETY_SUB2"
+          },
+          {
+            "id": "RULES_SAFETY_DESC2",
+            "type": "text",
+            "label": "KEY: RULES_SAFETY_DESC2",
+            "value": "HƏR BİR AVTOMOBİLDƏ ƏN AZI 2 KİLOQRAMLIQ, ASAN ƏLÇATAN YERDƏ YERLƏŞƏN YANĞINSÖNDÜRƏN BALON OLMALIDIR."
+          },
+          {
+            "id": "lbl-rules-safety-de-577",
+            "type": "text",
+            "label": "RULES_SAFETY_DESC2",
+            "value": "RULES_SAFETY_DESC2"
+          },
+          {
+            "id": "RULES_SAFETY_SUB3",
+            "type": "text",
+            "label": "KEY: RULES_SAFETY_SUB3",
+            "value": "KƏMƏR VƏ DƏBİLQƏ"
+          },
+          {
+            "id": "lbl-rules-safety-su-702",
+            "type": "text",
+            "label": "RULES_SAFETY_SUB3",
+            "value": "RULES_SAFETY_SUB3"
+          },
+          {
+            "id": "lbl-rules-safety-de-342",
+            "type": "text",
+            "label": "RULES_SAFETY_DESC3",
+            "value": "RULES_SAFETY_DESC3"
+          },
+          {
+            "id": "RULES_ECO_TITLE",
+            "type": "text",
+            "label": "KEY: RULES_ECO_TITLE",
+            "value": "EKOLOJİ MƏSULİYYƏT"
+          },
+          {
+            "id": "lbl-rules-eco-title-97",
+            "type": "text",
+            "label": "RULES_ECO_TITLE",
+            "value": "RULES_ECO_TITLE",
+            "url": "eco"
+          },
+          {
+            "id": "RULES_ECO_SUB1",
+            "type": "text",
+            "label": "KEY: RULES_ECO_SUB1",
+            "value": "TULLANTILARIN İDARƏ EDİLMƏSİ"
+          },
+          {
+            "id": "lbl-rules-eco-sub1-393",
+            "type": "text",
+            "label": "RULES_ECO_SUB1",
+            "value": "RULES_ECO_SUB1"
+          },
+          {
+            "id": "lbl-rules-eco-desc1-352",
+            "type": "text",
+            "label": "RULES_ECO_DESC1",
+            "value": "RULES_ECO_DESC1"
+          },
+          {
+            "id": "lbl-leave-no-trace-745",
+            "type": "text",
+            "label": "LEAVE NO TRACE",
+            "value": "LEAVE NO TRACE"
+          },
+          {
+            "id": "RULES_ECO_SUB2",
+            "type": "text",
+            "label": "KEY: RULES_ECO_SUB2",
+            "value": "MAYE SIZMALARI"
+          },
+          {
+            "id": "lbl-rules-eco-sub2-965",
+            "type": "text",
+            "label": "RULES_ECO_SUB2",
+            "value": "RULES_ECO_SUB2"
+          },
+          {
+            "id": "RULES_ECO_DESC2",
+            "type": "text",
+            "label": "KEY: RULES_ECO_DESC2",
+            "value": "AVTOMOBİLDƏN YAĞ VƏ YA SOYUDUCU MAYE SIZMASI OLDUĞU TƏQDİRDƏ PİLOT DƏRHAL DAYANMALI VƏ ƏRAZİNİN ÇİRKLƏNMƏSİNİN QARŞISINI ALMALIDIR."
+          },
+          {
+            "id": "lbl-rules-eco-desc2-619",
+            "type": "text",
+            "label": "RULES_ECO_DESC2",
+            "value": "RULES_ECO_DESC2"
+          },
+          {
+            "id": "RULES_ECO_SUB3",
+            "type": "text",
+            "label": "KEY: RULES_ECO_SUB3",
+            "value": "MARŞRUTDAN KƏNARA ÇIXMAMAQ"
+          },
+          {
+            "id": "lbl-rules-eco-sub3-36",
+            "type": "text",
+            "label": "RULES_ECO_SUB3",
+            "value": "RULES_ECO_SUB3"
+          },
+          {
+            "id": "RULES_ECO_DESC3",
+            "type": "text",
+            "label": "KEY: RULES_ECO_DESC3",
+            "value": "TƏBİİ ÖRTÜYÜ QORUMAQ MƏQSƏDİ İLƏ MÜƏYYƏN OLUNMUŞ TRASDANKƏNAR SÜRÜŞLƏR VƏ YA YAŞIL SAHƏLƏRƏ ZƏRƏR VERMƏK QADAĞANDIR."
+          },
+          {
+            "id": "lbl-rules-eco-desc3-822",
+            "type": "text",
+            "label": "RULES_ECO_DESC3",
+            "value": "RULES_ECO_DESC3"
+          },
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "KEY: PAGE_TITLE",
+            "value": "QAYDALAR"
+          },
+          {
+            "id": "lbl-page-title-609",
+            "type": "text",
+            "label": "PAGE_TITLE",
+            "value": "PAGE_TITLE"
+          },
+          {
+            "id": "PAGE_SUBTITLE",
+            "type": "text",
+            "label": "KEY: PAGE_SUBTITLE",
+            "value": "FORSAJ MOTORSPORT OFFICIAL RULES"
+          },
+          {
+            "id": "lbl-page-subtitle-264",
+            "type": "text",
+            "label": "PAGE_SUBTITLE",
+            "value": "PAGE_SUBTITLE"
+          },
+          {
+            "id": "DOC_DOWNLOAD_LABEL",
+            "type": "text",
+            "label": "KEY: DOC_DOWNLOAD_LABEL",
+            "value": "SƏNƏDİ YÜKLƏ"
+          },
+          {
+            "id": "lbl-doc-download-la-880",
+            "type": "text",
+            "label": "DOC_DOWNLOAD_LABEL",
+            "value": "DOC_DOWNLOAD_LABEL"
+          },
+          {
+            "id": "BTN_DOWNLOAD_PDF",
+            "type": "text",
+            "label": "KEY: BTN_DOWNLOAD_PDF",
+            "value": "PDF YÜKLƏ"
+          },
+          {
+            "id": "lbl-btn-download-pd-186",
+            "type": "text",
+            "label": "BTN_DOWNLOAD_PDF",
+            "value": "BTN_DOWNLOAD_PDF"
+          },
+          {
+            "id": "RULE_TAB_1_ID",
+            "type": "text",
+            "label": "Qayda Sekmesi 1 ID",
+            "value": "pilot"
+          },
+          {
+            "id": "RULE_TAB_1_TITLE",
+            "type": "text",
+            "label": "Qayda Sekmesi 1 Basliq",
+            "value": "PİLOT PROTOKOLU"
+          },
+          {
+            "id": "RULE_TAB_1_ICON",
+            "type": "text",
+            "label": "Qayda Sekmesi 1 Ikon",
+            "value": "Info"
+          },
+          {
+            "id": "RULE_TAB_1_DOC_NAME",
+            "type": "text",
+            "label": "Sekme 1 Sened Adi",
+            "value": "PILOT_PROTOKOLU.PDF"
+          },
+          {
+            "id": "RULE_TAB_1_DOC_BUTTON",
+            "type": "text",
+            "label": "Sekme 1 Sened Duymesi",
+            "value": "PDF YUKLE"
+          },
+          {
+            "id": "RULE_TAB_1_DOC_URL",
+            "type": "text",
+            "label": "Sekme 1 Sened Linki",
+            "value": ""
+          },
+          {
+            "id": "RULE_TAB_1_ITEM_1_TITLE",
+            "type": "text",
+            "label": "Sekme 1 Madde 1 Basliq",
+            "value": "İSTİFADƏÇİ ÖHDƏLİKLƏRİ"
+          },
+          {
+            "id": "RULE_TAB_1_ITEM_1_DESC",
+            "type": "text",
+            "label": "Sekme 1 Madde 1 Tesvir",
+            "value": "HƏR BİR İŞTİRAKÇI FEDERASİYANIN MÜƏYYƏN ETDİYİ BÜTÜN TEXNİKİ VƏ ETİK NORMALARI QEYD-ŞƏRTSİZ QƏBUL EDİR."
+          },
+          {
+            "id": "RULE_TAB_1_ITEM_2_TITLE",
+            "type": "text",
+            "label": "Sekme 1 Madde 2 Basliq",
+            "value": "DİSKVALİFİKASİYA"
+          },
+          {
+            "id": "RULE_TAB_1_ITEM_2_DESC",
+            "type": "text",
+            "label": "Sekme 1 Madde 2 Tesvir",
+            "value": "PROTOKOLDAN KƏNARA ÇIXMAQ VƏ YA HAKİM QƏRARLARINA ETİRAZ ETMƏK DƏRHAL DİSKVALİFİKASİYA İLƏ NƏTİCƏLƏNƏ BİLƏR."
+          },
+          {
+            "id": "RULE_TAB_1_ITEM_3_TITLE",
+            "type": "text",
+            "label": "Sekme 1 Madde 3 Basliq",
+            "value": "TEXNİKİ TƏLƏBLƏR"
+          },
+          {
+            "id": "RULE_TAB_1_ITEM_3_DESC",
+            "type": "text",
+            "label": "Sekme 1 Madde 3 Tesvir",
+            "value": "BÜTÜN AVADANLIQLAR YARIŞDAN 24 SAAT ƏVVƏL TEXNİKİ KOMİSSİYA TƏRƏFİNDƏN YOXLANILMALI VƏ TƏHLÜKƏSİZLİK SERTİFİKATI İLƏ TƏMİN EDİLMƏLİDİR."
+          },
+          {
+            "id": "RULE_TAB_2_ID",
+            "type": "text",
+            "label": "Qayda Sekmesi 2 ID",
+            "value": "technical"
+          },
+          {
+            "id": "RULE_TAB_2_TITLE",
+            "type": "text",
+            "label": "Qayda Sekmesi 2 Basliq",
+            "value": "TEXNİKİ NORMARTİVLƏR"
+          },
+          {
+            "id": "RULE_TAB_2_ICON",
+            "type": "text",
+            "label": "Qayda Sekmesi 2 Ikon",
+            "value": "Settings"
+          },
+          {
+            "id": "RULE_TAB_2_DOC_NAME",
+            "type": "text",
+            "label": "Sekme 2 Sened Adi",
+            "value": "TECHNICAL_PROTOKOLU.PDF"
+          },
+          {
+            "id": "RULE_TAB_2_DOC_BUTTON",
+            "type": "text",
+            "label": "Sekme 2 Sened Duymesi",
+            "value": "PDF YUKLE"
+          },
+          {
+            "id": "RULE_TAB_2_DOC_URL",
+            "type": "text",
+            "label": "Sekme 2 Sened Linki",
+            "value": ""
+          },
+          {
+            "id": "RULE_TAB_2_ITEM_1_TITLE",
+            "type": "text",
+            "label": "Sekme 2 Madde 1 Basliq",
+            "value": "TƏKƏR ÖLÇÜLƏRİ"
+          },
+          {
+            "id": "RULE_TAB_2_ITEM_1_DESC",
+            "type": "text",
+            "label": "Sekme 2 Madde 1 Tesvir",
+            "value": "PRO CLASS ÜÇÜN MAKSİMUM TƏKƏR ÖLÇÜSÜ 37 DÜYM, AMATEUR CLASS ÜÇÜN İSƏ 33 DÜYM OLARAQ MÜƏYYƏN EDİLMİŞDİR."
+          },
+          {
+            "id": "RULE_TAB_2_ITEM_2_TITLE",
+            "type": "text",
+            "label": "Sekme 2 Madde 2 Basliq",
+            "value": "MÜHƏRRİK GÜCÜ"
+          },
+          {
+            "id": "RULE_TAB_2_ITEM_2_DESC",
+            "type": "text",
+            "label": "Sekme 2 Madde 2 Tesvir",
+            "value": "MÜHƏRRİK ÜZƏRİNDƏ APARILAN MODİFİKASİYALAR KATEQORİYA ÜZRƏ LİMİTLƏRİ AŞMAMALIDIR. TURBO SİSTEMLƏRİ YALNIZ XÜSUSİ KLASLARDA İCAZƏLİDİR."
+          },
+          {
+            "id": "RULE_TAB_2_ITEM_3_TITLE",
+            "type": "text",
+            "label": "Sekme 2 Madde 3 Basliq",
+            "value": "ASQI SİSTEMİ"
+          },
+          {
+            "id": "RULE_TAB_2_ITEM_3_DESC",
+            "type": "text",
+            "label": "Sekme 2 Madde 3 Tesvir",
+            "value": "AVTOMOBILIN KLIRENSI VE ASQI ARTIKULYASIYASI TEHLUKESIZLIK STANDARTLARINA UYGUN OLMALIDIR."
+          },
+          {
+            "id": "RULE_TAB_3_ID",
+            "type": "text",
+            "label": "Qayda Sekmesi 3 ID",
+            "value": "safety"
+          },
+          {
+            "id": "RULE_TAB_3_TITLE",
+            "type": "text",
+            "label": "Qayda Sekmesi 3 Basliq",
+            "value": "TƏHLÜKƏSİZLİK QAYDALARI"
+          },
+          {
+            "id": "RULE_TAB_3_ICON",
+            "type": "text",
+            "label": "Qayda Sekmesi 3 Ikon",
+            "value": "ShieldAlert"
+          },
+          {
+            "id": "RULE_TAB_3_DOC_NAME",
+            "type": "text",
+            "label": "Sekme 3 Sened Adi",
+            "value": "SAFETY_PROTOKOLU.PDF"
+          },
+          {
+            "id": "RULE_TAB_3_DOC_BUTTON",
+            "type": "text",
+            "label": "Sekme 3 Sened Duymesi",
+            "value": "PDF YUKLE"
+          },
+          {
+            "id": "RULE_TAB_3_DOC_URL",
+            "type": "text",
+            "label": "Sekme 3 Sened Linki",
+            "value": ""
+          },
+          {
+            "id": "RULE_TAB_3_ITEM_1_TITLE",
+            "type": "text",
+            "label": "Sekme 3 Madde 1 Basliq",
+            "value": "KARKAS TƏLƏBİ"
+          },
+          {
+            "id": "RULE_TAB_3_ITEM_1_DESC",
+            "type": "text",
+            "label": "Sekme 3 Madde 1 Tesvir",
+            "value": "BUTUN ACIQ VE YA MODIFIKASIYA OLUNMUS AVTOMOBILLERDE FIA STANDARTLARINA UYGUN TEHLUKESIZLIK KARKASI MECBURIDIR."
+          },
+          {
+            "id": "RULE_TAB_3_ITEM_2_TITLE",
+            "type": "text",
+            "label": "Sekme 3 Madde 2 Basliq",
+            "value": "YANĞIN SÖNDÜRMƏ"
+          },
+          {
+            "id": "RULE_TAB_3_ITEM_2_DESC",
+            "type": "text",
+            "label": "Sekme 3 Madde 2 Tesvir",
+            "value": "HƏR BİR AVTOMOBİLDƏ ƏN AZI 2 KİLOQRAMLIQ, ASAN ƏLÇATAN YERDƏ YERLƏŞƏN YANĞINSÖNDÜRƏN BALON OLMALIDIR."
+          },
+          {
+            "id": "RULE_TAB_3_ITEM_3_TITLE",
+            "type": "text",
+            "label": "Sekme 3 Madde 3 Basliq",
+            "value": "KƏMƏR VƏ DƏBİLQƏ"
+          },
+          {
+            "id": "RULE_TAB_3_ITEM_3_DESC",
+            "type": "text",
+            "label": "Sekme 3 Madde 3 Tesvir",
+            "value": "5 NOQTELI TEHLUKESIZLIK KEMERLERI VE SERTIFIKATLI KASKALARIN ISTIFADESI BUTUN MERHELELERDE MECBURIDIR."
+          },
+          {
+            "id": "RULE_TAB_4_ID",
+            "type": "text",
+            "label": "Qayda Sekmesi 4 ID",
+            "value": "eco"
+          },
+          {
+            "id": "RULE_TAB_4_TITLE",
+            "type": "text",
+            "label": "Qayda Sekmesi 4 Basliq",
+            "value": "EKOLOJİ MƏSULİYYƏT"
+          },
+          {
+            "id": "RULE_TAB_4_ICON",
+            "type": "text",
+            "label": "Qayda Sekmesi 4 Ikon",
+            "value": "Leaf"
+          },
+          {
+            "id": "RULE_TAB_4_DOC_NAME",
+            "type": "text",
+            "label": "Sekme 4 Sened Adi",
+            "value": "ECO_PROTOKOLU.PDF"
+          },
+          {
+            "id": "RULE_TAB_4_DOC_BUTTON",
+            "type": "text",
+            "label": "Sekme 4 Sened Duymesi",
+            "value": "PDF YUKLE"
+          },
+          {
+            "id": "RULE_TAB_4_DOC_URL",
+            "type": "text",
+            "label": "Sekme 4 Sened Linki",
+            "value": ""
+          },
+          {
+            "id": "RULE_TAB_4_ITEM_1_TITLE",
+            "type": "text",
+            "label": "Sekme 4 Madde 1 Basliq",
+            "value": "TULLANTILARIN İDARƏ EDİLMƏSİ"
+          },
+          {
+            "id": "RULE_TAB_4_ITEM_1_DESC",
+            "type": "text",
+            "label": "Sekme 4 Madde 1 Tesvir",
+            "value": "YARIS ERAZISINDE VE TRASDA HER HANSI BIR TULLANTININ ATILMASI QETI QADAGANDIR. ISTIRAKCILAR LEAVE NO TRACE PRINSIPINE EMEL ETMELIDIR."
+          },
+          {
+            "id": "RULE_TAB_4_ITEM_2_TITLE",
+            "type": "text",
+            "label": "Sekme 4 Madde 2 Basliq",
+            "value": "MAYE SIZMALARI"
+          },
+          {
+            "id": "RULE_TAB_4_ITEM_2_DESC",
+            "type": "text",
+            "label": "Sekme 4 Madde 2 Tesvir",
+            "value": "AVTOMOBİLDƏN YAĞ VƏ YA SOYUDUCU MAYE SIZMASI OLDUĞU TƏQDİRDƏ PİLOT DƏRHAL DAYANMALI VƏ ƏRAZİNİN ÇİRKLƏNMƏSİNİN QARŞISINI ALMALIDIR."
+          },
+          {
+            "id": "RULE_TAB_4_ITEM_3_TITLE",
+            "type": "text",
+            "label": "Sekme 4 Madde 3 Basliq",
+            "value": "MARŞRUTDAN KƏNARA ÇIXMAMAQ"
+          },
+          {
+            "id": "RULE_TAB_4_ITEM_3_DESC",
+            "type": "text",
+            "label": "Sekme 4 Madde 3 Tesvir",
+            "value": "TƏBİİ ÖRTÜYÜ QORUMAQ MƏQSƏDİ İLƏ MÜƏYYƏN OLUNMUŞ TRASDANKƏNAR SÜRÜŞLƏR VƏ YA YAŞIL SAHƏLƏRƏ ZƏRƏR VERMƏK QADAĞANDIR."
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "contactpage",
+        "title": "Əlaqə Səhifəsi",
+        "sections": [
+          {
+            "id": "lbl-social-instagra-175",
+            "type": "text",
+            "label": "SOCIAL_INSTAGRAM",
+            "value": "SOCIAL_INSTAGRAM"
+          },
+          {
+            "id": "lbl-social-youtube-478",
+            "type": "text",
+            "label": "SOCIAL_YOUTUBE",
+            "value": "SOCIAL_YOUTUBE"
+          },
+          {
+            "id": "lbl-social-facebook-941",
+            "type": "text",
+            "label": "SOCIAL_FACEBOOK",
+            "value": "SOCIAL_FACEBOOK"
+          },
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "KEY: PAGE_TITLE",
+            "value": "ƏLAQƏ"
+          },
+          {
+            "id": "lbl-page-title-8",
+            "type": "text",
+            "label": "PAGE_TITLE",
+            "value": "PAGE_TITLE"
+          },
+          {
+            "id": "lbl-page-subtitle-966",
+            "type": "text",
+            "label": "PAGE_SUBTITLE",
+            "value": "PAGE_SUBTITLE"
+          },
+          {
+            "id": "OFFICE_LABEL",
+            "type": "text",
+            "label": "KEY: OFFICE_LABEL",
+            "value": "BAŞ OFİS"
+          },
+          {
+            "id": "lbl-office-label-492",
+            "type": "text",
+            "label": "OFFICE_LABEL",
+            "value": "OFFICE_LABEL"
+          },
+          {
+            "id": "lbl-contact-address-599",
+            "type": "text",
+            "label": "CONTACT_ADDRESS_1",
+            "value": "CONTACT_ADDRESS_1"
+          },
+          {
+            "id": "ADDRESS_LINE_1",
+            "type": "text",
+            "label": "KEY: ADDRESS_LINE_1",
+            "value": "AZADLIQ 102, BAKI"
+          },
+          {
+            "id": "lbl-address-line-1-35",
+            "type": "text",
+            "label": "ADDRESS_LINE_1",
+            "value": "ADDRESS_LINE_1"
+          },
+          {
+            "id": "lbl-contact-address-391",
+            "type": "text",
+            "label": "CONTACT_ADDRESS_2",
+            "value": "CONTACT_ADDRESS_2"
+          },
+          {
+            "id": "lbl-address-line-2-740",
+            "type": "text",
+            "label": "ADDRESS_LINE_2",
+            "value": "ADDRESS_LINE_2"
+          },
+          {
+            "id": "lbl-contact-hours-602",
+            "type": "text",
+            "label": "CONTACT_HOURS",
+            "value": "CONTACT_HOURS"
+          },
+          {
+            "id": "lbl-work-hours-73",
+            "type": "text",
+            "label": "WORK_HOURS",
+            "value": "WORK_HOURS"
+          },
+          {
+            "id": "txt-online-352",
+            "type": "text",
+            "label": "ONLINE",
+            "value": "ONLINE"
+          },
+          {
+            "id": "PHONE_LABEL",
+            "type": "text",
+            "label": "KEY: PHONE_LABEL",
+            "value": "ƏLAQƏ NÖMRƏSİ"
+          },
+          {
+            "id": "lbl-phone-label-81",
+            "type": "text",
+            "label": "PHONE_LABEL",
+            "value": "PHONE_LABEL"
+          },
+          {
+            "id": "lbl-contact-phone-446",
+            "type": "text",
+            "label": "CONTACT_PHONE",
+            "value": "CONTACT_PHONE"
+          },
+          {
+            "id": "EMAIL_LABEL",
+            "type": "text",
+            "label": "KEY: EMAIL_LABEL",
+            "value": "E-POÇT ÜNVANI"
+          },
+          {
+            "id": "lbl-email-label-748",
+            "type": "text",
+            "label": "EMAIL_LABEL",
+            "value": "EMAIL_LABEL"
+          },
+          {
+            "id": "lbl-contact-email-289",
+            "type": "text",
+            "label": "CONTACT_EMAIL",
+            "value": "CONTACT_EMAIL"
+          },
+          {
+            "id": "EMAIL_Address",
+            "type": "text",
+            "label": "KEY: EMAIL_Address",
+            "value": "PROTOCOL@FORSAJ.AZ"
+          },
+          {
+            "id": "lbl-email-address-947",
+            "type": "text",
+            "label": "EMAIL_Address",
+            "value": "EMAIL_Address"
+          },
+          {
+            "id": "lbl-dept-hq-title-722",
+            "type": "text",
+            "label": "DEPT_HQ_TITLE",
+            "value": "DEPT_HQ_TITLE"
+          },
+          {
+            "id": "DEPT_HQ_DESC",
+            "type": "text",
+            "label": "KEY: DEPT_HQ_DESC",
+            "value": "ÜMUMİ SORĞULAR VƏ İDARƏETMƏ"
+          },
+          {
+            "id": "lbl-dept-hq-desc-774",
+            "type": "text",
+            "label": "DEPT_HQ_DESC",
+            "value": "DEPT_HQ_DESC"
+          },
+          {
+            "id": "lbl-dept-hq-email-666",
+            "type": "text",
+            "label": "DEPT_HQ_EMAIL",
+            "value": "DEPT_HQ_EMAIL"
+          },
+          {
+            "id": "DEPT_HQ_EMAIL",
+            "type": "text",
+            "label": "KEY: DEPT_HQ_EMAIL",
+            "value": "HQ@FORSAJ.AZ"
+          },
+          {
+            "id": "DEPT_PR_TITLE",
+            "type": "text",
+            "label": "KEY: DEPT_PR_TITLE",
+            "value": "MEDİA VƏ PR"
+          },
+          {
+            "id": "lbl-dept-pr-title-555",
+            "type": "text",
+            "label": "DEPT_PR_TITLE",
+            "value": "DEPT_PR_TITLE"
+          },
+          {
+            "id": "DEPT_PR_DESC",
+            "type": "text",
+            "label": "KEY: DEPT_PR_DESC",
+            "value": "MƏTBUAT VƏ ƏMƏKDAŞLIQ"
+          },
+          {
+            "id": "lbl-dept-pr-desc-510",
+            "type": "text",
+            "label": "DEPT_PR_DESC",
+            "value": "DEPT_PR_DESC"
+          },
+          {
+            "id": "lbl-dept-pr-email-731",
+            "type": "text",
+            "label": "DEPT_PR_EMAIL",
+            "value": "DEPT_PR_EMAIL"
+          },
+          {
+            "id": "DEPT_PR_EMAIL",
+            "type": "text",
+            "label": "KEY: DEPT_PR_EMAIL",
+            "value": "PR@FORSAJ.AZ"
+          },
+          {
+            "id": "DEPT_TECH_TITLE",
+            "type": "text",
+            "label": "KEY: DEPT_TECH_TITLE",
+            "value": "TEXNİKİ DƏSTƏK"
+          },
+          {
+            "id": "lbl-dept-tech-title-154",
+            "type": "text",
+            "label": "DEPT_TECH_TITLE",
+            "value": "DEPT_TECH_TITLE"
+          },
+          {
+            "id": "DEPT_TECH_DESC",
+            "type": "text",
+            "label": "KEY: DEPT_TECH_DESC",
+            "value": "PİLOTLAR ÜÇÜN TEXNİKİ YARDIM"
+          },
+          {
+            "id": "lbl-dept-tech-desc-154",
+            "type": "text",
+            "label": "DEPT_TECH_DESC",
+            "value": "DEPT_TECH_DESC"
+          },
+          {
+            "id": "lbl-dept-tech-email-542",
+            "type": "text",
+            "label": "DEPT_TECH_EMAIL",
+            "value": "DEPT_TECH_EMAIL"
+          },
+          {
+            "id": "DEPT_TECH_EMAIL",
+            "type": "text",
+            "label": "KEY: DEPT_TECH_EMAIL",
+            "value": "TECH@FORSAJ.AZ"
+          },
+          {
+            "id": "FORM_TITLE",
+            "type": "text",
+            "label": "KEY: FORM_TITLE",
+            "value": "MÜRACİƏT FORMU"
+          },
+          {
+            "id": "lbl-form-title-803",
+            "type": "text",
+            "label": "FORM_TITLE",
+            "value": "FORM_TITLE"
+          },
+          {
+            "id": "lbl-ad-soyad-513",
+            "type": "text",
+            "label": "AD SOYAD",
+            "value": "AD SOYAD"
+          },
+          {
+            "id": "lbl-telefon-212",
+            "type": "text",
+            "label": "TELEFON",
+            "value": "TELEFON"
+          },
+          {
+            "id": "lbl-post-905",
+            "type": "text",
+            "label": "POST",
+            "value": "POST"
+          },
+          {
+            "id": "lbl-content-type-241",
+            "type": "text",
+            "label": "Content-Type",
+            "value": "Content-Type"
+          },
+          {
+            "id": "lbl-m-raci-tiniz-u--93",
+            "type": "text",
+            "label": "Müraciətiniz uğurla ...",
+            "value": "Müraciətiniz uğurla göndərildi!"
+          },
+          {
+            "id": "lbl-gond-rilm-zama-610",
+            "type": "text",
+            "label": "Gondərilmə zamanı xə...",
+            "value": "Gondərilmə zamanı xəta baş verdi."
+          },
+          {
+            "id": "FIELD_NAME_LABEL",
+            "type": "text",
+            "label": "KEY: FIELD_NAME_LABEL",
+            "value": "AD VƏ SOYAD"
+          },
+          {
+            "id": "lbl-field-name-labe-259",
+            "type": "text",
+            "label": "FIELD_NAME_LABEL",
+            "value": "FIELD_NAME_LABEL"
+          },
+          {
+            "id": "FIELD_NAME_PLACEHOLDER",
+            "type": "text",
+            "label": "KEY: FIELD_NAME_PLACEHOLDER",
+            "value": "AD SOYAD DAXİL EDİN"
+          },
+          {
+            "id": "lbl-field-name-plac-159",
+            "type": "text",
+            "label": "FIELD_NAME_PLACEHOLD...",
+            "value": "FIELD_NAME_PLACEHOLDER"
+          },
+          {
+            "id": "FIELD_CONTACT_LABEL",
+            "type": "text",
+            "label": "KEY: FIELD_CONTACT_LABEL",
+            "value": "ƏLAQƏ VASİTƏSİ"
+          },
+          {
+            "id": "lbl-field-contact-l-843",
+            "type": "text",
+            "label": "FIELD_CONTACT_LABEL",
+            "value": "FIELD_CONTACT_LABEL"
+          },
+          {
+            "id": "FIELD_CONTACT_PLACEHOLDER",
+            "type": "text",
+            "label": "KEY: FIELD_CONTACT_PLACEHOLDER",
+            "value": "TELEFON VƏ YA EMAIL"
+          },
+          {
+            "id": "lbl-field-contact-p-528",
+            "type": "text",
+            "label": "FIELD_CONTACT_PLACEH...",
+            "value": "FIELD_CONTACT_PLACEHOLDER"
+          },
+          {
+            "id": "FIELD_TOPIC_LABEL",
+            "type": "text",
+            "label": "KEY: FIELD_TOPIC_LABEL",
+            "value": "MÜRACİƏT İSTİQAMƏTİ"
+          },
+          {
+            "id": "lbl-field-topic-lab-327",
+            "type": "text",
+            "label": "FIELD_TOPIC_LABEL",
+            "value": "FIELD_TOPIC_LABEL"
+          },
+          {
+            "id": "TOPIC_GENERAL",
+            "type": "text",
+            "label": "KEY: TOPIC_GENERAL",
+            "value": "ÜMUMİ SORĞU"
+          },
+          {
+            "id": "lbl-topic-general-621",
+            "type": "text",
+            "label": "TOPIC_GENERAL",
+            "value": "TOPIC_GENERAL"
+          },
+          {
+            "id": "TOPIC_PILOT",
+            "type": "text",
+            "label": "KEY: TOPIC_PILOT",
+            "value": "PİLOT QEYDİYYATI"
+          },
+          {
+            "id": "lbl-topic-pilot-542",
+            "type": "text",
+            "label": "TOPIC_PILOT",
+            "value": "TOPIC_PILOT"
+          },
+          {
+            "id": "TOPIC_TECH",
+            "type": "text",
+            "label": "KEY: TOPIC_TECH",
+            "value": "TEXNİKİ YARDIM"
+          },
+          {
+            "id": "lbl-topic-tech-334",
+            "type": "text",
+            "label": "TOPIC_TECH",
+            "value": "TOPIC_TECH"
+          },
+          {
+            "id": "FIELD_MESSAGE_LABEL",
+            "type": "text",
+            "label": "KEY: FIELD_MESSAGE_LABEL",
+            "value": "MESAJINIZ"
+          },
+          {
+            "id": "lbl-field-message-l-571",
+            "type": "text",
+            "label": "FIELD_MESSAGE_LABEL",
+            "value": "FIELD_MESSAGE_LABEL"
+          },
+          {
+            "id": "FIELD_MESSAGE_PLACEHOLDER",
+            "type": "text",
+            "label": "KEY: FIELD_MESSAGE_PLACEHOLDER",
+            "value": "BURADA YAZIN..."
+          },
+          {
+            "id": "lbl-field-message-p-835",
+            "type": "text",
+            "label": "FIELD_MESSAGE_PLACEH...",
+            "value": "FIELD_MESSAGE_PLACEHOLDER"
+          },
+          {
+            "id": "BTN_SEND",
+            "type": "text",
+            "label": "KEY: BTN_SEND",
+            "value": "MESAJI GÖNDƏR"
+          },
+          {
+            "id": "lbl-btn-send-374",
+            "type": "text",
+            "label": "BTN_SEND",
+            "value": "BTN_SEND"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "categoryleaders",
+        "title": "Kateqoriya Liderləri",
+        "sections": [
+          {
+            "id": "SECTION_TITLE",
+            "type": "text",
+            "label": "KEY: SECTION_TITLE",
+            "value": "KATEQORİYA LİDƏRLƏRİ"
+          },
+          {
+            "id": "lbl-section-title-237",
+            "type": "text",
+            "label": "SECTION_TITLE",
+            "value": "SECTION_TITLE"
+          },
+          {
+            "id": "SECTION_SUBTITLE",
+            "type": "text",
+            "label": "KEY: SECTION_SUBTITLE",
+            "value": "HƏR KLASS ÜZRƏ MÖVSÜMÜN ƏN GÜCLÜ PİLOTLARI"
+          },
+          {
+            "id": "lbl-section-subtitl-440",
+            "type": "text",
+            "label": "SECTION_SUBTITLE",
+            "value": "SECTION_SUBTITLE"
+          },
+          {
+            "id": "VIEW_ALL_BTN",
+            "type": "text",
+            "label": "KEY: VIEW_ALL_BTN",
+            "value": "BÜTÜN REYTİNG"
+          },
+          {
+            "id": "lbl-view-all-btn-127",
+            "type": "text",
+            "label": "VIEW_ALL_BTN",
+            "value": "VIEW_ALL_BTN"
+          },
+          {
+            "id": "SCORE_LABEL",
+            "type": "text",
+            "label": "KEY: SCORE_LABEL",
+            "value": "XAL"
+          },
+          {
+            "id": "lbl-score-label-618",
+            "type": "text",
+            "label": "SCORE_LABEL",
+            "value": "SCORE_LABEL"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "footer",
+        "title": "Sayt Sonu",
+        "sections": [
+          {
+            "id": "lbl-site-logo-light-57",
+            "type": "text",
+            "label": "SITE_LOGO_LIGHT",
+            "value": "SITE_LOGO_LIGHT"
+          },
+          {
+            "id": "lbl-social-instagra-34",
+            "type": "text",
+            "label": "SOCIAL_INSTAGRAM",
+            "value": "SOCIAL_INSTAGRAM"
+          },
+          {
+            "id": "lbl-social-youtube-776",
+            "type": "text",
+            "label": "SOCIAL_YOUTUBE",
+            "value": "SOCIAL_YOUTUBE"
+          },
+          {
+            "id": "lbl-social-facebook-788",
+            "type": "text",
+            "label": "SOCIAL_FACEBOOK",
+            "value": "SOCIAL_FACEBOOK"
+          },
+          {
+            "id": "txt-ana-s-h-f-744",
+            "type": "text",
+            "label": "KEY: txt-ana-s-h-f-744",
+            "value": "ANA SƏHİFƏ",
+            "url": "home"
+          },
+          {
+            "id": "txt-haqqimizda-942",
+            "type": "text",
+            "label": "KEY: txt-haqqimizda-942",
+            "value": "HAQQIMIZDA",
+            "url": "about"
+          },
+          {
+            "id": "txt-x-b-rl-r-431",
+            "type": "text",
+            "label": "KEY: txt-x-b-rl-r-431",
+            "value": "XƏBƏRLƏR",
+            "url": "news"
+          },
+          {
+            "id": "txt-t-dbi-rl-r-62",
+            "type": "text",
+            "label": "KEY: txt-t-dbi-rl-r-62",
+            "value": "TƏDBİRLƏR",
+            "url": "events"
+          },
+          {
+            "id": "txt-s-r-c-l-r-931",
+            "type": "text",
+            "label": "KEY: txt-s-r-c-l-r-931",
+            "value": "SÜRÜCÜLƏR",
+            "url": "drivers"
+          },
+          {
+            "id": "txt-qalereya-112",
+            "type": "text",
+            "label": "KEY: txt-qalereya-112",
+            "value": "QALEREYA",
+            "url": "gallery"
+          },
+          {
+            "id": "txt-pi-lot-protokolu-31",
+            "type": "text",
+            "label": "KEY: txt-pi-lot-protokolu-31",
+            "value": "PİLOT PROTOKOLU",
+            "url": "rules"
+          },
+          {
+            "id": "txt-texni-ki-normati-712",
+            "type": "text",
+            "label": "KEY: txt-texni-ki-normati-712",
+            "value": "TEXNİKİ NORMATİVLƏR",
+            "url": "rules"
+          },
+          {
+            "id": "txt-t-hl-k-si-zli-k-q-121",
+            "type": "text",
+            "label": "KEY: txt-t-hl-k-si-zli-k-q-121",
+            "value": "TƏHLÜKƏSİZLİK QAYDALARI",
+            "url": "rules"
+          },
+          {
+            "id": "txt-ekoloji-m-suli-yy-612",
+            "type": "text",
+            "label": "KEY: txt-ekoloji-m-suli-yy-612",
+            "value": "EKOLOJİ MƏSULİYYƏT",
+            "url": "rules"
+          },
+          {
+            "id": "attr-forsaj-logo-395",
+            "type": "text",
+            "label": "ALT: Forsaj Logo...",
+            "value": "Forsaj Logo"
+          },
+          {
+            "id": "txt-forsaj-773",
+            "type": "text",
+            "label": "FORSAJ",
+            "value": "FORSAJ"
+          },
+          {
+            "id": "txt-club-442",
+            "type": "text",
+            "label": "CLUB",
+            "value": "CLUB"
+          },
+          {
+            "id": "txt-az-rbaycan-n-n-249",
+            "type": "text",
+            "label": "Azərbaycanın ən pres...",
+            "value": "Azərbaycanın ən prestijli motorsport mərkəzi. Sərhədsiz offroad həyəcanını bizimlə yaşayın."
+          },
+          {
+            "id": "txt--nvan-155",
+            "type": "text",
+            "label": "ÜNVAN",
+            "value": "ÜNVAN"
+          },
+          {
+            "id": "lbl-contact-address-200",
+            "type": "text",
+            "label": "CONTACT_ADDRESS_1",
+            "value": "CONTACT_ADDRESS_1"
+          },
+          {
+            "id": "lbl-azadliq-102-ba-73",
+            "type": "text",
+            "label": "AZADLIQ 102, BAKI",
+            "value": "AZADLIQ 102, BAKI"
+          },
+          {
+            "id": "txt--laq--161",
+            "type": "text",
+            "label": "ƏLAQƏ",
+            "value": "ƏLAQƏ"
+          },
+          {
+            "id": "lbl-contact-phone-498",
+            "type": "text",
+            "label": "CONTACT_PHONE",
+            "value": "CONTACT_PHONE"
+          },
+          {
+            "id": "txt-navi-qasi-ya-133",
+            "type": "text",
+            "label": "NAVİQASİYA",
+            "value": "NAVİQASİYA"
+          },
+          {
+            "id": "txt-motorsport-590",
+            "type": "text",
+            "label": "MOTORSPORT",
+            "value": "MOTORSPORT"
+          },
+          {
+            "id": "txt-x-b-rdar-ol-578",
+            "type": "text",
+            "label": "XƏBƏRDAR OL",
+            "value": "XƏBƏRDAR OL"
+          },
+          {
+            "id": "txt-yar-t-qvimi-v-414",
+            "type": "text",
+            "label": "Yarış təqvimi və xəb...",
+            "value": "Yarış təqvimi və xəbərlərdən anında xəbərdar olmaq üçün abunə olun."
+          },
+          {
+            "id": "attr-email-daxi-l-edi--293",
+            "type": "text",
+            "label": "PLACEHOLDER: EMAIL DAXİL EDİ...",
+            "value": "EMAIL DAXİL EDİN"
+          },
+          {
+            "id": "txt--2024-forsaj-c-32",
+            "type": "text",
+            "label": "© 2024 FORSAJ CLUB. ...",
+            "value": "© 2024 FORSAJ CLUB. ALL RIGHTS RESERVED.",
+            "url": "#"
+          },
+          {
+            "id": "txt-privacy-policy-517",
+            "type": "text",
+            "label": "PRIVACY POLICY",
+            "value": "Privacy Policy",
+            "url": "privacy"
+          },
+          {
+            "id": "txt-terms-of-servic-731",
+            "type": "text",
+            "label": "TERMS OF SERVICE",
+            "value": "Terms of Service",
+            "url": "terms"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "hero",
+        "title": "Giriş Hissəsi",
+        "sections": [
+          {
+            "id": "text-0",
+            "type": "text",
+            "label": "KEY: text-0",
+            "value": "AZERBAIJAN OFFROAD MOTORSPORT HUB"
+          },
+          {
+            "id": "text-1",
+            "type": "text",
+            "label": "KEY: text-1",
+            "value": "SƏRHƏDSİZ OFFROAD HƏYƏCANI"
+          },
+          {
+            "id": "text-2",
+            "type": "text",
+            "label": "KEY: text-2",
+            "value": "Azərbaycanın ən çətin yollarında peşəkar yarışlar və adrenalin dolu anlar."
+          },
+          {
+            "id": "text-3",
+            "type": "text",
+            "label": "KEY: text-3",
+            "value": "YARIŞLARA BAX"
+          },
+          {
+            "id": "text-4",
+            "type": "text",
+            "label": "KEY: text-4",
+            "value": "HAQQIMIZDA"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "marquee",
+        "title": "Sürüşən Yazı",
+        "sections": [
+          {
+            "id": "lbl-forsaj-club-40",
+            "type": "text",
+            "label": "FORSAJ CLUB",
+            "value": "FORSAJ CLUB"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "navbar",
+        "title": "Naviqasiya",
+        "sections": [
+          {
+            "id": "lbl-site-logo-light-358",
+            "type": "text",
+            "label": "SITE_LOGO_LIGHT",
+            "value": "SITE_LOGO_LIGHT",
+            "url": "home"
+          },
+          {
+            "id": "lbl-ana-s-hi-f--462",
+            "type": "text",
+            "label": "ANA SƏHİFƏ",
+            "value": "ANA SƏHİFƏ",
+            "url": "home"
+          },
+          {
+            "id": "lbl-haqqimizda-78",
+            "type": "text",
+            "label": "HAQQIMIZDA",
+            "value": "HAQQIMIZDA",
+            "url": "home"
+          },
+          {
+            "id": "lbl-x-b-rl-r-639",
+            "type": "text",
+            "label": "XƏBƏRLƏR",
+            "value": "XƏBƏRLƏR",
+            "url": "home"
+          },
+          {
+            "id": "lbl-t-dbi-rl-r-316",
+            "type": "text",
+            "label": "TƏDBİRLƏR",
+            "value": "TƏDBİRLƏR",
+            "url": "about"
+          },
+          {
+            "id": "lbl-s-r-c-l-r-927",
+            "type": "text",
+            "label": "SÜRÜCÜLƏR",
+            "value": "SÜRÜCÜLƏR",
+            "url": "news"
+          },
+          {
+            "id": "lbl-qalereya-403",
+            "type": "text",
+            "label": "QALEREYA",
+            "value": "QALEREYA",
+            "url": "events"
+          },
+          {
+            "id": "lbl-qaydalar-555",
+            "type": "text",
+            "label": "QAYDALAR",
+            "value": "QAYDALAR",
+            "url": "drivers"
+          },
+          {
+            "id": "lbl--laq--270",
+            "type": "text",
+            "label": "ƏLAQƏ",
+            "value": "ƏLAQƏ",
+            "url": "gallery"
+          },
+          {
+            "id": "attr-forsaj-logo-65",
+            "type": "text",
+            "label": "ALT: Forsaj Logo...",
+            "value": "Forsaj Logo"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "nextrace",
+        "title": "Növbəti Yarış",
+        "sections": [
+          {
+            "id": "lbl-race-date-269",
+            "type": "text",
+            "label": "RACE_DATE",
+            "value": "RACE_DATE"
+          },
+          {
+            "id": "RACE_CITY",
+            "type": "text",
+            "label": "KEY: RACE_CITY",
+            "value": "SUMQAYIT"
+          },
+          {
+            "id": "lbl-race-city-117",
+            "type": "text",
+            "label": "RACE_CITY",
+            "value": "RACE_CITY"
+          },
+          {
+            "id": "RACE_TYPE",
+            "type": "text",
+            "label": "KEY: RACE_TYPE",
+            "value": "CHALLENGE"
+          },
+          {
+            "id": "lbl-race-type-531",
+            "type": "text",
+            "label": "RACE_TYPE",
+            "value": "RACE_TYPE"
+          },
+          {
+            "id": "lbl-race-location-215",
+            "type": "text",
+            "label": "RACE_LOCATION",
+            "value": "RACE_LOCATION"
+          },
+          {
+            "id": "SECTION_TITLE",
+            "type": "text",
+            "label": "KEY: SECTION_TITLE",
+            "value": "NÖVBƏTİ YARIŞ"
+          },
+          {
+            "id": "lbl-section-title-998",
+            "type": "text",
+            "label": "SECTION_TITLE",
+            "value": "SECTION_TITLE"
+          },
+          {
+            "id": "SECTION_SUBTITLE",
+            "type": "text",
+            "label": "KEY: SECTION_SUBTITLE",
+            "value": "LİVE REGİSTRATİON OPEN"
+          },
+          {
+            "id": "lbl-section-subtitl-186",
+            "type": "text",
+            "label": "SECTION_SUBTITLE",
+            "value": "SECTION_SUBTITLE"
+          },
+          {
+            "id": "lbl-view-all-btn-340",
+            "type": "text",
+            "label": "VIEW_ALL_BTN",
+            "value": "VIEW_ALL_BTN"
+          },
+          {
+            "id": "VIEW_ALL_BTN",
+            "type": "text",
+            "label": "KEY: VIEW_ALL_BTN",
+            "value": "TAM TƏQVİM",
+            "url": "events"
+          },
+          {
+            "id": "attr-next-race-781",
+            "type": "text",
+            "label": "ALT: Next Race...",
+            "value": "Next Race"
+          },
+          {
+            "id": "lbl-race-location-b-844",
+            "type": "text",
+            "label": "RACE_LOCATION_BG",
+            "value": "RACE_LOCATION_BG"
+          },
+          {
+            "id": "lbl-register-btn-873",
+            "type": "text",
+            "label": "REGISTER_BTN",
+            "value": "REGISTER_BTN"
+          },
+          {
+            "id": "REGISTER_BTN",
+            "type": "text",
+            "label": "KEY: REGISTER_BTN",
+            "value": "QATILMAQ ÜÇÜN QEYDİYYAT",
+            "url": "events"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "partners",
+        "title": "Tərəfdaşlar",
+        "sections": [
+          {
+            "id": "lbl-azmf-945",
+            "type": "text",
+            "label": "AZMF",
+            "value": "AZMF",
+            "url": "partner_1"
+          },
+          {
+            "id": "lbl-offroad-az-536",
+            "type": "text",
+            "label": "OFFROAD AZ",
+            "value": "OFFROAD AZ",
+            "url": "partner_1"
+          },
+          {
+            "id": "lbl-global-4x4-941",
+            "type": "text",
+            "label": "GLOBAL 4X4",
+            "value": "GLOBAL 4X4",
+            "url": "partner_2"
+          },
+          {
+            "id": "lbl-race-tech-482",
+            "type": "text",
+            "label": "RACE TECH",
+            "value": "RACE TECH",
+            "url": "partner_3"
+          },
+          {
+            "id": "lbl-official-partne-160",
+            "type": "text",
+            "label": "OFFICIAL PARTNER",
+            "value": "OFFICIAL PARTNER"
+          },
+          {
+            "id": "SECTION_TITLE",
+            "type": "text",
+            "label": "KEY: SECTION_TITLE",
+            "value": "RƏSMİ TƏRƏFDAŞLARIMIZ"
+          },
+          {
+            "id": "lbl-section-title-152",
+            "type": "text",
+            "label": "SECTION_TITLE",
+            "value": "SECTION_TITLE"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "videoarchive",
+        "title": "Video Arxiv",
+        "sections": [
+          {
+            "id": "SECTION_TITLE",
+            "type": "text",
+            "label": "KEY: SECTION_TITLE",
+            "value": "VİDEO ARXİVİ"
+          },
+          {
+            "id": "lbl-section-title-745",
+            "type": "text",
+            "label": "SECTION_TITLE",
+            "value": "SECTION_TITLE"
+          },
+          {
+            "id": "SECTION_SUBTITLE",
+            "type": "text",
+            "label": "KEY: SECTION_SUBTITLE",
+            "value": "Tarixi yarışların unudulmaz anları"
+          },
+          {
+            "id": "lbl-section-subtitl-117",
+            "type": "text",
+            "label": "SECTION_SUBTITLE",
+            "value": "SECTION_SUBTITLE"
+          },
+          {
+            "id": "VIEW_ALL_BTN",
+            "type": "text",
+            "label": "KEY: VIEW_ALL_BTN",
+            "value": "BÜTÜN QALEREYA"
+          },
+          {
+            "id": "lbl-view-all-btn-426",
+            "type": "text",
+            "label": "VIEW_ALL_BTN",
+            "value": "VIEW_ALL_BTN"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "whatisoffroad",
+        "title": "Offroad Nədir?",
+        "sections": [
+          {
+            "id": "lbl-texni--398",
+            "type": "text",
+            "label": "TEXNİ",
+            "value": "TEXNİ"
+          },
+          {
+            "id": "txt-texni-ki-t-chi-z-856",
+            "type": "text",
+            "label": "KEY: txt-texni-ki-t-chi-z-856",
+            "value": "TEXNİKİ TƏCHİZAT"
+          },
+          {
+            "id": "txt-h-r-bir-ma-i-n-x-456",
+            "type": "text",
+            "label": "KEY: txt-h-r-bir-ma-i-n-x-456",
+            "value": "Hər bir maşın xüsusi asqı sistemi və gücləndirilmiş mühərriklə təmin olunur."
+          },
+          {
+            "id": "txt-t-hl-k-si-zli-k-420",
+            "type": "text",
+            "label": "KEY: txt-t-hl-k-si-zli-k-420",
+            "value": "TƏHLÜKƏSİZLİK"
+          },
+          {
+            "id": "txt-pi-lotlar-n-t-hl-k-112",
+            "type": "text",
+            "label": "KEY: txt-pi-lotlar-n-t-hl-k-112",
+            "value": "Pilotların təhlükəsizliyi bizim üçün prioritetdir. Karkas və kəmərlər məcburidir."
+          },
+          {
+            "id": "txt-navi-qasi-ya-901",
+            "type": "text",
+            "label": "KEY: txt-navi-qasi-ya-901",
+            "value": "NAVİQASIYA"
+          },
+          {
+            "id": "txt-gps-v-x-ri-t-oxu-452",
+            "type": "text",
+            "label": "KEY: txt-gps-v-x-ri-t-oxu-452",
+            "value": "GPS və xəritə oxuma bacarığı offroad yarışlarında qalibiyyətin yarısıdır."
+          },
+          {
+            "id": "txt-ekstremal-g-c-112",
+            "type": "text",
+            "label": "KEY: txt-ekstremal-g-c-112",
+            "value": "EKSTREMAL GÜC"
+          },
+          {
+            "id": "txt-s-r-c-n-n-fi-zi-ki-912",
+            "type": "text",
+            "label": "KEY: txt-s-r-c-n-n-fi-zi-ki-912",
+            "value": "Sürücünün fiziki hazırlığı ən az avtomobilin gücü qədər əhəmiyyətlidir."
+          },
+          {
+            "id": "txt-offroad-n-dir-134",
+            "type": "text",
+            "label": "KEY: txt-offroad-n-dir-134",
+            "value": "OFFROAD NƏDIR?"
+          },
+          {
+            "id": "txt-adrenali-n-v-texni-ka-364",
+            "type": "text",
+            "label": "KEY: txt-adrenali-n-v-texni-ka-364",
+            "value": "ADRENALİN VƏ TEXNİKANIN SİMBİOZU"
+          },
+          {
+            "id": "txt-offroad-yaln-z-yol-339",
+            "type": "text",
+            "label": "KEY: txt-offroad-yaln-z-yol-339",
+            "value": "Offroad – yalnız yolsuzluq şəraitində hərəkət etmək deyil, həm də dözümlülük, strateji düşüncə və mühəndislik bacarığının sınağıdır. Azərbaycanın čətin dağlıq relyefi bu idman növü üçün dünyada ən maraqlı məkanlardan biri hesab olunur."
+          },
+          {
+            "id": "attr-offroad-culture-928",
+            "type": "text",
+            "label": "ALT: Offroad Culture...",
+            "value": "Offroad Culture"
+          },
+          {
+            "id": "txt-yar-i-llik-96",
+            "type": "text",
+            "label": "KEY: txt-yar-i-llik-96",
+            "value": "YARIŞ İLLIK"
+          }
+        ],
+        "images": [
+          {
+            "id": "img-556",
+            "path": "https://picsum.photos/id/107/800/600",
+            "alt": "Bölmədəki Şəkil",
+            "type": "local"
+          }
+        ]
+      },
+      {
+        "id": "app",
+        "title": "Ümumi Ayarlar",
+        "sections": [
+          {
+            "id": "SEO_TITLE",
+            "type": "text",
+            "label": "KEY: SEO_TITLE",
+            "value": "Forsaj Club - Offroad Motorsport Hub"
+          },
+          {
+            "id": "lbl-seo-title-479",
+            "type": "text",
+            "label": "SEO_TITLE",
+            "value": "SEO_TITLE"
+          },
+          {
+            "id": "lbl-seo-description-878",
+            "type": "text",
+            "label": "SEO_DESCRIPTION",
+            "value": "SEO_DESCRIPTION"
+          },
+          {
+            "id": "lbl-seo-keywords-372",
+            "type": "text",
+            "label": "SEO_KEYWORDS",
+            "value": "SEO_KEYWORDS"
+          },
+          {
+            "id": "lbl-seo-canonical-u-224",
+            "type": "text",
+            "label": "SEO_CANONICAL_URL",
+            "value": "SEO_CANONICAL_URL"
+          },
+          {
+            "id": "SEO_ROBOTS",
+            "type": "text",
+            "label": "KEY: SEO_ROBOTS",
+            "value": "index,follow"
+          },
+          {
+            "id": "lbl-seo-robots-923",
+            "type": "text",
+            "label": "SEO_ROBOTS",
+            "value": "SEO_ROBOTS"
+          },
+          {
+            "id": "SEO_AUTHOR",
+            "type": "text",
+            "label": "KEY: SEO_AUTHOR",
+            "value": "Forsaj Club"
+          },
+          {
+            "id": "SEO_LANGUAGE",
+            "type": "text",
+            "label": "KEY: SEO_LANGUAGE",
+            "value": "az"
+          },
+          {
+            "id": "lbl-seo-language-178",
+            "type": "text",
+            "label": "SEO_LANGUAGE",
+            "value": "SEO_LANGUAGE"
+          },
+          {
+            "id": "lbl-seo-og-title-973",
+            "type": "text",
+            "label": "SEO_OG_TITLE",
+            "value": "SEO_OG_TITLE"
+          },
+          {
+            "id": "lbl-seo-og-descript-797",
+            "type": "text",
+            "label": "SEO_OG_DESCRIPTION",
+            "value": "SEO_OG_DESCRIPTION"
+          },
+          {
+            "id": "lbl-seo-og-image-535",
+            "type": "text",
+            "label": "SEO_OG_IMAGE",
+            "value": "SEO_OG_IMAGE"
+          },
+          {
+            "id": "lbl-seo-og-url-692",
+            "type": "text",
+            "label": "SEO_OG_URL",
+            "value": "SEO_OG_URL"
+          },
+          {
+            "id": "SEO_TWITTER_CARD",
+            "type": "text",
+            "label": "KEY: SEO_TWITTER_CARD",
+            "value": "summary_large_image"
+          },
+          {
+            "id": "lbl-seo-twitter-car-598",
+            "type": "text",
+            "label": "SEO_TWITTER_CARD",
+            "value": "SEO_TWITTER_CARD"
+          },
+          {
+            "id": "lbl-seo-twitter-sit-35",
+            "type": "text",
+            "label": "SEO_TWITTER_SITE",
+            "value": "SEO_TWITTER_SITE"
+          },
+          {
+            "id": "lbl-seo-twitter-cre-963",
+            "type": "text",
+            "label": "SEO_TWITTER_CREATOR",
+            "value": "SEO_TWITTER_CREATOR"
+          },
+          {
+            "id": "lbl-seo-google-veri-225",
+            "type": "text",
+            "label": "SEO_GOOGLE_VERIFICAT...",
+            "value": "SEO_GOOGLE_VERIFICATION"
+          },
+          {
+            "id": "lbl-seo-bing-verifi-562",
+            "type": "text",
+            "label": "SEO_BING_VERIFICATIO...",
+            "value": "SEO_BING_VERIFICATION"
+          },
+          {
+            "id": "lbl-seo-yandex-veri-272",
+            "type": "text",
+            "label": "SEO_YANDEX_VERIFICAT...",
+            "value": "SEO_YANDEX_VERIFICATION"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "privacypolicypage",
+        "title": "Məxfilik Siyasəti",
+        "sections": [
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "Səhifə Başlığı",
+            "value": "MƏXFİLİK SİYASƏTİ (PRIVACY POLICY)"
+          },
+          {
+            "id": "PAGE_SUBTITLE",
+            "type": "text",
+            "label": "Səhifə Alt Başlığı",
+            "value": "MƏLUMATLARIN QORUNMASI VƏ İSTİFADƏ ŞƏRTLƏRİ"
+          },
+          {
+            "id": "INTRO_TEXT",
+            "type": "text",
+            "label": "Giriş Mətni",
+            "value": "Bu Məxfilik Siyasəti forsaj.az (“Sayt”, “biz”, “bizim”) tərəfindən istifadəçilərdən toplanan məlumatların növlərini, istifadə qaydasını və qorunmasını izah edir."
+          },
+          {
+            "id": "UPDATED_LABEL",
+            "type": "text",
+            "label": "Yenilənmə Tarixi Etiketi",
+            "value": "Son yenilənmə tarixi"
+          },
+          {
+            "id": "UPDATED_DATE",
+            "type": "text",
+            "label": "Yenilənmə Tarixi",
+            "value": "18 Fevral 2026"
+          },
+          {
+            "id": "SECTION_1_TITLE",
+            "type": "text",
+            "label": "Bölmə 1 Başlıq",
+            "value": "1. Ümumi Məlumat"
+          },
+          {
+            "id": "SECTION_1_BODY",
+            "type": "text",
+            "label": "Bölmə 1 Mətn",
+            "value": "Bu Məxfilik Siyasəti forsaj.az (“Sayt”, “biz”, “bizim”) tərəfindən istifadəçilərdən toplanan məlumatların növlərini, istifadə qaydasını və qorunmasını izah edir. Saytdan istifadə etməklə bu siyasətin şərtlərini qəbul etmiş olursunuz."
+          },
+          {
+            "id": "SECTION_2_TITLE",
+            "type": "text",
+            "label": "Bölmə 2 Başlıq",
+            "value": "2. Toplanan Məlumatlar"
+          },
+          {
+            "id": "SECTION_2_BODY",
+            "type": "text",
+            "label": "Bölmə 2 Mətn",
+            "value": "Şəxsi məlumatlar:\n- Ad və soyad\n- Elektron poçt ünvanı\n- Telefon nömrəsi (təqdim edildiyi halda)\n\nTexniki məlumatlar:\n- IP ünvan\n- Brauzer növü və cihaz məlumatları\n- Saytda fəaliyyət məlumatları (baxışlar, kliklər və s.)"
+          },
+          {
+            "id": "SECTION_3_TITLE",
+            "type": "text",
+            "label": "Bölmə 3 Başlıq",
+            "value": "3. Məlumatların İstifadə Məqsədi"
+          },
+          {
+            "id": "SECTION_3_BODY",
+            "type": "text",
+            "label": "Bölmə 3 Mətn",
+            "value": "Toplanan məlumatlar aşağıdakı məqsədlərlə istifadə olunur:\n- Xidmətlərin təqdim edilməsi və inkişaf etdirilməsi\n- İstifadəçi sorğularına cavab verilməsi\n- Təhlükəsizliyin təmin olunması\n- Statistik və analitik təhlillər aparılması"
+          },
+          {
+            "id": "SECTION_4_TITLE",
+            "type": "text",
+            "label": "Bölmə 4 Başlıq",
+            "value": "4. Cookies (Kukilər)"
+          },
+          {
+            "id": "SECTION_4_BODY",
+            "type": "text",
+            "label": "Bölmə 4 Mətn",
+            "value": "Sayt istifadəçi təcrübəsini yaxşılaşdırmaq üçün kukilərdən istifadə edə bilər. İstifadəçi brauzer vasitəsilə kukiləri deaktiv edə bilər."
+          },
+          {
+            "id": "SECTION_5_TITLE",
+            "type": "text",
+            "label": "Bölmə 5 Başlıq",
+            "value": "5. Məlumatların Üçüncü Tərəflərlə Paylaşılması"
+          },
+          {
+            "id": "SECTION_5_BODY",
+            "type": "text",
+            "label": "Bölmə 5 Mətn",
+            "value": "Şəxsi məlumatlar yalnız aşağı hallarda üçüncü tərəflərlə paylaşıla bilər:\n- Qanunvericiliyin tələbi olduqda\n- Texniki və xidmət tərəfdaşları ilə əməkdaşlıq çərçivəsində\n- İstifadəçinin razılığı ilə"
+          },
+          {
+            "id": "SECTION_6_TITLE",
+            "type": "text",
+            "label": "Bölmə 6 Başlıq",
+            "value": "6. Məlumat Təhlükəsizliyi"
+          },
+          {
+            "id": "SECTION_6_BODY",
+            "type": "text",
+            "label": "Bölmə 6 Mətn",
+            "value": "Biz şəxsi məlumatların qorunması üçün müvafiq texniki və inzibati təhlükəsizlik tədbirləri tətbiq edirik."
+          },
+          {
+            "id": "SECTION_7_TITLE",
+            "type": "text",
+            "label": "Bölmə 7 Başlıq",
+            "value": "7. İstifadəçi Hüquqları"
+          },
+          {
+            "id": "SECTION_7_BODY",
+            "type": "text",
+            "label": "Bölmə 7 Mətn",
+            "value": "İstifadəçilər:\n- Öz məlumatlarına çıxış tələb edə bilər\n- Düzəliş və ya silinmə tələb edə bilər\n- Məlumatların işlənməsinə etiraz edə bilər"
+          },
+          {
+            "id": "SECTION_8_TITLE",
+            "type": "text",
+            "label": "Bölmə 8 Başlıq",
+            "value": "8. Siyasətdə Dəyişikliklər"
+          },
+          {
+            "id": "SECTION_8_BODY",
+            "type": "text",
+            "label": "Bölmə 8 Mətn",
+            "value": "Bu siyasət zaman-zaman yenilənə bilər. Yenilənmiş versiya saytda dərc edildiyi tarixdən qüvvəyə minir."
+          },
+          {
+            "id": "SECTION_9_TITLE",
+            "type": "text",
+            "label": "Bölmə 9 Başlıq",
+            "value": "9. Əlaqə"
+          },
+          {
+            "id": "SECTION_9_BODY",
+            "type": "text",
+            "label": "Bölmə 9 Mətn",
+            "value": "Email: info@forsaj.az\nVeb sayt: https://forsaj.az"
+          },
+          {
+            "id": "CONTACT_TITLE",
+            "type": "text",
+            "label": "Əlaqə Bölməsi Başlığı",
+            "value": "Əlaqə"
+          },
+          {
+            "id": "CONTACT_EMAIL",
+            "type": "text",
+            "label": "Əlaqə E-poçtu",
+            "value": "info@forsaj.az"
+          },
+          {
+            "id": "CONTACT_WEBSITE",
+            "type": "text",
+            "label": "Əlaqə Vebsaytı",
+            "value": "https://forsaj.az"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "termsofservicepage",
+        "title": "Xidmət Şərtləri",
+        "sections": [
+          {
+            "id": "PAGE_TITLE",
+            "type": "text",
+            "label": "Səhifə Başlığı",
+            "value": "XİDMƏT ŞƏRTLƏRİ (TERMS OF SERVICE)"
+          },
+          {
+            "id": "PAGE_SUBTITLE",
+            "type": "text",
+            "label": "Səhifə Alt Başlığı",
+            "value": "İSTİFADƏ QAYDALARI VƏ HÜQUQİ ŞƏRTLƏR"
+          },
+          {
+            "id": "INTRO_TEXT",
+            "type": "text",
+            "label": "Giriş Mətni",
+            "value": "forsaj.az saytından istifadə etməklə siz bu Xidmət Şərtlərini qəbul etmiş olursunuz."
+          },
+          {
+            "id": "UPDATED_LABEL",
+            "type": "text",
+            "label": "Yenilənmə Tarixi Etiketi",
+            "value": "Son yenilənmə tarixi"
+          },
+          {
+            "id": "UPDATED_DATE",
+            "type": "text",
+            "label": "Yenilənmə Tarixi",
+            "value": "18 Fevral 2026"
+          },
+          {
+            "id": "SECTION_1_TITLE",
+            "type": "text",
+            "label": "Bölmə 1 Başlıq",
+            "value": "1. Qəbul"
+          },
+          {
+            "id": "SECTION_1_BODY",
+            "type": "text",
+            "label": "Bölmə 1 Mətn",
+            "value": "forsaj.az saytından istifadə etməklə siz bu Xidmət Şərtlərini qəbul etmiş olursunuz."
+          },
+          {
+            "id": "SECTION_2_TITLE",
+            "type": "text",
+            "label": "Bölmə 2 Başlıq",
+            "value": "2. Xidmətin Təsviri"
+          },
+          {
+            "id": "SECTION_2_BODY",
+            "type": "text",
+            "label": "Bölmə 2 Mətn",
+            "value": "forsaj.az avtomobil, motorsport, off-road və Forsaj icması ilə bağlı məlumat, tədbir və digər rəqəmsal xidmətlər təqdim edir."
+          },
+          {
+            "id": "SECTION_3_TITLE",
+            "type": "text",
+            "label": "Bölmə 3 Başlıq",
+            "value": "3. İstifadə Qaydaları"
+          },
+          {
+            "id": "SECTION_3_BODY",
+            "type": "text",
+            "label": "Bölmə 3 Mətn",
+            "value": "İstifadəçi:\n- Saytdan yalnız qanuni məqsədlərlə istifadə etməlidir\n- Digər istifadəçilərin hüquqlarını pozmamalıdır\n- Saytın texniki sisteminə zərər verə biləcək hərəkətlər etməməlidir"
+          },
+          {
+            "id": "SECTION_4_TITLE",
+            "type": "text",
+            "label": "Bölmə 4 Başlıq",
+            "value": "4. Əqli Mülkiyyət Hüquqları"
+          },
+          {
+            "id": "SECTION_4_BODY",
+            "type": "text",
+            "label": "Bölmə 4 Mətn",
+            "value": "Saytda yerləşdirilən bütün məzmun (mətnlər, şəkillər, videolar, loqo və s.) müəllif hüquqları ilə qorunur və icazəsiz istifadə edilə bilməz."
+          },
+          {
+            "id": "SECTION_5_TITLE",
+            "type": "text",
+            "label": "Bölmə 5 Başlıq",
+            "value": "5. Məsuliyyətin Məhdudlaşdırılması"
+          },
+          {
+            "id": "SECTION_5_BODY",
+            "type": "text",
+            "label": "Bölmə 5 Mətn",
+            "value": "Sayt və xidmətlər “olduğu kimi” təqdim olunur. Texniki nasazlıq və ya fasilələrə görə sayt rəhbərliyi məsuliyyət daşımır."
+          },
+          {
+            "id": "SECTION_6_TITLE",
+            "type": "text",
+            "label": "Bölmə 6 Başlıq",
+            "value": "6. Dəyişiklik Hüququ"
+          },
+          {
+            "id": "SECTION_6_BODY",
+            "type": "text",
+            "label": "Bölmə 6 Mətn",
+            "value": "Biz bu şərtləri istənilən vaxt dəyişdirmək hüququnu özümüzdə saxlayırıq. Yenilənmiş versiya saytda dərc edildiyi tarixdən qüvvəyə minir."
+          },
+          {
+            "id": "SECTION_7_TITLE",
+            "type": "text",
+            "label": "Bölmə 7 Başlıq",
+            "value": "7. Tətbiq Olunan Qanun"
+          },
+          {
+            "id": "SECTION_7_BODY",
+            "type": "text",
+            "label": "Bölmə 7 Mətn",
+            "value": "Bu Xidmət Şərtləri Azərbaycan Respublikasının qanunvericiliyinə uyğun tənzimlənir."
+          },
+          {
+            "id": "SECTION_8_TITLE",
+            "type": "text",
+            "label": "Bölmə 8 Başlıq",
+            "value": "8. Əlaqə"
+          },
+          {
+            "id": "SECTION_8_BODY",
+            "type": "text",
+            "label": "Bölmə 8 Mətn",
+            "value": "Email: info@forsaj.az\nVeb sayt: https://forsaj.az"
+          },
+          {
+            "id": "CONTACT_TITLE",
+            "type": "text",
+            "label": "Əlaqə Bölməsi Başlığı",
+            "value": "Əlaqə"
+          },
+          {
+            "id": "CONTACT_EMAIL",
+            "type": "text",
+            "label": "Əlaqə E-poçtu",
+            "value": "info@forsaj.az"
+          },
+          {
+            "id": "CONTACT_WEBSITE",
+            "type": "text",
+            "label": "Əlaqə Vebsaytı",
+            "value": "https://forsaj.az"
+          }
+        ],
+        "images": []
+      },
+      {
+        "id": "general",
+        "title": "SİSTEM AYARLARI",
+        "sections": [
+          {
+            "id": "SMTP_HOST",
+            "type": "text",
+            "label": "SMTP_HOST",
+            "value": "smtp.gmail.com"
+          },
+          {
+            "id": "SMTP_USER",
+            "type": "text",
+            "label": "SMTP_USER",
+            "value": "aliyabuz30@gmail.com"
+          },
+          {
+            "id": "SMTP_PASS",
+            "type": "text",
+            "label": "SMTP_PASS",
+            "value": "bqvm drzu ywve eijv"
+          },
+          {
+            "id": "SMTP_FROM",
+            "type": "text",
+            "label": "SMTP_FROM",
+            "value": "aliyabuz30@gmail.com"
+          },
+          {
+            "id": "SMTP_TO",
+            "type": "text",
+            "label": "SMTP_TO",
+            "value": "aliyabuz30@gmail.com,tural.rahim99@gmail.com"
+          }
+        ],
+        "images": [],
+        "active": true
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "title": "SUMQAYIT CHALLENGEs",
+        "date": "2024-07-20",
+        "location": "SUMQAYIT",
+        "category": "OFFROAD FEATURED",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+        "description": "SUMQAYITIN SAHİL QUMRUQLARINDA KEÇİRİLƏN BU YARIŞDA PİLOTLARIN HƏM SÜRƏT, HƏM DƏ QUMLUQDA MANEVR QABİLİYYƏTLƏRİ SINAĞA ÇƏKİLƏCƏK. AZƏRBAYCANIN ƏN PRESTİJLİ SAHİL YARIŞI OLARAQ QƏBUL EDİLİR.",
+        "rules": "30KM/H LİMİT PİT-STOP ƏRAZİSİNDƏ MƏCBURİDİR. BÜTÜN AVTOMOBİLLƏRDƏ YANĞINSÖNDÜRƏN VƏ TƏHLÜKƏSİZLİK KARKASI OLMALIDIR.",
+        "status": "planned"
+      },
+      {
+        "id": 2,
+        "title": "XIZI DAĞ SINAĞIs",
+        "date": "2024-08-15",
+        "location": "XIZI",
+        "category": "DAĞ SINAĞI",
+        "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+        "status": "planned"
+      },
+      {
+        "id": 3,
+        "title": "NAXÇIVAN DESERT",
+        "date": "2024-09-10",
+        "location": "NAXÇIVAN",
+        "category": "DESERT",
+        "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+        "status": "planned"
+      },
+      {
+        "id": 4,
+        "title": "LERİK NIGHT TRAIL",
+        "date": "2024-10-05",
+        "location": "LERİK",
+        "category": "NIGHT TRAIL",
+        "img": "https://images.unsplash.com/photo-1533558701576-23c65e0272fb?q=80&w=1974&auto=format&fit=crop",
+        "status": "planned"
+      },
+      {
+        "id": 5,
+        "title": "GABALA WINTER CUP",
+        "date": "2024-12-20",
+        "location": "QƏBƏLƏ",
+        "category": "WINTER CUP",
+        "img": "https://images.unsplash.com/photo-1541447271487-09612b3f49f7?q=80&w=1974&auto=format&fit=crop",
+        "status": "planned"
+      },
+      {
+        "id": 6,
+        "title": "BAKU RALLY 2023",
+        "date": "2023-05-10",
+        "location": "BAKI",
+        "category": "RALLY",
+        "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+        "status": "past"
+      },
+      {
+        "id": 7,
+        "title": "QUSAR CHALLENGE",
+        "date": "2023-08-15",
+        "location": "QUSAR",
+        "category": "CHALLENGE",
+        "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+        "status": "past"
+      },
+      {
+        "id": 8,
+        "title": "QOBUSTAN TROPHY",
+        "date": "2023-11-20",
+        "location": "QOBUSTAN",
+        "category": "TROPHY",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+        "status": "past"
+      },
+      {
+        "id": 9,
+        "title": "SHEKİ TRAIL 2023",
+        "date": "2023-04-20",
+        "location": "ŞƏKİ",
+        "category": "TRAIL",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop",
+        "status": "past"
+      },
+      {
+        "id": 11,
+        "title": "ABŞERON DUNES RAID",
+        "date": "2025-03-15",
+        "location": "ABŞERON",
+        "category": "DESERT RAID",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+        "description": "Abşeronun qum dyunlarında sürət və dözümlülük yarışı. Mart ayının sərinliyində qızmar yarış!",
+        "status": "planned"
+      },
+      {
+        "id": 12,
+        "title": "ŞƏKİ TARİXİ TUR",
+        "date": "2025-05-20",
+        "location": "ŞƏKİ",
+        "category": "EXPEDITION",
+        "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+        "description": "Offroad texnikası ilə Şəkinin qədim kəndlərinə və tarixi abidələrinə səyahət.",
+        "status": "planned"
+      },
+      {
+        "id": 13,
+        "title": "MUD FESTIVAL 2025",
+        "date": "2025-06-10",
+        "location": "SUMQAYIT",
+        "category": "FESTIVAL",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+        "description": "Böyük Palçıq Festivalı. Həm yarış, həm əyləncə!",
+        "status": "planned"
+      },
+      {
+        "id": 101,
+        "title": "QOBU OFFROAD CHALLENGE 2026",
+        "date": "2026-04-12",
+        "location": "Bakı, Qobu",
+        "category": "OFFROAD",
+        "img": "https://images.unsplash.com/photo-1518655048521-f130df041f66?q=80&w=2070&auto=format&fit=crop",
+        "description": "[b]Forsaj Club[/b] 2026 mövsümünün açılış yarışı.",
+        "rules": "Texniki baxış və təhlükəsizlik qaydaları məcburidir.",
+        "youtubeUrl": "",
+        "status": "planned"
+      },
+      {
+        "id": 102,
+        "title": "ŞAMAXI HILL CLIMB WEEKEND",
+        "date": "2026-05-24",
+        "location": "Şamaxı",
+        "category": "HILL CLIMB",
+        "img": "https://images.unsplash.com/photo-1471295253337-3ceaaedca402?q=80&w=2070&auto=format&fit=crop",
+        "description": "Dağ marşrutunda sürət və stabillik testləri.",
+        "rules": "Təkər standartı və roll-cage yoxlaması aparılır.",
+        "youtubeUrl": "",
+        "status": "planned"
+      },
+      {
+        "id": 103,
+        "title": "LƏNKƏRAN MUD FEST 2025",
+        "date": "2025-10-05",
+        "location": "Lənkəran",
+        "category": "MUD RACE",
+        "img": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2074&auto=format&fit=crop",
+        "description": "Mövsümün ən çətin palçıq mərhələlərindən biri.",
+        "rules": "Dəbilqə və 4 nöqtəli kəmər mütləqdir.",
+        "youtubeUrl": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+        "status": "past"
+      },
+      {
+        "id": 104,
+        "title": "GƏDƏBƏY ROCK TRAIL 2025",
+        "date": "2025-08-17",
+        "location": "Gədəbəy",
+        "category": "ROCK CRAWL",
+        "img": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop",
+        "description": "Qaya keçidləri və dar texniki zolaqlar üzrə 2 mərhələ.",
+        "rules": "Qayalı hissədə spotter məcburidir.",
+        "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "status": "past"
+      },
+      {
+        "id": 105,
+        "title": "QAX FOREST TRAIL 2026",
+        "date": "2026-06-28",
+        "location": "Qax",
+        "category": "FOREST TRAIL",
+        "img": "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2070&auto=format&fit=crop",
+        "description": "Meşə marşrutları, çay keçidləri və texniki sürmə mərhələləri ilə 1 günlük offroad tədbiri.",
+        "rules": "Dəbilqə, çəkmə trosu və ilkin tibbi çanta mütləqdir.",
+        "youtubeUrl": "",
+        "status": "planned"
+      }
+    ],
+    "news": [
+      {
+        "id": 1,
+        "title": "Yeni Offroad Mövsümü Başlayırm",
+        "date": "2024-03-20",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+        "description": "Yeni mövsümdə sizi daha maraqlı yarışlar və sınaqlar gözləyir. Bütün iştirakçıları hazır olmağa çağırırıq!",
+        "category": "XƏBƏRLƏR",
+        "status": "published"
+      },
+      {
+        "id": 2,
+        "title": "Forsaj Club Beynəlxalq Yarışlarda",
+        "date": "2024-04-15",
+        "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+        "description": "Klubumuzun pilotları beynəlxalq dərəcəli offroad ralli yarışlarında iştirak etmək üçün dəvət alıblar.",
+        "category": "UĞURLARIMIZ",
+        "status": "published"
+      },
+      {
+        "id": 3,
+        "title": "Kross-kantri üzrə Azərbaycan Çempionatı",
+        "date": "2024-05-10",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+        "description": "Ölkənin ən güclü pilotları çempionluq uğrunda mübarizəyə qoşulur. Yarışlar 3 mərhələdən ibarət olacaq.",
+        "category": "YARIŞLAR",
+        "status": "published"
+      },
+      {
+        "id": 4,
+        "title": "Offroad Texnikasına Necə Qulluq Etməli?",
+        "date": "2024-05-25",
+        "img": "https://images.unsplash.com/photo-1485291571150-772bcfc10da5?q=80&w=2070&auto=format&fit=crop",
+        "description": "Çətin yol şəraitində avtomobilinizi qorumaq üçün lazım olan vacib məsləhətlər.",
+        "category": "MƏSLƏHƏTLƏR",
+        "status": "published"
+      },
+      {
+        "id": 5,
+        "title": "Forsaj Club Gənc Pilotlar Layihəsi",
+        "date": "2024-06-05",
+        "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+        "description": "Gənc nəslin motorsporta cəlb edilməsi üçün yeni təlim mərkəzimiz fəaliyyətə başlayır.",
+        "category": "LAYİHƏLƏR",
+        "status": "published"
+      },
+      {
+        "id": 6,
+        "title": "Yeni Ekspedisiya: Şahdağ Yüksəklikləri",
+        "date": "2024-06-20",
+        "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+        "description": "Klub üzvləri Şahdağın ən çətin zirvələrinə doğru yola çıxırlar.",
+        "category": "EKSPEDİSİYA",
+        "status": "published"
+      },
+      {
+        "id": 301,
+        "title": "2026 Mövsüm Təqvimi Açıqlandı",
+        "date": "2026-02-20",
+        "img": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=2070&auto=format&fit=crop",
+        "description": "Forsaj Club 2026 mövsümü üçün tədbir təqvimini təqdim etdi. Qeydiyyat mərhələləri mart ayından başlayır.",
+        "category": "XƏBƏRLƏR",
+        "status": "published"
+      },
+      {
+        "id": 302,
+        "title": "Texniki Komissiya Yenilənmiş Qaydaları Paylaşdı",
+        "date": "2026-02-18",
+        "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+        "description": "Təhlükəsizlik və təkər standartları üzrə yenilənmiş qaydalar iştirakçılara göndərildi.",
+        "category": "QAYDALAR",
+        "status": "published"
+      },
+      {
+        "id": 303,
+        "title": "Yeni Sürücü Qeydiyyatı Rekordu",
+        "date": "2026-02-16",
+        "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+        "description": "Bu həftə ərzində rekord sayda yeni pilot ilkin qeydiyyatdan keçib.",
+        "category": "ANONS",
+        "status": "published"
+      }
+    ],
+    "gallery-photos": [
+      {
+        "id": 1,
+        "url": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&fit=crop",
+        "title": "Sumqayıt Challenge 2024",
+        "category": "Yarışlar"
+      },
+      {
+        "id": 2,
+        "url": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&fit=crop",
+        "title": "Xızı Dağları",
+        "category": "Ekspedisiya"
+      },
+      {
+        "id": 3,
+        "url": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=800&fit=crop",
+        "title": "Naxçıvan Səhra Yarışı",
+        "category": "Yarışlar"
+      },
+      {
+        "id": 4,
+        "url": "https://images.unsplash.com/photo-1533558701576-23c65e0272fb?q=80&w=800&fit=crop",
+        "title": "Gecə Traili",
+        "category": "Ekspedisiya"
+      },
+      {
+        "id": 5,
+        "url": "https://images.unsplash.com/photo-1541447271487-09612b3f49f7?q=80&w=800&fit=crop",
+        "title": "Qış Kuboku",
+        "category": "Yarışlar"
+      },
+      {
+        "id": 6,
+        "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&fit=crop",
+        "title": "Şəki Panoraması",
+        "category": "Ekspedisiya"
+      },
+      {
+        "id": 501,
+        "title": "Qobu start xətti",
+        "url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop",
+        "album": "QOBU OFFROAD CHALLENGE 2026",
+        "eventId": 101
+      },
+      {
+        "id": 502,
+        "title": "Qobu su keçidi",
+        "url": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=2070&auto=format&fit=crop",
+        "album": "QOBU OFFROAD CHALLENGE 2026",
+        "eventId": 101
+      },
+      {
+        "id": 503,
+        "title": "Qobu finiş",
+        "url": "https://images.unsplash.com/photo-1529429617124-aee711d416e4?q=80&w=2068&auto=format&fit=crop",
+        "album": "QOBU OFFROAD CHALLENGE 2026",
+        "eventId": 101
+      },
+      {
+        "id": 504,
+        "title": "Şamaxı səhər dumanı",
+        "url": "https://images.unsplash.com/photo-1471295253337-3ceaaedca402?q=80&w=2070&auto=format&fit=crop",
+        "album": "ŞAMAXI HILL CLIMB WEEKEND",
+        "eventId": 102
+      },
+      {
+        "id": 505,
+        "title": "Şamaxı qalxma hissəsi",
+        "url": "https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=2070&auto=format&fit=crop",
+        "album": "ŞAMAXI HILL CLIMB WEEKEND",
+        "eventId": 102
+      },
+      {
+        "id": 506,
+        "title": "Şamaxı podium",
+        "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop",
+        "album": "ŞAMAXI HILL CLIMB WEEKEND",
+        "eventId": 102
+      },
+      {
+        "id": 507,
+        "title": "Lənkəran palçıq zonası",
+        "url": "https://images.unsplash.com/photo-1518655048521-f130df041f66?q=80&w=2070&auto=format&fit=crop",
+        "album": "LƏNKƏRAN MUD FEST 2025",
+        "eventId": 103
+      },
+      {
+        "id": 508,
+        "title": "Lənkəran komanda şəkli",
+        "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2070&auto=format&fit=crop",
+        "album": "LƏNKƏRAN MUD FEST 2025",
+        "eventId": 103
+      },
+      {
+        "id": 509,
+        "title": "Lənkəran finiş",
+        "url": "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2070&auto=format&fit=crop",
+        "album": "LƏNKƏRAN MUD FEST 2025",
+        "eventId": 103
+      },
+      {
+        "id": 510,
+        "title": "Gədəbəy qaya mərhələsi",
+        "url": "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070&auto=format&fit=crop",
+        "album": "GƏDƏBƏY ROCK TRAIL 2025",
+        "eventId": 104
+      },
+      {
+        "id": 511,
+        "title": "Gədəbəy dar keçid",
+        "url": "https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2070&auto=format&fit=crop",
+        "album": "GƏDƏBƏY ROCK TRAIL 2025",
+        "eventId": 104
+      },
+      {
+        "id": 512,
+        "title": "Gədəbəy qrup foto",
+        "url": "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2070&auto=format&fit=crop",
+        "album": "GƏDƏBƏY ROCK TRAIL 2025",
+        "eventId": 104
+      }
+    ],
+    "videos": [
+      {
+        "id": 1,
+        "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "videoId": "dQw4w9WgXcQ",
+        "title": "Forsaj Club 2024 Teaser",
+        "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+        "duration": "03:32",
+        "created_at": "2024-01-01T00:00:00Z"
+      },
+      {
+        "id": 2,
+        "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "videoId": "dQw4w9WgXcQ",
+        "title": "Dakar 2026 Hazırlıqları",
+        "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+        "duration": "03:32",
+        "created_at": "2024-01-02T00:00:00Z"
+      },
+      {
+        "id": 3,
+        "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "videoId": "dQw4w9WgXcQ",
+        "title": "Offroad Texnika Dərsləri",
+        "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+        "duration": "03:32",
+        "created_at": "2024-01-03T00:00:00Z"
+      },
+      {
+        "id": 201,
+        "title": "Qobu Offroad Test Lap",
+        "youtubeUrl": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+        "videoId": "M7lc1UVf-VE",
+        "duration": "04:27",
+        "thumbnail": "https://img.youtube.com/vi/M7lc1UVf-VE/maxresdefault.jpg",
+        "created_at": "2026-02-25T18:00:00.000Z"
+      },
+      {
+        "id": 202,
+        "title": "Şamaxı Dağ Etabı Highlights",
+        "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "videoId": "dQw4w9WgXcQ",
+        "duration": "03:33",
+        "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+        "created_at": "2026-02-24T17:30:00.000Z"
+      },
+      {
+        "id": 203,
+        "title": "Mud Zone Slow-Mo Recap",
+        "youtubeUrl": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        "videoId": "aqz-KE-bpKQ",
+        "duration": "02:18",
+        "thumbnail": "https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg",
+        "created_at": "2026-02-23T15:10:00.000Z"
+      },
+      {
+        "id": 204,
+        "title": "Rock Trail Driver Cam",
+        "youtubeUrl": "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+        "videoId": "ysz5S6PUM-U",
+        "duration": "05:02",
+        "thumbnail": "https://img.youtube.com/vi/ysz5S6PUM-U/maxresdefault.jpg",
+        "created_at": "2026-02-22T14:05:00.000Z"
+      }
+    ],
+    "drivers": [
+      {
+        "id": "pro-unlimited",
+        "name": "PRO UNLIMITED",
+        "drivers": [
+          {
+            "id": 9101,
+            "rank": 1,
+            "name": "Kənan Məlikov",
+            "license": "OFFROAD PRO",
+            "team": "Forsaj Factory",
+            "wins": 11,
+            "points": 1320,
+            "img": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 9102,
+            "rank": 2,
+            "name": "Samir Hüseynov",
+            "license": "MASTER",
+            "team": "Mountain Kings",
+            "wins": 8,
+            "points": 1080,
+            "img": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 9103,
+            "rank": 3,
+            "name": "Rauf Əliyev",
+            "license": "PRO LICENSE",
+            "team": "Baku Rangers",
+            "wins": 6,
+            "points": 920,
+            "img": "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&fit=crop"
+          }
+        ]
+      },
+      {
+        "id": "stock-class",
+        "name": "STOCK CLASS",
+        "drivers": [
+          {
+            "id": 9202,
+            "rank": 1,
+            "name": "Elvin Quliyev",
+            "license": "PILOT LICENSE",
+            "team": "Trail Hunters",
+            "wins": 4,
+            "points": 1090,
+            "img": "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 9201,
+            "rank": 2,
+            "name": "Nicat Rzayev",
+            "license": "PILOT LICENSE",
+            "team": "Stock Riders",
+            "wins": 5,
+            "points": 740,
+            "img": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 9203,
+            "rank": 3,
+            "name": "Orxan Məcidov",
+            "license": "NOVICE",
+            "team": "Mud Sliders",
+            "wins": 2,
+            "points": 430,
+            "img": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&fit=crop"
+          }
+        ]
+      },
+      {
+        "id": "test",
+        "name": "TEST",
+        "drivers": [
+          {
+            "id": 1770547955419,
+            "rank": 1,
+            "name": "Seymur Əliyev",
+            "license": "OFFROAD PRO",
+            "team": "Forsaj Elite",
+            "wins": 15,
+            "points": 1500,
+            "img": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770547965419,
+            "rank": 2,
+            "name": "Rəşad Məmmədov",
+            "license": "PILOT LICENSE",
+            "team": "Baku Rangers",
+            "wins": 8,
+            "points": 950,
+            "img": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770547975419,
+            "rank": 3,
+            "name": "Elnur Qasımov",
+            "license": "MASTER",
+            "team": "Mountain Kings",
+            "wins": 5,
+            "points": 720,
+            "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770547985419,
+            "rank": 4,
+            "name": "Murad Həsənov",
+            "license": "PILOT LICENSE",
+            "team": "Desert Fox",
+            "wins": 3,
+            "points": 450,
+            "img": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770547995419,
+            "rank": 5,
+            "name": "Zaur Vəliyev",
+            "license": "PRO LICENSE",
+            "team": "Forsaj Juniors",
+            "wins": 2,
+            "points": 380,
+            "img": "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770548005419,
+            "rank": 6,
+            "name": "Tural İsmayılov",
+            "license": "PILOT LICENSE",
+            "team": "Storm Chasers",
+            "wins": 1,
+            "points": 210,
+            "img": "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770548015419,
+            "rank": 7,
+            "name": "Anar Rəhimov",
+            "license": "NOVICE",
+            "team": "Mud Sliders",
+            "wins": 0,
+            "points": 150,
+            "img": "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770548025419,
+            "rank": 8,
+            "name": "Vüqar Sadıqov",
+            "license": "PILOT LICENSE",
+            "team": "Baku Rangers",
+            "wins": 0,
+            "points": 120,
+            "img": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 1770547917109,
+            "rank": 9,
+            "name": "Yeni Sürücü",
+            "license": "PILOT LICENSE",
+            "team": "TEAM NAME",
+            "wins": 0,
+            "points": 0,
+            "img": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&fit=crop"
+          }
+        ]
+      },
+      {
+        "id": "women-cup",
+        "name": "WOMEN CUP",
+        "drivers": [
+          {
+            "id": 9301,
+            "rank": 1,
+            "name": "Aylin Məmmədli",
+            "license": "PILOT LICENSE",
+            "team": "Desert Queens",
+            "wins": 7,
+            "points": 880,
+            "img": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 9302,
+            "rank": 2,
+            "name": "Nərmin İsmayılova",
+            "license": "PILOT LICENSE",
+            "team": "Forsaj Ladies",
+            "wins": 5,
+            "points": 760,
+            "img": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=400&fit=crop"
+          },
+          {
+            "id": 9303,
+            "rank": 3,
+            "name": "Leyla Qasımzadə",
+            "license": "NOVICE",
+            "team": "Rock Sisters",
+            "wins": 2,
+            "points": 420,
+            "img": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=400&fit=crop"
+          }
+        ]
+      }
+    ],
+    "subscribers": [
+      {
+        "email": "test.notify@example.com",
+        "name": "Test User",
+        "source": "qa",
+        "active": true,
+        "subscribed_at": "2026-02-25T19:04:46.786Z"
+      },
+      {
+        "email": "test.subscriber@example.com",
+        "name": "",
+        "source": "site",
+        "active": true,
+        "subscribed_at": "2026-02-25T19:05:24.227Z"
+      },
+      {
+        "email": "aliyabuz23@gmail.com",
+        "name": "NEWSLETTER ABUNƏSİ",
+        "source": "footer-newsletter",
+        "active": true,
+        "subscribed_at": "2026-02-25T19:20:54.684Z"
+      }
+    ]
+  }
+}

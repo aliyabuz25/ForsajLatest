@@ -1,0 +1,21 @@
+[
+  { "title": "DASHBOARD", "icon": "Layout", "path": "/" },
+  { "title": "ANA SƏHİFƏ", "icon": "Home", "path": "/?page=home" },
+  { "title": "HAQQIMIZDA", "icon": "Info", "path": "/?page=abouttab" },
+  { "title": "XƏBƏRLƏR", "icon": "FileText", "path": "/?page=newstab" },
+  { "title": "TƏDBİRLƏR", "icon": "Calendar", "path": "/?page=eventstab" },
+  { "title": "SÜRÜCÜLƏR", "icon": "Trophy", "path": "/?page=driverstab" },
+  { "title": "QALEREYA", "icon": "Image", "path": "/?page=gallerytab" },
+  { "title": "QAYDALAR", "icon": "BookOpen", "path": "/?page=rulestab" },
+  { "title": "ƏLAQƏ", "icon": "Phone", "path": "/?page=contacttab" },
+  { "title": "ADMİN HESABLARI", "icon": "Users", "path": "/users-management" },
+  {
+    "title": "SİSTEM AYARLARI",
+    "icon": "Settings",
+    "children": [
+      { "title": "SEO Ayarları", "path": "/general-settings?tab=seo", "icon": "Globe" },
+      { "title": "Ümumi Parametrlər", "path": "/general-settings?tab=general", "icon": "Settings" },
+      { "title": "Əlaqə və Sosial", "path": "/general-settings?tab=contact", "icon": "Phone" }
+    ]
+  }
+]

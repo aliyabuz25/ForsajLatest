@@ -1,0 +1,23 @@
+[
+  {
+    "email": "test.notify@example.com",
+    "name": "Test User",
+    "source": "qa",
+    "active": true,
+    "subscribed_at": "2026-02-25T19:04:46.786Z"
+  },
+  {
+    "email": "test.subscriber@example.com",
+    "name": "",
+    "source": "site",
+    "active": true,
+    "subscribed_at": "2026-02-25T19:05:24.227Z"
+  },
+  {
+    "email": "aliyabuz23@gmail.com",
+    "name": "NEWSLETTER ABUNƏSİ",
+    "source": "footer-newsletter",
+    "active": true,
+    "subscribed_at": "2026-02-25T19:20:54.684Z"
+  }
+]

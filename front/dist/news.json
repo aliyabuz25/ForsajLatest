@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "title": "Yeni Offroad Mövsümü Başlayırm",
+    "date": "2024-03-20",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yeni mövsümdə sizi daha maraqlı yarışlar və sınaqlar gözləyir. Bütün iştirakçıları hazır olmağa çağırırıq!",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 2,
+    "title": "Forsaj Club Beynəlxalq Yarışlarda",
+    "date": "2024-04-15",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Klubumuzun pilotları beynəlxalq dərəcəli offroad ralli yarışlarında iştirak etmək üçün dəvət alıblar.",
+    "category": "UĞURLARIMIZ",
+    "status": "published"
+  },
+  {
+    "id": 3,
+    "title": "Kross-kantri üzrə Azərbaycan Çempionatı",
+    "date": "2024-05-10",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Ölkənin ən güclü pilotları çempionluq uğrunda mübarizəyə qoşulur. Yarışlar 3 mərhələdən ibarət olacaq.",
+    "category": "YARIŞLAR",
+    "status": "published"
+  },
+  {
+    "id": 4,
+    "title": "Offroad Texnikasına Necə Qulluq Etməli?",
+    "date": "2024-05-25",
+    "img": "https://images.unsplash.com/photo-1485291571150-772bcfc10da5?q=80&w=2070&auto=format&fit=crop",
+    "description": "Çətin yol şəraitində avtomobilinizi qorumaq üçün lazım olan vacib məsləhətlər.",
+    "category": "MƏSLƏHƏTLƏR",
+    "status": "published"
+  },
+  {
+    "id": 5,
+    "title": "Forsaj Club Gənc Pilotlar Layihəsi",
+    "date": "2024-06-05",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Gənc nəslin motorsporta cəlb edilməsi üçün yeni təlim mərkəzimiz fəaliyyətə başlayır.",
+    "category": "LAYİHƏLƏR",
+    "status": "published"
+  },
+  {
+    "id": 6,
+    "title": "Yeni Ekspedisiya: Şahdağ Yüksəklikləri",
+    "date": "2024-06-20",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Klub üzvləri Şahdağın ən çətin zirvələrinə doğru yola çıxırlar.",
+    "category": "EKSPEDİSİYA",
+    "status": "published"
+  },
+  {
+    "id": 301,
+    "title": "2026 Mövsüm Təqvimi Açıqlandı",
+    "date": "2026-02-20",
+    "img": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=2070&auto=format&fit=crop",
+    "description": "Forsaj Club 2026 mövsümü üçün tədbir təqvimini təqdim etdi. Qeydiyyat mərhələləri mart ayından başlayır.",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 302,
+    "title": "Texniki Komissiya Yenilənmiş Qaydaları Paylaşdı",
+    "date": "2026-02-18",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Təhlükəsizlik və təkər standartları üzrə yenilənmiş qaydalar iştirakçılara göndərildi.",
+    "category": "QAYDALAR",
+    "status": "published"
+  },
+  {
+    "id": 303,
+    "title": "Yeni Sürücü Qeydiyyatı Rekordu",
+    "date": "2026-02-16",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Bu həftə ərzində rekord sayda yeni pilot ilkin qeydiyyatdan keçib.",
+    "category": "ANONS",
+    "status": "published"
+  }
+]
