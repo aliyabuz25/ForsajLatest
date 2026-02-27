@@ -286,7 +286,7 @@ const Footer: React.FC<FooterProps> = ({ onViewChange }) => {
           <p className="text-gray-500 font-bold italic text-[11px] uppercase leading-relaxed mb-10 max-w-xs tracking-tight">
             {footerAbout}
           </p>
-          <div className="flex gap-4 mb-8">
+          <div className="flex gap-4 mb-8" style={{ display: 'none' }}>
             {socialLinks.map(({ Icon, url }, idx) => (
               <a
                 key={idx}
@@ -300,7 +300,7 @@ const Footer: React.FC<FooterProps> = ({ onViewChange }) => {
             ))}
           </div>
 
-          <div className="space-y-4 pt-4 border-t border-white/5">
+          <div className="space-y-4 pt-4 border-t border-white/5" style={{ display: 'none' }}>
             <div className="flex items-start gap-4 text-gray-500 group">
               <div className="bg-white/5 p-3 rounded-sm text-[#FF4D00]">
                 <MapPin size={18} />
