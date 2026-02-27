@@ -12,6 +12,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const { getImage: getImageGeneral } = useSiteContent('general');
   const [isLangOpen, setIsLangOpen] = useState(false);
   const languagePickerRef = useRef<HTMLDivElement | null>(null);
+  const languageTimersRef = useRef<number[]>([]);
+  const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
+  const GTRANSLATE_WRAPPER_CLASS = 'gtranslate_wrapper';
+  const languageMap: Record<'AZ' | 'RU' | 'ENG', string> = {
+    AZ: 'az|az',
+    RU: 'az|ru',
+    ENG: 'az|en'
+  };
   const languagePickerAriaLabel: Record<'AZ' | 'RU' | 'ENG', string> = {
     AZ: 'Dil seçin',
     RU: 'Выберите язык',
@@ -27,6 +35,101 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     RU: 'Русский',
     ENG: 'English'
   };
+
+  const normalizeTranslateCode = (code: string) => {
+    const normalized = (code || '').trim().toLowerCase();
+    if (!normalized) return 'az|az';
+    return normalized.includes('|') ? normalized : `az|${normalized}`;
+  };
+
+  const setGTranslateCookie = (code: string) => {
+    const normalized = normalizeTranslateCode(code);
+    const [, target = 'az'] = normalized.split('|');
+    const cookieValue = `/az/${target}`;
+    const host = window.location.hostname;
+
+    document.cookie = `googtrans=${cookieValue};path=/;max-age=31536000`;
+    if (host && host !== 'localhost' && !/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) {
+      document.cookie = `googtrans=${cookieValue};domain=.${host.replace(/^www\./, '')};path=/;max-age=31536000`;
+    }
+  };
+
+  const applyGTranslateLanguage = (langCode: string, attempt = 0) => {
+    const normalizedCode = normalizeTranslateCode(langCode);
+    const select =
+      (document.querySelector(`.${GTRANSLATE_WRAPPER_CLASS} .gt_selector`) as HTMLSelectElement | null)
+      || (document.querySelector('.gt_selector') as HTMLSelectElement | null);
+
+    if (select) {
+      const hasOption = Array.from(select.options).some((option) => option.value === normalizedCode);
+      if (!hasOption) {
+        if (attempt < 28) {
+          window.setTimeout(() => applyGTranslateLanguage(normalizedCode, attempt + 1), 250);
+        }
+        return;
+      }
+
+      select.value = normalizedCode;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      const w = window as any;
+      if (typeof w.doGTranslate === 'function') {
+        w.doGTranslate(normalizedCode);
+      }
+      return;
+    }
+
+    if (attempt < 28) {
+      window.setTimeout(() => applyGTranslateLanguage(normalizedCode, attempt + 1), 250);
+    }
+  };
+
+  const ensureGTranslate = () => {
+    const w = window as any;
+
+    w.gtranslateSettings = {
+      default_language: 'az',
+      languages: ['az', 'ru', 'en'],
+      native_language_names: true,
+      wrapper_selector: `.${GTRANSLATE_WRAPPER_CLASS}`
+    };
+
+    if (!document.getElementById(GTRANSLATE_SCRIPT_ID)) {
+      const script = document.createElement('script');
+      script.id = GTRANSLATE_SCRIPT_ID;
+      script.src = 'https://cdn.gtranslate.net/widgets/latest/dropdown.js';
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+  };
+
+  const applySiteLanguage = (langCode: string) => {
+    const normalized = normalizeTranslateCode(langCode);
+    ensureGTranslate();
+    setGTranslateCookie(normalized);
+    applyGTranslateLanguage(normalized);
+  };
+
+  const scheduleLanguageReapply = (langCode: string) => {
+    languageTimersRef.current.forEach((id) => window.clearTimeout(id));
+    languageTimersRef.current = [];
+
+    [0, 180, 600, 1300].forEach((delay) => {
+      const timer = window.setTimeout(() => applySiteLanguage(langCode), delay);
+      languageTimersRef.current.push(timer);
+    });
+  };
+
+  useEffect(() => {
+    ensureGTranslate();
+    return () => {
+      languageTimersRef.current.forEach((id) => window.clearTimeout(id));
+      languageTimersRef.current = [];
+    };
+  }, []);
+
+  useEffect(() => {
+    scheduleLanguageReapply(languageMap[language] || 'az|az');
+  }, [language, currentView]);
 
   useEffect(() => {
     if (!isLangOpen) return;
@@ -214,6 +317,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
 
     setSiteLanguage(nextLanguage as any);
+    scheduleLanguageReapply(languageMap[nextLanguage as 'AZ' | 'RU' | 'ENG'] || 'az|az');
     setIsLangOpen(false);
   };
 
@@ -295,6 +399,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
           </div>
         )}
       </div>
+      <div className={GTRANSLATE_WRAPPER_CLASS} style={{ display: 'none' }} />
     </nav>
   );
 };
