@@ -1,13 +1,28 @@
 import React from 'react';
 import { Target, Globe, Shield, Users, Leaf, Zap } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
-import { bbcodeToHtml } from '../utils/bbcode';
+
+const buildPreviewText = (content: string, sentenceLimit = 2) => {
+  const normalized = content.replace(/\s+/g, ' ').trim();
+  if (!normalized) return '';
+
+  const sentences = normalized.match(/[^.!?]+[.!?]+/g);
+  if (sentences && sentences.length > sentenceLimit) {
+    return sentences.slice(0, sentenceLimit).join(' ').trim();
+  }
+
+  if (!sentences && normalized.length > 220) {
+    return `${normalized.slice(0, 220).trim()}...`;
+  }
+
+  return normalized;
+};
 
 const About: React.FC = () => {
   const { getPage, getText, getImage } = useSiteContent('about');
-  const { getText: getGeneralText } = useSiteContent('general');
   const page = getPage('about');
   const valuesPage = getPage('values');
+  const [isAboutExpanded, setIsAboutExpanded] = React.useState(false);
   const toPlainText = (value: string) => {
     if (!value) return '';
     let current = value;
@@ -29,29 +44,9 @@ const About: React.FC = () => {
   };
   const text = (id: string, fallback: string) => toPlainText(getText(id, fallback));
 
-  const dynamicStats: any[] = [];
   const dynamicValues: any[] = [];
 
   if (page?.sections) {
-    const getStatSuffix = (id: string) => (id.split('label-stat-')[1] || id.split('value-stat-')[1] || '').trim();
-    const statBySuffix = new Map<string, { label?: string; value?: string }>();
-
-    page.sections.forEach((section) => {
-      if (!section.id.includes('label-stat') && !section.id.includes('value-stat')) return;
-      const suffix = getStatSuffix(section.id) || section.id;
-      const current = statBySuffix.get(suffix) || {};
-
-      if (section.id.includes('label-stat')) current.label = section.value;
-      if (section.id.includes('value-stat')) current.value = section.value;
-      statBySuffix.set(suffix, current);
-    });
-
-    Array.from(statBySuffix.values()).forEach((stat) => {
-      if (stat.label && stat.value) {
-        dynamicStats.push({ label: toPlainText(stat.label), value: toPlainText(stat.value) });
-      }
-    });
-
     const getValueSuffix = (id: string) => (id.split('val-icon-')[1] || id.split('val-title-')[1] || id.split('val-desc-')[1] || '').trim();
     const valueBySuffix = new Map<string, { icon?: string; title?: string; desc?: string }>();
 
@@ -83,18 +78,16 @@ const About: React.FC = () => {
     });
   }
 
-  const stats = dynamicStats.length > 0 ? dynamicStats : [
-    { label: text('txt-pi-lotlar-label-123', 'PİLOTLAR'), value: toPlainText(getGeneralText('STATS_PILOTS') || getText('txt-pi-lotlar-value-123', '140+')) },
-    { label: text('txt-yari-lar-label-123', 'YARIŞLAR'), value: toPlainText(getGeneralText('STATS_RACES') || getText('txt-yari-lar-value-123', '50+')) },
-    { label: text('txt-g-ncl-r-label-123', 'GƏNCLƏR'), value: toPlainText(getGeneralText('STATS_YOUTH') || getText('txt-g-ncl-r-value-123', '20+')) },
-  ];
-
   const values = dynamicValues.length > 0 ? dynamicValues : [
     { icon: <Shield className="text-[#FF4D00]" />, title: text('txt-val-safety-title-123', 'TƏHLÜKƏSİZLİK'), desc: text('txt-val-safety-desc-123', 'EKSTREMAL İDMANDA CAN SAĞLIĞI BİZİM BİR NÖMRƏLİ QAYDAMIZDIR. BÜTÜN TEXNİKALARIMIZ FIA STANDARTLARINA UYĞUN YOXLANILIR.') },
     { icon: <Users className="text-[#FF4D00]" />, title: text('txt-val-community-title-123', 'İCMA RUHU'), desc: text('txt-val-community-desc-123', 'FORSAJ BİR KLUBDAN DAHA ÇOX, SADİQ VƏ BÖYÜK BİR AİLƏDİR. BİRİMİZ HAMIMIZ, HAMIMIZ BİRİMİZ ÜÇÜN!') },
     { icon: <Leaf className="text-[#FF4D00]" />, title: text('txt-val-nature-title-123', 'TƏBİƏTİ QORU'), desc: text('txt-val-nature-desc-123', 'BİZ OFFROAD EDƏRKƏN TƏBİƏTƏ ZƏRƏR VERMƏMƏYİ ÖZÜMÜZƏ BORC BİLİRİK. EKOLOJİ BALANS BİZİM ÜÇÜN MÜQƏDDƏSDİR.') },
     { icon: <Zap className="text-[#FF4D00]" />, title: text('txt-val-excellence-title-123', 'MÜKƏMMƏLLİK'), desc: text('txt-val-excellence-desc-123', 'HƏR YARIŞDA, HƏR DÖNGƏDƏ DAHA YAXŞI OLMAĞA ÇALIŞIRIQ. TƏLİMLƏRİMİZ PEŞƏKAR İNSTRUKTORLAR TƏRƏFİNDƏN İDARƏ OLUNUR.') },
   ];
+
+  const aboutDescription = text('txt-klubumuz-sad-c-bir-552', 'Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq.');
+  const aboutDescriptionPreview = buildPreviewText(aboutDescription);
+  const canExpandAboutDescription = aboutDescriptionPreview !== aboutDescription;
 
   return (
     <div id="haqqımızda" className="bg-[#0A0A0A] text-white">
@@ -122,19 +115,18 @@ const About: React.FC = () => {
             <h2 className="text-3xl md:text-5xl font-black italic leading-tight mb-8 uppercase max-w-2xl text-white tracking-tighter">
               {toPlainText(getText('txt-forsaj-club-az-rba-66', '"FORSAJ CLUB" AZƏRBAYCANIN OFFROAD MƏDƏNİYYƏTİNİ PEŞƏKAR SƏVİYYƏYƏ ÇATDIRMAQ ÜÇÜN YARADILMIŞDIR.'))}
             </h2>
-            <p
-              className="text-gray-400 font-bold italic text-sm md:text-base leading-relaxed mb-12 max-w-xl uppercase tracking-wide"
-              dangerouslySetInnerHTML={{ __html: bbcodeToHtml(text('txt-klubumuz-sad-c-bir-552', 'Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq.')) }}
-            />
-
-            <div className="flex flex-wrap gap-4">
-              {stats.map((stat, i) => (
-                <div key={i} className="bg-[#111] border border-white/5 p-8 rounded-sm min-w-[140px] shadow-2xl">
-                  <p className="text-[#FF4D00] font-black italic text-[10px] mb-2 tracking-widest uppercase">{stat.label}</p>
-                  <p className="text-5xl font-black italic text-white">{stat.value}</p>
-                </div>
-              ))}
-            </div>
+            <p className="text-gray-400 font-bold italic text-sm md:text-base leading-relaxed mb-5 max-w-xl uppercase tracking-wide">
+              {isAboutExpanded ? aboutDescription : aboutDescriptionPreview}
+            </p>
+            {!isAboutExpanded && canExpandAboutDescription && (
+              <button
+                type="button"
+                onClick={() => setIsAboutExpanded(true)}
+                className="inline-flex items-center border border-[#FF4D00]/50 px-4 py-2 text-[11px] font-black italic uppercase tracking-[0.24em] text-[#FF4D00] hover:bg-[#FF4D00] hover:text-black transition-colors"
+              >
+                Ətraflı oxu
+              </button>
+            )}
           </div>
         </div>
 

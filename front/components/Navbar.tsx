@@ -12,84 +12,21 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const { getImage: getImageGeneral } = useSiteContent('general');
   const [isLangOpen, setIsLangOpen] = useState(false);
   const languagePickerRef = useRef<HTMLDivElement | null>(null);
-  const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
-  const GTRANSLATE_WRAPPER_CLASS = 'gtranslate_wrapper';
-  const languageMap: Record<string, string> = { AZ: 'az|az', RU: 'az|ru', ENG: 'az|en' };
-
-  const normalizeTranslateCode = (code: string) => {
-    const normalized = (code || '').trim().toLowerCase();
-    if (!normalized) return 'az|az';
-    return normalized.includes('|') ? normalized : `az|${normalized}`;
+  const languagePickerAriaLabel: Record<'AZ' | 'RU' | 'ENG', string> = {
+    AZ: 'Dil seçin',
+    RU: 'Выберите язык',
+    ENG: 'Select language'
   };
-
-  const setGTranslateCookie = (code: string) => {
-    const normalized = normalizeTranslateCode(code);
-    const [, target = 'az'] = normalized.split('|');
-    const cookieValue = `/az/${target}`;
-    const hostname = window.location.hostname;
-    document.cookie = `googtrans=${cookieValue};path=/;max-age=31536000`;
-    document.cookie = `googtrans=${cookieValue};domain=${hostname};path=/;max-age=31536000`;
+  const languageVisibleLabel: Record<'AZ' | 'RU' | 'ENG', string> = {
+    AZ: 'AZ',
+    RU: 'РУ',
+    ENG: 'EN'
   };
-
-  const applyGTranslateLanguage = (langCode: string, attempt = 0) => {
-    const normalizedCode = normalizeTranslateCode(langCode);
-    const select =
-      (document.querySelector(`.${GTRANSLATE_WRAPPER_CLASS} .gt_selector`) as HTMLSelectElement | null)
-      || (document.querySelector('.gt_selector') as HTMLSelectElement | null);
-    if (select) {
-      const hasOption = Array.from(select.options).some((option) => option.value === normalizedCode);
-      if (!hasOption) {
-        if (attempt < 20) {
-          window.setTimeout(() => applyGTranslateLanguage(normalizedCode, attempt + 1), 250);
-        }
-        return;
-      }
-      select.value = normalizedCode;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-      const w = window as any;
-      if (typeof w.doGTranslate === 'function') {
-        w.doGTranslate(normalizedCode);
-      }
-      return;
-    }
-    if (attempt < 20) {
-      window.setTimeout(() => applyGTranslateLanguage(normalizedCode, attempt + 1), 250);
-    }
+  const languageOptionLabel: Record<'AZ' | 'RU' | 'ENG', string> = {
+    AZ: 'Azərbaycan',
+    RU: 'Русский',
+    ENG: 'English'
   };
-
-  const ensureGTranslate = () => {
-    const w = window as any;
-
-    w.gtranslateSettings = {
-      default_language: 'az',
-      languages: ['az', 'ru', 'en'],
-      native_language_names: true,
-      wrapper_selector: `.${GTRANSLATE_WRAPPER_CLASS}`
-    };
-
-    if (!document.getElementById(GTRANSLATE_SCRIPT_ID)) {
-      const script = document.createElement('script');
-      script.id = GTRANSLATE_SCRIPT_ID;
-      script.src = 'https://cdn.gtranslate.net/widgets/latest/dropdown.js';
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-  };
-
-  const applySiteLanguage = (langCode: string) => {
-    const normalizedCode = normalizeTranslateCode(langCode);
-    ensureGTranslate();
-    setGTranslateCookie(normalizedCode);
-    applyGTranslateLanguage(normalizedCode);
-  };
-
-  useEffect(() => {
-    ensureGTranslate();
-  }, []);
-
-  useEffect(() => {
-    applySiteLanguage(languageMap[language] || 'az|az');
-  }, [language]);
 
   useEffect(() => {
     if (!isLangOpen) return;
@@ -277,11 +214,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
 
     setSiteLanguage(nextLanguage as any);
-    applySiteLanguage(languageMap[nextLanguage] || 'az|az');
     setIsLangOpen(false);
-
-    // Ensure all sections rehydrate with the newly selected locale.
-    window.setTimeout(() => window.location.reload(), 80);
   };
 
   return (
@@ -336,17 +269,17 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
           type="button"
           onClick={() => setIsLangOpen((prev) => !prev)}
           className="language-picker__trigger inline-flex items-center justify-between gap-2"
-          aria-label="Select language"
+          aria-label={languagePickerAriaLabel[language]}
           aria-haspopup="listbox"
           aria-expanded={isLangOpen}
         >
           <Globe className="language-picker__globe" />
-          <span className="language-picker__current text-xs">{language}</span>
+          <span className="language-picker__current text-xs">{languageVisibleLabel[language]}</span>
           <ChevronDown className={`language-picker__chevron ${isLangOpen ? 'language-picker__chevron--open' : ''}`} />
         </button>
 
         {isLangOpen && (
-          <div className="language-picker__menu absolute right-0 z-50" role="listbox" aria-label="Language options">
+          <div className="language-picker__menu absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[language]}>
             {languages.map((lang) => (
               <button
                 key={lang}
@@ -356,13 +289,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                 onClick={() => handleLanguageSelect(lang)}
                 className={`language-picker__item block w-full text-left ${language === lang ? 'language-picker__item--active' : ''}`}
               >
-                {lang}
+                {languageOptionLabel[lang as 'AZ' | 'RU' | 'ENG']}
               </button>
             ))}
           </div>
         )}
       </div>
-      <div className={GTRANSLATE_WRAPPER_CLASS} style={{ display: 'none' }} />
     </nav>
   );
 };

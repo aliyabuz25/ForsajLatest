@@ -29,21 +29,7 @@ let siteContentCacheAt = 0;
 const CACHE_TTL_MS = 10000;
 const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
 const SITE_LANG_KEY = 'forsaj_site_lang';
-const TRANSLATION_CACHE_KEY = 'forsaj_free_translation_cache_v1';
 type SiteLang = 'AZ' | 'RU' | 'ENG';
-
-type TranslationStore = Record<string, Record<string, string>>;
-const translationStore: TranslationStore = (() => {
-    try {
-        const raw = localStorage.getItem(TRANSLATION_CACHE_KEY);
-        if (!raw) return {};
-        const parsed = JSON.parse(raw);
-        return typeof parsed === 'object' && parsed ? parsed : {};
-    } catch {
-        return {};
-    }
-})();
-const translationInFlight = new Map<string, Promise<string>>();
 
 const normalizeContent = (data: any): PageContent[] => {
     if (!Array.isArray(data)) return [];
@@ -78,10 +64,24 @@ const buildLanguageCandidates = (rawKey: string | number, lang: SiteLang) => {
     const key = String(rawKey || '').trim();
     if (!key) return [];
     if (lang === 'AZ') return [key];
+    if (lang === 'RU') {
+        return [
+            `${key}_RU`,
+            `RU_${key}`,
+            `${key}.ru`,
+            `${key}_RUS`,
+            `RUS_${key}`,
+            `${key}.rus`,
+            key
+        ];
+    }
     return [
-        `${key}_${lang}`,
-        `${lang}_${key}`,
-        `${key}.${lang.toLowerCase()}`,
+        `${key}_ENG`,
+        `ENG_${key}`,
+        `${key}.eng`,
+        `${key}_EN`,
+        `EN_${key}`,
+        `${key}.en`,
         key
     ];
 };
@@ -108,105 +108,6 @@ const findSectionByFallback = (sections: ContentSection[], fallbackValue: string
     return sections.find((section) =>
         normalizeToken(section.value || '') === target || normalizeToken(section.label || '') === target
     );
-};
-
-const saveTranslationStore = () => {
-    try {
-        localStorage.setItem(TRANSLATION_CACHE_KEY, JSON.stringify(translationStore));
-    } catch {
-        // ignore quota/storage errors
-    }
-};
-
-const canAutoTranslate = (value: string) => {
-    const text = (value || '').trim();
-    if (!text) return false;
-    if (text.length < 2) return false;
-    if (/^[A-Z0-9_]+$/.test(text)) return false; // key tokens
-    if (/^https?:\/\//i.test(text)) return false;
-    if (/<[a-z][\s\S]*>/i.test(text)) return false; // html content
-    return true;
-};
-
-const getLangCode = (lang: SiteLang) => {
-    if (lang === 'RU') return 'ru';
-    if (lang === 'ENG') return 'en';
-    return 'az';
-};
-
-const tryMyMemory = async (text: string, target: 'ru' | 'en') => {
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=az|${target}`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('mymemory_failed');
-    const data = await response.json();
-    const translated = String(data?.responseData?.translatedText || '').trim();
-    if (!translated) throw new Error('mymemory_empty');
-    return translated;
-};
-
-const tryLibreTranslate = async (text: string, target: 'ru' | 'en') => {
-    const endpoints = [
-        'https://translate.argosopentech.com/translate',
-        'https://libretranslate.de/translate'
-    ];
-    for (const endpoint of endpoints) {
-        try {
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    q: text,
-                    source: 'az',
-                    target,
-                    format: 'text'
-                })
-            });
-            if (!response.ok) continue;
-            const data = await response.json();
-            const translated = String(data?.translatedText || '').trim();
-            if (translated) return translated;
-        } catch {
-            // try next endpoint
-        }
-    }
-    throw new Error('libre_failed');
-};
-
-const translateFree = async (text: string, lang: SiteLang): Promise<string> => {
-    if (lang === 'AZ') return text;
-    if (!canAutoTranslate(text)) return text;
-
-    const target = getLangCode(lang) as 'ru' | 'en';
-    const byLang = translationStore[lang] || (translationStore[lang] = {});
-    if (byLang[text]) return byLang[text];
-
-    const inFlightKey = `${lang}:${text}`;
-    if (translationInFlight.has(inFlightKey)) {
-        return translationInFlight.get(inFlightKey) as Promise<string>;
-    }
-
-    const promise = (async () => {
-        try {
-            let translated = '';
-            try {
-                translated = await tryMyMemory(text, target);
-            } catch {
-                translated = await tryLibreTranslate(text, target);
-            }
-            byLang[text] = translated || text;
-            saveTranslationStore();
-            window.dispatchEvent(new CustomEvent('forsaj-translation-updated'));
-            return byLang[text];
-        } catch {
-            byLang[text] = text;
-            return text;
-        } finally {
-            translationInFlight.delete(inFlightKey);
-        }
-    })();
-
-    translationInFlight.set(inFlightKey, promise);
-    return promise;
 };
 
 const fetchSiteContentOnce = async (): Promise<PageContent[]> => {
@@ -252,7 +153,6 @@ const fetchSiteContentOnce = async (): Promise<PageContent[]> => {
 export const useSiteContent = (scopePageId?: string) => {
     const [content, setContent] = useState<PageContent[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [, forceUpdate] = useState(0);
     const [language, setLanguage] = useState<SiteLang>(() => {
         const saved = localStorage.getItem(SITE_LANG_KEY) as SiteLang | null;
         if (saved === 'AZ' || saved === 'RU' || saved === 'ENG') return saved;
@@ -306,9 +206,6 @@ export const useSiteContent = (scopePageId?: string) => {
                 setLanguage(next);
             }
         };
-        const onTranslationUpdate = () => {
-            forceUpdate((x) => x + 1);
-        };
 
         const interval = window.setInterval(() => {
             refresh();
@@ -316,13 +213,11 @@ export const useSiteContent = (scopePageId?: string) => {
 
         window.addEventListener('storage', onStorage);
         window.addEventListener('forsaj-language-changed', onLangChange as EventListener);
-        window.addEventListener('forsaj-translation-updated', onTranslationUpdate as EventListener);
         return () => {
             isMounted = false;
             window.clearInterval(interval);
             window.removeEventListener('storage', onStorage);
             window.removeEventListener('forsaj-language-changed', onLangChange as EventListener);
-            window.removeEventListener('forsaj-translation-updated', onTranslationUpdate as EventListener);
         };
     }, []);
 
@@ -368,12 +263,6 @@ export const useSiteContent = (scopePageId?: string) => {
         const resolved = isKeyLikeValue(value) && keyCandidates.includes(value.toUpperCase())
             ? defaultValue
             : (value || defaultValue);
-
-        if (language !== 'AZ' && canAutoTranslate(resolved)) {
-            const cached = translationStore[language]?.[resolved];
-            if (cached) return cached;
-            void translateFree(resolved, language);
-        }
 
         return resolved;
     };
