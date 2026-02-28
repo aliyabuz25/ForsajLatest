@@ -1925,6 +1925,85 @@ const VisualEditor: React.FC = () => {
         toast.success(`Bölmə ${nextSectionNo} əlavə edildi`);
     };
 
+    const updateLegalSectionFieldValue = (
+        sectionNo: number,
+        field: 'TITLE' | 'BODY',
+        value: string,
+        pageIdx: number = selectedPageIndex
+    ) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return;
+        const newPages = [...pages];
+        const currentPage = newPages[pageIdx];
+        if (!currentPage || !LEGAL_PAGE_IDS.has(currentPage.id)) return;
+
+        const targetId = `SECTION_${sectionNo}_${field}`;
+        const targetLabel = field === 'TITLE'
+            ? `Bölmə ${sectionNo} Başlıq`
+            : `Bölmə ${sectionNo} Mətn`;
+        const sectionIndex = (currentPage.sections || []).findIndex((section) => section.id === targetId);
+
+        if (sectionIndex >= 0) {
+            currentPage.sections[sectionIndex] = {
+                ...currentPage.sections[sectionIndex],
+                label: currentPage.sections[sectionIndex].label || targetLabel,
+                value
+            };
+        } else {
+            const nextOrder = (currentPage.sections || []).reduce(
+                (max, section, idx) => Math.max(max, normalizeOrder(section.order, idx)),
+                -1
+            ) + 1;
+            currentPage.sections.push({
+                id: targetId,
+                type: 'text',
+                label: targetLabel,
+                value,
+                order: nextOrder
+            });
+        }
+
+        setPages(newPages);
+    };
+
+    const removeLegalSectionPair = (sectionNo: number, pageIdx: number = selectedPageIndex) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return;
+        const newPages = [...pages];
+        const currentPage = newPages[pageIdx];
+        if (!currentPage || !LEGAL_PAGE_IDS.has(currentPage.id)) return;
+
+        const sectionNumbers = Array.from(
+            new Set(
+                (currentPage.sections || [])
+                    .map((section) => {
+                        const match = String(section.id || '').match(LEGAL_DYNAMIC_SECTION_REGEX);
+                        if (!match) return null;
+                        const value = Number(match[1]);
+                        return Number.isFinite(value) ? value : null;
+                    })
+                    .filter((value): value is number => value !== null)
+            )
+        ).sort((a, b) => a - b);
+
+        if (sectionNumbers.length <= 1) {
+            toast.error('Ən azı bir bölmə qalmalıdır.');
+            return;
+        }
+
+        const targetIds = new Set([
+            `SECTION_${sectionNo}_TITLE`,
+            `SECTION_${sectionNo}_BODY`
+        ]);
+        const hasAnyTarget = (currentPage.sections || []).some((section) => targetIds.has(section.id));
+        if (!hasAnyTarget) return;
+
+        currentPage.sections = (currentPage.sections || [])
+            .filter((section) => !targetIds.has(section.id))
+            .map((section, index) => ({ ...section, order: index }));
+
+        setPages(newPages);
+        toast.success(`Bölmə ${sectionNo} silindi`);
+    };
+
     const removeField = (type: 'text' | 'image', fieldId: string, pageIdx: number = selectedPageIndex) => {
         if (pageIdx < 0 || pageIdx >= pages.length) return;
         const newPages = [...pages];
@@ -3579,6 +3658,40 @@ const VisualEditor: React.FC = () => {
                     };
                 })
                 .filter((row) => matchesSearch(row.id, row.optionNumber, row.value));
+        })()
+        : [];
+
+    const legalSectionRows = currentPage?.id && LEGAL_PAGE_IDS.has(currentPage.id)
+        ? (() => {
+            const pairMap = new Map<number, {
+                sectionNo: number;
+                titleSection?: Section;
+                bodySection?: Section;
+            }>();
+
+            (currentPage.sections || []).forEach((section) => {
+                const match = String(section.id || '').match(LEGAL_DYNAMIC_SECTION_REGEX);
+                if (!match) return;
+                const sectionNo = Number(match[1]);
+                if (!Number.isFinite(sectionNo)) return;
+
+                const current = pairMap.get(sectionNo) || { sectionNo };
+                if (match[2].toUpperCase() === 'TITLE') current.titleSection = section;
+                if (match[2].toUpperCase() === 'BODY') current.bodySection = section;
+                pairMap.set(sectionNo, current);
+            });
+
+            return Array.from(pairMap.values())
+                .sort((a, b) => a.sectionNo - b.sectionNo)
+                .filter((row) =>
+                    matchesSearch(
+                        `SECTION_${row.sectionNo}`,
+                        row.titleSection?.label,
+                        row.titleSection?.value,
+                        row.bodySection?.label,
+                        row.bodySection?.value
+                    )
+                );
         })()
         : [];
 
@@ -6240,6 +6353,90 @@ const VisualEditor: React.FC = () => {
                                         </div>
                                     )}
 
+                                    {LEGAL_PAGE_IDS.has(currentPage.id) && (
+                                        <div className="field-group">
+                                            <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <label><List size={16} /> Bölmə Maddələri</label>
+                                                <button className="add-field-minimal" onClick={() => addLegalSectionPair()}>
+                                                    <Plus size={14} /> Bölmə Əlavə Et
+                                                </button>
+                                            </div>
+                                            <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '10px' }}>
+                                                Privacy Policy və Terms of Service səhifələrindəki kart bölmələrini buradan əlavə edin, redaktə edin və silin.
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                                {legalSectionRows.length > 0 ? (
+                                                    legalSectionRows.map((row) => (
+                                                        <div
+                                                            key={`legal-section-row-${row.sectionNo}`}
+                                                            style={{
+                                                                border: '1px solid #e2e8f0',
+                                                                borderRadius: '12px',
+                                                                background: '#fff',
+                                                                padding: '12px'
+                                                            }}
+                                                        >
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                                                                <div style={{
+                                                                    fontSize: '11px',
+                                                                    fontWeight: 900,
+                                                                    color: '#475569',
+                                                                    background: '#f8fafc',
+                                                                    border: '1px solid #e2e8f0',
+                                                                    borderRadius: '8px',
+                                                                    padding: '6px 10px',
+                                                                    textTransform: 'uppercase',
+                                                                    letterSpacing: '0.04em'
+                                                                }}>
+                                                                    Bölmə {row.sectionNo}
+                                                                </div>
+                                                                <button
+                                                                    type="button"
+                                                                    className="delete-section-btn"
+                                                                    onClick={() => removeLegalSectionPair(row.sectionNo)}
+                                                                    disabled={legalSectionRows.length <= 1}
+                                                                    title={legalSectionRows.length <= 1 ? 'Ən azı bir bölmə qalmalıdır' : 'Bölməni sil'}
+                                                                >
+                                                                    <Trash2 size={14} />
+                                                                </button>
+                                                            </div>
+                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                                                <div>
+                                                                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
+                                                                        Başlıq
+                                                                    </label>
+                                                                    <input
+                                                                        type="text"
+                                                                        value={row.titleSection?.value || ''}
+                                                                        onChange={(e) => updateLegalSectionFieldValue(row.sectionNo, 'TITLE', e.target.value)}
+                                                                        placeholder={`${row.sectionNo}. Bölmə başlığı`}
+                                                                        style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', fontWeight: 700 }}
+                                                                    />
+                                                                </div>
+                                                                <div>
+                                                                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
+                                                                        Mətn
+                                                                    </label>
+                                                                    <textarea
+                                                                        rows={5}
+                                                                        value={row.bodySection?.value || ''}
+                                                                        onChange={(e) => updateLegalSectionFieldValue(row.sectionNo, 'BODY', e.target.value)}
+                                                                        placeholder="Bölmə mətni"
+                                                                        style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', lineHeight: 1.45, resize: 'vertical' }}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div style={{ padding: '1rem', border: '1px dashed #cbd5e1', borderRadius: '8px', color: '#64748b', fontSize: '13px' }}>
+                                                        Axtarışa uyğun bölmə tapılmadı.
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {currentPage.id === 'about' && (
                                         <div className="field-group">
                                             <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -6524,16 +6721,10 @@ const VisualEditor: React.FC = () => {
                                         <div className="field-group">
                                             <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 <label><Type size={16} /> Mətn Sahələri</label>
-                                                {showAdvancedEditor && (
-                                                    LEGAL_PAGE_IDS.has(currentPage.id) ? (
-                                                        <button className="add-field-minimal" onClick={() => addLegalSectionPair()}>
-                                                            <Plus size={14} /> Bölmə Artır
-                                                        </button>
-                                                    ) : (
-                                                        <button className="add-field-minimal" onClick={() => addField('text')}>
-                                                            <Plus size={14} /> Mətn Əlavə Et
-                                                        </button>
-                                                    )
+                                                {showAdvancedEditor && !LEGAL_PAGE_IDS.has(currentPage.id) && (
+                                                    <button className="add-field-minimal" onClick={() => addField('text')}>
+                                                        <Plus size={14} /> Mətn Əlavə Et
+                                                    </button>
                                                 )}
                                             </div>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -6556,7 +6747,9 @@ const VisualEditor: React.FC = () => {
                                                         </div>
                                                     ))
                                                 ) : (currentPage?.id === 'privacypolicypage' || currentPage?.id === 'termsofservicepage') ? (
-                                                    legalGroupedSections.map((group) => (
+                                                    legalGroupedSections
+                                                        .filter((group) => group.kind !== 'legal-sections')
+                                                        .map((group) => (
                                                         <div key={group.title} style={{ display: 'flex', flexDirection: 'column', gap: '10px', border: '1px solid #e2e8f0', borderRadius: '12px', background: '#f8fafc', padding: '12px' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', padding: '4px 2px 8px 2px', borderBottom: '1px solid #e2e8f0' }}>
                                                                 <div style={{ fontSize: '12px', color: '#334155', fontWeight: 900, textTransform: 'uppercase' }}>
@@ -6565,17 +6758,6 @@ const VisualEditor: React.FC = () => {
                                                                 <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
                                                                     {group.subtitle}
                                                                 </div>
-                                                                {showAdvancedEditor && group.kind === 'legal-sections' && (
-                                                                    <div style={{ marginTop: '8px' }}>
-                                                                        <button
-                                                                            className="add-field-minimal"
-                                                                            onClick={() => addLegalSectionPair()}
-                                                                            style={{ background: '#fff', border: '1px solid #e2e8f0' }}
-                                                                        >
-                                                                            <Plus size={14} /> Bölmə Artır
-                                                                        </button>
-                                                                    </div>
-                                                                )}
                                                             </div>
                                                             {group.sections.map((section, index) => renderTextSectionCard(section, index))}
                                                         </div>
