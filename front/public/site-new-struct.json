@@ -647,6 +647,12 @@
             "value": "TƏDBİRƏ QOŞUL"
           },
           {
+            "id": "BTN_JOIN_EVENT_UNAVAILABLE",
+            "type": "text",
+            "label": "KEY: BTN_JOIN_EVENT_UNAVAILABLE",
+            "value": "Qeydiyyat aktiv deyil"
+          },
+          {
             "id": "SECTION_DESC",
             "type": "text",
             "label": "KEY: SECTION_DESC",

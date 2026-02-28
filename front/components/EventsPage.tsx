@@ -66,6 +66,16 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
     return true;
   };
 
+  const isEventRegistrationEnabled = (event?: Partial<EventItem> & Record<string, unknown> | null) => {
+    if (!event) return false;
+    return normalizeRegistrationEnabled(
+      event.registrationEnabled ??
+      event.registration_enabled ??
+      event.isRegistrationEnabled ??
+      event.is_registration_enabled
+    );
+  };
+
   const extractYoutubeId = (url: string) => {
     if (!url) return null;
     try {
@@ -217,7 +227,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
   const openRegistrationModal = () => {
     if (!selectedEvent) return;
     if (selectedEvent.status !== 'planned') return;
-    if (selectedEvent.registrationEnabled === false) {
+    if (!isEventRegistrationEnabled(selectedEvent as Partial<EventItem> & Record<string, unknown>)) {
       toast.error(registrationClosedToast);
       return;
     }
@@ -424,6 +434,8 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
   };
 
   if (selectedEvent) {
+    const isSelectedEventRegistrationEnabled = isEventRegistrationEnabled(selectedEvent as Partial<EventItem> & Record<string, unknown>);
+
     return (
       <div className="bg-[#0A0A0A] min-h-screen pb-20 text-white animate-in fade-in duration-500">
         {renderRegistrationModal()}
@@ -461,21 +473,23 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                 </div>
               </div>
 
-              {selectedEvent.status === 'planned' && selectedEvent.registrationEnabled === false && (
+              {selectedEvent.status === 'planned' && (
                 <button
                   type="button"
-                  disabled
-                  className="bg-white/10 border border-white/20 text-white px-12 py-6 font-black italic text-lg uppercase tracking-widest transform -skew-x-12 cursor-not-allowed opacity-95"
-                >
-                  <span className="transform skew-x-12 block">{getText('BTN_JOIN_EVENT_UNAVAILABLE', 'MÖVCUD DEYİL')}</span>
-                </button>
-              )}
-              {selectedEvent.status === 'planned' && selectedEvent.registrationEnabled !== false && (
-                <button
                   onClick={openRegistrationModal}
-                  className="bg-[#FF4D00] text-black px-12 py-6 font-black italic text-lg uppercase transform -skew-x-12 hover:bg-white transition-all flex items-center gap-3 shadow-[0_10px_40px_rgba(255,77,0,0.3)]"
+                  disabled={!isSelectedEventRegistrationEnabled}
+                  className={`px-12 py-6 font-black italic text-lg uppercase transform -skew-x-12 transition-all flex items-center gap-3 ${
+                    isSelectedEventRegistrationEnabled
+                      ? 'bg-[#FF4D00] text-black hover:bg-white shadow-[0_10px_40px_rgba(255,77,0,0.3)]'
+                      : 'bg-white/10 border border-white/20 text-white cursor-not-allowed opacity-95'
+                  }`}
                 >
-                  <span className="transform skew-x-12 flex items-center gap-3">{getText('BTN_JOIN_EVENT', 'TƏDBİRƏ QOŞUL')} <ArrowRight size={24} /></span>
+                  <span className="transform skew-x-12 flex items-center gap-3">
+                    {isSelectedEventRegistrationEnabled
+                      ? getText('BTN_JOIN_EVENT', 'TƏDBİRƏ QOŞUL')
+                      : getText('BTN_JOIN_EVENT_UNAVAILABLE', 'Qeydiyyat aktiv deyil')}
+                    {isSelectedEventRegistrationEnabled && <ArrowRight size={24} />}
+                  </span>
                 </button>
               )}
             </div>

@@ -1040,6 +1040,7 @@ const VisualEditor: React.FC = () => {
                         { id: 'PAGE_TITLE', label: 'Səhifə Başlığı', value: 'TƏDBİRLƏR' },
                         { id: 'PAGE_SUBTITLE', label: 'Səhifə Alt Başlığı', value: 'OFFICIAL EVENT CALENDAR // FORSAJ CLUB' },
                         { id: 'BTN_JOIN_EVENT', label: 'Tədbirə Qoşul Düyməsi', value: 'TƏDBİRƏ QOŞUL' },
+                        { id: 'BTN_JOIN_EVENT_UNAVAILABLE', label: 'Qeydiyyat Bağlı Düyməsi', value: 'Qeydiyyat aktiv deyil' },
                         { id: 'SIDEBAR_QUESTION_TITLE', label: 'Sual Kartı Başlığı', value: 'SUALINIZ VAR?' },
                         { id: 'SIDEBAR_QUESTION_DESC', label: 'Sual Kartı Təsviri', value: 'YARIŞLA BAĞLI ƏLAVƏ SUALLARINIZ ÜÇÜN BİZİMLƏ ƏLAQƏ SAXLAYIN.' },
                         { id: 'BTN_CONTACT', label: 'Sual Kartı Əlaqə Düyməsi', value: 'ƏLAQƏ' },
@@ -4012,6 +4013,22 @@ const VisualEditor: React.FC = () => {
                                         />
                                     </div>
                                     <div className="form-group">
+                                        <label>TƏDBİRƏ QOŞUL DÜYMƏSİ</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('BTN_JOIN_EVENT', 'TƏDBİRƏ QOŞUL')}
+                                            onChange={(e) => updateEventManagementValue('BTN_JOIN_EVENT', 'Tədbirə Qoşul Düyməsi', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>QEYDİYYAT BAĞLI DÜYMƏSİ</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('BTN_JOIN_EVENT_UNAVAILABLE', 'Qeydiyyat aktiv deyil')}
+                                            onChange={(e) => updateEventManagementValue('BTN_JOIN_EVENT_UNAVAILABLE', 'Qeydiyyat Bağlı Düyməsi', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
                                         <label>PİLOT KART BAŞLIĞI</label>
                                         <input
                                             type="text"
@@ -4365,6 +4382,19 @@ const VisualEditor: React.FC = () => {
                                         />
                                         <div style={{ marginTop: '8px', fontSize: '12px', color: '#64748b' }}>
                                             Tədbir detalında böyük narıncı düymənin mətnini buradan dəyişin.
+                                        </div>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('BTN_JOIN_EVENT_UNAVAILABLE', 'Qeydiyyat aktiv deyil')}
+                                            onChange={(e) => {
+                                                if (eventsPageIndex < 0) return;
+                                                handleSectionChange(eventsPageIndex, 'BTN_JOIN_EVENT_UNAVAILABLE', 'value', e.target.value);
+                                            }}
+                                            placeholder="Qeydiyyat aktiv deyil"
+                                            style={{ marginTop: '10px' }}
+                                        />
+                                        <div style={{ marginTop: '8px', fontSize: '12px', color: '#64748b' }}>
+                                            Qeydiyyat bağlı olduqda görünən düymə mətnini buradan dəyişin.
                                         </div>
                                     </div>
 
