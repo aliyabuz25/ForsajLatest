@@ -238,6 +238,11 @@ const CONTACT_SECTION_GROUPS: Array<{ title: string; subtitle: string; ids: stri
         ]
     }
 ];
+const CONTACT_LEGACY_TOPIC_FIELDS = [
+    { id: 'TOPIC_GENERAL', fallback: 'ÜMUMİ SORĞU' },
+    { id: 'TOPIC_PILOT', fallback: 'PİLOT QEYDİYYATI' },
+    { id: 'TOPIC_TECH', fallback: 'TEXNİKİ YARDIM' }
+] as const;
 
 const LEGAL_SECTION_GROUPS: Record<string, Array<{ title: string; subtitle: string; ids: string[] }>> = {
     privacypolicypage: [
@@ -1751,23 +1756,97 @@ const VisualEditor: React.FC = () => {
         setPages(newPages);
     };
 
+    const ensureContactDynamicTopicOptions = (page: PageContent) => {
+        const dynamicRows = (page.sections || [])
+            .map((section) => {
+                const match = String(section.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
+                if (!match) return null;
+                return {
+                    id: section.id,
+                    optionNumber: Number(match[1]),
+                    value: String(section.value || '')
+                };
+            })
+            .filter((row): row is { id: string; optionNumber: number; value: string } => !!row)
+            .sort((a, b) => a.optionNumber - b.optionNumber);
+
+        if (dynamicRows.length > 0) return dynamicRows;
+
+        let nextOrder = (page.sections || []).reduce(
+            (max, section, idx) => Math.max(max, normalizeOrder(section.order, idx)),
+            -1
+        ) + 1;
+
+        CONTACT_LEGACY_TOPIC_FIELDS.forEach((legacyField, index) => {
+            const existingLegacy = (page.sections || []).find((section) => section.id === legacyField.id);
+            const value = String(existingLegacy?.value || legacyField.fallback).trim() || legacyField.fallback;
+            page.sections.push({
+                id: `TOPIC_OPTION_${index + 1}`,
+                type: 'text',
+                label: `Mövzu Seçimi ${index + 1}`,
+                value,
+                order: nextOrder++
+            });
+        });
+
+        return (page.sections || [])
+            .map((section) => {
+                const match = String(section.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
+                if (!match) return null;
+                return {
+                    id: section.id,
+                    optionNumber: Number(match[1]),
+                    value: String(section.value || '')
+                };
+            })
+            .filter((row): row is { id: string; optionNumber: number; value: string } => !!row)
+            .sort((a, b) => a.optionNumber - b.optionNumber);
+    };
+
+    const updateContactTopicOptionValue = (
+        sectionId: string,
+        optionNumber: number,
+        value: string,
+        pageIdx: number = selectedPageIndex
+    ) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return;
+        const newPages = [...pages];
+        const currentPage = newPages[pageIdx];
+        if (!currentPage || currentPage.id !== 'contactpage') return;
+
+        const sectionIndex = (currentPage.sections || []).findIndex((section) => section.id === sectionId);
+        if (sectionIndex >= 0) {
+            currentPage.sections[sectionIndex] = {
+                ...currentPage.sections[sectionIndex],
+                label: currentPage.sections[sectionIndex].label || `Mövzu Seçimi ${optionNumber}`,
+                value
+            };
+        } else {
+            const nextOrder = (currentPage.sections || []).reduce(
+                (max, section, idx) => Math.max(max, normalizeOrder(section.order, idx)),
+                -1
+            ) + 1;
+            currentPage.sections.push({
+                id: sectionId,
+                type: 'text',
+                label: `Mövzu Seçimi ${optionNumber}`,
+                value,
+                order: nextOrder
+            });
+        }
+
+        setPages(newPages);
+    };
+
     const addContactTopicOption = (pageIdx: number = selectedPageIndex) => {
         if (pageIdx < 0 || pageIdx >= pages.length) return;
         const newPages = [...pages];
         const currentPage = newPages[pageIdx];
         if (!currentPage || currentPage.id !== 'contactpage') return;
 
-        const maxOptionNumber = (currentPage.sections || []).reduce((max, section) => {
-            const match = String(section.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
-            if (!match) return max;
-            return Math.max(max, Number(match[1]));
-        }, 0);
-
-        const hasLegacyOptions = (currentPage.sections || []).some((section) =>
-            ['TOPIC_GENERAL', 'TOPIC_PILOT', 'TOPIC_TECH'].includes(String(section.id || '').toUpperCase())
-        );
-
-        const nextOptionNumber = Math.max(maxOptionNumber, hasLegacyOptions ? 3 : 0) + 1;
+        const dynamicRows = ensureContactDynamicTopicOptions(currentPage);
+        const maxOptionNumber = dynamicRows.reduce((max, row) => Math.max(max, row.optionNumber), 0);
+        const nextOptionNumber = maxOptionNumber + 1;
         const nextOrder = (currentPage.sections || []).reduce(
             (max, section, idx) => Math.max(max, normalizeOrder(section.order, idx)),
             -1
@@ -1783,6 +1862,29 @@ const VisualEditor: React.FC = () => {
 
         setPages(newPages);
         toast.success(`Mövzu seçimi ${nextOptionNumber} əlavə edildi`);
+    };
+
+    const removeContactTopicOption = (sectionId: string, pageIdx: number = selectedPageIndex) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return;
+        const newPages = [...pages];
+        const currentPage = newPages[pageIdx];
+        if (!currentPage || currentPage.id !== 'contactpage') return;
+
+        const dynamicRows = ensureContactDynamicTopicOptions(currentPage);
+        const legacyIndex = CONTACT_LEGACY_TOPIC_FIELDS.findIndex((field) => field.id === sectionId);
+        const normalizedSectionId = legacyIndex >= 0 ? `TOPIC_OPTION_${legacyIndex + 1}` : sectionId;
+
+        if (dynamicRows.length <= 1) {
+            toast.error('Ən azı bir seçim qalmalıdır.');
+            return;
+        }
+
+        currentPage.sections = (currentPage.sections || [])
+            .filter((section) => section.id !== normalizedSectionId)
+            .map((section, index) => ({ ...section, order: index }));
+
+        setPages(newPages);
+        toast.success('Mövzu seçimi silindi');
     };
 
     const addLegalSectionPair = (pageIdx: number = selectedPageIndex) => {
@@ -3422,6 +3524,41 @@ const VisualEditor: React.FC = () => {
         return matchesSearch(s.id, s.label, s.value, s.url);
     }).sort((a, b) => normalizeOrder(a.order, 0) - normalizeOrder(b.order, 0));
 
+    const contactPageSections = currentPage?.id === 'contactpage' ? (currentPage.sections || []) : [];
+    const contactTopicOptionRows = currentPage?.id === 'contactpage'
+        ? (() => {
+            const dynamicRows = contactPageSections
+                .map((section) => {
+                    const match = String(section.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
+                    if (!match) return null;
+                    return {
+                        id: section.id,
+                        optionNumber: Number(match[1]),
+                        value: String(section.value || ''),
+                        isLegacy: false
+                    };
+                })
+                .filter((row): row is { id: string; optionNumber: number; value: string; isLegacy: false } => !!row)
+                .sort((a, b) => a.optionNumber - b.optionNumber);
+
+            if (dynamicRows.length > 0) {
+                return dynamicRows.filter((row) => matchesSearch(row.id, row.optionNumber, row.value));
+            }
+
+            return CONTACT_LEGACY_TOPIC_FIELDS
+                .map((legacyField, index) => {
+                    const section = contactPageSections.find((entry) => entry.id === legacyField.id);
+                    return {
+                        id: legacyField.id,
+                        optionNumber: index + 1,
+                        value: String(section?.value || legacyField.fallback),
+                        isLegacy: true
+                    };
+                })
+                .filter((row) => matchesSearch(row.id, row.optionNumber, row.value));
+        })()
+        : [];
+
     const aboutStats = currentPage?.id === 'about'
         ? (() => {
             const statsMap = new Map<string, { label: string; value: string }>();
@@ -3713,31 +3850,28 @@ const VisualEditor: React.FC = () => {
     const contactGroupedSections = (() => {
         if (currentPage?.id !== 'contactpage') return [];
         const usedIds = new Set<string>();
-        const topicOptionSections = [...displayedSections]
-            .filter((section) => CONTACT_TOPIC_OPTION_REGEX.test(String(section.id || '')))
-            .sort((a, b) => {
-                const aMatch = String(a.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
-                const bMatch = String(b.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
-                if (!aMatch || !bMatch) return 0;
-                return Number(aMatch[1]) - Number(bMatch[1]);
-            });
+        const hiddenTopicIds = new Set<string>(CONTACT_LEGACY_TOPIC_FIELDS.map((field) => field.id));
 
-        const groups: Array<{ title: string; subtitle: string; sections: Section[]; kind?: 'contact-form' }> = CONTACT_SECTION_GROUPS.map((group) => {
+        const groups: Array<{ title: string; subtitle: string; sections: Section[] }> = CONTACT_SECTION_GROUPS.map((group) => {
             const baseSections = group.ids
                 .map((id) => displayedSections.find((section) => section.id === id))
                 .filter(Boolean) as Section[];
             const sections = group.title === 'Form'
-                ? [...baseSections, ...topicOptionSections]
+                ? baseSections.filter((section) => !hiddenTopicIds.has(section.id))
                 : baseSections;
 
             sections.forEach((section) => usedIds.add(section.id));
             return {
                 title: group.title,
                 subtitle: group.subtitle,
-                sections,
-                kind: group.title === 'Form' ? ('contact-form' as const) : undefined
+                sections
             };
         }).filter((group) => group.sections.length > 0);
+
+        displayedSections.forEach((section) => {
+            if (CONTACT_TOPIC_OPTION_REGEX.test(String(section.id || ''))) usedIds.add(section.id);
+            if (hiddenTopicIds.has(section.id)) usedIds.add(section.id);
+        });
 
         const extraSections = displayedSections.filter((section) => !usedIds.has(section.id));
         if (extraSections.length > 0) groups.push({ title: 'Digər Sahələr', subtitle: 'Avtomatik qruplaşdırıla bilməyən sahələr', sections: extraSections });
@@ -6011,6 +6145,72 @@ const VisualEditor: React.FC = () => {
                                 </div>
 
                                 <div className="edit-fields">
+                                    {currentPage.id === 'contactpage' && (
+                                        <div className="field-group">
+                                            <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <label><List size={16} /> Müraciət İstiqaməti Seçimləri</label>
+                                                <button className="add-field-minimal" onClick={() => addContactTopicOption()}>
+                                                    <Plus size={14} /> Yeni Seçim
+                                                </button>
+                                            </div>
+                                            <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '10px' }}>
+                                                Bu seçimlər əlaqə formundakı dropdown içində göstərilir.
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                                {contactTopicOptionRows.length > 0 ? (
+                                                    contactTopicOptionRows.map((row) => (
+                                                        <div
+                                                            key={`contact-topic-option-${row.id}`}
+                                                            style={{
+                                                                display: 'grid',
+                                                                gridTemplateColumns: 'auto 1fr auto',
+                                                                gap: '10px',
+                                                                alignItems: 'center',
+                                                                padding: '10px',
+                                                                border: '1px solid #e2e8f0',
+                                                                borderRadius: '10px',
+                                                                background: '#fff'
+                                                            }}
+                                                        >
+                                                            <div style={{
+                                                                fontSize: '11px',
+                                                                fontWeight: 800,
+                                                                color: '#475569',
+                                                                background: '#f8fafc',
+                                                                border: '1px solid #e2e8f0',
+                                                                borderRadius: '8px',
+                                                                padding: '6px 10px',
+                                                                whiteSpace: 'nowrap'
+                                                            }}>
+                                                                Seçim {row.optionNumber}
+                                                            </div>
+                                                            <input
+                                                                type="text"
+                                                                value={row.value}
+                                                                onChange={(e) => updateContactTopicOptionValue(row.id, row.optionNumber, e.target.value)}
+                                                                placeholder={`Seçim ${row.optionNumber}`}
+                                                                style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', fontWeight: 700 }}
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                className="delete-section-btn"
+                                                                onClick={() => removeContactTopicOption(row.id)}
+                                                                disabled={contactTopicOptionRows.length <= 1}
+                                                                title={contactTopicOptionRows.length <= 1 ? 'Ən azı bir seçim qalmalıdır' : 'Seçimi sil'}
+                                                            >
+                                                                <Trash2 size={14} />
+                                                            </button>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div style={{ padding: '1rem', border: '1px dashed #cbd5e1', borderRadius: '8px', color: '#64748b', fontSize: '13px' }}>
+                                                        Axtarışa uyğun seçim tapılmadı.
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {currentPage.id === 'about' && (
                                         <div className="field-group">
                                             <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -6315,17 +6515,6 @@ const VisualEditor: React.FC = () => {
                                                                 <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
                                                                     {group.subtitle}
                                                                 </div>
-                                                                {showAdvancedEditor && group.kind === 'contact-form' && (
-                                                                    <div style={{ marginTop: '8px' }}>
-                                                                        <button
-                                                                            className="add-field-minimal"
-                                                                            onClick={() => addContactTopicOption()}
-                                                                            style={{ background: '#fff', border: '1px solid #e2e8f0' }}
-                                                                        >
-                                                                            <Plus size={14} /> Yeni Mövzu Seçimi
-                                                                        </button>
-                                                                    </div>
-                                                                )}
                                                             </div>
                                                             {group.sections.map((section, index) => renderTextSectionCard(section, index))}
                                                         </div>
