@@ -32,7 +32,7 @@ interface EventsPageProps {
 }
 
 const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'default' }) => {
-  const { getText, language } = useSiteContent('eventspage');
+  const { getText, language, getPage } = useSiteContent('eventspage');
   const requiredFieldsToast = getText('PILOT_FORM_TOAST_REQUIRED', 'Zəhmət olmasa bütün sahələri doldurun.');
   const submitSuccessToast = getText('PILOT_FORM_TOAST_SUCCESS', 'Qeydiyyat müraciətiniz uğurla göndərildi!');
   const submitErrorToast = getText('PILOT_FORM_TOAST_ERROR', 'Gondərilmə zamanı xəta baş verdi.');
@@ -227,17 +227,36 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
   const renderRegistrationModal = () => {
     if (!regStep) return null;
 
-    const clubs = [
-      getText('CLUB_OPTION_1', 'Fərdi İştirakçı'),
-      getText('CLUB_OPTION_2', 'Club 4X4'),
-      getText('CLUB_OPTION_3', 'Extreme 4X4'),
-      getText('CLUB_OPTION_4', 'Forsaj Club'),
-      getText('CLUB_OPTION_5', 'Offroad.az'),
-      getText('CLUB_OPTION_6', 'Overland 4X4'),
-      getText('CLUB_OPTION_7', 'PatrolClub.az'),
-      getText('CLUB_OPTION_8', 'Victory Club'),
-      getText('CLUB_OPTION_9', 'Zəfər 4X4 Club')
+    const defaultClubOptions = [
+      'Fərdi İştirakçı',
+      'Club 4X4',
+      'Extreme 4X4',
+      'Forsaj Club',
+      'Offroad.az',
+      'Overland 4X4',
+      'PatrolClub.az',
+      'Victory Club',
+      'Zəfər 4X4 Club'
     ];
+    const eventPageSections = getPage('eventspage')?.sections || [];
+    const dynamicClubKeys = Array.from(
+      new Set(
+        eventPageSections
+          .map((section) => {
+            const match = String(section?.id || '').match(/^CLUB_OPTION_(\d+)(?:_(?:RU|RUS|ENG|EN))?$/i);
+            return match ? `CLUB_OPTION_${match[1]}` : null;
+          })
+          .filter((key): key is string => !!key)
+      )
+    ).sort((a, b) => {
+      const aNum = Number(a.replace('CLUB_OPTION_', ''));
+      const bNum = Number(b.replace('CLUB_OPTION_', ''));
+      return aNum - bNum;
+    });
+    const clubs = (dynamicClubKeys.length > 0 ? dynamicClubKeys : defaultClubOptions.map((_, i) => `CLUB_OPTION_${i + 1}`))
+      .map((key, idx) => getText(key, defaultClubOptions[idx] || ''))
+      .map((value) => value.trim())
+      .filter(Boolean);
 
     return (
       <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4">

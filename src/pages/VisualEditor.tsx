@@ -3145,6 +3145,18 @@ const VisualEditor: React.FC = () => {
     };
     const eventsPageIndex = pages.findIndex((page) => page.id === 'eventspage');
     const eventsPageConfig = eventsPageIndex >= 0 ? pages[eventsPageIndex] : null;
+    const eventClubOptionRows = (eventsPageConfig?.sections || [])
+        .map((section) => {
+            const match = String(section.id || '').match(/^CLUB_OPTION_(\d+)$/i);
+            if (!match) return null;
+            return {
+                id: section.id,
+                optionNumber: Number(match[1]),
+                value: String(section.value || '')
+            };
+        })
+        .filter((row): row is { id: string; optionNumber: number; value: string } => !!row)
+        .sort((a, b) => a.optionNumber - b.optionNumber);
     const getEventsPageConfigValue = (key: string, fallback: string) => {
         const found = eventsPageConfig?.sections?.find((section) => section.id === key);
         return (found?.value || fallback).toString();
@@ -3175,6 +3187,53 @@ const VisualEditor: React.FC = () => {
             page.sections.push({ id: key, type: 'text', label, value, order: nextOrder });
         }
 
+        setPages(nextPages);
+    };
+    const addEventManagementClubOption = () => {
+        const nextPages = [...pages];
+        let pageIdx = nextPages.findIndex((page) => page.id === 'eventspage');
+        if (pageIdx === -1) {
+            nextPages.push({
+                id: 'eventspage',
+                title: componentLabels.eventspage || 'Tədbirlər Səhifəsi',
+                sections: [],
+                images: []
+            });
+            pageIdx = nextPages.length - 1;
+        }
+
+        const page = nextPages[pageIdx];
+        const maxOptionNumber = (page.sections || []).reduce((max, section) => {
+            const match = String(section.id || '').match(/^CLUB_OPTION_(\d+)$/i);
+            if (!match) return max;
+            return Math.max(max, Number(match[1]));
+        }, 0);
+        const nextOptionNumber = maxOptionNumber + 1;
+        const nextOrder = (page.sections || []).reduce((max, s, idx) => Math.max(max, normalizeOrder(s.order, idx)), -1) + 1;
+        page.sections.push({
+            id: `CLUB_OPTION_${nextOptionNumber}`,
+            type: 'text',
+            label: `Klub Seçimi ${nextOptionNumber}`,
+            value: `Klub ${nextOptionNumber}`,
+            order: nextOrder
+        });
+        setPages(nextPages);
+    };
+    const removeEventManagementClubOption = (sectionId: string) => {
+        if (eventClubOptionRows.length <= 1) {
+            toast.error('Ən azı bir klub seçimi qalmalıdır.');
+            return;
+        }
+
+        const nextPages = [...pages];
+        const pageIdx = nextPages.findIndex((page) => page.id === 'eventspage');
+        if (pageIdx === -1) return;
+
+        const page = nextPages[pageIdx];
+        const sectionIdx = (page.sections || []).findIndex((section) => section.id === sectionId);
+        if (sectionIdx === -1) return;
+
+        page.sections.splice(sectionIdx, 1);
         setPages(nextPages);
     };
     const updateEventManagementUrl = (key: string, label: string, value: string, url: string) => {
@@ -4119,78 +4178,41 @@ const VisualEditor: React.FC = () => {
                                             onChange={(e) => updateEventManagementValue('FIELD_CLUB', 'Klub Label', e.target.value)}
                                         />
                                     </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 1 (DEFAULT)</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_1', 'Fərdi İştirakçı')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_1', 'Klub Seçimi 1', e.target.value)}
-                                        />
+                                    <div className="form-group full-span">
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                                            <label style={{ marginBottom: 0 }}>KLUB SEÇİMLƏRİ</label>
+                                            <button
+                                                type="button"
+                                                className="add-section-btn"
+                                                onClick={addEventManagementClubOption}
+                                                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                                            >
+                                                <Plus size={14} />
+                                                Yeni seçim
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 2</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_2', 'Club 4X4')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_2', 'Klub Seçimi 2', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 3</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_3', 'Extreme 4X4')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_3', 'Klub Seçimi 3', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 4</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_4', 'Forsaj Club')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_4', 'Klub Seçimi 4', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 5</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_5', 'Offroad.az')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_5', 'Klub Seçimi 5', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 6</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_6', 'Overland 4X4')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_6', 'Klub Seçimi 6', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 7</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_7', 'PatrolClub.az')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_7', 'Klub Seçimi 7', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 8</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_8', 'Victory Club')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_8', 'Klub Seçimi 8', e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>KLUB SEÇİMİ 9</label>
-                                        <input
-                                            type="text"
-                                            value={getEventsPageConfigValue('CLUB_OPTION_9', 'Zəfər 4X4 Club')}
-                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_9', 'Klub Seçimi 9', e.target.value)}
-                                        />
-                                    </div>
+                                    {eventClubOptionRows.map((row) => (
+                                        <div className="form-group full-span" key={row.id}>
+                                            <label>KLUB SEÇİMİ {row.optionNumber}</label>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                <input
+                                                    type="text"
+                                                    value={row.value}
+                                                    onChange={(e) => updateEventManagementValue(row.id, `Klub Seçimi ${row.optionNumber}`, e.target.value)}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="delete-section-btn"
+                                                    onClick={() => removeEventManagementClubOption(row.id)}
+                                                    disabled={eventClubOptionRows.length <= 1}
+                                                    title={eventClubOptionRows.length <= 1 ? 'Ən azı bir seçim qalmalıdır' : 'Seçimi sil'}
+                                                >
+                                                    <Trash2 size={14} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             )}
 
