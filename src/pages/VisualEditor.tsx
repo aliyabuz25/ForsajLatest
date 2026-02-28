@@ -531,6 +531,9 @@ const PARTNER_KEY_REGEX = /^PARTNER_(\d+)_(NAME|TAG|ICON|USE_IMAGE|IMAGE_ID)$/;
 const RULE_TAB_FIELD_REGEX = /^RULE_TAB_(\d+)_(ID|TITLE|ICON|DOC_NAME|DOC_BUTTON|DOC_URL)$/;
 const RULE_TAB_ITEM_FIELD_REGEX = /^RULE_TAB_(\d+)_ITEM_(\d+)_(TITLE|DESC)$/;
 const RULE_TAB_SECTION_REGEX = /^RULE_TAB_\d+_(?:ID|TITLE|ICON|DOC_NAME|DOC_BUTTON|DOC_URL|ITEM_\d+_(?:TITLE|DESC))$/;
+const CONTACT_TOPIC_OPTION_REGEX = /^TOPIC_OPTION_(\d+)$/i;
+const LEGAL_DYNAMIC_SECTION_REGEX = /^SECTION_(\d+)_(TITLE|BODY)$/i;
+const LEGAL_PAGE_IDS = new Set(['privacypolicypage', 'termsofservicepage']);
 type PartnerField = 'name' | 'tag' | 'icon' | 'useImage' | 'imageId';
 type PartnerRow = {
     index: number;
@@ -1746,6 +1749,81 @@ const VisualEditor: React.FC = () => {
         }
 
         setPages(newPages);
+    };
+
+    const addContactTopicOption = (pageIdx: number = selectedPageIndex) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return;
+        const newPages = [...pages];
+        const currentPage = newPages[pageIdx];
+        if (!currentPage || currentPage.id !== 'contactpage') return;
+
+        const maxOptionNumber = (currentPage.sections || []).reduce((max, section) => {
+            const match = String(section.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
+            if (!match) return max;
+            return Math.max(max, Number(match[1]));
+        }, 0);
+
+        const hasLegacyOptions = (currentPage.sections || []).some((section) =>
+            ['TOPIC_GENERAL', 'TOPIC_PILOT', 'TOPIC_TECH'].includes(String(section.id || '').toUpperCase())
+        );
+
+        const nextOptionNumber = Math.max(maxOptionNumber, hasLegacyOptions ? 3 : 0) + 1;
+        const nextOrder = (currentPage.sections || []).reduce(
+            (max, section, idx) => Math.max(max, normalizeOrder(section.order, idx)),
+            -1
+        ) + 1;
+
+        currentPage.sections.push({
+            id: `TOPIC_OPTION_${nextOptionNumber}`,
+            type: 'text',
+            label: `Mövzu Seçimi ${nextOptionNumber}`,
+            value: `SEÇİM ${nextOptionNumber}`,
+            order: nextOrder
+        });
+
+        setPages(newPages);
+        toast.success(`Mövzu seçimi ${nextOptionNumber} əlavə edildi`);
+    };
+
+    const addLegalSectionPair = (pageIdx: number = selectedPageIndex) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return;
+        const newPages = [...pages];
+        const currentPage = newPages[pageIdx];
+        if (!currentPage || !LEGAL_PAGE_IDS.has(currentPage.id)) return;
+
+        const maxSectionNo = (currentPage.sections || []).reduce((max, section) => {
+            const match = String(section.id || '').match(LEGAL_DYNAMIC_SECTION_REGEX);
+            if (!match) return max;
+            const sectionNo = Number(match[1]);
+            if (!Number.isFinite(sectionNo)) return max;
+            return Math.max(max, sectionNo);
+        }, 0);
+
+        const nextSectionNo = maxSectionNo + 1;
+        const nextOrder = (currentPage.sections || []).reduce(
+            (max, section, idx) => Math.max(max, normalizeOrder(section.order, idx)),
+            -1
+        ) + 1;
+
+        currentPage.sections.push(
+            {
+                id: `SECTION_${nextSectionNo}_TITLE`,
+                type: 'text',
+                label: `Bölmə ${nextSectionNo} Başlıq`,
+                value: `${nextSectionNo}. Yeni Bölmə`,
+                order: nextOrder
+            },
+            {
+                id: `SECTION_${nextSectionNo}_BODY`,
+                type: 'text',
+                label: `Bölmə ${nextSectionNo} Mətn`,
+                value: 'Bu bölmənin mətni buraya yazılır.',
+                order: nextOrder + 1
+            }
+        );
+
+        setPages(newPages);
+        toast.success(`Bölmə ${nextSectionNo} əlavə edildi`);
     };
 
     const removeField = (type: 'text' | 'image', fieldId: string, pageIdx: number = selectedPageIndex) => {
@@ -3420,9 +3498,9 @@ const VisualEditor: React.FC = () => {
     };
 
     const isLongLegalBodyField = (section: Section, pageId?: string) => {
-        if (!pageId || (pageId !== 'privacypolicypage' && pageId !== 'termsofservicepage')) return false;
+        if (!pageId || !LEGAL_PAGE_IDS.has(pageId)) return false;
         if (section.id === 'INTRO_TEXT') return true;
-        return /^SECTION_\d+_BODY$/.test(section.id);
+        return /^SECTION_\d+_BODY$/i.test(section.id);
     };
 
     const getSectionCollapseStorageKey = (pageId: string, sectionId: string) => `${pageId}::${sectionId}`;
@@ -3635,12 +3713,30 @@ const VisualEditor: React.FC = () => {
     const contactGroupedSections = (() => {
         if (currentPage?.id !== 'contactpage') return [];
         const usedIds = new Set<string>();
-        const groups = CONTACT_SECTION_GROUPS.map((group) => {
-            const sections = group.ids
+        const topicOptionSections = [...displayedSections]
+            .filter((section) => CONTACT_TOPIC_OPTION_REGEX.test(String(section.id || '')))
+            .sort((a, b) => {
+                const aMatch = String(a.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
+                const bMatch = String(b.id || '').match(CONTACT_TOPIC_OPTION_REGEX);
+                if (!aMatch || !bMatch) return 0;
+                return Number(aMatch[1]) - Number(bMatch[1]);
+            });
+
+        const groups: Array<{ title: string; subtitle: string; sections: Section[]; kind?: 'contact-form' }> = CONTACT_SECTION_GROUPS.map((group) => {
+            const baseSections = group.ids
                 .map((id) => displayedSections.find((section) => section.id === id))
                 .filter(Boolean) as Section[];
+            const sections = group.title === 'Form'
+                ? [...baseSections, ...topicOptionSections]
+                : baseSections;
+
             sections.forEach((section) => usedIds.add(section.id));
-            return { title: group.title, subtitle: group.subtitle, sections };
+            return {
+                title: group.title,
+                subtitle: group.subtitle,
+                sections,
+                kind: group.title === 'Form' ? 'contact-form' : undefined
+            };
         }).filter((group) => group.sections.length > 0);
 
         const extraSections = displayedSections.filter((section) => !usedIds.has(section.id));
@@ -3650,18 +3746,58 @@ const VisualEditor: React.FC = () => {
 
     const legalGroupedSections = (() => {
         if (!currentPage?.id || !LEGAL_SECTION_GROUPS[currentPage.id]) return [];
+        const pageGroups = LEGAL_SECTION_GROUPS[currentPage.id];
+        const headerGroup = pageGroups[0];
+        const textGroup = pageGroups[1];
+        const contactGroup = pageGroups[2];
         const usedIds = new Set<string>();
-        const groups = LEGAL_SECTION_GROUPS[currentPage.id].map((group) => {
-            const sections = group.ids
-                .map((id) => displayedSections.find((section) => section.id === id))
-                .filter(Boolean) as Section[];
-            sections.forEach((section) => usedIds.add(section.id));
-            return { title: group.title, subtitle: group.subtitle, sections };
-        }).filter((group) => group.sections.length > 0);
+        const groups: Array<{ title: string; subtitle: string; sections: Section[]; kind?: 'legal-sections' }> = [];
+
+        const headerSections = headerGroup.ids
+            .map((id) => displayedSections.find((section) => section.id === id))
+            .filter(Boolean) as Section[];
+        if (headerSections.length > 0) {
+            headerSections.forEach((section) => usedIds.add(section.id));
+            groups.push({ title: headerGroup.title, subtitle: headerGroup.subtitle, sections: headerSections });
+        }
+
+        const textSections = [...displayedSections]
+            .filter((section) => LEGAL_DYNAMIC_SECTION_REGEX.test(String(section.id || '')))
+            .sort((a, b) => {
+                const aMatch = String(a.id || '').match(LEGAL_DYNAMIC_SECTION_REGEX);
+                const bMatch = String(b.id || '').match(LEGAL_DYNAMIC_SECTION_REGEX);
+                if (!aMatch || !bMatch) return 0;
+                const sectionNoDiff = Number(aMatch[1]) - Number(bMatch[1]);
+                if (sectionNoDiff !== 0) return sectionNoDiff;
+                if (aMatch[2] === bMatch[2]) return 0;
+                return aMatch[2] === 'TITLE' ? -1 : 1;
+            });
+
+        if (textSections.length > 0) {
+            textSections.forEach((section) => usedIds.add(section.id));
+            groups.push({
+                title: textGroup.title,
+                subtitle: textGroup.subtitle,
+                sections: textSections,
+                kind: 'legal-sections'
+            });
+        }
+
+        const contactSections = contactGroup.ids
+            .map((id) => displayedSections.find((section) => section.id === id))
+            .filter(Boolean) as Section[];
+        if (contactSections.length > 0) {
+            contactSections.forEach((section) => usedIds.add(section.id));
+            groups.push({ title: contactGroup.title, subtitle: contactGroup.subtitle, sections: contactSections });
+        }
 
         const extraSections = displayedSections.filter((section) => !usedIds.has(section.id));
         if (extraSections.length > 0) {
-            groups.push({ title: 'Digər Sahələr', subtitle: 'Avtomatik qruplaşdırıla bilməyən əlavə sahələr', sections: extraSections });
+            groups.push({
+                title: 'Digər Sahələr',
+                subtitle: 'Avtomatik qruplaşdırıla bilməyən əlavə sahələr',
+                sections: extraSections
+            });
         }
         return groups;
     })();
@@ -6153,9 +6289,15 @@ const VisualEditor: React.FC = () => {
                                             <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 <label><Type size={16} /> Mətn Sahələri</label>
                                                 {showAdvancedEditor && (
-                                                    <button className="add-field-minimal" onClick={() => addField('text')}>
-                                                        <Plus size={14} /> Mətn Əlavə Et
-                                                    </button>
+                                                    LEGAL_PAGE_IDS.has(currentPage.id) ? (
+                                                        <button className="add-field-minimal" onClick={() => addLegalSectionPair()}>
+                                                            <Plus size={14} /> Bölmə Artır
+                                                        </button>
+                                                    ) : (
+                                                        <button className="add-field-minimal" onClick={() => addField('text')}>
+                                                            <Plus size={14} /> Mətn Əlavə Et
+                                                        </button>
+                                                    )
                                                 )}
                                             </div>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -6173,6 +6315,17 @@ const VisualEditor: React.FC = () => {
                                                                 <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
                                                                     {group.subtitle}
                                                                 </div>
+                                                                {showAdvancedEditor && group.kind === 'contact-form' && (
+                                                                    <div style={{ marginTop: '8px' }}>
+                                                                        <button
+                                                                            className="add-field-minimal"
+                                                                            onClick={() => addContactTopicOption()}
+                                                                            style={{ background: '#fff', border: '1px solid #e2e8f0' }}
+                                                                        >
+                                                                            <Plus size={14} /> Yeni Mövzu Seçimi
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                             {group.sections.map((section, index) => renderTextSectionCard(section, index))}
                                                         </div>
@@ -6187,6 +6340,17 @@ const VisualEditor: React.FC = () => {
                                                                 <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
                                                                     {group.subtitle}
                                                                 </div>
+                                                                {showAdvancedEditor && group.kind === 'legal-sections' && (
+                                                                    <div style={{ marginTop: '8px' }}>
+                                                                        <button
+                                                                            className="add-field-minimal"
+                                                                            onClick={() => addLegalSectionPair()}
+                                                                            style={{ background: '#fff', border: '1px solid #e2e8f0' }}
+                                                                        >
+                                                                            <Plus size={14} /> Bölmə Artır
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                             {group.sections.map((section, index) => renderTextSectionCard(section, index))}
                                                         </div>

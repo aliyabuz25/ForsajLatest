@@ -3,7 +3,8 @@ import { CalendarDays, Scale, Mail, Globe } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 
 const TermsOfServicePage: React.FC = () => {
-  const { getText } = useSiteContent('termsofservicepage');
+  const { getPage, getText } = useSiteContent('termsofservicepage');
+  const pageSections = getPage('termsofservicepage')?.sections || [];
 
   const pageTitle = getText('PAGE_TITLE', 'XİDMƏT ŞƏRTLƏRİ (TERMS OF SERVICE)');
   const pageSubtitle = getText('PAGE_SUBTITLE', 'İSTİFADƏ QAYDALARI VƏ HÜQUQİ ŞƏRTLƏR');
@@ -52,10 +53,31 @@ const TermsOfServicePage: React.FC = () => {
     }
   ];
 
-  const sections = sectionFallbacks.map((section, index) => ({
-    title: getText(`SECTION_${index + 1}_TITLE`, section.title),
-    body: getText(`SECTION_${index + 1}_BODY`, section.body)
-  }));
+  const dynamicSections = new Map<number, { title?: string; body?: string }>();
+  pageSections.forEach((section) => {
+    const match = String(section.id || '').match(/^SECTION_(\d+)_(TITLE|BODY)$/i);
+    if (!match) return;
+    const sectionNo = Number(match[1]);
+    if (!Number.isFinite(sectionNo)) return;
+    const field = match[2].toUpperCase();
+    const current = dynamicSections.get(sectionNo) || {};
+    const cleanValue = String(section.value || '').trim();
+    if (!cleanValue) return;
+    if (field === 'TITLE') current.title = cleanValue;
+    if (field === 'BODY') current.body = cleanValue;
+    dynamicSections.set(sectionNo, current);
+  });
+
+  const maxSectionNo = Math.max(sectionFallbacks.length, ...Array.from(dynamicSections.keys()), 0);
+  const sections = Array.from({ length: maxSectionNo }, (_, index) => {
+    const sectionNo = index + 1;
+    const fallback = sectionFallbacks[index] || { title: `${sectionNo}. Bölmə`, body: '' };
+    const pair = dynamicSections.get(sectionNo);
+    return {
+      title: (pair?.title || '').trim() || getText(`SECTION_${sectionNo}_TITLE`, fallback.title),
+      body: (pair?.body || '').trim() || getText(`SECTION_${sectionNo}_BODY`, fallback.body)
+    };
+  }).filter((section) => (section.title || '').trim() || (section.body || '').trim());
 
   const normalizeToken = (value: string) =>
     (value || '')

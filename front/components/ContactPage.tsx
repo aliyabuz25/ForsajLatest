@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapPin, Phone, Mail, Instagram, Youtube, Facebook, Send, Info, ChevronDown, Clock, Map as MapIcon } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 import toast from 'react-hot-toast';
 import { resolveSocialLinks } from '../utils/socialLinks';
 
 const ContactPage: React.FC = () => {
-  const { getText } = useSiteContent('contactpage');
+  const { getPage, getText } = useSiteContent('contactpage');
   const { getText: getGeneralText } = useSiteContent('general');
   const onlineLabel = getText('ONLINE_STATUS_LABEL', 'ONLINE');
   const formStatusLabel = getText('FORM_STATUS_LABEL', 'STATUS: ONLINE');
@@ -15,7 +15,47 @@ const ContactPage: React.FC = () => {
   const formMethodRaw = (getText('FORM_METHOD', 'POST') || 'POST').toUpperCase();
   const formMethod = ['POST', 'PUT', 'PATCH'].includes(formMethodRaw) ? formMethodRaw : 'POST';
   const formContentType = getText('FORM_CONTENT_TYPE', 'application/json') || 'application/json';
-  const [selectedType, setSelectedType] = useState(getText('TOPIC_GENERAL', 'ÜMUMİ SORĞU'));
+  const defaultTopicOptions = [
+    'ÜMUMİ SORĞU',
+    'PİLOT QEYDİYYATI',
+    'TEXNİKİ YARDIM'
+  ];
+  const contactPageSections = getPage('contactpage')?.sections || [];
+  const dynamicTopicKeys = Array.from(
+    new Set(
+      contactPageSections
+        .map((section) => {
+          const match = String(section?.id || '').match(/^TOPIC_OPTION_(\d+)(?:_(?:RU|RUS|ENG|EN))?$/i);
+          return match ? `TOPIC_OPTION_${match[1]}` : null;
+        })
+        .filter((key): key is string => !!key)
+    )
+  ).sort((a, b) => {
+    const aNum = Number(a.replace('TOPIC_OPTION_', ''));
+    const bNum = Number(b.replace('TOPIC_OPTION_', ''));
+    return aNum - bNum;
+  });
+  const topicOptions = (
+    dynamicTopicKeys.length > 0
+      ? dynamicTopicKeys.map((key) => getText(key, ''))
+      : [
+          getText('TOPIC_GENERAL', defaultTopicOptions[0]),
+          getText('TOPIC_PILOT', defaultTopicOptions[1]),
+          getText('TOPIC_TECH', defaultTopicOptions[2])
+        ]
+  )
+    .map((value) => String(value || '').trim())
+    .filter(Boolean);
+  const [selectedType, setSelectedType] = useState(topicOptions[0] || defaultTopicOptions[0]);
+  useEffect(() => {
+    if (!topicOptions.length) {
+      setSelectedType(defaultTopicOptions[0]);
+      return;
+    }
+    if (!topicOptions.includes(selectedType)) {
+      setSelectedType(topicOptions[0]);
+    }
+  }, [selectedType, topicOptions]);
   const phoneNumber = getText('PHONE_NUMBER', getGeneralText('CONTACT_PHONE') || '+994 50 123 45 67');
   const phoneNumberSingleLine = phoneNumber.replace(/\s+/g, '\u00A0');
 
@@ -205,9 +245,9 @@ const ContactPage: React.FC = () => {
                   onChange={(e) => setSelectedType(e.target.value)}
                   className="w-full bg-[#111] border border-white/5 text-white p-5 font-black italic text-xs uppercase appearance-none outline-none focus:border-[#FF4D00] transition-colors"
                 >
-                  <option>{getText('TOPIC_GENERAL', 'ÜMUMİ SORĞU')}</option>
-                  <option>{getText('TOPIC_PILOT', 'PİLOT QEYDİYYATI')}</option>
-                  <option>{getText('TOPIC_TECH', 'TEXNİKİ YARDIM')}</option>
+                  {topicOptions.map((topic, index) => (
+                    <option key={`${topic}-${index}`} value={topic}>{topic}</option>
+                  ))}
                 </select>
                 <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-[#FF4D00] pointer-events-none" size={20} />
               </div>

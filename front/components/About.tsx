@@ -2,20 +2,22 @@ import React from 'react';
 import { Target, Globe, Shield, Users, Leaf, Zap } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 
-const buildPreviewText = (content: string, sentenceLimit = 2) => {
+const buildPreviewText = (content: string, sentenceLimit = 2, maxChars = 190) => {
   const normalized = content.replace(/\s+/g, ' ').trim();
   if (!normalized) return '';
 
   const sentences = normalized.match(/[^.!?]+[.!?]+/g);
+  let preview = normalized;
+
   if (sentences && sentences.length > sentenceLimit) {
-    return sentences.slice(0, sentenceLimit).join(' ').trim();
+    preview = sentences.slice(0, sentenceLimit).join(' ').trim();
   }
 
-  if (!sentences && normalized.length > 220) {
-    return `${normalized.slice(0, 220).trim()}...`;
+  if (preview.length > maxChars) {
+    return `${preview.slice(0, maxChars).trim().replace(/[.,;:!?-]\s*$/, '')}...`;
   }
 
-  return normalized;
+  return preview;
 };
 
 const normalizeLookupToken = (value: string) =>
@@ -173,8 +175,8 @@ const About: React.FC = () => {
   );
   const aboutReadMoreLabel = resolveAboutText(
     ['ABOUT_READ_MORE_BTN'],
-    'ƏTRAFLI OXU',
-    ['etrafli oxu', 'hamsina bax', 'hamisina bax']
+    'TAMAMINI GÖR',
+    ['etrafli oxu', 'hamsina bax', 'hamisina bax', 'tamamini gor']
   );
   const aboutDescriptionPreview = buildPreviewText(aboutDescription);
   const isAboutExpandable = aboutDescriptionPreview !== aboutDescription;
