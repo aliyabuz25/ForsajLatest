@@ -184,9 +184,9 @@ const ContactPage: React.FC = () => {
 
         {/* Form Section */}
         <div className="bg-[#050505] text-white p-10 md:p-20 relative overflow-hidden shadow-2xl border border-white/5 mb-12">
-          <div className="flex justify-between items-center mb-12 border-b border-white/5 pb-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center items-start gap-4 mb-12 border-b border-white/5 pb-8">
             <h3 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">{getText('FORM_TITLE', 'MÜRACİƏT FORMU')}</h3>
-            <span className="bg-[#FF4D00] px-4 py-1.5 text-black font-black italic text-[10px] uppercase tracking-widest shadow-lg">{formStatusLabel}</span>
+            <span className="self-start sm:self-auto bg-[#FF4D00] px-3 sm:px-4 py-1.5 text-black font-black italic text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-widest shadow-lg whitespace-nowrap">{formStatusLabel}</span>
           </div>
 
           <form className="space-y-10" onSubmit={async (e) => {
