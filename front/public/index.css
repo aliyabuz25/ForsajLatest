@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
   --sidebar-width: 280px;
   --header-height: 64px;
+  --font-ui: 'Segoe UI', 'Segoe UI Historic', 'Noto Sans', 'DejaVu Sans', Arial, sans-serif;
 
   /* Colors - Modern Dark/Light Balance */
   --primary: #3b82f6;
@@ -39,7 +40,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
   background-color: var(--bg-main);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
@@ -52,8 +53,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-ui);
   font-weight: 600;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-ui);
 }
 
 a {
