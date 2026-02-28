@@ -1,5 +1,5 @@
 import React from 'react';
-import { CalendarDays, Scale, Mail, Globe } from 'lucide-react';
+import { CalendarDays, Scale, Mail, Globe, FileText, Shield, ShieldCheck, Users, Leaf, Zap } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 
 const TermsOfServicePage: React.FC = () => {
@@ -53,9 +53,26 @@ const TermsOfServicePage: React.FC = () => {
     }
   ];
 
-  const dynamicSections = new Map<number, { title?: string; body?: string }>();
+  const legalIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    FileText,
+    Shield,
+    ShieldCheck,
+    Users,
+    Globe,
+    Leaf,
+    Zap
+  };
+
+  const resolveLegalIcon = (token: string) => {
+    const normalized = String(token || '').trim().toLowerCase();
+    if (!normalized) return null;
+    const key = Object.keys(legalIconMap).find((item) => item.toLowerCase() === normalized);
+    return key ? legalIconMap[key] : null;
+  };
+
+  const dynamicSections = new Map<number, { title?: string; icon?: string; body?: string }>();
   pageSections.forEach((section) => {
-    const match = String(section.id || '').match(/^SECTION_(\d+)_(TITLE|BODY)$/i);
+    const match = String(section.id || '').match(/^SECTION_(\d+)_(TITLE|ICON|BODY)$/i);
     if (!match) return;
     const sectionNo = Number(match[1]);
     if (!Number.isFinite(sectionNo)) return;
@@ -64,6 +81,7 @@ const TermsOfServicePage: React.FC = () => {
     const cleanValue = String(section.value || '').trim();
     if (!cleanValue) return;
     if (field === 'TITLE') current.title = cleanValue;
+    if (field === 'ICON') current.icon = cleanValue;
     if (field === 'BODY') current.body = cleanValue;
     dynamicSections.set(sectionNo, current);
   });
@@ -75,6 +93,7 @@ const TermsOfServicePage: React.FC = () => {
     const pair = dynamicSections.get(sectionNo);
     return {
       title: (pair?.title || '').trim() || getText(`SECTION_${sectionNo}_TITLE`, fallback.title),
+      icon: (pair?.icon || '').trim(),
       body: (pair?.body || '').trim() || getText(`SECTION_${sectionNo}_BODY`, fallback.body)
     };
   }).filter((section) => (section.title || '').trim() || (section.body || '').trim());
@@ -125,7 +144,14 @@ const TermsOfServicePage: React.FC = () => {
         <div className="space-y-4">
           {contentSections.map((section, idx) => (
             <article key={`terms-section-${idx}`} className="bg-[#111] border border-white/5 p-6 md:p-8 rounded-sm">
-              <h3 className="text-xl md:text-2xl font-black italic text-[#FF4D00] mb-4 uppercase tracking-tight">{section.title}</h3>
+              <h3 className="text-xl md:text-2xl font-black italic text-[#FF4D00] mb-4 uppercase tracking-tight flex items-center gap-2">
+                {(() => {
+                  const IconComponent = resolveLegalIcon(section.icon || '');
+                  if (!IconComponent) return null;
+                  return <IconComponent size={20} className="text-[#FF4D00]" />;
+                })()}
+                <span>{section.title}</span>
+              </h3>
               <p className="text-gray-300 leading-relaxed whitespace-pre-line">{section.body}</p>
             </article>
           ))}

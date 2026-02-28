@@ -192,6 +192,16 @@ const CORE_VALUE_ICON_COMPONENTS: Record<string, React.ComponentType<{ size?: nu
     Leaf,
     Zap
 };
+const LEGAL_SECTION_ICON_PRESETS = ['', 'FileText', 'Shield', 'ShieldCheck', 'Users', 'Globe', 'Leaf', 'Zap'] as const;
+const LEGAL_SECTION_ICON_COMPONENTS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    FileText,
+    Shield,
+    ShieldCheck,
+    Users,
+    Globe,
+    Leaf,
+    Zap
+};
 const PARTNER_ICON_PRESETS = ['ShieldCheck', 'Truck', 'Globe', 'Zap'];
 const PARTNER_ICON_COMPONENTS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
     ShieldCheck,
@@ -520,6 +530,8 @@ const getSectionHint = (section: Section, pageId?: string) => {
 
     const sectionTitleMatch = normalizedKey.match(/^SECTION_(\d+)_TITLE$/);
     if (sectionTitleMatch) return `${sectionTitleMatch[1]}. maddənin başlıq mətni.`;
+    const sectionIconMatch = normalizedKey.match(/^SECTION_(\d+)_ICON$/);
+    if (sectionIconMatch) return `${sectionIconMatch[1]}. maddə üçün ikon seçimi (opsional).`;
     const sectionBodyMatch = normalizedKey.match(/^SECTION_(\d+)_BODY$/);
     if (sectionBodyMatch) return `${sectionBodyMatch[1]}. maddənin izah mətni.`;
 
@@ -537,7 +549,7 @@ const RULE_TAB_FIELD_REGEX = /^RULE_TAB_(\d+)_(ID|TITLE|ICON)$/;
 const RULE_TAB_ITEM_FIELD_REGEX = /^RULE_TAB_(\d+)_ITEM_(\d+)_(TITLE|DESC)$/;
 const RULE_TAB_SECTION_REGEX = /^RULE_TAB_\d+_(?:ID|TITLE|ICON|DOC_NAME|DOC_BUTTON|DOC_URL|ITEM_\d+_(?:TITLE|DESC))$/;
 const CONTACT_TOPIC_OPTION_REGEX = /^TOPIC_OPTION_(\d+)$/i;
-const LEGAL_DYNAMIC_SECTION_REGEX = /^SECTION_(\d+)_(TITLE|BODY)$/i;
+const LEGAL_DYNAMIC_SECTION_REGEX = /^SECTION_(\d+)_(TITLE|ICON|BODY)$/i;
 const LEGAL_PAGE_IDS = new Set(['privacypolicypage', 'termsofservicepage']);
 type PartnerField = 'name' | 'tag' | 'icon' | 'useImage' | 'imageId';
 type PartnerRow = {
@@ -1932,11 +1944,18 @@ const VisualEditor: React.FC = () => {
                 order: nextOrder
             },
             {
+                id: `SECTION_${nextSectionNo}_ICON`,
+                type: 'text',
+                label: `Bölmə ${nextSectionNo} İkon`,
+                value: '',
+                order: nextOrder + 1
+            },
+            {
                 id: `SECTION_${nextSectionNo}_BODY`,
                 type: 'text',
                 label: `Bölmə ${nextSectionNo} Mətn`,
                 value: 'Bu bölmənin mətni buraya yazılır.',
-                order: nextOrder + 1
+                order: nextOrder + 2
             }
         );
 
@@ -1946,7 +1965,7 @@ const VisualEditor: React.FC = () => {
 
     const updateLegalSectionFieldValue = (
         sectionNo: number,
-        field: 'TITLE' | 'BODY',
+        field: 'TITLE' | 'ICON' | 'BODY',
         value: string,
         pageIdx: number = selectedPageIndex
     ) => {
@@ -1958,7 +1977,9 @@ const VisualEditor: React.FC = () => {
         const targetId = `SECTION_${sectionNo}_${field}`;
         const targetLabel = field === 'TITLE'
             ? `Bölmə ${sectionNo} Başlıq`
-            : `Bölmə ${sectionNo} Mətn`;
+            : field === 'ICON'
+                ? `Bölmə ${sectionNo} İkon`
+                : `Bölmə ${sectionNo} Mətn`;
         const sectionIndex = (currentPage.sections || []).findIndex((section) => section.id === targetId);
 
         if (sectionIndex >= 0) {
@@ -2010,6 +2031,7 @@ const VisualEditor: React.FC = () => {
 
         const targetIds = new Set([
             `SECTION_${sectionNo}_TITLE`,
+            `SECTION_${sectionNo}_ICON`,
             `SECTION_${sectionNo}_BODY`
         ]);
         const hasAnyTarget = (currentPage.sections || []).some((section) => targetIds.has(section.id));
@@ -3689,6 +3711,7 @@ const VisualEditor: React.FC = () => {
             const pairMap = new Map<number, {
                 sectionNo: number;
                 titleSection?: Section;
+                iconSection?: Section;
                 bodySection?: Section;
             }>();
 
@@ -3700,6 +3723,7 @@ const VisualEditor: React.FC = () => {
 
                 const current = pairMap.get(sectionNo) || { sectionNo };
                 if (match[2].toUpperCase() === 'TITLE') current.titleSection = section;
+                if (match[2].toUpperCase() === 'ICON') current.iconSection = section;
                 if (match[2].toUpperCase() === 'BODY') current.bodySection = section;
                 pairMap.set(sectionNo, current);
             });
@@ -3711,6 +3735,8 @@ const VisualEditor: React.FC = () => {
                         `SECTION_${row.sectionNo}`,
                         row.titleSection?.label,
                         row.titleSection?.value,
+                        row.iconSection?.label,
+                        row.iconSection?.value,
                         row.bodySection?.label,
                         row.bodySection?.value
                     )
@@ -4063,7 +4089,10 @@ const VisualEditor: React.FC = () => {
                 const sectionNoDiff = Number(aMatch[1]) - Number(bMatch[1]);
                 if (sectionNoDiff !== 0) return sectionNoDiff;
                 if (aMatch[2] === bMatch[2]) return 0;
-                return aMatch[2] === 'TITLE' ? -1 : 1;
+                const fieldOrder: Record<string, number> = { TITLE: 0, ICON: 1, BODY: 2 };
+                const aField = String(aMatch[2] || '').toUpperCase();
+                const bField = String(bMatch[2] || '').toUpperCase();
+                return (fieldOrder[aField] ?? 99) - (fieldOrder[bField] ?? 99);
             });
 
         if (textSections.length > 0) {
@@ -6391,68 +6420,113 @@ const VisualEditor: React.FC = () => {
                                             </div>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                                 {legalSectionRows.length > 0 ? (
-                                                    legalSectionRows.map((row) => (
-                                                        <div
-                                                            key={`legal-section-row-${row.sectionNo}`}
-                                                            style={{
-                                                                border: '1px solid #e2e8f0',
-                                                                borderRadius: '12px',
-                                                                background: '#fff',
-                                                                padding: '12px'
-                                                            }}
-                                                        >
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                                                                <div style={{
-                                                                    fontSize: '11px',
-                                                                    fontWeight: 900,
-                                                                    color: '#475569',
-                                                                    background: '#f8fafc',
+                                                    legalSectionRows.map((row) => {
+                                                        const selectedIconToken = String(row.iconSection?.value || '').trim();
+                                                        const selectedIconKey = LEGAL_SECTION_ICON_PRESETS.find((token) => token.toLowerCase() === selectedIconToken.toLowerCase()) || '';
+                                                        const SelectedLegalIcon = selectedIconKey ? LEGAL_SECTION_ICON_COMPONENTS[selectedIconKey] : null;
+
+                                                        return (
+                                                            <div
+                                                                key={`legal-section-row-${row.sectionNo}`}
+                                                                style={{
                                                                     border: '1px solid #e2e8f0',
-                                                                    borderRadius: '8px',
-                                                                    padding: '6px 10px',
-                                                                    textTransform: 'uppercase',
-                                                                    letterSpacing: '0.04em'
-                                                                }}>
-                                                                    Bölmə {row.sectionNo}
+                                                                    borderRadius: '12px',
+                                                                    background: '#fff',
+                                                                    padding: '12px'
+                                                                }}
+                                                            >
+                                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                                                                    <div style={{
+                                                                        fontSize: '11px',
+                                                                        fontWeight: 900,
+                                                                        color: '#475569',
+                                                                        background: '#f8fafc',
+                                                                        border: '1px solid #e2e8f0',
+                                                                        borderRadius: '8px',
+                                                                        padding: '6px 10px',
+                                                                        textTransform: 'uppercase',
+                                                                        letterSpacing: '0.04em'
+                                                                    }}>
+                                                                        Bölmə {row.sectionNo}
+                                                                    </div>
+                                                                    <button
+                                                                        type="button"
+                                                                        className="delete-section-btn"
+                                                                        onClick={() => removeLegalSectionPair(row.sectionNo)}
+                                                                        disabled={legalSectionRows.length <= 1}
+                                                                        title={legalSectionRows.length <= 1 ? 'Ən azı bir bölmə qalmalıdır' : 'Bölməni sil'}
+                                                                    >
+                                                                        <Trash2 size={14} />
+                                                                    </button>
                                                                 </div>
-                                                                <button
-                                                                    type="button"
-                                                                    className="delete-section-btn"
-                                                                    onClick={() => removeLegalSectionPair(row.sectionNo)}
-                                                                    disabled={legalSectionRows.length <= 1}
-                                                                    title={legalSectionRows.length <= 1 ? 'Ən azı bir bölmə qalmalıdır' : 'Bölməni sil'}
-                                                                >
-                                                                    <Trash2 size={14} />
-                                                                </button>
+                                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                                                    <div>
+                                                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
+                                                                            Başlıq
+                                                                        </label>
+                                                                        <input
+                                                                            type="text"
+                                                                            value={row.titleSection?.value || ''}
+                                                                            onChange={(e) => updateLegalSectionFieldValue(row.sectionNo, 'TITLE', e.target.value)}
+                                                                            placeholder={`${row.sectionNo}. Bölmə başlığı`}
+                                                                            style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', fontWeight: 700 }}
+                                                                        />
+                                                                    </div>
+                                                                    <div>
+                                                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
+                                                                            İkon (opsional)
+                                                                        </label>
+                                                                        <details className="legal-icon-dropdown">
+                                                                            <summary className="legal-icon-dropdown-summary">
+                                                                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                                                                                    <span className="legal-icon-preview-box">
+                                                                                        {SelectedLegalIcon ? <SelectedLegalIcon size={14} /> : <X size={12} />}
+                                                                                    </span>
+                                                                                    <span>{selectedIconKey || 'İkon yoxdur'}</span>
+                                                                                </span>
+                                                                                <ChevronDown size={14} />
+                                                                            </summary>
+                                                                            <div className="legal-icon-dropdown-menu">
+                                                                                {LEGAL_SECTION_ICON_PRESETS.map((token) => {
+                                                                                    const IconComponent = token ? LEGAL_SECTION_ICON_COMPONENTS[token] : null;
+                                                                                    const isActive = token.toLowerCase() === selectedIconKey.toLowerCase();
+                                                                                    return (
+                                                                                        <button
+                                                                                            key={`legal-icon-option-${row.sectionNo}-${token || 'none'}`}
+                                                                                            type="button"
+                                                                                            className={`legal-icon-option ${isActive ? 'active' : ''}`}
+                                                                                            onClick={(e) => {
+                                                                                                const details = (e.currentTarget.closest('details') as HTMLDetailsElement | null);
+                                                                                                updateLegalSectionFieldValue(row.sectionNo, 'ICON', token);
+                                                                                                if (details) details.open = false;
+                                                                                            }}
+                                                                                        >
+                                                                                            <span className="legal-icon-preview-box">
+                                                                                                {IconComponent ? <IconComponent size={14} /> : <X size={12} />}
+                                                                                            </span>
+                                                                                            <span>{token || 'İkon yoxdur'}</span>
+                                                                                        </button>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        </details>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
+                                                                            Mətn
+                                                                        </label>
+                                                                        <textarea
+                                                                            rows={5}
+                                                                            value={row.bodySection?.value || ''}
+                                                                            onChange={(e) => updateLegalSectionFieldValue(row.sectionNo, 'BODY', e.target.value)}
+                                                                            placeholder="Bölmə mətni"
+                                                                            style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', lineHeight: 1.45, resize: 'vertical' }}
+                                                                        />
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                                                <div>
-                                                                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
-                                                                        Başlıq
-                                                                    </label>
-                                                                    <input
-                                                                        type="text"
-                                                                        value={row.titleSection?.value || ''}
-                                                                        onChange={(e) => updateLegalSectionFieldValue(row.sectionNo, 'TITLE', e.target.value)}
-                                                                        placeholder={`${row.sectionNo}. Bölmə başlığı`}
-                                                                        style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', fontWeight: 700 }}
-                                                                    />
-                                                                </div>
-                                                                <div>
-                                                                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 800, color: '#64748b', marginBottom: '6px' }}>
-                                                                        Mətn
-                                                                    </label>
-                                                                    <textarea
-                                                                        rows={5}
-                                                                        value={row.bodySection?.value || ''}
-                                                                        onChange={(e) => updateLegalSectionFieldValue(row.sectionNo, 'BODY', e.target.value)}
-                                                                        placeholder="Bölmə mətni"
-                                                                        style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', lineHeight: 1.45, resize: 'vertical' }}
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))
+                                                        );
+                                                    })
                                                 ) : (
                                                     <div style={{ padding: '1rem', border: '1px dashed #cbd5e1', borderRadius: '8px', color: '#64748b', fontSize: '13px' }}>
                                                         Axtarışa uyğun bölmə tapılmadı.
