@@ -505,6 +505,29 @@
     border-color: var(--primary);
 }
 
+.add-section-btn.add-option-btn {
+    width: auto;
+    min-width: 136px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 10px;
+    justify-content: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: #eff6ff;
+    color: var(--primary);
+    border-color: #bfdbfe;
+}
+
+.add-section-btn.add-option-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
 .modal-overlay {
     position: fixed;
     inset: 0;

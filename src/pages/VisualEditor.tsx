@@ -4694,26 +4694,11 @@ const VisualEditor: React.FC = () => {
                                             <label style={{ marginBottom: 0 }}>KLUB SEÇİMLƏRİ</label>
                                             <button
                                                 type="button"
-                                                className="add-section-btn"
+                                                className="add-section-btn add-option-btn"
                                                 onClick={addEventManagementClubOption}
-                                                style={{
-                                                    display: 'inline-flex',
-                                                    alignItems: 'center',
-                                                    gap: '8px',
-                                                    padding: '8px 12px',
-                                                    borderRadius: '10px',
-                                                    border: '1px solid rgba(255, 77, 0, 0.45)',
-                                                    background: 'linear-gradient(135deg, #ff6a00 0%, #ff4d00 100%)',
-                                                    color: '#111827',
-                                                    fontWeight: 900,
-                                                    fontSize: '12px',
-                                                    textTransform: 'uppercase',
-                                                    letterSpacing: '0.08em',
-                                                    boxShadow: '0 8px 20px rgba(255, 77, 0, 0.22)'
-                                                }}
                                             >
                                                 <Plus size={14} />
-                                                Yeni seçim
+                                                Yeni Option
                                             </button>
                                         </div>
                                     </div>
