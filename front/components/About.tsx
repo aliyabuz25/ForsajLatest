@@ -185,13 +185,13 @@ const About: React.FC = () => {
     <div id="haqqımızda" className="bg-[#0A0A0A] text-white">
     <section className="py-16 px-6 lg:px-20 relative overflow-hidden bg-[#0A0A0A] text-white">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-20">
-        <div className="flex items-start gap-4">
-          <div className="w-2 h-16 bg-[#FF4D00] shadow-[0_0_15px_rgba(255,77,0,0.4)]"></div>
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div className="w-1.5 sm:w-2 h-12 sm:h-16 bg-[#FF4D00] shadow-[0_0_15px_rgba(255,77,0,0.4)]"></div>
           <div>
-            <h2 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-none text-white">
+            <h2 className="text-4xl sm:text-5xl md:text-8xl font-black italic tracking-tighter uppercase leading-none text-white">
               {toPlainText(getText('PAGE_TITLE', getText('txt-haqqimizda-904', 'HAQQIMIZDA')))}
             </h2>
-            <p className="text-[#FF4D00] font-black italic text-[11px] md:text-sm mt-2 uppercase tracking-[0.4em]">
+            <p className="text-[#FF4D00] font-black italic text-[10px] sm:text-[11px] md:text-sm mt-2 uppercase tracking-[0.2em] sm:tracking-[0.4em] leading-snug break-words">
               {toPlainText(getText('PAGE_SUBTITLE', getText('txt-bi-zi-m-hekay-mi-z-m-888', 'BİZİM HEKAYƏMİZ // MİSSİYAMIZ VƏ GƏLƏCƏYİMİZ')))}
             </p>
           </div>

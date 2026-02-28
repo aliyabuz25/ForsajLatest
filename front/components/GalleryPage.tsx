@@ -379,13 +379,13 @@ const GalleryPage: React.FC = () => {
 
       {/* Standardized Page Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-20">
-        <div className="flex items-start gap-4">
-          <div className="w-2 h-16 bg-[#FF4D00] shadow-[0_0_15px_rgba(255,77,0,0.4)]"></div>
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div className="w-1.5 sm:w-2 h-12 sm:h-16 bg-[#FF4D00] shadow-[0_0_15px_rgba(255,77,0,0.4)]"></div>
           <div>
-            <h2 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-none text-white">
+            <h2 className="text-4xl sm:text-5xl md:text-8xl font-black italic tracking-tighter uppercase leading-none text-white">
               {getText('PAGE_TITLE', 'QALEREYA')}
             </h2>
-            <p className="text-[#FF4D00] font-black italic text-[11px] md:text-sm mt-2 uppercase tracking-[0.4em]">
+            <p className="text-[#FF4D00] font-black italic text-[10px] sm:text-[11px] md:text-sm mt-2 uppercase tracking-[0.2em] sm:tracking-[0.4em] leading-snug break-words">
               {getText('PAGE_SUBTITLE', 'XRONOLOJİ MOTORSPORT ARXİVİ // FORSAJ CLUB')}
             </p>
           </div>
