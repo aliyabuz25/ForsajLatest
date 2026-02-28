@@ -18,12 +18,21 @@ const buildPreviewText = (content: string, sentenceLimit = 2) => {
   return normalized;
 };
 
+const normalizeLookupToken = (value: string) =>
+  (value || '')
+    .toLocaleLowerCase('az')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '');
+
+const isKeyLike = (value: string) => /^[A-Z0-9_]+$/.test((value || '').trim());
+
 const About: React.FC = () => {
   const { getPage, getText, getImage } = useSiteContent('about');
   const { getText: getGeneralText } = useSiteContent('general');
   const page = getPage('about');
   const valuesPage = getPage('values');
-  const [isFullAboutVisible, setIsFullAboutVisible] = React.useState(false);
+  const [isAboutTextExpanded, setIsAboutTextExpanded] = React.useState(false);
   const toPlainText = (value: string) => {
     if (!value) return '';
     let current = value;
@@ -44,6 +53,41 @@ const About: React.FC = () => {
       .trim();
   };
   const text = (id: string, fallback: string) => toPlainText(getText(id, fallback));
+  const aboutSections = page?.sections || [];
+
+  const findSectionByTokens = (tokens: string[]) => {
+    const normalizedTokens = tokens.map(normalizeLookupToken).filter(Boolean);
+    if (normalizedTokens.length === 0) return undefined;
+
+    const byIdLabel = aboutSections.find((section) => {
+      const haystack = normalizeLookupToken(`${section.id || ''} ${section.label || ''}`);
+      return normalizedTokens.some((token) => haystack.includes(token));
+    });
+
+    if (byIdLabel) return byIdLabel;
+
+    return aboutSections.find((section) => {
+      const valueToken = normalizeLookupToken(section.value || '');
+      return normalizedTokens.some((token) => valueToken.includes(token));
+    });
+  };
+
+  const resolveAboutText = (
+    keyCandidates: string[],
+    fallback: string,
+    tokenHints: string[] = []
+  ) => {
+    for (const key of keyCandidates) {
+      const directValue = toPlainText(getText(key, ''));
+      if (directValue && !isKeyLike(directValue)) return directValue;
+    }
+
+    const hinted = findSectionByTokens(tokenHints);
+    const hintedValue = toPlainText(hinted?.value || '');
+    if (hintedValue && !isKeyLike(hintedValue)) return hintedValue;
+
+    return toPlainText(fallback);
+  };
 
   const dynamicStats: any[] = [];
   const dynamicValues: any[] = [];
@@ -112,8 +156,28 @@ const About: React.FC = () => {
     { icon: <Zap className="text-[#FF4D00]" />, title: text('txt-val-excellence-title-123', 'MÜKƏMMƏLLİK'), desc: text('txt-val-excellence-desc-123', 'HƏR YARIŞDA, HƏR DÖNGƏDƏ DAHA YAXŞI OLMAĞA ÇALIŞIRIQ. TƏLİMLƏRİMİZ PEŞƏKAR İNSTRUKTORLAR TƏRƏFİNDƏN İDARƏ OLUNUR.') },
   ];
 
-  const aboutDescription = text('txt-klubumuz-sad-c-bir-552', 'Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq.');
+  const aboutKicker = resolveAboutText(
+    ['ABOUT_KICKER', 'txt-est-2018-motorsp-949'],
+    'EST. 2018 // MOTORSPORT MƏRKƏZİ',
+    ['about ust basliq', 'est 2018', 'motorsport merkezi']
+  );
+  const aboutHeadline = resolveAboutText(
+    ['ABOUT_HEADLINE', 'txt-forsaj-club-az-rba-66'],
+    '"FORSAJ CLUB" AZƏRBAYCANIN OFFROAD MƏDƏNİYYƏTİNİ PEŞƏKAR SƏVİYYƏYƏ ÇATDIRMAQ ÜÇÜN YARADILMIŞDIR.',
+    ['about ana basliq', 'forsaj club', 'offroad medeniyyetini']
+  );
+  const aboutDescription = resolveAboutText(
+    ['ABOUT_DESCRIPTION', 'txt-klubumuz-sad-c-bir-552'],
+    'Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq.',
+    ['about tesviri', 'klubumuz sadece bir', 'ralli xeritesi', 'platformadir']
+  );
+  const aboutReadMoreLabel = resolveAboutText(
+    ['ABOUT_READ_MORE_BTN'],
+    'ƏTRAFLI OXU',
+    ['etrafli oxu', 'hamsina bax', 'hamisina bax']
+  );
   const aboutDescriptionPreview = buildPreviewText(aboutDescription);
+  const isAboutExpandable = aboutDescriptionPreview !== aboutDescription;
 
   return (
     <div id="haqqımızda" className="bg-[#0A0A0A] text-white">
@@ -135,25 +199,25 @@ const About: React.FC = () => {
       <div className="flex flex-col lg:flex-row gap-16">
         <div className="lg:w-7/12 relative z-10">
           <div className="mt-4">
-            <h4 className="text-[#FF4D00] font-black italic text-2xl mb-4 tracking-tight">
-              {toPlainText(getText('txt-est-2018-motorsp-949', 'EST. 2018 // MOTORSPORT MƏRKƏZİ'))}
+            <h4 className="text-[#FF4D00] font-black italic text-xl md:text-2xl mb-4 tracking-tight break-words [overflow-wrap:anywhere] leading-snug">
+              {aboutKicker}
             </h4>
-            <h2 className="text-3xl md:text-5xl font-black italic leading-tight mb-8 uppercase max-w-2xl text-white tracking-tighter">
-              {toPlainText(getText('txt-forsaj-club-az-rba-66', '"FORSAJ CLUB" AZƏRBAYCANIN OFFROAD MƏDƏNİYYƏTİNİ PEŞƏKAR SƏVİYYƏYƏ ÇATDIRMAQ ÜÇÜN YARADILMIŞDIR.'))}
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black italic leading-tight mb-8 max-w-3xl text-white tracking-tighter break-words [overflow-wrap:anywhere]">
+              {aboutHeadline}
             </h2>
-            <p className="text-gray-400 font-bold italic text-sm md:text-base leading-relaxed mb-5 max-w-xl uppercase tracking-wide">
-              {isFullAboutVisible ? aboutDescription : aboutDescriptionPreview}
+            <p className="text-gray-400 font-bold italic text-sm md:text-base leading-relaxed mb-5 max-w-3xl tracking-wide break-words [overflow-wrap:anywhere]">
+              {isAboutTextExpanded ? aboutDescription : aboutDescriptionPreview}
             </p>
-            {!isFullAboutVisible ? (
+            {!isAboutTextExpanded && isAboutExpandable ? (
               <button
                 type="button"
-                onClick={() => setIsFullAboutVisible(true)}
-                className="mt-7 inline-flex items-center border border-[#FF4D00] bg-[#FF4D00] px-5 py-3 text-[11px] font-black italic uppercase tracking-[0.24em] text-black hover:bg-transparent hover:text-[#FF4D00] transition-colors"
+                onClick={() => setIsAboutTextExpanded(true)}
+                className="mt-7 inline-flex items-center justify-center border border-[#FF4D00] bg-[#FF4D00] px-5 py-3 text-[11px] font-black italic tracking-[0.18em] text-black hover:bg-transparent hover:text-[#FF4D00] transition-colors whitespace-normal text-center break-words [overflow-wrap:anywhere]"
               >
-                {text('ABOUT_READ_MORE_BTN', 'ƏTRAFLI OXU')}
+                {aboutReadMoreLabel}
               </button>
             ) : (
-              <div className="flex flex-wrap gap-4 mt-7">
+              <div className="flex flex-wrap gap-4 mt-7" style={{ display: 'none' }}>
                 {stats.map((stat, i) => (
                   <div key={i} className="bg-[#111] border border-white/5 p-8 rounded-sm min-w-[140px] shadow-2xl">
                     <p className="text-[#FF4D00] font-black italic text-[10px] mb-2 tracking-widest uppercase">{stat.label}</p>
@@ -177,7 +241,6 @@ const About: React.FC = () => {
       </div>
     </section>
 
-    {isFullAboutVisible && (
       <section className="bg-[#050505] py-24 px-6 lg:px-20 text-white relative border-y border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div className="relative">
@@ -217,9 +280,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-    )}
 
-    {isFullAboutVisible && (
       <section className="py-24 px-6 lg:px-20 bg-[#0A0A0A]">
         <div className="text-center mb-20">
           <h4 className="text-[#FF4D00] font-black italic text-[10px] tracking-[0.4em] mb-4 uppercase">
@@ -244,7 +305,7 @@ const About: React.FC = () => {
           ))}
         </div>
       </section>
-    )}
+
     </div>
   );
 };

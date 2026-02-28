@@ -785,9 +785,66 @@ const VisualEditor: React.FC = () => {
                             order: images.length
                         });
                     };
+                    const normalizeAboutLookup = (value: string) =>
+                        (value || '')
+                            .toLocaleLowerCase('az')
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .replace(/[^a-z0-9]+/g, '');
+                    const isMeaningfulAboutValue = (value: string) => {
+                        const trimmed = String(value || '').trim();
+                        if (!trimmed) return false;
+                        if (/^[A-Z0-9_]+$/.test(trimmed)) return false;
+                        return true;
+                    };
+                    const resolveAboutSeedValue = (idHints: string[], tokenHints: string[], fallback: string) => {
+                        const byId = sections.find((s) => idHints.includes(s.id));
+                        if (byId && isMeaningfulAboutValue(byId.value || '')) return byId.value || fallback;
+
+                        const normalizedHints = tokenHints.map(normalizeAboutLookup).filter(Boolean);
+                        if (normalizedHints.length > 0) {
+                            const byIdOrLabel = sections.find((s) => {
+                                const haystack = normalizeAboutLookup(`${s.id || ''} ${s.label || ''}`);
+                                return normalizedHints.some((hint) => haystack.includes(hint));
+                            });
+                            if (byIdOrLabel && isMeaningfulAboutValue(byIdOrLabel.value || '')) return byIdOrLabel.value || fallback;
+
+                            const byValue = sections.find((s) => {
+                                const haystack = normalizeAboutLookup(s.value || '');
+                                return normalizedHints.some((hint) => haystack.includes(hint));
+                            });
+                            if (byValue && isMeaningfulAboutValue(byValue.value || '')) return byValue.value || fallback;
+                        }
+
+                        return fallback;
+                    };
+                    const aboutKickerSeed = resolveAboutSeedValue(
+                        ['ABOUT_KICKER', 'txt-est-2018-motorsp-949'],
+                        ['about ust basliq', 'est 2018', 'motorsport merkezi'],
+                        'EST. 2018 // MOTORSPORT MƏRKƏZİ'
+                    );
+                    const aboutHeadlineSeed = resolveAboutSeedValue(
+                        ['ABOUT_HEADLINE', 'txt-forsaj-club-az-rba-66'],
+                        ['about ana basliq', 'forsaj club', 'offroad medeniyyetini'],
+                        '"FORSAJ CLUB" AZƏRBAYCANIN OFFROAD MƏDƏNİYYƏTİNİ PEŞƏKAR SƏVİYYƏYƏ ÇATDIRMAQ ÜÇÜN YARADILMIŞDIR.'
+                    );
+                    const aboutDescriptionSeed = resolveAboutSeedValue(
+                        ['ABOUT_DESCRIPTION', 'txt-klubumuz-sad-c-bir-552'],
+                        ['about tesviri', 'klubumuz sadece bir', 'ralli xeritesi', 'platformadir'],
+                        'Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq.'
+                    );
+                    const aboutReadMoreSeed = resolveAboutSeedValue(
+                        ['ABOUT_READ_MORE_BTN'],
+                        ['etrafli oxu', 'hamsina bax', 'hamisina bax'],
+                        'ƏTRAFLI OXU'
+                    );
 
                     ensureSection('PAGE_TITLE', 'Səhifə Başlığı', 'HAQQIMIZDA');
                     ensureSection('PAGE_SUBTITLE', 'Səhifə Alt Başlığı', 'BİZİM HEKAYƏMİZ // MİSSİYAMIZ VƏ GƏLƏCƏYİMİZ');
+                    ensureSection('ABOUT_KICKER', 'KEY: ABOUT_KICKER', aboutKickerSeed);
+                    ensureSection('ABOUT_HEADLINE', 'KEY: ABOUT_HEADLINE', aboutHeadlineSeed);
+                    ensureSection('ABOUT_DESCRIPTION', 'KEY: ABOUT_DESCRIPTION', aboutDescriptionSeed);
+                    ensureSection('ABOUT_READ_MORE_BTN', 'KEY: ABOUT_READ_MORE_BTN', aboutReadMoreSeed);
 
                     // Ensure key "about" title fields always exist in panel
                     ensureSection(
@@ -859,6 +916,10 @@ const VisualEditor: React.FC = () => {
                         prioritizeSectionOrder(aboutPage, [
                             'PAGE_TITLE',
                             'PAGE_SUBTITLE',
+                            'ABOUT_KICKER',
+                            'ABOUT_HEADLINE',
+                            'ABOUT_DESCRIPTION',
+                            'ABOUT_READ_MORE_BTN',
                             'txt-est-2018-motorsp-949'
                         ]);
                         ensureImage(
@@ -896,6 +957,10 @@ const VisualEditor: React.FC = () => {
                     prioritizeSectionOrder(aboutPage, [
                         'PAGE_TITLE',
                         'PAGE_SUBTITLE',
+                        'ABOUT_KICKER',
+                        'ABOUT_HEADLINE',
+                        'ABOUT_DESCRIPTION',
+                        'ABOUT_READ_MORE_BTN',
                         'txt-est-2018-motorsp-949'
                     ]);
                     ensureImage(
@@ -4368,7 +4433,7 @@ const VisualEditor: React.FC = () => {
                                     <button className="btn-primary" onClick={saveChanges}>Yadda Saxla</button>
                                 </div>
 
-                                <div className="edit-grid grid-2" style={{ marginTop: '1.25rem' }}>
+                                <div className="edit-grid grid-2" style={{ marginTop: '1.25rem', display: 'none' }}>
                                     <div className="form-group full-span" style={{ border: '1px solid #e2e8f0', borderRadius: '12px', padding: '14px', background: '#f8fafc' }}>
                                         <label style={{ color: '#0f172a' }}>SECTION 1: TƏDBİRƏ QOŞUL DÜYMƏSİ</label>
                                         <input

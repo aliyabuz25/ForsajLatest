@@ -16,6 +16,8 @@ const ContactPage: React.FC = () => {
   const formMethod = ['POST', 'PUT', 'PATCH'].includes(formMethodRaw) ? formMethodRaw : 'POST';
   const formContentType = getText('FORM_CONTENT_TYPE', 'application/json') || 'application/json';
   const [selectedType, setSelectedType] = useState(getText('TOPIC_GENERAL', 'ÜMUMİ SORĞU'));
+  const phoneNumber = getText('PHONE_NUMBER', getGeneralText('CONTACT_PHONE') || '+994 50 123 45 67');
+  const phoneNumberSingleLine = phoneNumber.replace(/\s+/g, '\u00A0');
 
   const { getPage: getSocialsPage } = useSiteContent('socials');
   const socialsPage = getSocialsPage('socials');
@@ -83,9 +85,11 @@ const ContactPage: React.FC = () => {
                 <div className="bg-white/5 p-4 text-[#FF4D00] group-hover:bg-[#FF4D00] group-hover:text-black transition-all shadow-xl">
                   <Phone size={24} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-gray-600 font-black italic text-[8px] uppercase tracking-[0.4em] mb-1">{getText('PHONE_LABEL', 'ƏLAQƏ NÖMRƏSİ')}</p>
-                  <p className="text-2xl font-black italic uppercase tracking-tighter text-white">{getText('PHONE_NUMBER', getGeneralText('CONTACT_PHONE') || '+994 50 123 45 67')}</p>
+                  <p className="text-lg sm:text-2xl font-black italic uppercase tracking-tight sm:tracking-tighter text-white whitespace-nowrap leading-[1.1]">
+                    {phoneNumberSingleLine}
+                  </p>
                 </div>
               </div>
 

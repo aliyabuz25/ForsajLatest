@@ -174,9 +174,9 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
   }, []);
 
   const displayDate = nextEvent?.date || getText('RACE_DATE', '2024-07-20');
+  const displayTitle = nextEvent?.title || getText('RACE_LOCATION', 'SUMQAYIT SAHİL TRASI // SECTOR 04');
   const displayLocation = nextEvent?.location || getText('RACE_CITY', 'SUMQAYIT');
   const displayCategory = nextEvent?.category || getText('RACE_TYPE', 'CHALLENGE');
-  const displayFullLocation = nextEvent?.title || getText('RACE_LOCATION', 'SUMQAYIT SAHİL TRASI // SECTOR 04');
   const raceFallbackImage = getImage('race-bg', 'https://images.unsplash.com/photo-1541447271487-09612b3f49f7?q=80&w=1974&auto=format&fit=crop');
   const configuredNextRaceImage = (nextRacePage?.images || []).find((img) => (img.path || '').trim())?.path || '';
   const displayImage = configuredNextRaceImage || nextEvent?.img || raceFallbackImage.path;
@@ -225,11 +225,14 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
             <span className="text-lg tracking-widest uppercase">{displayDate}</span>
           </div>
           <h2 className="text-5xl md:text-7xl font-black italic leading-[0.9] mb-6 tracking-tighter uppercase text-white">
-            {displayLocation} <br /><span className="text-gray-500">{displayCategory}</span>
+            {displayTitle}
           </h2>
-          <div className="flex items-center gap-2 text-gray-500 font-black italic mb-10 text-xs uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-gray-500 font-black italic mb-3 text-xs uppercase tracking-widest">
             <MapPin className="w-4 h-4 text-[#FF4D00]" />
-            <span>{displayFullLocation}</span>
+            <span>{displayLocation}</span>
+          </div>
+          <div className="text-gray-600 font-black italic mb-10 text-[11px] uppercase tracking-[0.25em]">
+            {displayCategory}
           </div>
 
           <button

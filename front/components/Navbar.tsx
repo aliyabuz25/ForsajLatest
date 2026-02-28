@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Globe, ChevronDown } from 'lucide-react';
+import { Globe, ChevronDown, Menu, X } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 
 interface NavbarProps {
@@ -11,6 +11,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const { getPage, getText, language, setSiteLanguage } = useSiteContent('navbar');
   const { getImage: getImageGeneral } = useSiteContent('general');
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const languagePickerRef = useRef<HTMLDivElement | null>(null);
   const languageTimersRef = useRef<number[]>([]);
   const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
@@ -156,6 +157,36 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
       document.removeEventListener('keydown', handleEscape);
     };
   }, [isLangOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const navbarPage = getPage('navbar');
   const logoImg = getImageGeneral('SITE_LOGO_LIGHT').path;
@@ -313,94 +344,181 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const handleLanguageSelect = (nextLanguage: string) => {
     if (nextLanguage === language) {
       setIsLangOpen(false);
+      setIsMobileMenuOpen(false);
       return;
     }
 
     setSiteLanguage(nextLanguage as any);
     scheduleLanguageReapply(languageMap[nextLanguage as 'AZ' | 'RU' | 'ENG'] || 'az|az');
     setIsLangOpen(false);
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleNavTargetClick = (target: NavTarget) => {
+    if (target.type === 'external') {
+      window.open(target.url, '_blank');
+    } else {
+      onViewChange((viewIds.has(target.view) ? target.view : 'home') as any);
+    }
+    setIsMobileMenuOpen(false);
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/5 px-6 lg:px-20 py-4 flex items-center justify-between shadow-2xl">
-      <div
-        className="flex items-center gap-3 cursor-pointer group"
-        onClick={() => onViewChange('home')}
-      >
-        {logoImg ? (
-          <img src={logoImg} alt="Forsaj Logo" className="h-12 w-auto object-contain transition-transform group-hover:scale-105" />
-        ) : (
-          <div className="flex items-center gap-3">
-            <div className="bg-[#FF4D00] w-10 h-10 rounded-sm flex items-center justify-center relative shadow-[0_0_20px_rgba(255,77,0,0.4)] group-hover:scale-110 transition-transform">
-              <svg viewBox="0 0 24 24" className="w-6 h-6 text-black fill-current transform -rotate-12">
-                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-black italic tracking-tighter flex items-center">
-              <span className="text-white">FORSAJ</span>
-              <span className="text-[#FF4D00] ml-1">CLUB</span>
-            </h1>
-          </div>
-        )}
-      </div>
-
-      <div className="hidden lg:flex items-center gap-2 xl:gap-4">
-        {resolvedNavItems.map((item, idx) => (
-          <button
-            key={`${item.name}-${idx}`}
-            onClick={() => {
-              if (item.target.type === 'external') {
-                window.open(item.target.url, '_blank');
-              } else {
-                onViewChange((viewIds.has(item.target.view) ? item.target.view : 'home') as any);
-              }
-            }}
-            className={`px-4 py-2 text-[10px] xl:text-[11px] font-black italic transition-all uppercase tracking-tight relative transform -skew-x-12 ${currentView === item.activeView
-              ? 'bg-[#FF4D00] text-black shadow-[0_0_25px_rgba(255,77,0,0.25)] border-2 border-[#FF4D00]'
-              : 'text-gray-400 hover:text-white hover:bg-white/5 border-2 border-transparent'
-              }`}
-          >
-            <span className="transform skew-x-12 block whitespace-nowrap">{item.name}</span>
-          </button>
-        ))}
-      </div>
-
-      <div
-        ref={languagePickerRef}
-        className={`language-picker relative z-[70] ${isLangOpen ? 'language-picker--open' : ''}`}
-      >
-        <button
-          type="button"
-          onClick={() => setIsLangOpen((prev) => !prev)}
-          className="language-picker__trigger inline-flex items-center justify-between gap-2"
-          aria-label={languagePickerAriaLabel[language]}
-          aria-haspopup="listbox"
-          aria-expanded={isLangOpen}
+    <>
+      <nav className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/5 px-6 lg:px-20 py-4 flex items-center justify-between shadow-2xl">
+        <div
+          className="flex items-center gap-3 cursor-pointer group"
+          onClick={() => {
+            onViewChange('home');
+            setIsMobileMenuOpen(false);
+          }}
         >
-          <Globe className="language-picker__globe" />
-          <span className="language-picker__current text-xs">{languageVisibleLabel[language]}</span>
-          <ChevronDown className={`language-picker__chevron ${isLangOpen ? 'language-picker__chevron--open' : ''}`} />
-        </button>
+          {logoImg ? (
+            <img src={logoImg} alt="Forsaj Logo" className="h-12 w-auto object-contain transition-transform group-hover:scale-105" />
+          ) : (
+            <div className="flex items-center gap-3">
+              <div className="bg-[#FF4D00] w-10 h-10 rounded-sm flex items-center justify-center relative shadow-[0_0_20px_rgba(255,77,0,0.4)] group-hover:scale-110 transition-transform">
+                <svg viewBox="0 0 24 24" className="w-6 h-6 text-black fill-current transform -rotate-12">
+                  <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
+                </svg>
+              </div>
+              <h1 className="text-2xl font-black italic tracking-tighter flex items-center">
+                <span className="text-white">FORSAJ</span>
+                <span className="text-[#FF4D00] ml-1">CLUB</span>
+              </h1>
+            </div>
+          )}
+        </div>
 
-        {isLangOpen && (
-          <div className="language-picker__menu absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[language]}>
-            {languages.map((lang) => (
-              <button
-                key={lang}
-                type="button"
-                role="option"
-                aria-selected={language === lang}
-                onClick={() => handleLanguageSelect(lang)}
-                className={`language-picker__item block w-full text-left ${language === lang ? 'language-picker__item--active' : ''}`}
-              >
-                {languageOptionLabel[lang as 'AZ' | 'RU' | 'ENG']}
-              </button>
-            ))}
+        <div className="hidden lg:flex items-center gap-2 xl:gap-4">
+          {resolvedNavItems.map((item, idx) => (
+            <button
+              key={`${item.name}-${idx}`}
+              onClick={() => handleNavTargetClick(item.target)}
+              className={`px-4 py-2 text-[10px] xl:text-[11px] font-black italic transition-all uppercase tracking-tight relative transform -skew-x-12 ${currentView === item.activeView
+                ? 'bg-[#FF4D00] text-black shadow-[0_0_25px_rgba(255,77,0,0.25)] border-2 border-[#FF4D00]'
+                : 'text-gray-400 hover:text-white hover:bg-white/5 border-2 border-transparent'
+                }`}
+            >
+              <span className="transform skew-x-12 block whitespace-nowrap">{item.name}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div
+            ref={languagePickerRef}
+            className={`language-picker relative z-[70] hidden lg:block ${isLangOpen ? 'language-picker--open' : ''}`}
+          >
+            <button
+              type="button"
+              onClick={() => setIsLangOpen((prev) => !prev)}
+              className="language-picker__trigger inline-flex items-center justify-between gap-2"
+              aria-label={languagePickerAriaLabel[language]}
+              aria-haspopup="listbox"
+              aria-expanded={isLangOpen}
+            >
+              <Globe className="language-picker__globe" />
+              <span className="language-picker__current text-xs">{languageVisibleLabel[language]}</span>
+              <ChevronDown className={`language-picker__chevron ${isLangOpen ? 'language-picker__chevron--open' : ''}`} />
+            </button>
+
+            {isLangOpen && (
+              <div className="language-picker__menu absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[language]}>
+                {languages.map((lang) => (
+                  <button
+                    key={lang}
+                    type="button"
+                    role="option"
+                    aria-selected={language === lang}
+                    onClick={() => handleLanguageSelect(lang)}
+                    className={`language-picker__item block w-full text-left ${language === lang ? 'language-picker__item--active' : ''}`}
+                  >
+                    {languageOptionLabel[lang as 'AZ' | 'RU' | 'ENG']}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className={GTRANSLATE_WRAPPER_CLASS} style={{ display: 'none' }} />
-    </nav>
+
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="inline-flex lg:hidden items-center justify-center w-11 h-11 rounded-sm border border-white/15 bg-white/5 text-white hover:bg-[#FF4D00] hover:text-black transition-colors"
+            aria-label={getText('MOBILE_MENU_OPEN', 'Menyunu aç')}
+          >
+            <Menu size={22} />
+          </button>
+        </div>
+        <div className={GTRANSLATE_WRAPPER_CLASS} style={{ display: 'none' }} />
+      </nav>
+
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[140] bg-[#050505]/98 backdrop-blur-md lg:hidden">
+          <div className="h-full flex flex-col px-6 py-6">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <button
+                type="button"
+                onClick={() => {
+                  onViewChange('home');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-white font-black italic tracking-tighter text-xl"
+              >
+                FORSAJ <span className="text-[#FF4D00]">CLUB</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center w-11 h-11 rounded-sm border border-white/15 bg-white/5 text-white hover:bg-[#FF4D00] hover:text-black transition-colors"
+                aria-label={getText('MOBILE_MENU_CLOSE', 'Menyunu bağla')}
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto py-6 space-y-3">
+              {resolvedNavItems.map((item, idx) => (
+                <button
+                  key={`mobile-${item.name}-${idx}`}
+                  type="button"
+                  onClick={() => handleNavTargetClick(item.target)}
+                  className={`w-full text-left px-5 py-4 font-black italic text-sm uppercase tracking-[0.16em] border rounded-sm transition-all ${
+                    currentView === item.activeView
+                      ? 'bg-[#FF4D00] text-black border-[#FF4D00]'
+                      : 'bg-white/5 text-white border-white/10 hover:bg-white/10'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+
+            <div className="pt-4 border-t border-white/10">
+              <p className="text-[10px] font-black italic uppercase tracking-[0.24em] text-gray-500 mb-3">
+                {getText('MOBILE_LANGUAGE_TITLE', 'DİL')}
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {languages.map((lang) => (
+                  <button
+                    key={`mobile-lang-${lang}`}
+                    type="button"
+                    onClick={() => handleLanguageSelect(lang)}
+                    className={`px-3 py-3 text-xs font-black italic uppercase rounded-sm border transition-all ${
+                      language === lang
+                        ? 'bg-[#FF4D00] text-black border-[#FF4D00]'
+                        : 'bg-white/5 text-white border-white/10 hover:bg-white/10'
+                    }`}
+                  >
+                    {languageVisibleLabel[lang as 'AZ' | 'RU' | 'ENG']}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
