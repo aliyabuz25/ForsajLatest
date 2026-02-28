@@ -357,8 +357,8 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                   <input name="name" required type="text" className="w-full bg-black border border-white/5 text-white p-5 font-black italic text-sm focus:ring-1 focus:ring-[#FF4D00] outline-none uppercase placeholder:text-gray-800" placeholder={getText('PLACEHOLDER_NAME', 'Tam ad daxil edin')} />
                 </div>
                 <div className="space-y-4">
-                  <label className="text-gray-600 font-black italic text-[10px] uppercase tracking-widest">{getText('FIELD_WHATSAPP', 'WHATSAPP NÖMRƏSİ')}</label>
-                  <input name="whatsapp" required type="tel" className="w-full bg-black border border-white/5 text-white p-5 font-black italic text-sm focus:ring-1 focus:ring-[#FF4D00] outline-none placeholder:text-gray-800" placeholder={getText('PLACEHOLDER_WHATSAPP', '+994 50 123 45 67')} />
+                  <label className="text-gray-600 font-black italic text-[10px] uppercase tracking-widest">{getText('FIELD_WHATSAPP', getText('FIELD_PHONE', 'WHATSAPP NÖMRƏSİ'))}</label>
+                  <input name="whatsapp" required type="tel" className="w-full bg-black border border-white/5 text-white p-5 font-black italic text-sm focus:ring-1 focus:ring-[#FF4D00] outline-none placeholder:text-gray-800" placeholder={getText('PLACEHOLDER_WHATSAPP', getText('PLACEHOLDER_PHONE', '+994 50 123 45 67'))} />
                 </div>
                 <div className="space-y-4">
                   <label className="text-gray-600 font-black italic text-[10px] uppercase tracking-widest">{getText('FIELD_CAR_MODEL', 'AVTOMOBİLİN MARKA/MODELİ')}</label>
@@ -442,18 +442,22 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                 </div>
               </div>
 
-              {selectedEvent.status === 'planned' && (
+              {selectedEvent.status === 'planned' && selectedEvent.registrationEnabled === false && (
+                <button
+                  type="button"
+                  disabled
+                  className="bg-white/10 border border-white/20 text-white px-12 py-6 font-black italic text-lg uppercase tracking-widest transform -skew-x-12 cursor-not-allowed opacity-95"
+                >
+                  <span className="transform skew-x-12 block">{getText('BTN_JOIN_EVENT_UNAVAILABLE', 'MÖVCUD DEYİL')}</span>
+                </button>
+              )}
+              {selectedEvent.status === 'planned' && selectedEvent.registrationEnabled !== false && (
                 <button
                   onClick={openRegistrationModal}
                   className="bg-[#FF4D00] text-black px-12 py-6 font-black italic text-lg uppercase transform -skew-x-12 hover:bg-white transition-all flex items-center gap-3 shadow-[0_10px_40px_rgba(255,77,0,0.3)]"
                 >
                   <span className="transform skew-x-12 flex items-center gap-3">{getText('BTN_JOIN_EVENT', 'TƏDBİRƏ QOŞUL')} <ArrowRight size={24} /></span>
                 </button>
-              )}
-              {selectedEvent.status === 'planned' && selectedEvent.registrationEnabled === false && (
-                <div className="bg-white/10 border border-white/20 text-white px-8 py-4 font-black italic text-xs uppercase tracking-widest transform -skew-x-12">
-                  <span className="transform skew-x-12 block">{getText('BTN_JOIN_EVENT_DISABLED', 'QEYDİYYAT MÜVƏQQƏTİ BAĞLIDIR')}</span>
-                </div>
               )}
             </div>
           </div>

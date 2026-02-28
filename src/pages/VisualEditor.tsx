@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Save, Type, Image as ImageIcon, Layout, Globe, Plus, Trash2, X, Search, Calendar, FileText, Trophy, Video, Play, ChevronUp, ChevronDown, Shield, Users, Leaf, ShieldCheck, Truck, Zap } from 'lucide-react';
+import { Save, Type, Image as ImageIcon, Layout, Globe, Plus, Trash2, X, Search, Calendar, FileText, Trophy, Video, Play, ChevronUp, ChevronDown, Shield, Users, Leaf, ShieldCheck, Truck, Zap, List } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getAuthToken } from '../utils/session';
 import ReactQuill from 'react-quill-new';
@@ -697,7 +697,7 @@ const VisualEditor: React.FC = () => {
     const pageParam = queryParams.get('page');
 
     const [editorMode, setEditorMode] = useState<'extract' | 'events' | 'event-management' | 'news' | 'drivers' | 'videos' | 'photos'>('extract');
-    const [eventManagementTab, setEventManagementTab] = useState<'modal' | 'pilot'>('modal');
+    const [eventManagementTab, setEventManagementTab] = useState<'modal' | 'pilot' | 'clubs'>('modal');
 
     const [galleryPhotos, setGalleryPhotos] = useState<GalleryPhotoItem[]>([]);
     const autoSyncTriggeredRef = useRef(false);
@@ -1052,7 +1052,8 @@ const VisualEditor: React.FC = () => {
                         { id: 'PILOT_REG_TITLE', label: 'Pilot Qeydiyyatı Başlığı', value: 'PİLOT QEYDİYYATI' },
                         { id: 'FIELD_NAME', label: 'Ad Soyad Label', value: 'AD VƏ SOYAD' },
                         { id: 'PLACEHOLDER_NAME', label: 'Ad Soyad Placeholder', value: 'Tam ad daxil edin' },
-                        { id: 'FIELD_PHONE', label: 'Telefon Label', value: 'TELEFON' },
+                        { id: 'FIELD_WHATSAPP', label: 'WhatsApp Label', value: 'WHATSAPP NÖMRƏSİ' },
+                        { id: 'FIELD_PHONE', label: 'Telefon Label (Legacy)', value: 'WHATSAPP NÖMRƏSİ' },
                         { id: 'FIELD_CAR_MODEL', label: 'Avtomobil Label', value: 'AVTOMOBİLİN MARKA/MODELİ' },
                         { id: 'PLACEHOLDER_CAR', label: 'Avtomobil Placeholder', value: 'Məs: Toyota LC 105' },
                         { id: 'FIELD_TIRE_SIZE', label: 'Təkər Label', value: 'TƏKƏR ÖLÇÜSÜ' },
@@ -1064,7 +1065,8 @@ const VisualEditor: React.FC = () => {
                         { id: 'PILOT_FORM_TOAST_REQUIRED', label: 'Pilot Form Boş Sahə Xəbərdarlığı', value: 'Zəhmət olmasa bütün sahələri doldurun.' },
                         { id: 'PILOT_FORM_TOAST_SUCCESS', label: 'Pilot Form Uğurlu Göndəriş Mesajı', value: 'Qeydiyyat müraciətiniz uğurla göndərildi!' },
                         { id: 'PILOT_FORM_TOAST_ERROR', label: 'Pilot Form Xəta Mesajı', value: 'Gondərilmə zamanı xəta baş verdi.' },
-                        { id: 'PLACEHOLDER_PHONE', label: 'Telefon Placeholder', value: '+994 -- --- -- --' },
+                        { id: 'PLACEHOLDER_WHATSAPP', label: 'WhatsApp Placeholder', value: '+994 50 123 45 67' },
+                        { id: 'PLACEHOLDER_PHONE', label: 'Telefon Placeholder (Legacy)', value: '+994 50 123 45 67' },
                         { id: 'SPECTATOR_TICKET_URL', label: 'İzləyici Bilet Linki', value: 'https://iticket.az', url: 'https://iticket.az' },
                         { id: 'CLUB_OPTION_1', label: 'Klub Seçimi 1', value: 'Fərdi İştirakçı' },
                         { id: 'CLUB_OPTION_2', label: 'Klub Seçimi 2', value: 'Club 4X4' },
@@ -3919,6 +3921,13 @@ const VisualEditor: React.FC = () => {
                             >
                                 <FileText size={14} /> Pilot Qeydiyyatı
                             </button>
+                            <button
+                                className={`page-nav-item ${eventManagementTab === 'clubs' ? 'active' : ''}`}
+                                onClick={() => setEventManagementTab('clubs')}
+                                style={{ width: '100%', textAlign: 'left' }}
+                            >
+                                <List size={14} /> Klub Seçimləri
+                            </button>
                         </div>
                     </aside>
 
@@ -3929,7 +3938,7 @@ const VisualEditor: React.FC = () => {
                                     <Calendar size={22} /> Tedbir Yönetimi
                                 </h2>
                                 <p style={{ color: '#64748b' }}>
-                                    Tədbir modalı və pilot qeydiyyat formu mətnlərini buradan dəyişin.
+                                    Tədbir modalı, pilot qeydiyyat formu və klub dropdown seçimlərini buradan dəyişin.
                                 </p>
                             </div>
 
@@ -3985,7 +3994,7 @@ const VisualEditor: React.FC = () => {
                                         />
                                     </div>
                                 </div>
-                            ) : (
+                            ) : eventManagementTab === 'pilot' ? (
                                 <div className="edit-grid grid-2">
                                     <div className="form-group full-span">
                                         <label>GERİ DÜYMƏSİ</label>
@@ -4020,19 +4029,19 @@ const VisualEditor: React.FC = () => {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>TELEFON LABEL</label>
+                                        <label>WHATSAPP LABEL</label>
                                         <input
                                             type="text"
-                                            value={getEventsPageConfigValue('FIELD_PHONE', 'TELEFON')}
-                                            onChange={(e) => updateEventManagementValue('FIELD_PHONE', 'Telefon Label', e.target.value)}
+                                            value={getEventsPageConfigValue('FIELD_WHATSAPP', getEventsPageConfigValue('FIELD_PHONE', 'WHATSAPP NÖMRƏSİ'))}
+                                            onChange={(e) => updateEventManagementValue('FIELD_WHATSAPP', 'WhatsApp Label', e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>TELEFON PLACEHOLDER</label>
+                                        <label>WHATSAPP PLACEHOLDER</label>
                                         <input
                                             type="text"
-                                            value={getEventsPageConfigValue('PLACEHOLDER_PHONE', '+994 -- --- -- --')}
-                                            onChange={(e) => updateEventManagementValue('PLACEHOLDER_PHONE', 'Telefon Placeholder', e.target.value)}
+                                            value={getEventsPageConfigValue('PLACEHOLDER_WHATSAPP', getEventsPageConfigValue('PLACEHOLDER_PHONE', '+994 50 123 45 67'))}
+                                            onChange={(e) => updateEventManagementValue('PLACEHOLDER_WHATSAPP', 'WhatsApp Placeholder', e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -4097,6 +4106,89 @@ const VisualEditor: React.FC = () => {
                                             type="text"
                                             value={getEventsPageConfigValue('BTN_COMPLETE_REG', 'QEYDİYYATI TAMAMLA')}
                                             onChange={(e) => updateEventManagementValue('BTN_COMPLETE_REG', 'Qeydiyyatı Tamamla Düyməsi', e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="edit-grid grid-2">
+                                    <div className="form-group full-span">
+                                        <label>KLUB DROPDOWN BAŞLIĞI</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('FIELD_CLUB', 'TƏMSİL ETDİYİ KLUB')}
+                                            onChange={(e) => updateEventManagementValue('FIELD_CLUB', 'Klub Label', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 1 (DEFAULT)</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_1', 'Fərdi İştirakçı')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_1', 'Klub Seçimi 1', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 2</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_2', 'Club 4X4')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_2', 'Klub Seçimi 2', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 3</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_3', 'Extreme 4X4')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_3', 'Klub Seçimi 3', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 4</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_4', 'Forsaj Club')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_4', 'Klub Seçimi 4', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 5</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_5', 'Offroad.az')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_5', 'Klub Seçimi 5', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 6</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_6', 'Overland 4X4')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_6', 'Klub Seçimi 6', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 7</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_7', 'PatrolClub.az')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_7', 'Klub Seçimi 7', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 8</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_8', 'Victory Club')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_8', 'Klub Seçimi 8', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>KLUB SEÇİMİ 9</label>
+                                        <input
+                                            type="text"
+                                            value={getEventsPageConfigValue('CLUB_OPTION_9', 'Zəfər 4X4 Club')}
+                                            onChange={(e) => updateEventManagementValue('CLUB_OPTION_9', 'Klub Seçimi 9', e.target.value)}
                                         />
                                     </div>
                                 </div>
