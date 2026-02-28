@@ -533,7 +533,7 @@ const getSectionHint = (section: Section, pageId?: string) => {
 };
 
 const PARTNER_KEY_REGEX = /^PARTNER_(\d+)_(NAME|TAG|ICON|USE_IMAGE|IMAGE_ID)$/;
-const RULE_TAB_FIELD_REGEX = /^RULE_TAB_(\d+)_(ID|TITLE|ICON|DOC_NAME|DOC_BUTTON|DOC_URL)$/;
+const RULE_TAB_FIELD_REGEX = /^RULE_TAB_(\d+)_(ID|TITLE|ICON)$/;
 const RULE_TAB_ITEM_FIELD_REGEX = /^RULE_TAB_(\d+)_ITEM_(\d+)_(TITLE|DESC)$/;
 const RULE_TAB_SECTION_REGEX = /^RULE_TAB_\d+_(?:ID|TITLE|ICON|DOC_NAME|DOC_BUTTON|DOC_URL|ITEM_\d+_(?:TITLE|DESC))$/;
 const CONTACT_TOPIC_OPTION_REGEX = /^TOPIC_OPTION_(\d+)$/i;
@@ -558,9 +558,6 @@ type RuleTabRow = {
     id: string;
     title: string;
     icon: string;
-    docName?: string;
-    docButton?: string;
-    docUrl?: string;
     items: RuleTabItemRow[];
 };
 
@@ -2256,7 +2253,6 @@ const VisualEditor: React.FC = () => {
             icon: 'Info',
             titleKey: 'RULES_PILOT_TITLE',
             titleFallback: 'PİLOT PROTOKOLU',
-            docNameFallback: 'PILOT_PROTOKOLU.PDF',
             items: [
                 { titleKey: 'RULES_PILOT_SUB1', titleFallback: 'İSTİFADƏÇİ ÖHDƏLİKLƏRİ', descKey: 'RULES_PILOT_DESC1', descFallback: 'HƏR BİR İŞTİRAKÇI FEDERASİYANIN MÜƏYYƏN ETDİYİ BÜTÜN TEXNİKİ VƏ ETİK NORMALARI QEYD-ŞƏRTSİZ QƏBUL EDİR.' },
                 { titleKey: 'RULES_PILOT_SUB2', titleFallback: 'DİSKVALİFİKASİYA', descKey: 'RULES_PILOT_DESC2', descFallback: 'PROTOKOLDAN KƏNARA ÇIXMAQ VƏ YA HAKİM QƏRARLARINA ETİRAZ ETMƏK DƏRHAL DİSKVALİFİKASİYA İLƏ NƏTİCƏLƏNƏ BİLƏR.' },
@@ -2268,7 +2264,6 @@ const VisualEditor: React.FC = () => {
             icon: 'Settings',
             titleKey: 'RULES_TECH_TITLE',
             titleFallback: 'TEXNİKİ NORMARTİVLƏR',
-            docNameFallback: 'TEXNIKI_NORMATIVLER.PDF',
             items: [
                 { titleKey: 'RULES_TECH_SUB1', titleFallback: 'TƏKƏR ÖLÇÜLƏRİ', descKey: 'RULES_TECH_DESC1', descFallback: 'PRO CLASS ÜÇÜN MAKSİMUM TƏKƏR ÖLÇÜSÜ 37 DÜYM, AMATEUR CLASS ÜÇÜN İSƏ 33 DÜYM OLARAQ MÜƏYYƏN EDİLMİŞDİR.' },
                 { titleKey: 'RULES_TECH_SUB2', titleFallback: 'MÜHƏRRİK GÜCÜ', descKey: 'RULES_TECH_DESC2', descFallback: 'MÜHƏRRİK ÜZƏRİNDƏ APARILAN MODİFİKASİYALAR KATEQORİYA ÜZRƏ LİMİTLƏRİ AŞMAMALIDIR. TURBO SİSTEMLƏRİ YALNIZ XÜSUSİ KLASLARDA İCAZƏLİDİR.' },
@@ -2280,7 +2275,6 @@ const VisualEditor: React.FC = () => {
             icon: 'ShieldAlert',
             titleKey: 'RULES_SAFETY_TITLE',
             titleFallback: 'TƏHLÜKƏSİZLİK QAYDALARI',
-            docNameFallback: 'TEHLUKESIZLIK_QAYDALARI.PDF',
             items: [
                 { titleKey: 'RULES_SAFETY_SUB1', titleFallback: 'KARKAS TƏLƏBİ', descKey: 'RULES_SAFETY_DESC1', descFallback: 'BÜTÜN AÇIQ VƏ YA MODİFİKASİYA OLUNMUŞ AVTOMOBİLLƏRDƏ FIA STANDARTLARINA UYĞUN TƏHLÜKƏSİZLİK KARKASI (ROLL CAGE) MƏCBURİDİR.' },
                 { titleKey: 'RULES_SAFETY_SUB2', titleFallback: 'YANĞIN SÖNDÜRMƏ', descKey: 'RULES_SAFETY_DESC2', descFallback: 'HƏR BİR AVTOMOBİLDƏ ƏN AZI 2 KİLOQRAMLIQ, ASAN ƏLÇATAN YERDƏ YERLƏŞƏN YANĞINSÖNDÜRƏN BALON OLMALIDIR.' },
@@ -2292,7 +2286,6 @@ const VisualEditor: React.FC = () => {
             icon: 'Leaf',
             titleKey: 'RULES_ECO_TITLE',
             titleFallback: 'EKOLOJİ MƏSULİYYƏT',
-            docNameFallback: 'EKOLOJI_MESULIYYET.PDF',
             items: [
                 { titleKey: 'RULES_ECO_SUB1', titleFallback: 'TULLANTILARIN İDARƏ EDİLMƏSİ', descKey: 'RULES_ECO_DESC1', descFallback: 'YARIŞ ƏRAZİSİNDƏ VƏ TRASDA HƏR HANSI BİR TULLANTININ ATILMASI QƏTİ QADAĞANDIR. İŞTİRAKÇILAR "LEAVE NO TRACE" PRİNSİPİNƏ ƏMƏL ETMƏLİDİR.' },
                 { titleKey: 'RULES_ECO_SUB2', titleFallback: 'MAYE SIZMALARI', descKey: 'RULES_ECO_DESC2', descFallback: 'AVTOMOBİLDƏN YAĞ VƏ YA SOYUDUCU MAYE SIZMASI OLDUĞU TƏQDİRDƏ PİLOT DƏRHAL DAYANMALI VƏ ƏRAZİNİN ÇİRKLƏNMƏSİNİN QARŞISINI ALMALIDIR.' },
@@ -2308,17 +2301,11 @@ const VisualEditor: React.FC = () => {
     };
 
     const buildLegacyRuleTabRows = (sections: Section[]): RuleTabRow[] => {
-        const docButtonFallback = pickLegacyRuleSectionValue(sections, 'BTN_DOWNLOAD_PDF', 'PDF YÜKLƏ');
-        const docUrlFallback = toAbsoluteUrl((sections.find((s) => s.id === 'BTN_DOWNLOAD_PDF')?.url || '').toString());
-
         return RULE_TAB_LEGACY_PRESETS.map((preset, index) => ({
             index: index + 1,
             id: preset.id,
             title: pickLegacyRuleSectionValue(sections, preset.titleKey, preset.titleFallback),
             icon: preset.icon,
-            docName: preset.docNameFallback,
-            docButton: docButtonFallback,
-            docUrl: docUrlFallback,
             items: preset.items.map((item, itemIndex) => ({
                 index: itemIndex + 1,
                 title: pickLegacyRuleSectionValue(sections, item.titleKey, item.titleFallback),
@@ -2332,7 +2319,7 @@ const VisualEditor: React.FC = () => {
     const getRulesTabRows = (page: PageContent | undefined): RuleTabRow[] => {
         if (!page || page.id !== 'rulespage') return [];
 
-        const tabs = new Map<number, { id: string; title: string; icon: string; docName: string; docButton: string; docUrl: string; items: Map<number, { title: string; desc: string }> }>();
+        const tabs = new Map<number, { id: string; title: string; icon: string; items: Map<number, { title: string; desc: string }> }>();
         (page.sections || []).forEach((section) => {
             const tabMatch = section.id.match(RULE_TAB_FIELD_REGEX);
             if (tabMatch) {
@@ -2342,17 +2329,11 @@ const VisualEditor: React.FC = () => {
                     id: `tab-${tabNo}`,
                     title: '',
                     icon: 'Info',
-                    docName: '',
-                    docButton: '',
-                    docUrl: '',
                     items: new Map<number, { title: string; desc: string }>()
                 };
                 if (field === 'ID') current.id = section.value || `tab-${tabNo}`;
                 if (field === 'TITLE') current.title = section.value || '';
                 if (field === 'ICON') current.icon = section.value || 'Info';
-                if (field === 'DOC_NAME') current.docName = section.value || '';
-                if (field === 'DOC_BUTTON') current.docButton = section.value || '';
-                if (field === 'DOC_URL') current.docUrl = toAbsoluteUrl(section.url || section.value || '');
                 tabs.set(tabNo, current);
                 return;
             }
@@ -2366,9 +2347,6 @@ const VisualEditor: React.FC = () => {
                     id: `tab-${tabNo}`,
                     title: '',
                     icon: 'Info',
-                    docName: '',
-                    docButton: '',
-                    docUrl: '',
                     items: new Map<number, { title: string; desc: string }>()
                 };
                 const item = current.items.get(itemNo) || { title: '', desc: '' };
@@ -2386,9 +2364,6 @@ const VisualEditor: React.FC = () => {
                 id: tab.id || `tab-${index}`,
                 title: tab.title || '',
                 icon: tab.icon || 'Info',
-                docName: tab.docName || '',
-                docButton: tab.docButton || '',
-                docUrl: tab.docUrl || '',
                 items: Array.from(tab.items.entries())
                     .sort((a, b) => a[0] - b[0])
                     .map(([itemIndex, item]) => ({
@@ -2419,9 +2394,6 @@ const VisualEditor: React.FC = () => {
                 id: dynamic.id || legacyRow.id,
                 title: dynamic.title || legacyRow.title,
                 icon: dynamic.icon || legacyRow.icon,
-                docName: dynamic.docName || legacyRow.docName,
-                docButton: dynamic.docButton || legacyRow.docButton,
-                docUrl: dynamic.docUrl || legacyRow.docUrl,
                 items: (dynamic.items && dynamic.items.length > 0) ? dynamic.items : legacyRow.items
             };
         });
@@ -2448,17 +2420,11 @@ const VisualEditor: React.FC = () => {
             const safeId = normalizeRuleTabSlug(row.id || row.title || '', `tab-${tabNo}`);
             const safeTitle = normalizePlainText(row.title || `SEKME ${tabNo}`);
             const safeIcon = RULE_TAB_ICON_PRESETS.includes(row.icon) ? row.icon : 'Info';
-            const safeDocName = normalizePlainText(row.docName || `${safeId.toUpperCase()}_PROTOKOLU.PDF`);
-            const safeDocButton = normalizePlainText(row.docButton || 'PDF YÜKLƏ');
-            const safeDocUrl = toStoredUrl(row.docUrl || '');
 
             nextSections.push(
                 { id: `RULE_TAB_${tabNo}_ID`, type: 'text', label: `Qayda Sekməsi ${tabNo} ID`, value: safeId },
                 { id: `RULE_TAB_${tabNo}_TITLE`, type: 'text', label: `Qayda Sekməsi ${tabNo} Başlıq`, value: safeTitle },
-                { id: `RULE_TAB_${tabNo}_ICON`, type: 'text', label: `Qayda Sekməsi ${tabNo} İkon`, value: safeIcon },
-                { id: `RULE_TAB_${tabNo}_DOC_NAME`, type: 'text', label: `Sekmə ${tabNo} Sənəd Adı`, value: safeDocName },
-                { id: `RULE_TAB_${tabNo}_DOC_BUTTON`, type: 'text', label: `Sekmə ${tabNo} Sənəd Düyməsi`, value: safeDocButton },
-                { id: `RULE_TAB_${tabNo}_DOC_URL`, type: 'text', label: `Sekmə ${tabNo} Sənəd Linki`, value: safeDocUrl, ...(safeDocUrl ? { url: safeDocUrl } : {}) }
+                { id: `RULE_TAB_${tabNo}_ICON`, type: 'text', label: `Qayda Sekməsi ${tabNo} İkon`, value: safeIcon }
             );
 
             (row.items || []).forEach((item, itemIndex) => {
@@ -2483,9 +2449,6 @@ const VisualEditor: React.FC = () => {
             id: `tab-${nextNo}`,
             title: `SEKME ${nextNo}`,
             icon: 'Info',
-            docName: `TAB_${nextNo}_PROTOKOLU.PDF`,
-            docButton: 'PDF YÜKLƏ',
-            docUrl: '',
             items: [{ index: 1, title: 'YENİ MADDƏ', desc: 'Maddə təsviri...' }]
         });
         rewriteRulesTabRows(rows, pageIdx);
@@ -2510,7 +2473,7 @@ const VisualEditor: React.FC = () => {
 
     const updateRulesTabField = (
         rowIdx: number,
-        field: 'id' | 'title' | 'icon' | 'docName' | 'docButton' | 'docUrl',
+        field: 'id' | 'title' | 'icon',
         value: string,
         pageIdx: number = selectedPageIndex
     ) => {
@@ -2518,6 +2481,77 @@ const VisualEditor: React.FC = () => {
         if (!rows[rowIdx]) return;
         rows[rowIdx] = { ...rows[rowIdx], [field]: value };
         rewriteRulesTabRows(rows, pageIdx);
+    };
+
+    const deriveFileNameFromUrl = (rawUrl: string) => {
+        const cleaned = (rawUrl || '').split('?')[0].split('#')[0];
+        if (!cleaned) return '';
+        const token = cleaned.substring(cleaned.lastIndexOf('/') + 1).trim();
+        if (!token) return '';
+        try {
+            return decodeURIComponent(token);
+        } catch {
+            return token;
+        }
+    };
+
+    const getRulesGeneralPdfState = (page: PageContent | undefined) => {
+        const section = (page?.sections || []).find((s) => s.id === 'BTN_DOWNLOAD_PDF');
+        const buttonText = normalizePlainText((section?.value || '').toString()) || 'PDF YÜKLƏ';
+        const url = toAbsoluteUrl((section?.url || '').toString());
+        return {
+            buttonText,
+            url,
+            fileName: deriveFileNameFromUrl(url)
+        };
+    };
+
+    const updateRulesGeneralPdf = (
+        patch: { buttonText?: string; url?: string },
+        pageIdx: number = selectedPageIndex
+    ) => {
+        if (pageIdx < 0 || pageIdx >= pages.length) return null;
+        const newPages = [...pages];
+        const page = newPages[pageIdx];
+        if (!page || page.id !== 'rulespage') return null;
+
+        const sections = [...(page.sections || [])];
+        let sectionIdx = sections.findIndex((s) => s.id === 'BTN_DOWNLOAD_PDF');
+        if (sectionIdx === -1) {
+            sections.push({
+                id: 'BTN_DOWNLOAD_PDF',
+                type: 'text',
+                label: 'Ümumi PDF Düyməsi',
+                value: 'PDF YÜKLƏ',
+                url: ''
+            });
+            sectionIdx = sections.length - 1;
+        }
+
+        const section = { ...sections[sectionIdx] };
+        if (patch.buttonText !== undefined) {
+            section.value = normalizePlainText(patch.buttonText) || 'PDF YÜKLƏ';
+        }
+        if (patch.url !== undefined) {
+            section.url = toStoredUrl(patch.url || '');
+            if (!normalizePlainText((section.value || '').toString())) {
+                section.value = 'PDF YÜKLƏ';
+            }
+        }
+        sections[sectionIdx] = section;
+
+        page.sections = sections.map((item, idx) => ({ ...item, order: idx }));
+        setPages(newPages);
+        return newPages;
+    };
+
+    const handleRulesGeneralPdfUpload = async (file: File, pageIdx: number = selectedPageIndex) => {
+        const url = await uploadPdf(file);
+        if (!url) return;
+        const nextPages = updateRulesGeneralPdf({ url }, pageIdx);
+        if (nextPages && editorMode === 'extract') {
+            await savePagesSilently(nextPages);
+        }
     };
 
     const addRulesTabItem = (rowIdx: number, pageIdx: number = selectedPageIndex) => {
@@ -2607,18 +2641,6 @@ const VisualEditor: React.FC = () => {
             }
         } catch (error) {
             console.error('Silent save failed:', error);
-        }
-    };
-
-    const handleRulesTabPdfUpload = async (file: File, rowIdx: number, pageIdx: number = selectedPageIndex) => {
-        const url = await uploadPdf(file);
-        if (!url) return;
-        const rows = getRulesTabRows(pages[pageIdx]);
-        if (!rows[rowIdx]) return;
-        rows[rowIdx] = { ...rows[rowIdx], docName: file.name, docUrl: url };
-        const nextPages = rewriteRulesTabRows(rows, pageIdx);
-        if (nextPages && editorMode === 'extract') {
-            await savePagesSilently(nextPages);
         }
     };
 
@@ -3521,6 +3543,7 @@ const VisualEditor: React.FC = () => {
         if (currentPage?.id === 'partners') return false;
         if (currentPage?.id === 'rulespage' && RULE_TAB_SECTION_REGEX.test(s.id)) return false;
         if (currentPage?.id === 'rulespage' && s.id.startsWith('RULES_')) return false;
+        if (currentPage?.id === 'rulespage' && s.id === 'BTN_DOWNLOAD_PDF') return false;
         return matchesSearch(s.id, s.label, s.value, s.url);
     }).sort((a, b) => normalizeOrder(a.order, 0) - normalizeOrder(b.order, 0));
 
@@ -5642,6 +5665,7 @@ const VisualEditor: React.FC = () => {
                                             if (page.id === 'partners') return false;
                                             if (page.id === 'rulespage' && RULE_TAB_SECTION_REGEX.test(section.id)) return false;
                                             if (page.id === 'rulespage' && section.id.startsWith('RULES_')) return false;
+                                            if (page.id === 'rulespage' && section.id === 'BTN_DOWNLOAD_PDF') return false;
                                             return matchesSearch(section.id, section.label, section.value, section.url);
                                         })
                                         .sort((a, b) => normalizeOrder(a.order, 0) - normalizeOrder(b.order, 0));
@@ -5671,9 +5695,6 @@ const VisualEditor: React.FC = () => {
                                                 row.id,
                                                 row.title,
                                                 row.icon,
-                                                row.docName,
-                                                row.docButton,
-                                                row.docUrl,
                                                 ...(row.items || []).flatMap((item) => [item.title, item.desc])
                                             )
                                         )
@@ -5801,6 +5822,59 @@ const VisualEditor: React.FC = () => {
 
                                                         {page.id === 'rulespage' && (
                                                             <div className="field-item-wrapper" style={{ position: 'relative', background: '#fcfcfd', padding: '1rem', borderRadius: '12px', border: '1px solid #f0f0f2' }}>
+                                                                {(() => {
+                                                                    const pdfState = getRulesGeneralPdfState(page);
+                                                                    const uploadInputId = `rules-global-doc-upload-${pageIdx}`;
+                                                                    return (
+                                                                        <div style={{ border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px', background: '#fff', marginBottom: '10px' }}>
+                                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                                                                <div style={{ fontSize: '12px', color: '#334155', fontWeight: 800, textTransform: 'uppercase' }}>
+                                                                                    Ümumi Təlimat PDF
+                                                                                </div>
+                                                                                <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 700 }}>
+                                                                                    {pdfState.fileName || 'PDF faylı seçilməyib'}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px', gap: '8px', marginBottom: '8px' }}>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    value={pdfState.url}
+                                                                                    onChange={(e) => updateRulesGeneralPdf({ url: e.target.value }, pageIdx)}
+                                                                                    placeholder="Ümumi sənəd linki (Məs: /uploads/rules.pdf və ya https://...)"
+                                                                                    style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
+                                                                                />
+                                                                                <input
+                                                                                    type="text"
+                                                                                    value={pdfState.buttonText}
+                                                                                    onChange={(e) => updateRulesGeneralPdf({ buttonText: e.target.value }, pageIdx)}
+                                                                                    placeholder="Düymə mətni (Məs: PDF YÜKLƏ)"
+                                                                                    style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
+                                                                                />
+                                                                            </div>
+                                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                                                <input
+                                                                                    id={uploadInputId}
+                                                                                    type="file"
+                                                                                    accept=".pdf,application/pdf"
+                                                                                    style={{ display: 'none' }}
+                                                                                    onChange={async (e) => {
+                                                                                        const f = e.target.files?.[0];
+                                                                                        if (!f) return;
+                                                                                        await handleRulesGeneralPdfUpload(f, pageIdx);
+                                                                                        e.target.value = '';
+                                                                                    }}
+                                                                                />
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className="btn-secondary"
+                                                                                    onClick={() => document.getElementById(uploadInputId)?.click()}
+                                                                                >
+                                                                                    PDF Yüklə
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    );
+                                                                })()}
                                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                                                                     <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 800 }}>
                                                                         Qaydalar Sekmələri
@@ -5871,51 +5945,6 @@ const VisualEditor: React.FC = () => {
                                                                                             <Trash2 size={14} />
                                                                                         </button>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px', gap: '8px', marginBottom: '8px' }}>
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        value={row.docName || ''}
-                                                                                        onChange={(e) => updateRulesTabField(rowIndex, 'docName', e.target.value, pageIdx)}
-                                                                                        placeholder="Sənəd adı (Məs: PILOT_PROTOKOLU.PDF)"
-                                                                                        style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
-                                                                                    />
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        value={row.docButton || ''}
-                                                                                        onChange={(e) => updateRulesTabField(rowIndex, 'docButton', e.target.value, pageIdx)}
-                                                                                        placeholder="Düymə mətni (Məs: PDF YÜKLƏ)"
-                                                                                        style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
-                                                                                    />
-                                                                                </div>
-                                                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                                                                                    <Globe size={14} style={{ color: '#94a3b8' }} />
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        value={row.docUrl || ''}
-                                                                                        onChange={(e) => updateRulesTabField(rowIndex, 'docUrl', e.target.value, pageIdx)}
-                                                                                        placeholder="Sənəd linki (Məs: /uploads/pilot.pdf və ya https://...)"
-                                                                                        style={{ width: '100%', padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
-                                                                                    />
-                                                                                    <input
-                                                                                        id={`rules-doc-upload-${pageIdx}-${rowIndex}`}
-                                                                                        type="file"
-                                                                                        accept=".pdf,application/pdf"
-                                                                                        style={{ display: 'none' }}
-                                                                                        onChange={async (e) => {
-                                                                                            const f = e.target.files?.[0];
-                                                                                            if (!f) return;
-                                                                                            await handleRulesTabPdfUpload(f, rowIndex, pageIdx);
-                                                                                            e.target.value = '';
-                                                                                        }}
-                                                                                    />
-                                                                                    <button
-                                                                                        type="button"
-                                                                                        className="btn-secondary"
-                                                                                        onClick={() => document.getElementById(`rules-doc-upload-${pageIdx}-${rowIndex}`)?.click()}
-                                                                                    >
-                                                                                        PDF Yüklə
-                                                                                    </button>
                                                                                 </div>
                                                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                                                                     {(row.items || []).map((item, itemIndex) => (
@@ -6337,6 +6366,59 @@ const VisualEditor: React.FC = () => {
 
                                     {currentPage.id === 'rulespage' && (
                                         <div className="field-group">
+                                            {(() => {
+                                                const pdfState = getRulesGeneralPdfState(currentPage);
+                                                const uploadInputId = 'rules-global-doc-upload-current';
+                                                return (
+                                                    <div className="field-item-wrapper" style={{ border: '1px solid #e2e8f0', borderRadius: '10px', padding: '12px', background: '#fff', marginBottom: '10px' }}>
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                                            <div style={{ fontSize: '12px', color: '#334155', fontWeight: 900, textTransform: 'uppercase' }}>
+                                                                Ümumi Təlimat PDF
+                                                            </div>
+                                                            <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 700 }}>
+                                                                {pdfState.fileName || 'PDF faylı seçilməyib'}
+                                                            </div>
+                                                        </div>
+                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px', gap: '8px', marginBottom: '8px' }}>
+                                                            <input
+                                                                type="text"
+                                                                value={pdfState.url}
+                                                                onChange={(e) => updateRulesGeneralPdf({ url: e.target.value })}
+                                                                placeholder="Ümumi sənəd linki (Məs: /uploads/rules.pdf və ya https://...)"
+                                                                style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
+                                                            />
+                                                            <input
+                                                                type="text"
+                                                                value={pdfState.buttonText}
+                                                                onChange={(e) => updateRulesGeneralPdf({ buttonText: e.target.value })}
+                                                                placeholder="Düymə mətni (Məs: PDF YÜKLƏ)"
+                                                                style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
+                                                            />
+                                                        </div>
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                            <input
+                                                                id={uploadInputId}
+                                                                type="file"
+                                                                accept=".pdf,application/pdf"
+                                                                style={{ display: 'none' }}
+                                                                onChange={async (e) => {
+                                                                    const f = e.target.files?.[0];
+                                                                    if (!f) return;
+                                                                    await handleRulesGeneralPdfUpload(f);
+                                                                    e.target.value = '';
+                                                                }}
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                className="btn-secondary"
+                                                                onClick={() => document.getElementById(uploadInputId)?.click()}
+                                                            >
+                                                                PDF Yüklə
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })()}
                                             <div className="field-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 <label><Layout size={16} /> Qaydalar Sekmələri</label>
                                                 <button className="add-field-minimal" onClick={() => addRulesTab()}>
@@ -6399,52 +6481,6 @@ const VisualEditor: React.FC = () => {
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 180px', gap: '8px', marginBottom: '8px' }}>
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.docName || ''}
-                                                                    onChange={(e) => updateRulesTabField(rowIndex, 'docName', e.target.value)}
-                                                                    placeholder="Sənəd adı (Məs: PILOT_PROTOKOLU.PDF)"
-                                                                    style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
-                                                                />
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.docButton || ''}
-                                                                    onChange={(e) => updateRulesTabField(rowIndex, 'docButton', e.target.value)}
-                                                                    placeholder="Düymə mətni (Məs: PDF YÜKLƏ)"
-                                                                    style={{ padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
-                                                                />
-                                                            </div>
-                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                                                                <Globe size={14} style={{ color: '#94a3b8' }} />
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.docUrl || ''}
-                                                                    onChange={(e) => updateRulesTabField(rowIndex, 'docUrl', e.target.value)}
-                                                                    placeholder="Sənəd linki (Məs: /uploads/pilot.pdf və ya https://...)"
-                                                                    style={{ width: '100%', padding: '9px 10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '12px' }}
-                                                                />
-                                                                <input
-                                                                    id={`rules-doc-upload-current-${rowIndex}`}
-                                                                    type="file"
-                                                                    accept=".pdf,application/pdf"
-                                                                    style={{ display: 'none' }}
-                                                                    onChange={async (e) => {
-                                                                        const f = e.target.files?.[0];
-                                                                        if (!f) return;
-                                                                        await handleRulesTabPdfUpload(f, rowIndex);
-                                                                        e.target.value = '';
-                                                                    }}
-                                                                />
-                                                                <button
-                                                                    type="button"
-                                                                    className="btn-secondary"
-                                                                    onClick={() => document.getElementById(`rules-doc-upload-current-${rowIndex}`)?.click()}
-                                                                >
-                                                                    PDF Yüklə
-                                                                </button>
-                                                            </div>
-
                                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                                                 {(row.items || []).map((item, itemIndex) => (
                                                                     <div key={`rules-item-${row.index}-${item.index}`} style={{ border: '1px solid #e2e8f0', borderRadius: '8px', padding: '8px' }}>
