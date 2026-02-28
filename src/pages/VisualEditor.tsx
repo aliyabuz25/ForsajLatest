@@ -703,6 +703,8 @@ const VisualEditor: React.FC = () => {
 
     const [editorMode, setEditorMode] = useState<'extract' | 'events' | 'event-management' | 'news' | 'drivers' | 'videos' | 'photos'>('extract');
     const [eventManagementTab, setEventManagementTab] = useState<'modal' | 'pilot' | 'clubs'>('modal');
+    const [pendingClubFocusId, setPendingClubFocusId] = useState<string | null>(null);
+    const clubOptionInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
     const [galleryPhotos, setGalleryPhotos] = useState<GalleryPhotoItem[]>([]);
     const autoSyncTriggeredRef = useRef(false);
@@ -750,6 +752,23 @@ const VisualEditor: React.FC = () => {
     useEffect(() => {
         localStorage.setItem(SECTION_COLLAPSE_KEY, JSON.stringify(sectionCollapsed));
     }, [sectionCollapsed]);
+
+    useEffect(() => {
+        if (!pendingClubFocusId) return;
+        if (editorMode !== 'event-management' || eventManagementTab !== 'clubs') return;
+
+        const targetInput = clubOptionInputRefs.current[pendingClubFocusId];
+        if (!targetInput) return;
+
+        const rafId = window.requestAnimationFrame(() => {
+            targetInput.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+            targetInput.focus({ preventScroll: true });
+            targetInput.select();
+            setPendingClubFocusId(null);
+        });
+
+        return () => window.cancelAnimationFrame(rafId);
+    }, [pendingClubFocusId, editorMode, eventManagementTab, pages]);
     const [driverCategories, setDriverCategories] = useState<DriverCategory[]>([]);
     const [selectedCatId, setSelectedCatId] = useState<string | null>(null);
     const [selectedDriverId, setSelectedDriverId] = useState<number | null>(null);
@@ -2795,6 +2814,8 @@ const VisualEditor: React.FC = () => {
                 if (addedEventsCount > 0) {
                     if (mailSent) {
                         eventsMailNotice = `Yeni tədbir bildirişi ${recipients || 0} abunəçiyə göndərildi.`;
+                    } else if (reason === 'no_active_new_events') {
+                        eventsMailNotice = 'Keçmiş tarixli yeni tədbir üçün abunəçilərə bildiriş göndərilmir.';
                     } else if (reason === 'smtp_disabled' || reason === 'smtp_not_configured') {
                         eventsMailNotice = 'Yeni tədbir əlavə olundu, amma SMTP aktiv olmadığından mail göndərilmədi.';
                     } else {
@@ -3556,15 +3577,17 @@ const VisualEditor: React.FC = () => {
             return Math.max(max, Number(match[1]));
         }, 0);
         const nextOptionNumber = maxOptionNumber + 1;
+        const nextSectionId = `CLUB_OPTION_${nextOptionNumber}`;
         const nextOrder = (page.sections || []).reduce((max, s, idx) => Math.max(max, normalizeOrder(s.order, idx)), -1) + 1;
         page.sections.push({
-            id: `CLUB_OPTION_${nextOptionNumber}`,
+            id: nextSectionId,
             type: 'text',
             label: `Klub Seçimi ${nextOptionNumber}`,
             value: `Klub ${nextOptionNumber}`,
             order: nextOrder
         });
         setPages(nextPages);
+        setPendingClubFocusId(nextSectionId);
     };
     const removeEventManagementClubOption = (sectionId: string) => {
         if (eventClubOptionRows.length <= 1) {
@@ -4673,7 +4696,21 @@ const VisualEditor: React.FC = () => {
                                                 type="button"
                                                 className="add-section-btn"
                                                 onClick={addEventManagementClubOption}
-                                                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                                                style={{
+                                                    display: 'inline-flex',
+                                                    alignItems: 'center',
+                                                    gap: '8px',
+                                                    padding: '8px 12px',
+                                                    borderRadius: '10px',
+                                                    border: '1px solid rgba(255, 77, 0, 0.45)',
+                                                    background: 'linear-gradient(135deg, #ff6a00 0%, #ff4d00 100%)',
+                                                    color: '#111827',
+                                                    fontWeight: 900,
+                                                    fontSize: '12px',
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: '0.08em',
+                                                    boxShadow: '0 8px 20px rgba(255, 77, 0, 0.22)'
+                                                }}
                                             >
                                                 <Plus size={14} />
                                                 Yeni seçim
@@ -4687,6 +4724,9 @@ const VisualEditor: React.FC = () => {
                                                 <input
                                                     type="text"
                                                     value={row.value}
+                                                    ref={(el) => {
+                                                        clubOptionInputRefs.current[row.id] = el;
+                                                    }}
                                                     onChange={(e) => updateEventManagementValue(row.id, `Klub Seçimi ${row.optionNumber}`, e.target.value)}
                                                 />
                                                 <button
