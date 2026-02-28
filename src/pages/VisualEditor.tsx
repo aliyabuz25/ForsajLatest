@@ -3735,7 +3735,7 @@ const VisualEditor: React.FC = () => {
                 title: group.title,
                 subtitle: group.subtitle,
                 sections,
-                kind: group.title === 'Form' ? 'contact-form' : undefined
+                kind: group.title === 'Form' ? ('contact-form' as const) : undefined
             };
         }).filter((group) => group.sections.length > 0);
 
