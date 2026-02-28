@@ -284,7 +284,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
             <div className="text-center animate-in fade-in zoom-in-95 duration-300">
               <h2 className="text-5xl md:text-8xl font-black italic text-white uppercase tracking-tighter mb-2 leading-none">{getText('MODAL_TITLE', 'YARIŞDA İŞTİRAK')}</h2>
               <p className="text-[#FF4D00] font-black italic text-xs uppercase tracking-[0.3em] mb-16">
-                {selectedEvent?.title} // {selectedEvent?.location}
+                {selectedEvent?.title || getText('EVENT_NAME_LABEL', 'YENİ TƏDBİR')}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
