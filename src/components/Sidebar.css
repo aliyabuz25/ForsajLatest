@@ -32,6 +32,17 @@
     min-width: 0;
 }
 
+.sidebar-gtranslate {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.4rem;
+}
+
+.sidebar-gtranslate .gtranslate_wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
 .logo-mark {
     width: 34px;
     height: 34px;
