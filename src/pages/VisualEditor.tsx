@@ -717,6 +717,8 @@ const VisualEditor: React.FC = () => {
     const [eventManagementTab, setEventManagementTab] = useState<'modal' | 'pilot' | 'clubs'>('modal');
     const [pendingClubFocusId, setPendingClubFocusId] = useState<string | null>(null);
     const clubOptionInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+    const [pendingLegalSectionScrollNo, setPendingLegalSectionScrollNo] = useState<number | null>(null);
+    const legalSectionCardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
     const [galleryPhotos, setGalleryPhotos] = useState<GalleryPhotoItem[]>([]);
     const autoSyncTriggeredRef = useRef(false);
@@ -781,6 +783,28 @@ const VisualEditor: React.FC = () => {
 
         return () => window.cancelAnimationFrame(rafId);
     }, [pendingClubFocusId, editorMode, eventManagementTab, pages]);
+
+    useEffect(() => {
+        if (pendingLegalSectionScrollNo === null) return;
+
+        const page = pages[selectedPageIndex];
+        if (!page || !LEGAL_PAGE_IDS.has(page.id)) return;
+
+        const targetCard = legalSectionCardRefs.current[pendingLegalSectionScrollNo];
+        if (!targetCard) return;
+
+        const rafId = window.requestAnimationFrame(() => {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+            const titleInput = targetCard.querySelector('input') as HTMLInputElement | null;
+            if (titleInput) {
+                titleInput.focus({ preventScroll: true });
+                titleInput.select();
+            }
+            setPendingLegalSectionScrollNo(null);
+        });
+
+        return () => window.cancelAnimationFrame(rafId);
+    }, [pendingLegalSectionScrollNo, pages, selectedPageIndex]);
     const [driverCategories, setDriverCategories] = useState<DriverCategory[]>([]);
     const [selectedCatId, setSelectedCatId] = useState<string | null>(null);
     const [selectedDriverId, setSelectedDriverId] = useState<number | null>(null);
@@ -1960,6 +1984,7 @@ const VisualEditor: React.FC = () => {
         );
 
         setPages(newPages);
+        setPendingLegalSectionScrollNo(nextSectionNo);
         toast.success(`Bölmə ${nextSectionNo} əlavə edildi`);
     };
 
@@ -6428,6 +6453,9 @@ const VisualEditor: React.FC = () => {
                                                         return (
                                                             <div
                                                                 key={`legal-section-row-${row.sectionNo}`}
+                                                                ref={(el) => {
+                                                                    legalSectionCardRefs.current[row.sectionNo] = el;
+                                                                }}
                                                                 style={{
                                                                     border: '1px solid #e2e8f0',
                                                                     borderRadius: '12px',
