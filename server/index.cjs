@@ -121,6 +121,7 @@ const authenticateToken = (req, res, next) => {
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.disable('etag');
 
 // Request Logger & Trailing Slash Normalizer
 app.use((req, res, next) => {
@@ -128,6 +129,15 @@ app.use((req, res, next) => {
     if (req.url.startsWith('/api/') && req.url.length > 5 && req.url.endsWith('/')) {
         req.url = req.url.slice(0, -1);
     }
+    next();
+});
+
+// Disable browser/proxy caching so clients always fetch the latest content.
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
     next();
 });
 
@@ -1269,18 +1279,63 @@ const extractNewEvents = (previousList, nextList) => {
     });
 };
 
+const parseEventDateStart = (rawValue) => {
+    const value = String(rawValue || '').trim();
+    if (!value) return null;
+
+    // ISO-like: YYYY-MM-DD
+    const isoMatch = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (isoMatch) {
+        const year = Number(isoMatch[1]);
+        const month = Number(isoMatch[2]);
+        const day = Number(isoMatch[3]);
+        const parsed = new Date(year, month - 1, day);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+    }
+
+    // Dotted: DD.MM.YYYY or DD/MM/YYYY
+    const dottedMatch = value.match(/^(\d{1,2})[./](\d{1,2})[./](\d{4})$/);
+    if (dottedMatch) {
+        const day = Number(dottedMatch[1]);
+        const month = Number(dottedMatch[2]);
+        const year = Number(dottedMatch[3]);
+        const parsed = new Date(year, month - 1, day);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+    }
+
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return null;
+    return new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+};
+
+const isPastEventForNewsletter = (event) => {
+    const status = String(event?.status || '').trim().toLowerCase();
+    if (['past', 'kecmis', 'keçmiş'].includes(status)) return true;
+
+    const eventDate = parseEventDateStart(event?.date);
+    if (!eventDate) return false;
+
+    const today = new Date();
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return eventDate.getTime() < todayStart.getTime();
+};
+
 const notifySubscribersAboutNewEvents = async (addedEvents, req = null) => {
     const events = Array.isArray(addedEvents) ? addedEvents : [];
     if (!events.length) return { sent: false, reason: 'no_new_events' };
+
+    const activeEvents = events.filter((event) => !isPastEventForNewsletter(event));
+    if (!activeEvents.length) return { sent: false, reason: 'no_active_new_events', recipients: 0 };
+
     const baseUrl = req
         ? getRequestBaseUrl(req)
         : (String(process.env.PUBLIC_SITE_URL || process.env.SITE_URL || '').trim() || 'http://localhost:3005');
 
-    const headline = events.length === 1
-        ? `Yeni tədbir əlavə olundu: ${String(events[0]?.title || '').trim() || 'Tədbir'}`
-        : `${events.length} yeni tədbir əlavə olundu`;
+    const headline = activeEvents.length === 1
+        ? `Yeni tədbir əlavə olundu: ${String(activeEvents[0]?.title || '').trim() || 'Tədbir'}`
+        : `${activeEvents.length} yeni tədbir əlavə olundu`;
 
-    const eventLines = events.map((event) => {
+    const eventLines = activeEvents.map((event) => {
         const title = String(event?.title || 'Tədbir').trim();
         const date = String(event?.date || '').trim();
         const location = String(event?.location || '').trim();
@@ -1288,7 +1343,7 @@ const notifySubscribersAboutNewEvents = async (addedEvents, req = null) => {
         return `• ${title}${date ? ` — ${date}` : ''}${location ? ` (${location})` : ''}${event?.id ? `\n  ${eventUrl}` : ''}`;
     });
 
-    const htmlList = events.map((event) => {
+    const htmlList = activeEvents.map((event) => {
         const title = escapeHtml(String(event?.title || 'Tədbir').trim());
         const date = escapeHtml(String(event?.date || '').trim());
         const location = escapeHtml(String(event?.location || '').trim());
