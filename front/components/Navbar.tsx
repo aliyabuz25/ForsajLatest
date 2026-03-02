@@ -79,13 +79,11 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
         return;
       }
 
-      if (lastAppliedLanguageRef.current !== normalizedCode || select.value !== normalizedCode) {
-        select.value = normalizedCode;
-        select.dispatchEvent(new Event('change', { bubbles: true }));
-        const w = window as any;
-        if (typeof w.doGTranslate === 'function') {
-          w.doGTranslate(normalizedCode);
-        }
+      select.value = normalizedCode;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      const w = window as any;
+      if (typeof w.doGTranslate === 'function') {
+        w.doGTranslate(normalizedCode);
       }
 
       lastAppliedLanguageRef.current = normalizedCode;
