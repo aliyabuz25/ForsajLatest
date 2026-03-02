@@ -395,6 +395,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
 
     setSiteLanguage(nextLanguage as any);
+    scheduleLanguageReapply(languageMap[nextLanguage as 'AZ' | 'RU' | 'ENG'] || 'az|az', true);
     setIsLangOpen(false);
     setIsMobileMenuOpen(false);
   };
