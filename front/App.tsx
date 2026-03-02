@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Marquee from './components/Marquee';
 import Navbar from './components/Navbar';
@@ -40,6 +40,8 @@ const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [eventsOpenMode, setEventsOpenMode] = useState<EventsOpenMode>('default');
   const [isLanguageSplashVisible, setIsLanguageSplashVisible] = useState(true);
+  const [shouldRenderSplash, setShouldRenderSplash] = useState(true);
+  const splashFailSafeRef = useRef<number | null>(null);
 
   const handleViewChange = (view: FrontView, category: string | null = null) => {
     setCurrentView((prevView) => {
@@ -177,29 +179,71 @@ const App: React.FC = () => {
   }, [getText]);
 
   useEffect(() => {
-    const onLanguageTransitionStart = () => setIsLanguageSplashVisible(true);
-    const onLanguageTransitionEnd = () => setIsLanguageSplashVisible(false);
+    const clearSplashFailsafe = () => {
+      if (splashFailSafeRef.current !== null) {
+        window.clearTimeout(splashFailSafeRef.current);
+        splashFailSafeRef.current = null;
+      }
+    };
+
+    const armSplashFailsafe = () => {
+      clearSplashFailsafe();
+      splashFailSafeRef.current = window.setTimeout(() => {
+        setIsLanguageSplashVisible(false);
+      }, 5000);
+    };
+
+    const onLanguageTransitionStart = () => {
+      setIsLanguageSplashVisible(true);
+      armSplashFailsafe();
+    };
+    const onLanguageTransitionEnd = () => {
+      clearSplashFailsafe();
+      setIsLanguageSplashVisible(false);
+    };
 
     window.addEventListener(LANGUAGE_TRANSITION_START_EVENT, onLanguageTransitionStart as EventListener);
     window.addEventListener(LANGUAGE_TRANSITION_END_EVENT, onLanguageTransitionEnd as EventListener);
-
-    const failsafeTimer = window.setTimeout(() => {
-      setIsLanguageSplashVisible(false);
-    }, 5000);
+    armSplashFailsafe();
 
     return () => {
       window.removeEventListener(LANGUAGE_TRANSITION_START_EVENT, onLanguageTransitionStart as EventListener);
       window.removeEventListener(LANGUAGE_TRANSITION_END_EVENT, onLanguageTransitionEnd as EventListener);
-      window.clearTimeout(failsafeTimer);
+      clearSplashFailsafe();
     };
   }, []);
 
+  useEffect(() => {
+    if (isLanguageSplashVisible) {
+      setShouldRenderSplash(true);
+      return;
+    }
+
+    const hideTimer = window.setTimeout(() => {
+      setShouldRenderSplash(false);
+    }, 450);
+
+    return () => window.clearTimeout(hideTimer);
+  }, [isLanguageSplashVisible]);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {isLanguageSplashVisible && (
-        <div className="fixed inset-0 z-[300] bg-black flex items-center justify-center">
+      {shouldRenderSplash && (
+        <div
+          className={`fixed inset-0 z-[300] bg-black flex items-center justify-center transition-all duration-500 ease-out ${
+            isLanguageSplashVisible
+              ? 'opacity-100 backdrop-blur-sm pointer-events-auto'
+              : 'opacity-0 backdrop-blur-0 pointer-events-none'
+          }`}
+        >
           {splashLogo ? (
-            <img src={splashLogo} alt="Forsaj Logo" className="max-w-[220px] w-[58vw] h-auto object-contain" />
+            <img
+              src={splashLogo}
+              alt="Forsaj Logo"
+              className={`max-w-[220px] w-[58vw] h-auto object-contain transition-all duration-500 ease-out ${
+                isLanguageSplashVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
+            />
           ) : null}
         </div>
       )}
