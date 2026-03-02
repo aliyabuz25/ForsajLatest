@@ -63,9 +63,23 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const applyGTranslateLanguage = (langCode: string, token: number, withSplash: boolean, attempt = 0) => {
     if (token !== languageTransitionTokenRef.current) return;
     const normalizedCode = normalizeTranslateCode(langCode);
+    const w = window as any;
     const select =
       (document.querySelector(`.${GTRANSLATE_WRAPPER_CLASS} .gt_selector`) as HTMLSelectElement | null)
       || (document.querySelector('.gt_selector') as HTMLSelectElement | null);
+
+    // Fallback: some widget states expose doGTranslate without rendering the selector.
+    if (!select && typeof w.doGTranslate === 'function') {
+      w.doGTranslate(normalizedCode);
+      lastAppliedLanguageRef.current = normalizedCode;
+      if (withSplash && token === languageTransitionTokenRef.current) {
+        const settleTimer = window.setTimeout(() => {
+          if (token === languageTransitionTokenRef.current) emitLanguageTransition('end');
+        }, 900);
+        languageTimersRef.current.push(settleTimer);
+      }
+      return;
+    }
 
     if (select) {
       const hasOption = Array.from(select.options).some((option) => option.value === normalizedCode);
@@ -81,7 +95,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
       select.value = normalizedCode;
       select.dispatchEvent(new Event('change', { bubbles: true }));
-      const w = window as any;
       if (typeof w.doGTranslate === 'function') {
         w.doGTranslate(normalizedCode);
       }
