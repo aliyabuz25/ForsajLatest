@@ -16,6 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const languageTimersRef = useRef<number[]>([]);
   const languageBootstrappedRef = useRef(false);
   const languageTransitionTokenRef = useRef(0);
+  const lastAppliedLanguageRef = useRef<string>('');
   const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
   const GTRANSLATE_WRAPPER_CLASS = 'gtranslate_wrapper';
   const LANGUAGE_TRANSITION_START_EVENT = 'forsaj-language-transition-start';
@@ -59,7 +60,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
   };
 
-  const applyGTranslateLanguage = (langCode: string, attempt = 0) => {
+  const applyGTranslateLanguage = (langCode: string, token: number, withSplash: boolean, attempt = 0) => {
+    if (token !== languageTransitionTokenRef.current) return;
     const normalizedCode = normalizeTranslateCode(langCode);
     const select =
       (document.querySelector(`.${GTRANSLATE_WRAPPER_CLASS} .gt_selector`) as HTMLSelectElement | null)
@@ -68,23 +70,39 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     if (select) {
       const hasOption = Array.from(select.options).some((option) => option.value === normalizedCode);
       if (!hasOption) {
-        if (attempt < 28) {
-          window.setTimeout(() => applyGTranslateLanguage(normalizedCode, attempt + 1), 250);
+        if (attempt < 20) {
+          const retry = window.setTimeout(() => applyGTranslateLanguage(normalizedCode, token, withSplash, attempt + 1), 180);
+          languageTimersRef.current.push(retry);
+        } else if (withSplash && token === languageTransitionTokenRef.current) {
+          emitLanguageTransition('end');
         }
         return;
       }
 
-      select.value = normalizedCode;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-      const w = window as any;
-      if (typeof w.doGTranslate === 'function') {
-        w.doGTranslate(normalizedCode);
+      if (lastAppliedLanguageRef.current !== normalizedCode || select.value !== normalizedCode) {
+        select.value = normalizedCode;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        const w = window as any;
+        if (typeof w.doGTranslate === 'function') {
+          w.doGTranslate(normalizedCode);
+        }
+      }
+
+      lastAppliedLanguageRef.current = normalizedCode;
+      if (withSplash && token === languageTransitionTokenRef.current) {
+        const settleTimer = window.setTimeout(() => {
+          if (token === languageTransitionTokenRef.current) emitLanguageTransition('end');
+        }, 900);
+        languageTimersRef.current.push(settleTimer);
       }
       return;
     }
 
-    if (attempt < 28) {
-      window.setTimeout(() => applyGTranslateLanguage(normalizedCode, attempt + 1), 250);
+    if (attempt < 20) {
+      const retry = window.setTimeout(() => applyGTranslateLanguage(normalizedCode, token, withSplash, attempt + 1), 180);
+      languageTimersRef.current.push(retry);
+    } else if (withSplash && token === languageTransitionTokenRef.current) {
+      emitLanguageTransition('end');
     }
   };
 
@@ -107,11 +125,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
   };
 
-  const applySiteLanguage = (langCode: string) => {
+  const applySiteLanguage = (langCode: string, withSplash = false) => {
     const normalized = normalizeTranslateCode(langCode);
     ensureGTranslate();
     setGTranslateCookie(normalized);
-    applyGTranslateLanguage(normalized);
+    const token = languageTransitionTokenRef.current;
+    applyGTranslateLanguage(normalized, token, withSplash);
   };
 
   const emitLanguageTransition = (type: 'start' | 'end') => {
@@ -124,21 +143,19 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     languageTimersRef.current.forEach((id) => window.clearTimeout(id));
     languageTimersRef.current = [];
     const token = ++languageTransitionTokenRef.current;
+    const normalized = normalizeTranslateCode(langCode);
+
+    if (!withSplash && lastAppliedLanguageRef.current === normalized) {
+      return;
+    }
 
     if (withSplash) emitLanguageTransition('start');
-
-    [0, 180, 600, 1300].forEach((delay) => {
-      const timer = window.setTimeout(() => applySiteLanguage(langCode), delay);
-      languageTimersRef.current.push(timer);
-    });
-
+    applySiteLanguage(normalized, withSplash);
     if (withSplash) {
-      const settleTimer = window.setTimeout(() => {
-        if (languageTransitionTokenRef.current === token) {
-          emitLanguageTransition('end');
-        }
-      }, 1800);
-      languageTimersRef.current.push(settleTimer);
+      const failsafe = window.setTimeout(() => {
+        if (token === languageTransitionTokenRef.current) emitLanguageTransition('end');
+      }, 2200);
+      languageTimersRef.current.push(failsafe);
     }
   };
 
@@ -159,7 +176,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   useEffect(() => {
     if (!languageBootstrappedRef.current) return;
     scheduleLanguageReapply(languageMap[language] || 'az|az');
-  }, [currentView, language]);
+  }, [currentView]);
 
   useEffect(() => {
     if (!isLangOpen) return;
