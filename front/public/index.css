@@ -253,6 +253,67 @@ a {
   z-index: 70;
 }
 
+.translate-transition-overlay {
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.translate-transition-overlay.is-visible {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.translate-loader {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  animation: translate-loader-spin 1.1s linear infinite;
+}
+
+.translate-loader.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.translate-loader-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #ff4d00;
+  box-shadow: 0 0 16px rgba(255, 77, 0, 0.55);
+}
+
+.translate-loader-dot.dot-a {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.translate-loader-dot.dot-b {
+  left: 3px;
+  bottom: 10px;
+}
+
+.translate-loader-dot.dot-c {
+  right: 3px;
+  bottom: 10px;
+}
+
+@keyframes translate-loader-spin {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
 .language-picker::before {
   content: '';
   position: absolute;

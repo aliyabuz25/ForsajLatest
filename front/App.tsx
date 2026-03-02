@@ -54,8 +54,7 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  const { getText, getImage } = useSiteContent('general');
-  const splashLogo = getImage('SITE_LOGO_LIGHT', '').path;
+  const { getText } = useSiteContent('general');
 
   useEffect(() => {
     try {
@@ -230,21 +229,17 @@ const App: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {shouldRenderSplash && (
         <div
-          className={`fixed inset-0 z-[300] bg-black flex items-center justify-center transition-all duration-500 ease-out ${
+          className={`translate-transition-overlay fixed inset-0 z-[300] flex items-center justify-center transition-all duration-500 ease-out ${
             isLanguageSplashVisible
-              ? 'opacity-100 backdrop-blur-sm pointer-events-auto'
-              : 'opacity-0 backdrop-blur-0 pointer-events-none'
+              ? 'is-visible opacity-100 pointer-events-auto'
+              : 'opacity-0 pointer-events-none'
           }`}
         >
-          {splashLogo ? (
-            <img
-              src={splashLogo}
-              alt="Forsaj Logo"
-              className={`max-w-[220px] w-[58vw] h-auto object-contain transition-all duration-500 ease-out ${
-                isLanguageSplashVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-              }`}
-            />
-          ) : null}
+          <div className={`translate-loader ${isLanguageSplashVisible ? 'is-visible' : ''}`} aria-hidden="true">
+            <span className="translate-loader-dot dot-a" />
+            <span className="translate-loader-dot dot-b" />
+            <span className="translate-loader-dot dot-c" />
+          </div>
         </div>
       )}
       <Toaster position="top-right" />
