@@ -33,13 +33,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   };
   const languageVisibleLabel: Record<'AZ' | 'RU' | 'ENG', string> = {
     AZ: 'AZ',
-    RU: 'РУ',
+    RU: 'RUS',
     ENG: 'EN'
   };
   const languageOptionLabel: Record<'AZ' | 'RU' | 'ENG', string> = {
-    AZ: 'Azərbaycan',
-    RU: 'Русский',
-    ENG: 'English'
+    AZ: 'AZ',
+    RU: 'RUS',
+    ENG: 'EN'
   };
 
   const normalizeTranslateCode = (code: string) => {
@@ -453,23 +453,25 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
         <div className="flex items-center gap-2">
           <div
             ref={languagePickerRef}
-            className={`language-picker relative z-[70] hidden lg:block ${isLangOpen ? 'language-picker--open' : ''}`}
+            className={`language-picker notranslate relative z-[70] hidden lg:block ${isLangOpen ? 'language-picker--open' : ''}`}
+            translate="no"
           >
             <button
               type="button"
               onClick={() => setIsLangOpen((prev) => !prev)}
-              className="language-picker__trigger inline-flex items-center justify-between gap-2"
+              className="language-picker__trigger notranslate inline-flex items-center justify-between gap-2"
+              translate="no"
               aria-label={languagePickerAriaLabel[language]}
               aria-haspopup="listbox"
               aria-expanded={isLangOpen}
             >
               <Globe className="language-picker__globe" />
-              <span className="language-picker__current text-xs">{languageVisibleLabel[language]}</span>
+              <span className="language-picker__current notranslate text-xs" translate="no">{languageVisibleLabel[language]}</span>
               <ChevronDown className={`language-picker__chevron ${isLangOpen ? 'language-picker__chevron--open' : ''}`} />
             </button>
 
             {isLangOpen && (
-              <div className="language-picker__menu absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[language]}>
+              <div className="language-picker__menu notranslate absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[language]} translate="no">
                 {languages.map((lang) => (
                   <button
                     key={lang}
@@ -477,7 +479,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                     role="option"
                     aria-selected={language === lang}
                     onClick={() => handleLanguageSelect(lang)}
-                    className={`language-picker__item block w-full text-left ${language === lang ? 'language-picker__item--active' : ''}`}
+                    className={`language-picker__item notranslate block w-full text-left ${language === lang ? 'language-picker__item--active' : ''}`}
+                    translate="no"
                   >
                     {languageOptionLabel[lang as 'AZ' | 'RU' | 'ENG']}
                   </button>
@@ -549,11 +552,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                     key={`mobile-lang-${lang}`}
                     type="button"
                     onClick={() => handleLanguageSelect(lang)}
-                    className={`px-3 py-3 text-xs font-black italic uppercase rounded-sm border transition-all ${
+                    className={`notranslate px-3 py-3 text-xs font-black italic uppercase rounded-sm border transition-all ${
                       language === lang
                         ? 'bg-[#FF4D00] text-black border-[#FF4D00]'
                         : 'bg-white/5 text-white border-white/10 hover:bg-white/10'
                     }`}
+                    translate="no"
                   >
                     {languageVisibleLabel[lang as 'AZ' | 'RU' | 'ENG']}
                   </button>
