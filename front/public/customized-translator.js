@@ -192,6 +192,14 @@
     try {
       if (languageChanged) showTransitionVeil();
 
+      // AZ -> other languages: apply target cookie and reload immediately.
+      if (previousLang === DEFAULT_LANG && lang !== DEFAULT_LANG) {
+        setGoogTransCookie(lang);
+        setActive(lang);
+        window.setTimeout(() => window.location.reload(), 60);
+        return;
+      }
+
       // Returning to base language should fully stop translation and reload cleanly.
       if (lang === DEFAULT_LANG && languageChanged) {
         clearGoogTransCookies();
