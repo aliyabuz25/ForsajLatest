@@ -295,6 +295,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                 </button>
               ))}
             </div>
+            <div className="pt-4 border-t border-white/10">
+              <div className="mobile-translator custom-gtranslate mini notranslate" translate="no" />
+            </div>
           </div>
         </div>
       )}

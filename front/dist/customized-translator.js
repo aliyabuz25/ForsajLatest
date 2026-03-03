@@ -14,10 +14,8 @@
     en: "https://flagcdn.com/w40/us.png"
   };
 
-  let currentLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
-  if (!SUPPORTED_LANGS.includes(currentLang)) {
-    currentLang = DEFAULT_LANG;
-  }
+  let currentLang = (localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG).toLowerCase();
+  if (!SUPPORTED_LANGS.includes(currentLang)) currentLang = DEFAULT_LANG;
 
   function setGoogTransCookie(lang) {
     const value = `/${DEFAULT_LANG}/${lang}`;
@@ -39,8 +37,8 @@
     cookies.forEach(c => document.cookie = c);
   }
 
-  function getHost() {
-    return document.getElementById("customTranslator");
+  function getHosts() {
+    return Array.from(document.querySelectorAll(".custom-gtranslate"));
   }
 
   function setButtonsDisabled(disabled) {
@@ -51,61 +49,63 @@
   }
 
   function renderButtons() {
-    const host = getHost();
-    if (!host) return;
+    const hosts = getHosts();
+    if (!hosts.length) return;
 
-    host.innerHTML = "";
+    hosts.forEach((host) => {
+      host.innerHTML = "";
 
-    if (host.classList.contains("full")) {
-      const dropdown = document.createElement("div");
-      dropdown.className = "cg-dropdown";
+      if (host.classList.contains("full")) {
+        const dropdown = document.createElement("div");
+        dropdown.className = "cg-dropdown";
 
-      const trigger = document.createElement("div");
-      trigger.className = "cg-dropdown-trigger";
-      trigger.innerHTML = `
-        <img src="${flags[currentLang]}" class="cg-flag-img-small">
-        <span class="notranslate">${currentLang.toUpperCase()}</span>
-        <span class="cg-arrow">▾</span>
-      `;
-
-      const list = document.createElement("div");
-      list.className = "cg-dropdown-list";
-
-      SUPPORTED_LANGS.forEach((lang) => {
-        const item = document.createElement("div");
-        item.className = "cg-dropdown-item" + (lang === currentLang ? " active" : "");
-        item.innerHTML = `
-          <img src="${flags[lang]}" class="cg-flag-img-small">
-          <span class="notranslate">${lang.toUpperCase()}</span>
+        const trigger = document.createElement("div");
+        trigger.className = "cg-dropdown-trigger";
+        trigger.innerHTML = `
+          <img src="${flags[currentLang]}" class="cg-flag-img-small">
+          <span class="notranslate">${currentLang.toUpperCase()}</span>
+          <span class="cg-arrow">▾</span>
         `;
-        item.addEventListener("click", (e) => {
-          e.stopPropagation();
-          handleLangChange(lang);
-          dropdown.classList.remove("open");
+
+        const list = document.createElement("div");
+        list.className = "cg-dropdown-list";
+
+        SUPPORTED_LANGS.forEach((lang) => {
+          const item = document.createElement("div");
+          item.className = "cg-dropdown-item" + (lang === currentLang ? " active" : "");
+          item.innerHTML = `
+            <img src="${flags[lang]}" class="cg-flag-img-small">
+            <span class="notranslate">${lang.toUpperCase()}</span>
+          `;
+          item.addEventListener("click", (e) => {
+            e.stopPropagation();
+            handleLangChange(lang);
+            dropdown.classList.remove("open");
+          });
+          list.appendChild(item);
         });
-        list.appendChild(item);
-      });
 
-      trigger.addEventListener("click", (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle("open");
-      });
+        trigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          dropdown.classList.toggle("open");
+        });
 
-      document.addEventListener("click", () => dropdown.classList.remove("open"));
-      dropdown.appendChild(trigger);
-      dropdown.appendChild(list);
-      host.appendChild(dropdown);
-    } else {
-      SUPPORTED_LANGS.forEach((lang) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "cg-btn";
-        if (lang === currentLang) btn.classList.add("active");
-        btn.innerHTML = `<img src="${flags[lang]}" alt="${lang}" class="cg-flag-img" loading="lazy">`;
-        btn.onclick = () => handleLangChange(lang);
-        host.appendChild(btn);
-      });
-    }
+        document.addEventListener("click", () => dropdown.classList.remove("open"));
+        dropdown.appendChild(trigger);
+        dropdown.appendChild(list);
+        host.appendChild(dropdown);
+      } else {
+        SUPPORTED_LANGS.forEach((lang) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "cg-btn";
+          if (lang === currentLang) btn.classList.add("active");
+          btn.innerHTML = `<img src="${flags[lang]}" alt="${lang}" class="cg-flag-img" loading="lazy">`;
+          btn.onclick = () => handleLangChange(lang);
+          host.appendChild(btn);
+        });
+      }
+    });
   }
 
   async function handleLangChange(lang) {
@@ -178,6 +178,13 @@
     return cookie ? decodeURIComponent(cookie.split("=").slice(1).join("=")) : "";
   }
 
+  function getGoogTransTargetFromCookie() {
+    const value = getCookieValue("googtrans");
+    if (!value) return "";
+    const parts = decodeURIComponent(value).split("/");
+    return (parts[parts.length - 1] || "").toLowerCase();
+  }
+
   function getCurrentTranslatorLang() {
     const combo = document.querySelector("select.goog-te-combo");
     if (combo && combo.value) return combo.value;
@@ -241,6 +248,17 @@
       languages: SUPPORTED_LANGS,
       wrapper_selector: ".gtranslate_native_wrapper"
     };
+
+    const cookieLang = getGoogTransTargetFromCookie();
+    if (!SUPPORTED_LANGS.includes(cookieLang || "")) {
+      clearGoogTransCookies();
+      setGoogTransCookie(DEFAULT_LANG);
+    } else if (cookieLang) {
+      currentLang = cookieLang;
+      localStorage.setItem(STORAGE_KEY, currentLang);
+    } else {
+      setGoogTransCookie(currentLang || DEFAULT_LANG);
+    }
 
     renderButtons();
 

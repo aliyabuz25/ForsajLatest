@@ -1,8 +1,8 @@
 .custom-gtranslate.mini {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  z-index: 300;
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: 60;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -148,4 +148,8 @@
 
 body {
   top: 0 !important;
+}
+
+.mobile-translator.custom-gtranslate.mini {
+  justify-content: center;
 }
