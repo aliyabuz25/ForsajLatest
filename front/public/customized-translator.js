@@ -211,7 +211,15 @@
         setGoogTransCookie(lang);
       }
 
-      const ok = applyLang(lang);
+      let ok = applyLang(lang);
+      if (!ok) {
+        try {
+          await loadScript();
+          const ready = await waitForTranslatorReady();
+          if (ready) ok = applyLang(lang);
+        } catch (e) { }
+      }
+
       if (ok) {
         await new Promise(r => setTimeout(r, 220));
 
@@ -228,13 +236,19 @@
           }
         } else {
           const applied = await waitForRenderedTranslation(lang);
-          if (applied) setActive(lang);
-          if (languageChanged) hideTransitionVeil();
+          if (applied) {
+            setActive(lang);
+            if (languageChanged) hideTransitionVeil();
+          } else {
+            // Last-resort fallback: hard reload with target cookie guarantees translation on reopen.
+            setActive(lang);
+            if (languageChanged) window.setTimeout(() => window.location.reload(), 120);
+          }
         }
       } else if (languageChanged) {
-        // Fallback: if translator API is temporarily unavailable, do not leave UI dark.
+        // Fallback: widget unavailable; reload with selected language cookie.
         setActive(lang);
-        hideTransitionVeil();
+        window.setTimeout(() => window.location.reload(), 120);
       }
     } catch (err) {
       console.error("Translation switch error:", err);
