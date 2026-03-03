@@ -10,9 +10,9 @@
   const POST_RELOAD_FADE_KEY = "cg_post_reload_fade";
   const POST_RELOAD_PENDING_CLASS = "cg-post-reload-pending";
   const POST_RELOAD_READY_CLASS = "cg-post-reload-ready";
-  const POST_RELOAD_FADE_DURATION_MS = 1200;
+  const POST_RELOAD_FADE_DURATION_MS = 2200;
   const POST_RELOAD_COVER_ID = "cg-post-reload-cover";
-  const POST_RELOAD_COVER_FADE_MS = 900;
+  const POST_RELOAD_COVER_FADE_MS = 1800;
 
   const flags = {
     az: "https://flagcdn.com/w40/az.png",
@@ -65,7 +65,7 @@
     veil.style.pointerEvents = "none";
     veil.style.background = "#000";
     veil.style.opacity = "0";
-    veil.style.transition = "opacity 140ms ease";
+    veil.style.transition = "opacity 420ms cubic-bezier(0.22, 1, 0.36, 1)";
     veil.style.zIndex = "2147483647";
     document.body.appendChild(veil);
     return veil;
@@ -74,14 +74,14 @@
   function showTransitionVeil() {
     const veil = getTransitionVeil();
     requestAnimationFrame(() => {
-      veil.style.opacity = "0.9";
+      veil.style.opacity = "0.96";
     });
   }
 
   function hideTransitionVeil() {
     const veil = document.getElementById("cg-translate-veil");
     if (!veil) return;
-    veil.style.transition = "opacity 220ms ease";
+    veil.style.transition = "opacity 700ms cubic-bezier(0.22, 1, 0.36, 1)";
     veil.style.opacity = "0";
   }
 
@@ -110,7 +110,7 @@
   function hidePostReloadCover() {
     const cover = document.getElementById(POST_RELOAD_COVER_ID);
     if (!cover) return;
-    cover.style.transition = `opacity ${POST_RELOAD_COVER_FADE_MS}ms ease`;
+    cover.style.transition = `opacity ${POST_RELOAD_COVER_FADE_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`;
     cover.style.opacity = "0";
     window.setTimeout(() => {
       const node = document.getElementById(POST_RELOAD_COVER_ID);
