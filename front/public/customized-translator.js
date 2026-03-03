@@ -10,7 +10,9 @@
   const POST_RELOAD_FADE_KEY = "cg_post_reload_fade";
   const POST_RELOAD_PENDING_CLASS = "cg-post-reload-pending";
   const POST_RELOAD_READY_CLASS = "cg-post-reload-ready";
-  const POST_RELOAD_FADE_DURATION_MS = 3600;
+  const POST_RELOAD_FADE_DURATION_MS = 1200;
+  const POST_RELOAD_COVER_ID = "cg-post-reload-cover";
+  const POST_RELOAD_COVER_FADE_MS = 900;
 
   const flags = {
     az: "https://flagcdn.com/w40/az.png",
@@ -83,6 +85,39 @@
     veil.style.opacity = "0";
   }
 
+  function getPostReloadCover() {
+    let cover = document.getElementById(POST_RELOAD_COVER_ID);
+    if (cover) return cover;
+    cover = document.createElement("div");
+    cover.id = POST_RELOAD_COVER_ID;
+    cover.setAttribute("aria-hidden", "true");
+    cover.style.position = "fixed";
+    cover.style.inset = "0";
+    cover.style.background = "#000";
+    cover.style.opacity = "1";
+    cover.style.pointerEvents = "none";
+    cover.style.zIndex = "2147483646";
+    document.body.appendChild(cover);
+    return cover;
+  }
+
+  function showPostReloadCover() {
+    const cover = getPostReloadCover();
+    cover.style.transition = "none";
+    cover.style.opacity = "1";
+  }
+
+  function hidePostReloadCover() {
+    const cover = document.getElementById(POST_RELOAD_COVER_ID);
+    if (!cover) return;
+    cover.style.transition = `opacity ${POST_RELOAD_COVER_FADE_MS}ms ease`;
+    cover.style.opacity = "0";
+    window.setTimeout(() => {
+      const node = document.getElementById(POST_RELOAD_COVER_ID);
+      if (node) node.remove();
+    }, POST_RELOAD_COVER_FADE_MS + 150);
+  }
+
   function applyPostReloadFade() {
     try {
       const raw = sessionStorage.getItem(POST_RELOAD_FADE_KEY);
@@ -92,6 +127,7 @@
       if (!Number.isFinite(ts) || Date.now() - ts > 7000) return false;
       document.body.classList.add(POST_RELOAD_PENDING_CLASS);
       document.body.classList.remove(POST_RELOAD_READY_CLASS);
+      showPostReloadCover();
       return true;
     } catch (e) {
       return false;
@@ -102,10 +138,11 @@
     const body = document.body;
     if (!body || !body.classList.contains(POST_RELOAD_PENDING_CLASS)) return;
     body.classList.add(POST_RELOAD_READY_CLASS);
+    hidePostReloadCover();
     window.setTimeout(() => {
       body.classList.remove(POST_RELOAD_PENDING_CLASS);
       body.classList.remove(POST_RELOAD_READY_CLASS);
-    }, POST_RELOAD_FADE_DURATION_MS + 300);
+    }, Math.max(POST_RELOAD_FADE_DURATION_MS, POST_RELOAD_COVER_FADE_MS) + 350);
   }
 
   function applyLanguageClass(lang) {
