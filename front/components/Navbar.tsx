@@ -185,7 +185,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
   const scheduleLanguageReapply = (langCode: string, withSplash = false, force = false) => {
     const now = Date.now();
-    if (force && !withSplash && now - lastReapplyAtRef.current < 1200) {
+    if (!force && !withSplash && now - lastReapplyAtRef.current < 1200) {
       return;
     }
     const normalized = normalizeTranslateCode(langCode);
