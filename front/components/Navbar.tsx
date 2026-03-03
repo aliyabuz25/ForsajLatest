@@ -28,6 +28,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const suppressObserverUntilRef = useRef(0);
   const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
   const GTRANSLATE_WRAPPER_CLASS = 'gtranslate_wrapper';
+  const GTRANSLATE_MOBILE_SCRIPT_ID = 'gtranslate-widget-script-fc';
+  const GTRANSLATE_MOBILE_WRAPPER_CLASS = 'gtranslate_wrapper_mobile';
   const USE_LIBRE_TRANSLATE = true;
   const LANGUAGE_TRANSITION_START_EVENT = 'forsaj-language-transition-start';
   const LANGUAGE_TRANSITION_END_EVENT = 'forsaj-language-transition-end';
@@ -311,6 +313,23 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
   };
 
+  const ensureMobileGTranslateWidget = () => {
+    const w = window as any;
+    w.gtranslateSettings = {
+      default_language: 'az',
+      languages: ['az', 'en', 'ru'],
+      wrapper_selector: `.${GTRANSLATE_MOBILE_WRAPPER_CLASS}`
+    };
+
+    if (!document.getElementById(GTRANSLATE_MOBILE_SCRIPT_ID)) {
+      const script = document.createElement('script');
+      script.id = GTRANSLATE_MOBILE_SCRIPT_ID;
+      script.src = 'https://cdn.gtranslate.net/widgets/latest/fc.js';
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+  };
+
   const applySiteLanguage = (langCode: string, withSplash = false) => {
     const normalized = normalizeTranslateCode(langCode);
     const token = languageTransitionTokenRef.current;
@@ -494,6 +513,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', handleEscape);
+    ensureMobileGTranslateWidget();
 
     return () => {
       document.body.style.overflow = previousOverflow;
@@ -838,22 +858,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
               <p className="text-[10px] font-black italic uppercase tracking-[0.24em] text-gray-500 mb-3">
                 {getText('MOBILE_LANGUAGE_TITLE', 'DİL')}
               </p>
-              <div className="grid grid-cols-3 gap-2">
-                {languages.map((lang) => (
-                  <button
-                    key={`mobile-lang-${lang}`}
-                    type="button"
-                    onClick={() => handleLanguageSelect(lang)}
-                    className={`notranslate px-3 py-3 text-xs font-black italic uppercase rounded-sm border transition-all ${
-                      language === lang
-                        ? 'bg-[#FF4D00] text-black border-[#FF4D00]'
-                        : 'bg-white/5 text-white border-white/10 hover:bg-white/10'
-                    }`}
-                    translate="no"
-                  >
-                    {languageVisibleLabel[lang as 'AZ' | 'RU' | 'ENG']}
-                  </button>
-                ))}
+              <div
+                className={`${GTRANSLATE_MOBILE_WRAPPER_CLASS} notranslate min-h-[44px]`}
+                translate="no"
+              />
+              <div className="mt-3">
+                <p className="text-[10px] font-black italic uppercase tracking-[0.16em] text-gray-600">
+                  {getText('MOBILE_LANGUAGE_HINT', 'DİLİ SEÇƏN KİMİ TƏRCÜMƏ EDİLƏCƏK')}
+                </p>
               </div>
             </div>
           </div>
