@@ -192,6 +192,19 @@
     try {
       if (languageChanged) showTransitionVeil();
 
+      // Returning to base language should fully stop translation and reload cleanly.
+      if (lang === DEFAULT_LANG && languageChanged) {
+        clearGoogTransCookies();
+        const combo = document.querySelector("select.goog-te-combo");
+        if (combo) {
+          combo.selectedIndex = 0;
+          combo.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+        setActive(lang);
+        window.setTimeout(() => window.location.reload(), 120);
+        return;
+      }
+
       if (lang === DEFAULT_LANG) {
         clearGoogTransCookies();
       } else {
