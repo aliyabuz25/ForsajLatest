@@ -48,6 +48,28 @@
     });
   }
 
+  function smoothReload() {
+    if (window.__cgReloadPending) return;
+    window.__cgReloadPending = true;
+
+    const veil = document.createElement("div");
+    veil.setAttribute("aria-hidden", "true");
+    veil.style.position = "fixed";
+    veil.style.inset = "0";
+    veil.style.pointerEvents = "none";
+    veil.style.background = "#000";
+    veil.style.opacity = "0";
+    veil.style.transition = "opacity 160ms ease";
+    veil.style.zIndex = "2147483647";
+    document.body.appendChild(veil);
+
+    requestAnimationFrame(() => {
+      veil.style.opacity = "0.14";
+    });
+
+    window.setTimeout(() => window.location.reload(), 180);
+  }
+
   function renderButtons() {
     const hosts = getHosts();
     if (!hosts.length) return;
@@ -110,7 +132,8 @@
 
   async function handleLangChange(lang) {
     if (!lang) return;
-    const wasNonDefault = currentLang !== DEFAULT_LANG;
+    const previousLang = currentLang;
+    const languageChanged = previousLang !== lang;
 
     setButtonsDisabled(true);
     try {
@@ -133,12 +156,13 @@
             combo.dispatchEvent(new Event("change", { bubbles: true }));
           }
           setActive(lang);
-          if (wasNonDefault) {
-            window.setTimeout(() => window.location.reload(), 150);
-          }
+          if (languageChanged) smoothReload();
         } else {
           const applied = await waitForLanguageApplied(lang);
-          if (applied) setActive(lang);
+          if (applied) {
+            setActive(lang);
+            if (languageChanged) smoothReload();
+          }
         }
       }
     } catch (err) {
