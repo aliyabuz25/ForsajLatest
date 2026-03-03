@@ -832,42 +832,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
         <div className="flex items-center gap-2">
           <div
-            ref={languagePickerRef}
-            className={`language-picker notranslate relative z-[70] hidden lg:block ${isLangOpen ? 'language-picker--open' : ''}`}
+            className={`${GTRANSLATE_WRAPPER_CLASS} notranslate min-h-[44px]`}
             translate="no"
-          >
-            <button
-              type="button"
-              onClick={() => setIsLangOpen((prev) => !prev)}
-              className="language-picker__trigger notranslate inline-flex items-center justify-between gap-2"
-              translate="no"
-              aria-label={languagePickerAriaLabel[selectedLanguage]}
-              aria-haspopup="listbox"
-              aria-expanded={isLangOpen}
-            >
-              <Globe className="language-picker__globe" />
-              <span className="language-picker__current notranslate text-xs" translate="no">{languageVisibleLabel[selectedLanguage]}</span>
-              <ChevronDown className={`language-picker__chevron ${isLangOpen ? 'language-picker__chevron--open' : ''}`} />
-            </button>
-
-            {isLangOpen && (
-              <div className="language-picker__menu notranslate absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[selectedLanguage]} translate="no">
-                {languages.map((lang) => (
-                  <button
-                    key={lang}
-                    type="button"
-                    role="option"
-                    aria-selected={selectedLanguage === lang}
-                    onClick={() => handleLanguageSelect(lang)}
-                    className={`language-picker__item notranslate block w-full text-left ${selectedLanguage === lang ? 'language-picker__item--active' : ''}`}
-                    translate="no"
-                  >
-                    {languageOptionLabel[lang as 'AZ' | 'RU' | 'ENG']}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+          />
 
           <button
             type="button"
@@ -878,7 +845,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
             <Menu size={22} />
           </button>
         </div>
-        <div className={GTRANSLATE_WRAPPER_CLASS} style={{ display: 'none' }} />
       </nav>
 
       {isMobileMenuOpen && (
@@ -926,10 +892,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
               <p className="text-[10px] font-black italic uppercase tracking-[0.24em] text-gray-500 mb-3">
                 {getText('MOBILE_LANGUAGE_TITLE', 'DİL')}
               </p>
-              <div
-                className={`${GTRANSLATE_WRAPPER_CLASS} notranslate min-h-[44px]`}
-                translate="no"
-              />
               <div className="mt-3">
                 <p className="text-[10px] font-black italic uppercase tracking-[0.16em] text-gray-600">
                   {getText('MOBILE_LANGUAGE_HINT', 'DİLİ SEÇƏN KİMİ TƏRCÜMƏ EDİLƏCƏK')}
