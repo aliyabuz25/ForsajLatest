@@ -17,6 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const languageBootstrappedRef = useRef(false);
   const languageTransitionTokenRef = useRef(0);
   const lastAppliedLanguageRef = useRef<string>('');
+  const lastReapplyAtRef = useRef(0);
   const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
   const GTRANSLATE_WRAPPER_CLASS = 'gtranslate_wrapper';
   const LANGUAGE_TRANSITION_START_EVENT = 'forsaj-language-transition-start';
@@ -150,18 +151,26 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     );
   };
 
-  const scheduleLanguageReapply = (langCode: string, withSplash = false) => {
+  const scheduleLanguageReapply = (langCode: string, withSplash = false, force = false) => {
+    const now = Date.now();
+    if (force && !withSplash && now - lastReapplyAtRef.current < 350) {
+      return;
+    }
+
     languageTimersRef.current.forEach((id) => window.clearTimeout(id));
     languageTimersRef.current = [];
     const token = ++languageTransitionTokenRef.current;
     const normalized = normalizeTranslateCode(langCode);
 
-    if (!withSplash && lastAppliedLanguageRef.current === normalized) {
+    // Reapply on demand even if the selected language has not changed.
+    // This prevents stale untranslated content after view/content updates.
+    if (!withSplash && !force && lastAppliedLanguageRef.current === normalized) {
       return;
     }
 
     if (withSplash) emitLanguageTransition('start');
     applySiteLanguage(normalized, withSplash);
+    lastReapplyAtRef.current = now;
     if (withSplash) {
       const failsafe = window.setTimeout(() => {
         if (token === languageTransitionTokenRef.current) emitLanguageTransition('end');
@@ -186,8 +195,35 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
   useEffect(() => {
     if (!languageBootstrappedRef.current) return;
-    scheduleLanguageReapply(languageMap[language] || 'az|az');
+    scheduleLanguageReapply(languageMap[language] || 'az|az', false, true);
   }, [currentView]);
+
+  useEffect(() => {
+    if (language === 'AZ') return;
+
+    let debounceId = 0;
+    const observer = new MutationObserver((mutations) => {
+      const hasStructuralChange = mutations.some((mutation) => {
+        return mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0;
+      });
+
+      if (!hasStructuralChange) return;
+      window.clearTimeout(debounceId);
+      debounceId = window.setTimeout(() => {
+        scheduleLanguageReapply(languageMap[language] || 'az|az', false, true);
+      }, 180);
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => {
+      window.clearTimeout(debounceId);
+      observer.disconnect();
+    };
+  }, [language]);
 
   useEffect(() => {
     if (!isLangOpen) return;
