@@ -13,6 +13,9 @@ const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const FORCED_MAIL_LOGO_URL = 'https://forsaj.octotech.az/uploads/1771427495257-714907240.png';
+const LIBRETRANSLATE_URL = String(process.env.LIBRETRANSLATE_URL || 'http://localhost:5001/translate').trim();
+const LIBRETRANSLATE_API_KEY = String(process.env.LIBRETRANSLATE_API_KEY || '').trim();
+const LIBRETRANSLATE_TIMEOUT_MS = Number(process.env.LIBRETRANSLATE_TIMEOUT_MS || 15000);
 
 // ------------------------------------------
 // MYSQL CONFIGURATION
@@ -1546,6 +1549,99 @@ app.get('/api/health', (req, res) => {
 
         return res.json(payload);
     })();
+});
+
+// API: Frontend translation proxy (LibreTranslate compatible)
+app.post('/api/translate', async (req, res) => {
+    try {
+        const body = req.body || {};
+        const source = String(body.source || 'az').trim().toLowerCase() || 'az';
+        const target = String(body.target || '').trim().toLowerCase();
+        const format = String(body.format || 'text').trim().toLowerCase() || 'text';
+        const rawQ = body.q;
+
+        if (!target) {
+            return res.status(400).json({ error: 'target language is required' });
+        }
+        if (typeof rawQ === 'undefined' || rawQ === null) {
+            return res.status(400).json({ error: 'q is required' });
+        }
+
+        const isArrayInput = Array.isArray(rawQ);
+        const normalizedQ = isArrayInput
+            ? rawQ.map((item) => String(item ?? ''))
+            : String(rawQ ?? '');
+
+        if (isArrayInput && normalizedQ.length === 0) {
+            return res.json({ translatedText: [] });
+        }
+
+        if (source === target) {
+            return res.json({ translatedText: normalizedQ });
+        }
+
+        const payload = {
+            q: normalizedQ,
+            source,
+            target,
+            format
+        };
+
+        if (LIBRETRANSLATE_API_KEY) {
+            payload.api_key = LIBRETRANSLATE_API_KEY;
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), LIBRETRANSLATE_TIMEOUT_MS);
+
+        let upstreamResponse;
+        try {
+            upstreamResponse = await fetch(LIBRETRANSLATE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                signal: controller.signal
+            });
+        } finally {
+            clearTimeout(timeoutId);
+        }
+
+        const upstreamText = await upstreamResponse.text();
+        let upstreamJson = {};
+        try {
+            upstreamJson = upstreamText ? JSON.parse(upstreamText) : {};
+        } catch {
+            upstreamJson = {};
+        }
+
+        if (!upstreamResponse.ok) {
+            return res.status(502).json({
+                error: 'translation upstream failed',
+                details: upstreamJson?.error || upstreamText || upstreamResponse.statusText
+            });
+        }
+
+        let translatedText;
+        if (isArrayInput) {
+            if (Array.isArray(upstreamJson?.translatedText)) {
+                translatedText = upstreamJson.translatedText.map((item) => String(item ?? ''));
+            } else {
+                translatedText = normalizedQ;
+            }
+        } else {
+            translatedText = typeof upstreamJson?.translatedText === 'string'
+                ? upstreamJson.translatedText
+                : normalizedQ;
+        }
+
+        return res.json({ translatedText });
+    } catch (error) {
+        if (error?.name === 'AbortError') {
+            return res.status(504).json({ error: 'translation request timed out' });
+        }
+        console.error('Translation proxy error:', error);
+        return res.status(500).json({ error: 'Failed to translate text' });
+    }
 });
 
 app.get('/', (req, res) => {
