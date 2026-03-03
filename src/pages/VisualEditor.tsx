@@ -1055,16 +1055,37 @@ const VisualEditor: React.FC = () => {
                         { name: 'RACE TECH', tag: 'OFFICIAL PARTNER', icon: 'Zap' }
                     ];
 
-                    defaults.forEach((item, i) => {
-                        const idx = i + 1;
-                        ensureSection(`PARTNER_${idx}_NAME`, `Tərəfdaş ${idx} Ad`, item.name);
-                        ensureSection(`PARTNER_${idx}_TAG`, `Tərəfdaş ${idx} Etiket`, item.tag);
-                        ensureSection(`PARTNER_${idx}_ICON`, `Tərəfdaş ${idx} İkon`, item.icon);
-                        ensureSection(`PARTNER_${idx}_USE_IMAGE`, `Tərəfdaş ${idx} Görsel İstifadə`, 'false');
-                        ensureSection(`PARTNER_${idx}_IMAGE_ID`, `Tərəfdaş ${idx} Görsel ID`, `partner-image-${idx}`);
-                        ensureSection(`PARTNER_${idx}_LINK_URL`, `Tərəfdaş ${idx} Link`, '');
-                        ensureImage(`partner-image-${idx}`);
-                    });
+                    const existingPartnerIndexes = Array.from(new Set(
+                        sections
+                            .map((section) => section.id.match(PARTNER_KEY_REGEX))
+                            .filter(Boolean)
+                            .map((match) => Number((match as RegExpMatchArray)[1]))
+                            .filter((idx) => Number.isFinite(idx) && idx > 0)
+                    )).sort((a, b) => a - b);
+
+                    if (existingPartnerIndexes.length === 0) {
+                        defaults.forEach((item, i) => {
+                            const idx = i + 1;
+                            ensureSection(`PARTNER_${idx}_NAME`, `Tərəfdaş ${idx} Ad`, item.name);
+                            ensureSection(`PARTNER_${idx}_TAG`, `Tərəfdaş ${idx} Etiket`, item.tag);
+                            ensureSection(`PARTNER_${idx}_ICON`, `Tərəfdaş ${idx} İkon`, item.icon);
+                            ensureSection(`PARTNER_${idx}_USE_IMAGE`, `Tərəfdaş ${idx} Görsel İstifadə`, 'false');
+                            ensureSection(`PARTNER_${idx}_IMAGE_ID`, `Tərəfdaş ${idx} Görsel ID`, `partner-image-${idx}`);
+                            ensureSection(`PARTNER_${idx}_LINK_URL`, `Tərəfdaş ${idx} Link`, '');
+                            ensureImage(`partner-image-${idx}`);
+                        });
+                    } else {
+                        existingPartnerIndexes.forEach((idx) => {
+                            const fallback = defaults[idx - 1] || defaults[0];
+                            ensureSection(`PARTNER_${idx}_NAME`, `Tərəfdaş ${idx} Ad`, fallback.name);
+                            ensureSection(`PARTNER_${idx}_TAG`, `Tərəfdaş ${idx} Etiket`, fallback.tag);
+                            ensureSection(`PARTNER_${idx}_ICON`, `Tərəfdaş ${idx} İkon`, fallback.icon);
+                            ensureSection(`PARTNER_${idx}_USE_IMAGE`, `Tərəfdaş ${idx} Görsel İstifadə`, 'false');
+                            ensureSection(`PARTNER_${idx}_IMAGE_ID`, `Tərəfdaş ${idx} Görsel ID`, `partner-image-${idx}`);
+                            ensureSection(`PARTNER_${idx}_LINK_URL`, `Tərəfdaş ${idx} Link`, '');
+                            ensureImage(`partner-image-${idx}`);
+                        });
+                    }
 
                     partnersPage.sections = sections;
                     partnersPage.images = images;
