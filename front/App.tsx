@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 const SELECTED_NEWS_ID_KEY = 'forsaj_selected_news_id';
 const LANGUAGE_TRANSITION_START_EVENT = 'forsaj-language-transition-start';
 const LANGUAGE_TRANSITION_END_EVENT = 'forsaj-language-transition-end';
+const LANGUAGE_SPLASH_MIN_VISIBLE_MS = 3000;
 
 type FrontView =
   | 'home'
@@ -43,6 +44,7 @@ const App: React.FC = () => {
   const [shouldRenderSplash, setShouldRenderSplash] = useState(true);
   const splashFailSafeRef = useRef<number | null>(null);
   const splashHideDelayRef = useRef<number | null>(null);
+  const splashStartAtRef = useRef<number>(Date.now());
 
   const handleViewChange = (view: FrontView, category: string | null = null) => {
     setCurrentView((prevView) => {
@@ -215,16 +217,19 @@ const App: React.FC = () => {
 
     const onLanguageTransitionStart = () => {
       clearSplashHideDelay();
+      splashStartAtRef.current = Date.now();
       setIsLanguageSplashVisible(true);
       armSplashFailsafe();
     };
     const onLanguageTransitionEnd = () => {
       clearSplashFailsafe();
       clearSplashHideDelay();
+      const elapsed = Date.now() - splashStartAtRef.current;
+      const delay = Math.max(0, LANGUAGE_SPLASH_MIN_VISIBLE_MS - elapsed);
       splashHideDelayRef.current = window.setTimeout(() => {
         setIsLanguageSplashVisible(false);
         splashHideDelayRef.current = null;
-      }, 1000);
+      }, delay);
     };
 
     window.addEventListener(LANGUAGE_TRANSITION_START_EVENT, onLanguageTransitionStart as EventListener);
