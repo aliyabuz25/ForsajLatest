@@ -47,6 +47,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.cg-post-reload-fade {
+  animation: cg-post-reload-fade 1200ms ease-out both;
+}
+
+@keyframes cg-post-reload-fade {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 h1,
 h2,
 h3,
@@ -244,6 +260,11 @@ a {
   line-height: inherit !important;
   text-transform: inherit !important;
   white-space: inherit !important;
+}
+
+/* Long Russian translations fit better with slightly smaller hero headline */
+body.cg-lang-ru .hero-title {
+  font-size: clamp(1.7rem, 6.6vw, 5.6rem) !important;
 }
 
 /* Language picker: premium racing style */

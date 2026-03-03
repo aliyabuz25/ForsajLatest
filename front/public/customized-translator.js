@@ -7,6 +7,7 @@
   const RETRY_DELAY_MS = 500;
   const READY_TIMEOUT_MS = 10000;
   const SWITCH_TIMEOUT_MS = 6000;
+  const POST_RELOAD_FADE_KEY = "cg_post_reload_fade";
 
   const flags = {
     az: "https://flagcdn.com/w40/az.png",
@@ -67,7 +68,32 @@
       veil.style.opacity = "0.14";
     });
 
+    try {
+      sessionStorage.setItem(POST_RELOAD_FADE_KEY, String(Date.now()));
+    } catch (e) { }
+
     window.setTimeout(() => window.location.reload(), 180);
+  }
+
+  function applyPostReloadFade() {
+    try {
+      const raw = sessionStorage.getItem(POST_RELOAD_FADE_KEY);
+      if (!raw) return;
+      sessionStorage.removeItem(POST_RELOAD_FADE_KEY);
+      const ts = Number(raw);
+      if (!Number.isFinite(ts) || Date.now() - ts > 7000) return;
+      document.body.classList.add("cg-post-reload-fade");
+      window.setTimeout(() => {
+        document.body.classList.remove("cg-post-reload-fade");
+      }, 1600);
+    } catch (e) { }
+  }
+
+  function applyLanguageClass(lang) {
+    const body = document.body;
+    if (!body) return;
+    body.classList.remove("cg-lang-az", "cg-lang-ru", "cg-lang-en");
+    body.classList.add(`cg-lang-${lang}`);
   }
 
   function renderButtons() {
@@ -176,6 +202,7 @@
   function setActive(lang) {
     currentLang = lang;
     localStorage.setItem(STORAGE_KEY, lang);
+    applyLanguageClass(lang);
 
     document.querySelectorAll(".cg-btn").forEach((btn) => {
       const isMatch = btn.querySelector('img')?.alt === lang;
@@ -271,6 +298,8 @@
   }
 
   async function init() {
+    applyPostReloadFade();
+
     window.gtranslateSettings = {
       default_language: DEFAULT_LANG,
       languages: SUPPORTED_LANGS,
@@ -288,6 +317,7 @@
       setGoogTransCookie(currentLang || DEFAULT_LANG);
     }
 
+    applyLanguageClass(currentLang);
     renderButtons();
 
     try {
