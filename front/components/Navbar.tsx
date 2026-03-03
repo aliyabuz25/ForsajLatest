@@ -23,6 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const translationOriginalTextRef = useRef(new WeakMap<Text, string>());
   const translationCacheRef = useRef(new Map<string, string>());
   const translationRunIdRef = useRef(0);
+  const translationEngineRef = useRef<'libre' | 'gtranslate'>('libre');
   const pendingSplashLanguageRef = useRef<'AZ' | 'RU' | 'ENG' | null>(null);
   const suppressObserverUntilRef = useRef(0);
   const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
@@ -125,6 +126,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     }
 
     const payload = await response.json();
+    if (payload?.fallback) {
+      throw new Error('LibreTranslate fallback mode active');
+    }
     if (Array.isArray(payload?.translatedText)) {
       return payload.translatedText.map((item: unknown) => String(item ?? ''));
     }
@@ -134,7 +138,15 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     return [];
   };
 
-  const applyLibreTranslate = async (langCode: string, token: number) => {
+  const switchToGTranslate = (langCode: string, token: number, withSplash: boolean) => {
+    if (translationEngineRef.current === 'gtranslate') return;
+    translationEngineRef.current = 'gtranslate';
+    ensureGTranslate();
+    setGTranslateCookie(langCode);
+    applyGTranslateLanguage(langCode, token, withSplash, 0);
+  };
+
+  const applyLibreTranslate = async (langCode: string, token: number, withSplash: boolean) => {
     const target = getLibreTargetLanguage(langCode);
     const normalized = normalizeTranslateCode(langCode);
     const runId = ++translationRunIdRef.current;
@@ -188,9 +200,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
           }
         });
       } catch {
-        chunk.forEach((original) => {
-          translationCacheRef.current.set(cacheKey(original), original);
-        });
+        switchToGTranslate(normalized, token, withSplash);
+        return;
       }
     }
 
@@ -304,9 +315,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     const normalized = normalizeTranslateCode(langCode);
     const token = languageTransitionTokenRef.current;
 
-    if (USE_LIBRE_TRANSLATE) {
+    if (USE_LIBRE_TRANSLATE && translationEngineRef.current === 'libre') {
       suppressObserverUntilRef.current = Date.now() + (withSplash ? 1200 : 600);
-      void applyLibreTranslate(normalized, token);
+      void applyLibreTranslate(normalized, token, withSplash);
       return;
     }
 

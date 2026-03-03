@@ -1580,6 +1580,14 @@ app.post('/api/translate', async (req, res) => {
             return res.json({ translatedText: normalizedQ });
         }
 
+        const respondFallback = (reason) => {
+            return res.json({
+                translatedText: normalizedQ,
+                fallback: true,
+                reason
+            });
+        };
+
         const payload = {
             q: normalizedQ,
             source,
@@ -1615,10 +1623,9 @@ app.post('/api/translate', async (req, res) => {
         }
 
         if (!upstreamResponse.ok) {
-            return res.status(502).json({
-                error: 'translation upstream failed',
-                details: upstreamJson?.error || upstreamText || upstreamResponse.statusText
-            });
+            return respondFallback(
+                upstreamJson?.error || upstreamText || upstreamResponse.statusText || 'upstream_error'
+            );
         }
 
         let translatedText;
@@ -1637,10 +1644,18 @@ app.post('/api/translate', async (req, res) => {
         return res.json({ translatedText });
     } catch (error) {
         if (error?.name === 'AbortError') {
-            return res.status(504).json({ error: 'translation request timed out' });
+            const rawQ = req.body?.q;
+            const normalizedQ = Array.isArray(rawQ)
+                ? rawQ.map((item) => String(item ?? ''))
+                : String(rawQ ?? '');
+            return res.json({ translatedText: normalizedQ, fallback: true, reason: 'timeout' });
         }
         console.error('Translation proxy error:', error);
-        return res.status(500).json({ error: 'Failed to translate text' });
+        const rawQ = req.body?.q;
+        const normalizedQ = Array.isArray(rawQ)
+            ? rawQ.map((item) => String(item ?? ''))
+            : String(rawQ ?? '');
+        return res.json({ translatedText: normalizedQ, fallback: true, reason: 'internal_error' });
     }
 });
 
