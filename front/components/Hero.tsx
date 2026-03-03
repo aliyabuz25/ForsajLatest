@@ -119,7 +119,7 @@ const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
         <h2 className="hero-title text-[clamp(2rem,8vw,6.8rem)] font-black italic tracking-[-0.02em] leading-[0.92] mb-8 text-white uppercase break-words [overflow-wrap:anywhere]">
           {getText('text-1', 'SƏRHƏDSİZ OFFROAD HƏYƏCANI')}
         </h2>
-        <p className="hero-desc text-gray-400 font-bold italic max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed uppercase tracking-wide break-words [overflow-wrap:anywhere]">
+        <p className="hero-desc text-gray-400 font-bold italic max-w-2xl mx-auto mb-10 text-[13px] md:text-[15px] leading-relaxed uppercase tracking-wide break-words [overflow-wrap:anywhere]">
           {getText('text-2', 'Azərbaycanın ən çətin yollarında peşəkar yarışlar və adrenalin dolu anlar.')}
         </p>
 
