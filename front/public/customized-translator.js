@@ -308,6 +308,29 @@
     return false;
   }
 
+  function hasTranslatedDomSignal() {
+    const htmlClass = document.documentElement.className || "";
+    const bodyClass = document.body?.className || "";
+    if (/\btranslated-(ltr|rtl)\b/i.test(htmlClass) || /\btranslated-(ltr|rtl)\b/i.test(bodyClass)) {
+      return true;
+    }
+    if (document.querySelector('font[style*="vertical-align: inherit"]')) {
+      return true;
+    }
+    return false;
+  }
+
+  async function waitForRenderedTranslation(targetLang) {
+    if (!targetLang || targetLang === DEFAULT_LANG) return true;
+    const started = Date.now();
+    while (Date.now() - started < SWITCH_TIMEOUT_MS + 4000) {
+      const langApplied = getCurrentTranslatorLang() === targetLang;
+      if (langApplied && hasTranslatedDomSignal()) return true;
+      await new Promise((r) => setTimeout(r, 180));
+    }
+    return false;
+  }
+
   function loadScript() {
     if (document.querySelector(`script[src="${SCRIPT_URL}"]`)) return Promise.resolve();
     return new Promise((resolve, reject) => {
@@ -349,7 +372,7 @@
       if (ready && currentLang !== DEFAULT_LANG) {
         applyLang(currentLang);
         if (hasPostReloadFade) {
-          await waitForLanguageApplied(currentLang);
+          await waitForRenderedTranslation(currentLang);
           markPostReloadReady();
         }
       } else if (hasPostReloadFade) {
