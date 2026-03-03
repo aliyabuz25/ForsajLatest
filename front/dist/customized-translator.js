@@ -52,31 +52,35 @@
     });
   }
 
-  function smoothReload() {
-    if (window.__cgReloadPending) return;
-    window.__cgReloadPending = true;
-
-    const veil = document.createElement("div");
+  function getTransitionVeil() {
+    let veil = document.getElementById("cg-translate-veil");
+    if (veil) return veil;
+    veil = document.createElement("div");
+    veil.id = "cg-translate-veil";
     veil.setAttribute("aria-hidden", "true");
     veil.style.position = "fixed";
     veil.style.inset = "0";
     veil.style.pointerEvents = "none";
     veil.style.background = "#000";
     veil.style.opacity = "0";
-    // Intentionally snappy fade-out before reload so text doesn't appear to morph.
-    veil.style.transition = "opacity 90ms linear";
+    veil.style.transition = "opacity 140ms ease";
     veil.style.zIndex = "2147483647";
     document.body.appendChild(veil);
+    return veil;
+  }
 
+  function showTransitionVeil() {
+    const veil = getTransitionVeil();
     requestAnimationFrame(() => {
-      veil.style.opacity = "0.82";
+      veil.style.opacity = "0.9";
     });
+  }
 
-    try {
-      sessionStorage.setItem(POST_RELOAD_FADE_KEY, String(Date.now()));
-    } catch (e) { }
-
-    window.setTimeout(() => window.location.reload(), 110);
+  function hideTransitionVeil() {
+    const veil = document.getElementById("cg-translate-veil");
+    if (!veil) return;
+    veil.style.transition = "opacity 220ms ease";
+    veil.style.opacity = "0";
   }
 
   function applyPostReloadFade() {
@@ -186,18 +190,7 @@
 
     setButtonsDisabled(true);
     try {
-      // If user selected another language, reload with the new target cookie.
-      // We skip in-place translation to avoid visible text morph before reload.
-      if (languageChanged) {
-        if (lang === DEFAULT_LANG) {
-          clearGoogTransCookies();
-        } else {
-          setGoogTransCookie(lang);
-        }
-        setActive(lang);
-        smoothReload();
-        return;
-      }
+      if (languageChanged) showTransitionVeil();
 
       if (lang === DEFAULT_LANG) {
         clearGoogTransCookies();
@@ -207,28 +200,29 @@
 
       const ok = applyLang(lang);
       if (ok) {
-        // Wait a bit for Google to react
-        await new Promise(r => setTimeout(r, 300));
+        await new Promise(r => setTimeout(r, 220));
 
         if (lang === DEFAULT_LANG) {
-          // Force original content if Google combo is present
           const combo = document.querySelector("select.goog-te-combo");
           if (combo) {
             combo.selectedIndex = 0;
             combo.dispatchEvent(new Event("change", { bubbles: true }));
           }
           setActive(lang);
-        } else {
-          const applied = await waitForLanguageApplied(lang);
-          if (applied) {
-            setActive(lang);
+          if (languageChanged) {
+            await waitForBaseLanguageRestored();
+            hideTransitionVeil();
           }
+        } else {
+          const applied = await waitForRenderedTranslation(lang);
+          if (applied) setActive(lang);
+          if (languageChanged) hideTransitionVeil();
         }
       }
     } catch (err) {
       console.error("Translation switch error:", err);
+      hideTransitionVeil();
     } finally {
-      // Small safety delay before re-enabling
       setTimeout(() => setButtonsDisabled(false), 200);
     }
   }
@@ -339,6 +333,20 @@
       const langApplied = getCurrentTranslatorLang() === targetLang;
       if (langApplied && hasTranslatedDomSignal()) return true;
       await new Promise((r) => setTimeout(r, 180));
+    }
+    return false;
+  }
+
+  async function waitForBaseLanguageRestored() {
+    const started = Date.now();
+    while (Date.now() - started < SWITCH_TIMEOUT_MS + 3000) {
+      const noTranslatedDom = !hasTranslatedDomSignal();
+      const combo = document.querySelector("select.goog-te-combo");
+      const comboAtBase = !combo || !combo.value;
+      const cookieTarget = getGoogTransTargetFromCookie();
+      const cookieAtBase = !cookieTarget || cookieTarget === DEFAULT_LANG;
+      if (noTranslatedDom && comboAtBase && cookieAtBase) return true;
+      await new Promise((r) => setTimeout(r, 150));
     }
     return false;
   }
