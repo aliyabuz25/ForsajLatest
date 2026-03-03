@@ -10,6 +10,7 @@
   const POST_RELOAD_FADE_KEY = "cg_post_reload_fade";
   const POST_RELOAD_PENDING_CLASS = "cg-post-reload-pending";
   const POST_RELOAD_READY_CLASS = "cg-post-reload-ready";
+  const POST_RELOAD_FADE_DURATION_MS = 3600;
 
   const flags = {
     az: "https://flagcdn.com/w40/az.png",
@@ -99,7 +100,7 @@
     window.setTimeout(() => {
       body.classList.remove(POST_RELOAD_PENDING_CLASS);
       body.classList.remove(POST_RELOAD_READY_CLASS);
-    }, 1700);
+    }, POST_RELOAD_FADE_DURATION_MS + 300);
   }
 
   function applyLanguageClass(lang) {
