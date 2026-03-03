@@ -10,10 +10,17 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const { getPage, getText, language, setSiteLanguage } = useSiteContent('navbar');
   const { getImage: getImageGeneral } = useSiteContent('general');
+  const TRANSLATE_SELECTED_LANG_KEY = 'forsaj_translate_selected_lang';
+  const [selectedLanguage, setSelectedLanguage] = useState<'AZ' | 'RU' | 'ENG'>(() => {
+    const saved = (localStorage.getItem(TRANSLATE_SELECTED_LANG_KEY) || 'AZ').toUpperCase();
+    if (saved === 'RU' || saved === 'ENG' || saved === 'AZ') return saved;
+    return 'AZ';
+  });
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const languagePickerRef = useRef<HTMLDivElement | null>(null);
   const languageTimersRef = useRef<number[]>([]);
+  const selectedLanguageRef = useRef<'AZ' | 'RU' | 'ENG'>('AZ');
   const languageBootstrappedRef = useRef(false);
   const languageTransitionTokenRef = useRef(0);
   const lastAppliedLanguageRef = useRef<string>('');
@@ -23,14 +30,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const translationOriginalTextRef = useRef(new WeakMap<Text, string>());
   const translationCacheRef = useRef(new Map<string, string>());
   const translationRunIdRef = useRef(0);
-  const translationEngineRef = useRef<'libre' | 'gtranslate'>('libre');
+  const translationEngineRef = useRef<'libre' | 'gtranslate'>('gtranslate');
   const pendingSplashLanguageRef = useRef<'AZ' | 'RU' | 'ENG' | null>(null);
+  const expectedWidgetLanguageRef = useRef<'AZ' | 'RU' | 'ENG' | null>(null);
+  const cookieSyncBlockUntilRef = useRef(0);
   const suppressObserverUntilRef = useRef(0);
   const GTRANSLATE_SCRIPT_ID = 'gtranslate-widget-script';
   const GTRANSLATE_WRAPPER_CLASS = 'gtranslate_wrapper';
-  const GTRANSLATE_MOBILE_SCRIPT_ID = 'gtranslate-widget-script-fc';
-  const GTRANSLATE_MOBILE_WRAPPER_CLASS = 'gtranslate_wrapper_mobile';
-  const USE_LIBRE_TRANSLATE = true;
+  const USE_LIBRE_TRANSLATE = false;
   const LANGUAGE_TRANSITION_START_EVENT = 'forsaj-language-transition-start';
   const LANGUAGE_TRANSITION_END_EVENT = 'forsaj-language-transition-end';
   const languageMap: Record<'AZ' | 'RU' | 'ENG', string> = {
@@ -53,6 +60,35 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     RU: 'RUS',
     ENG: 'EN'
   };
+
+  const readGoogTransTarget = (): 'AZ' | 'RU' | 'ENG' | null => {
+    const cookies = document.cookie.split(';').map((item) => item.trim());
+    let rawValue = '';
+    cookies.forEach((entry) => {
+      if (entry.startsWith('googtrans=')) {
+        rawValue = entry.slice('googtrans='.length);
+      }
+    });
+    if (!rawValue) return null;
+    const decoded = decodeURIComponent(rawValue);
+    const parts = decoded.split('/');
+    const target = (parts[2] || '').toLowerCase();
+    if (target === 'az') return 'AZ';
+    if (target === 'ru') return 'RU';
+    if (target === 'en') return 'ENG';
+    return null;
+  };
+
+  useEffect(() => {
+    // Keep CMS/static content language at AZ to avoid double translation conflicts.
+    if (language !== 'AZ') {
+      setSiteLanguage('AZ');
+    }
+  }, [language, setSiteLanguage]);
+
+  useEffect(() => {
+    selectedLanguageRef.current = selectedLanguage;
+  }, [selectedLanguage]);
 
   const normalizeTranslateCode = (code: string) => {
     const normalized = (code || '').trim().toLowerCase();
@@ -294,36 +330,17 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   };
 
   const ensureGTranslate = () => {
-    if (USE_LIBRE_TRANSLATE) return;
     const w = window as any;
 
     w.gtranslateSettings = {
       default_language: 'az',
-      languages: ['az', 'ru', 'en'],
-      native_language_names: true,
+      languages: ['az', 'en', 'ru'],
       wrapper_selector: `.${GTRANSLATE_WRAPPER_CLASS}`
     };
 
     if (!document.getElementById(GTRANSLATE_SCRIPT_ID)) {
       const script = document.createElement('script');
       script.id = GTRANSLATE_SCRIPT_ID;
-      script.src = 'https://cdn.gtranslate.net/widgets/latest/dropdown.js';
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-  };
-
-  const ensureMobileGTranslateWidget = () => {
-    const w = window as any;
-    w.gtranslateSettings = {
-      default_language: 'az',
-      languages: ['az', 'en', 'ru'],
-      wrapper_selector: `.${GTRANSLATE_MOBILE_WRAPPER_CLASS}`
-    };
-
-    if (!document.getElementById(GTRANSLATE_MOBILE_SCRIPT_ID)) {
-      const script = document.createElement('script');
-      script.id = GTRANSLATE_MOBILE_SCRIPT_ID;
       script.src = 'https://cdn.gtranslate.net/widgets/latest/fc.js';
       script.defer = true;
       document.body.appendChild(script);
@@ -425,26 +442,26 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     const isInitialSync = !languageBootstrappedRef.current;
     languageBootstrappedRef.current = true;
 
-    if (pendingSplashLanguageRef.current === language) {
+    if (pendingSplashLanguageRef.current === selectedLanguage) {
       pendingSplashLanguageRef.current = null;
     }
 
-    scheduleLanguageReapply(languageMap[language] || 'az|az', isInitialSync, !isInitialSync);
-  }, [language]);
+    scheduleLanguageReapply(languageMap[selectedLanguage] || 'az|az', isInitialSync, !isInitialSync);
+  }, [selectedLanguage]);
 
   useEffect(() => {
     if (!languageBootstrappedRef.current) return;
-    if (language === 'AZ') return;
+    if (selectedLanguage === 'AZ') return;
     if (Date.now() < suppressObserverUntilRef.current) return;
     const timer = window.setTimeout(() => {
-      scheduleLanguageReapply(languageMap[language] || 'az|az', false, true);
+      scheduleLanguageReapply(languageMap[selectedLanguage] || 'az|az', false, true);
     }, 320);
     return () => window.clearTimeout(timer);
-  }, [currentView]);
+  }, [currentView, selectedLanguage]);
 
   useEffect(() => {
     if (!languageBootstrappedRef.current) return;
-    if (language === 'AZ') return;
+    if (selectedLanguage === 'AZ') return;
 
     const observer = new MutationObserver(() => {
       if (Date.now() < suppressObserverUntilRef.current) return;
@@ -456,7 +473,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
         const now = Date.now();
         if (now - observerLastApplyAtRef.current < 700) return;
         observerLastApplyAtRef.current = now;
-        scheduleLanguageReapply(languageMap[language] || 'az|az', false, true);
+        scheduleLanguageReapply(languageMap[selectedLanguage] || 'az|az', false, true);
       }, 220);
     });
 
@@ -473,7 +490,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
         observerTimerRef.current = null;
       }
     };
-  }, [language]);
+  }, [selectedLanguage]);
 
   useEffect(() => {
     if (!isLangOpen) return;
@@ -513,13 +530,60 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', handleEscape);
-    ensureMobileGTranslateWidget();
+    translationEngineRef.current = 'gtranslate';
+    ensureGTranslate();
 
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener('keydown', handleEscape);
     };
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const syncLanguageFromCookie = () => {
+      const fromCookie = readGoogTransTarget();
+      if (!fromCookie) return;
+      const now = Date.now();
+      const expected = expectedWidgetLanguageRef.current;
+      if (expected && fromCookie === expected) {
+        expectedWidgetLanguageRef.current = null;
+        cookieSyncBlockUntilRef.current = 0;
+      } else if (expected && now < cookieSyncBlockUntilRef.current) {
+        // Ignore stale cookie values right after widget click.
+        return;
+      }
+      if (fromCookie === selectedLanguageRef.current) return;
+      setSelectedLanguage(fromCookie);
+      localStorage.setItem(TRANSLATE_SELECTED_LANG_KEY, fromCookie);
+      pendingSplashLanguageRef.current = fromCookie;
+      translationEngineRef.current = 'gtranslate';
+    };
+
+    const onWidgetClick = (event: Event) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      const langLink = target.closest('[data-gt-lang]') as HTMLElement | null;
+      if (!langLink) return;
+      const gtLang = String(langLink.getAttribute('data-gt-lang') || '').trim().toLowerCase();
+      const mapped = gtLang === 'az' ? 'AZ' : gtLang === 'ru' ? 'RU' : gtLang === 'en' ? 'ENG' : null;
+      if (!mapped) return;
+      expectedWidgetLanguageRef.current = mapped;
+      cookieSyncBlockUntilRef.current = Date.now() + 1800;
+      setSelectedLanguage(mapped);
+      localStorage.setItem(TRANSLATE_SELECTED_LANG_KEY, mapped);
+      pendingSplashLanguageRef.current = mapped;
+      translationEngineRef.current = 'gtranslate';
+    };
+
+    const intervalId = window.setInterval(syncLanguageFromCookie, 400);
+    document.addEventListener('click', onWidgetClick, true);
+    syncLanguageFromCookie();
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener('click', onWidgetClick, true);
+    };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -693,10 +757,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
       observerTimerRef.current = null;
     }
 
-    const mapped = languageMap[nextLanguage as 'AZ' | 'RU' | 'ENG'] || 'az|az';
-    if (nextLanguage !== language) {
+    const normalizedLanguage = (nextLanguage as 'AZ' | 'RU' | 'ENG');
+    const mapped = languageMap[normalizedLanguage] || 'az|az';
+    expectedWidgetLanguageRef.current = normalizedLanguage;
+    cookieSyncBlockUntilRef.current = Date.now() + 1800;
+    if (normalizedLanguage !== selectedLanguage) {
+      setSelectedLanguage(normalizedLanguage);
+      localStorage.setItem(TRANSLATE_SELECTED_LANG_KEY, normalizedLanguage);
       pendingSplashLanguageRef.current = nextLanguage as 'AZ' | 'RU' | 'ENG';
-      setSiteLanguage(nextLanguage as any);
     }
 
     // Apply immediately on every click (even if same language) to avoid stale translate cache behavior.
@@ -773,25 +841,25 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
               onClick={() => setIsLangOpen((prev) => !prev)}
               className="language-picker__trigger notranslate inline-flex items-center justify-between gap-2"
               translate="no"
-              aria-label={languagePickerAriaLabel[language]}
+              aria-label={languagePickerAriaLabel[selectedLanguage]}
               aria-haspopup="listbox"
               aria-expanded={isLangOpen}
             >
               <Globe className="language-picker__globe" />
-              <span className="language-picker__current notranslate text-xs" translate="no">{languageVisibleLabel[language]}</span>
+              <span className="language-picker__current notranslate text-xs" translate="no">{languageVisibleLabel[selectedLanguage]}</span>
               <ChevronDown className={`language-picker__chevron ${isLangOpen ? 'language-picker__chevron--open' : ''}`} />
             </button>
 
             {isLangOpen && (
-              <div className="language-picker__menu notranslate absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[language]} translate="no">
+              <div className="language-picker__menu notranslate absolute right-0 z-50" role="listbox" aria-label={languagePickerAriaLabel[selectedLanguage]} translate="no">
                 {languages.map((lang) => (
                   <button
                     key={lang}
                     type="button"
                     role="option"
-                    aria-selected={language === lang}
+                    aria-selected={selectedLanguage === lang}
                     onClick={() => handleLanguageSelect(lang)}
-                    className={`language-picker__item notranslate block w-full text-left ${language === lang ? 'language-picker__item--active' : ''}`}
+                    className={`language-picker__item notranslate block w-full text-left ${selectedLanguage === lang ? 'language-picker__item--active' : ''}`}
                     translate="no"
                   >
                     {languageOptionLabel[lang as 'AZ' | 'RU' | 'ENG']}
@@ -859,7 +927,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                 {getText('MOBILE_LANGUAGE_TITLE', 'DİL')}
               </p>
               <div
-                className={`${GTRANSLATE_MOBILE_WRAPPER_CLASS} notranslate min-h-[44px]`}
+                className={`${GTRANSLATE_WRAPPER_CLASS} notranslate min-h-[44px]`}
                 translate="no"
               />
               <div className="mt-3">
