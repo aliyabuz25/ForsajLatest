@@ -204,7 +204,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     <>
       <nav className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/5 px-6 lg:px-20 py-4 flex items-center justify-between shadow-2xl">
         <div
-          className="flex items-center gap-3 cursor-pointer group"
+          className="flex items-center gap-3 cursor-pointer group lg:min-w-[170px]"
           onClick={() => {
             onViewChange('home');
             setIsMobileMenuOpen(false);
@@ -242,14 +242,17 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
           ))}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="inline-flex lg:hidden items-center justify-center w-11 h-11 rounded-sm border border-white/15 bg-white/5 text-white hover:bg-[#FF4D00] hover:text-black transition-colors"
-          aria-label={getText('MOBILE_MENU_OPEN', 'Menyunu aç')}
-        >
-          <Menu size={22} />
-        </button>
+        <div className="flex items-center justify-end min-w-[170px]">
+          <div id="customTranslator" className="custom-gtranslate full notranslate hidden lg:block" translate="no" />
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="inline-flex lg:hidden items-center justify-center w-11 h-11 rounded-sm border border-white/15 bg-white/5 text-white hover:bg-[#FF4D00] hover:text-black transition-colors"
+            aria-label={getText('MOBILE_MENU_OPEN', 'Menyunu aç')}
+          >
+            <Menu size={22} />
+          </button>
+        </div>
       </nav>
 
       {isMobileMenuOpen && (

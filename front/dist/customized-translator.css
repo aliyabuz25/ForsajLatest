@@ -9,10 +9,10 @@
 }
 
 .custom-gtranslate.full {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  z-index: 300;
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: 60;
 }
 
 .cg-dropdown {
