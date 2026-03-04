@@ -146,10 +146,21 @@
   display: none !important;
 }
 
+/* Keep typography stable after Google Translate wraps text nodes with <font> tags */
+.translated-ltr font,
+.translated-rtl font,
+font[style*="vertical-align: inherit"] {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  color: inherit !important;
+}
+
 body {
   top: 0 !important;
 }
 
-.mobile-translator.custom-gtranslate.mini {
-  justify-content: center;
-}
+/* Typography stabilization applied via translated-ltr classes */

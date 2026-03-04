@@ -74,10 +74,7 @@
   }
 
   function showTransitionVeil() {
-    const veil = getTransitionVeil();
-    requestAnimationFrame(() => {
-      veil.style.opacity = "0.96";
-    });
+    // Disabled veil darkening per user request for smoother UI feeling
   }
 
   function hideTransitionVeil() {
@@ -104,9 +101,7 @@
   }
 
   function showPostReloadCover() {
-    const cover = getPostReloadCover();
-    cover.style.transition = "none";
-    cover.style.opacity = "1";
+    // Disabled post-reload darkening to prevent black screen lockup
   }
 
   function hidePostReloadCover() {
@@ -147,10 +142,8 @@
     if (!body || !body.classList.contains(POST_RELOAD_PENDING_CLASS)) return;
     body.classList.add(POST_RELOAD_READY_CLASS);
     hidePostReloadCover();
-    window.setTimeout(() => {
-      body.classList.remove(POST_RELOAD_PENDING_CLASS);
-      body.classList.remove(POST_RELOAD_READY_CLASS);
-    }, Math.max(POST_RELOAD_FADE_DURATION_MS, POST_RELOAD_COVER_FADE_MS) + 350);
+    body.classList.remove(POST_RELOAD_PENDING_CLASS);
+    body.classList.remove(POST_RELOAD_READY_CLASS);
   }
 
   function startInitialFadeIn() {

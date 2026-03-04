@@ -17,7 +17,8 @@ const CategoryLeaders: React.FC<CategoryLeadersProps> = ({ onViewChange }) => {
   React.useEffect(() => {
     const loadLeaders = async () => {
       try {
-        const response = await fetch(`/api/drivers?v=${Date.now()}`, { cache: 'no-store' });
+        const version = localStorage.getItem('forsaj_site_content_version') || '';
+        const response = await fetch(`/api/drivers?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
         if (!response.ok) throw new Error('Failed to fetch drivers');
 
         const data = await response.json();
@@ -82,6 +83,8 @@ const CategoryLeaders: React.FC<CategoryLeadersProps> = ({ onViewChange }) => {
               <img
                 src={leader.img}
                 alt={leader.name}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0 opacity-60 group-hover:opacity-100"
               />
 

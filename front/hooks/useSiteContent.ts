@@ -197,7 +197,11 @@ export const useSiteContent = (scopePageId?: string) => {
             siteContentCache = null;
             siteContentCacheAt = 0;
             fetchSiteContentOnce()
-                .then((mapped) => { if (isMounted) setContent(mapped); })
+                .then((mapped) => {
+                    if (!isMounted) return;
+                    setContent(mapped);
+                    setIsLoading(false);
+                })
                 .catch((err) => console.error('Failed to refresh site content from storage event:', err));
         };
 
@@ -220,17 +224,22 @@ export const useSiteContent = (scopePageId?: string) => {
             }
         };
 
-        const interval = window.setInterval(() => {
-            refresh();
-        }, 15000);
+        const onVisibility = () => {
+            if (document.visibilityState !== 'visible') return;
+            const staleFor = Date.now() - siteContentCacheAt;
+            if (staleFor > 60000) {
+                refresh();
+            }
+        };
 
         window.addEventListener('storage', onStorage);
         window.addEventListener('forsaj-language-changed', onLangChange as EventListener);
+        document.addEventListener('visibilitychange', onVisibility);
         return () => {
             isMounted = false;
-            window.clearInterval(interval);
             window.removeEventListener('storage', onStorage);
             window.removeEventListener('forsaj-language-changed', onLangChange as EventListener);
+            document.removeEventListener('visibilitychange', onVisibility);
         };
     }, []);
 

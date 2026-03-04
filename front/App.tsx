@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Marquee from './components/Marquee';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import About from './components/About';
-import NewsPage from './components/NewsPage';
-import EventsPage from './components/EventsPage';
-import DriversPage from './components/DriversPage';
-import RulesPage from './components/RulesPage';
-import ContactPage from './components/ContactPage';
-import GalleryPage from './components/GalleryPage';
 import Footer from './components/Footer';
-import PrivacyPolicyPage from './components/PrivacyPolicyPage';
-import TermsOfServicePage from './components/TermsOfServicePage';
 import { useSiteContent } from './hooks/useSiteContent';
-import { useEffect } from 'react';
+
+const About = lazy(() => import('./components/About'));
+const NewsPage = lazy(() => import('./components/NewsPage'));
+const EventsPage = lazy(() => import('./components/EventsPage'));
+const DriversPage = lazy(() => import('./components/DriversPage'));
+const RulesPage = lazy(() => import('./components/RulesPage'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
+const GalleryPage = lazy(() => import('./components/GalleryPage'));
+const PrivacyPolicyPage = lazy(() => import('./components/PrivacyPolicyPage'));
+const TermsOfServicePage = lazy(() => import('./components/TermsOfServicePage'));
 
 const SELECTED_NEWS_ID_KEY = 'forsaj_selected_news_id';
 
@@ -36,7 +36,6 @@ const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<FrontView>('home');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [eventsOpenMode, setEventsOpenMode] = useState<EventsOpenMode>('default');
-
   const handleViewChange = (view: FrontView, category: string | null = null) => {
     setCurrentView((prevView) => {
       if (view === 'events') {
@@ -184,13 +183,29 @@ const App: React.FC = () => {
     setCanonical(canonicalUrl);
   }, [getText]);
 
+
+
   useEffect(() => {
-    if (document.getElementById('custom-gtranslate-script')) return;
-    const script = document.createElement('script');
-    script.id = 'custom-gtranslate-script';
-    script.src = '/customized-translator.js';
-    script.defer = true;
-    document.body.appendChild(script);
+    const markTranslatorReady = () => {
+      document.body.classList.remove('cg-boot-pending');
+      document.body.classList.add('cg-boot-ready');
+    };
+    const fallbackTimer = window.setTimeout(markTranslatorReady, 9000);
+    window.addEventListener('custom-gtranslate-ready', markTranslatorReady as EventListener);
+
+    if (!document.getElementById('custom-gtranslate-script')) {
+      const script = document.createElement('script');
+      script.id = 'custom-gtranslate-script';
+      script.src = '/customized-translator.js';
+      script.defer = true;
+      script.onerror = markTranslatorReady;
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      window.removeEventListener('custom-gtranslate-ready', markTranslatorReady as EventListener);
+    };
   }, []);
 
   return (
@@ -200,21 +215,23 @@ const App: React.FC = () => {
       <Marquee />
       <Navbar currentView={currentView} onViewChange={(view) => handleViewChange(view, null)} />
       <main className="flex-grow w-full overflow-x-hidden">
-        {currentView === 'home' && <Home onViewChange={(view, cat) => handleViewChange(view, cat || null)} />}
-        {currentView === 'about' && <About />}
-        {currentView === 'news' && <NewsPage />}
-        {currentView === 'events' && (
-          <EventsPage
-            openMode={eventsOpenMode}
-            onViewChange={(view) => handleViewChange(view, null)}
-          />
-        )}
-        {currentView === 'drivers' && <DriversPage initialCategoryId={activeCategory} />}
-        {currentView === 'rules' && <RulesPage />}
-        {currentView === 'contact' && <ContactPage />}
-        {currentView === 'gallery' && <GalleryPage />}
-        {currentView === 'privacy' && <PrivacyPolicyPage />}
-        {currentView === 'terms' && <TermsOfServicePage />}
+        <Suspense fallback={<div className="min-h-[50vh] bg-[#0A0A0A] animate-pulse" />}>
+          {currentView === 'home' && <Home onViewChange={(view, cat) => handleViewChange(view, cat || null)} />}
+          {currentView === 'about' && <About />}
+          {currentView === 'news' && <NewsPage />}
+          {currentView === 'events' && (
+            <EventsPage
+              openMode={eventsOpenMode}
+              onViewChange={(view) => handleViewChange(view, null)}
+            />
+          )}
+          {currentView === 'drivers' && <DriversPage initialCategoryId={activeCategory} />}
+          {currentView === 'rules' && <RulesPage />}
+          {currentView === 'contact' && <ContactPage />}
+          {currentView === 'gallery' && <GalleryPage />}
+          {currentView === 'privacy' && <PrivacyPolicyPage />}
+          {currentView === 'terms' && <TermsOfServicePage />}
+        </Suspense>
       </main>
       <Footer onViewChange={(view) => handleViewChange(view, null)} />
     </div>

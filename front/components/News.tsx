@@ -60,7 +60,8 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
   useEffect(() => {
     const loadNews = async () => {
       try {
-        const response = await fetch(`/api/news?v=${Date.now()}`, { cache: 'no-store' });
+        const version = localStorage.getItem('forsaj_site_content_version') || '';
+        const response = await fetch(`/api/news?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
         if (!response.ok) throw new Error('Failed to fetch news');
 
         const data = await response.json();
@@ -125,6 +126,8 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
             <img
               src={mainNews.img}
               alt={mainNews.title}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover grayscale brightness-50 transition-transform duration-1000 group-hover:scale-110 group-hover:grayscale-0 group-hover:brightness-75"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
@@ -150,6 +153,8 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
                   <img
                     src={news.img}
                     alt={news.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover grayscale opacity-50 transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-100"
                   />
                 </div>

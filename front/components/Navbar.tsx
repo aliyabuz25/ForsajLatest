@@ -113,10 +113,28 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const { getImage: getImageGeneral } = useSiteContent('general');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileLanguageModalOpen, setIsMobileLanguageModalOpen] = useState(false);
-  const [mobileLanguage, setMobileLanguage] = useState<string>(() => {
-    const saved = (localStorage.getItem('custom_gtranslate_lang') || 'az').toLowerCase();
-    return saved === 'ru' || saved === 'en' ? saved : 'az';
-  });
+  const [mobileLanguage, setMobileLanguage] = useState<string>('az');
+
+  const readRuntimeLanguage = () => {
+    try {
+      const runtimeLang = (window as any).customGTranslateGetLang?.();
+      const lang = String(runtimeLang || 'az').toLowerCase();
+      return lang === 'ru' || lang === 'en' ? lang : 'az';
+    } catch { }
+
+    try {
+      const rawCookie = document.cookie
+        .split(';')
+        .map((part) => part.trim())
+        .find((part) => part.startsWith('googtrans='));
+      if (!rawCookie) return 'az';
+      const cookieValue = decodeURIComponent(rawCookie.split('=').slice(1).join('='));
+      const target = (cookieValue.split('/').pop() || '').toLowerCase();
+      return target === 'ru' || target === 'en' ? target : 'az';
+    } catch {
+      return 'az';
+    }
+  };
 
   const mobileLanguageOptions = [
     { code: 'az', label: 'AZ', flag: 'https://flagcdn.com/w40/az.png' },
@@ -145,6 +163,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   }, [isMobileMenuOpen, isMobileLanguageModalOpen]);
 
   useEffect(() => {
+    const syncFromRuntime = () => {
+      setMobileLanguage(readRuntimeLanguage());
+    };
+
     const onLanguageChanged = (event: Event) => {
       const next = String((event as CustomEvent)?.detail?.lang || '').toLowerCase();
       if (next === 'az' || next === 'ru' || next === 'en') {
@@ -152,8 +174,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
       }
     };
 
+    syncFromRuntime();
     window.addEventListener('custom-gtranslate-language-changed', onLanguageChanged as EventListener);
-    return () => window.removeEventListener('custom-gtranslate-language-changed', onLanguageChanged as EventListener);
+    window.addEventListener('custom-gtranslate-ready', syncFromRuntime as EventListener);
+    return () => {
+      window.removeEventListener('custom-gtranslate-language-changed', onLanguageChanged as EventListener);
+      window.removeEventListener('custom-gtranslate-ready', syncFromRuntime as EventListener);
+    };
   }, []);
 
   useEffect(() => {
@@ -368,6 +395,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                   key={option.code}
                   type="button"
                   onClick={() => handleMobileLanguageSelect(option.code)}
+                  translate="no"
                   className={`flex items-center justify-center gap-2 px-3 py-3 rounded-sm border transition-all font-black italic text-xs uppercase ${
                     mobileLanguage === option.code
                       ? 'bg-[#FF4D00] text-black border-[#FF4D00]'
@@ -375,7 +403,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
                   }`}
                 >
                   <img src={option.flag} alt={option.label} className="w-5 h-5 rounded-full object-cover border border-white/30" />
-                  {option.label}
+                  <span className="notranslate" translate="no">
+                    {option.label}
+                  </span>
                 </button>
               ))}
             </div>

@@ -117,7 +117,7 @@ const Partners: React.FC = () => {
             >
               {p.useImage && p.imagePath ? (
                 <div className="mb-5 w-full max-w-[144px] h-20 p-2 rounded-sm border border-white/10 bg-white/5 transition-all duration-500 group-hover:bg-white/10 group-hover:scale-105">
-                  <img src={p.imagePath} alt={p.imageAlt} className="w-full h-full object-contain" />
+                  <img src={p.imagePath} alt={p.imageAlt} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                 </div>
               ) : (
                 <div className={`mb-5 p-5 rounded-sm transition-all duration-500 text-gray-700 ${p.color} ${p.bg} ${p.glow} group-hover:scale-110 group-hover:rotate-3`}>

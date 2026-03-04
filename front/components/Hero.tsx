@@ -103,6 +103,9 @@ const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
         <img
           src={heroImg.path}
           alt={heroImg.alt}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover opacity-30 grayscale contrast-125 transition-all duration-700 hover:grayscale-0"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40"></div>

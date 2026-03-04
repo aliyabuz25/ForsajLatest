@@ -152,7 +152,8 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch(`/api/events?v=${Date.now()}`, { cache: 'no-store' });
+        const version = localStorage.getItem('forsaj_site_content_version') || '';
+        const response = await fetch(`/api/events?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
         if (!response.ok) throw new Error('Failed to fetch events');
         const data = await response.json();
 
@@ -210,6 +211,8 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
           <img
             src={displayImage}
             alt={getText('RACE_IMAGE_ALT', 'Next Race')}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover opacity-40 grayscale group-hover:scale-105 transition-transform duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>

@@ -27,7 +27,6 @@ interface ArchiveVideoItem {
 }
 
 const GALLERY_VERSION_KEY = 'forsaj_gallery_version';
-const VIDEO_ARCHIVE_REFRESH_MS = 30000;
 
 const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
@@ -99,8 +98,8 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
 
     const loadVideos = async () => {
       try {
-        const stamp = Date.now();
-        const response = await fetch(`/api/events?v=${stamp}`, { cache: 'no-store' });
+        const version = localStorage.getItem('forsaj_site_content_version') || '';
+        const response = await fetch(`/api/events?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
         if (!response.ok) throw new Error('Failed to fetch events');
         const data = await response.json();
 
@@ -136,15 +135,20 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
         loadVideos();
       }
     };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        loadVideos();
+      }
+    };
 
     loadVideos();
-    const refreshInterval = window.setInterval(loadVideos, VIDEO_ARCHIVE_REFRESH_MS);
     window.addEventListener('storage', onStorage);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
       mounted = false;
-      window.clearInterval(refreshInterval);
       window.removeEventListener('storage', onStorage);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
     };
   }, []);
 
@@ -216,6 +220,8 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
               <img
                 src={video.thumbnail}
                 alt={video.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-80 grayscale"
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-[#FF4D00]/10 transition-colors flex items-center justify-center">

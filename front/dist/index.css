@@ -48,12 +48,12 @@ body {
 }
 
 body.cg-post-reload-pending {
-  opacity: 0.08;
-  filter: blur(2px);
+  opacity: 0;
+  filter: blur(3px);
 }
 
 body.cg-post-reload-pending.cg-post-reload-ready {
-  animation: cg-post-reload-fade 3600ms ease-out both;
+  animation: cg-post-reload-fade 2200ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes cg-post-reload-fade {
