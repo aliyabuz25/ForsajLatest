@@ -81,6 +81,13 @@ const pathMapRu: Record<string, string> = {
   '/applications': 'Заявки',
   '/users-management': 'Управление пользователями',
   '/general-settings?tab=general': 'Системные настройки',
+  '/?page=contactpage': 'Контакты',
+  '/?page=rulespage': 'Правила',
+  '/?page=newspage': 'Новости',
+  '/?page=eventspage': 'Мероприятия',
+  '/?page=drivers': 'Пилоты',
+  '/?page=about': 'О нас',
+  '/?page=gallerypage': 'Галерея',
   '/general-settings?tab=social': 'Соцсети',
   '/general-settings?tab=whatsapp': 'Интеграция WhatsApp',
   '/general-settings?tab=seo': 'Настройки SEO',
@@ -95,6 +102,15 @@ const pathMapRu: Record<string, string> = {
 const pathMapAz: Record<string, string> = {
   '/general-settings?tab=social': 'Sosial Media',
   '/general-settings?tab=whatsapp': 'WhatsApp Integration',
+};
+
+const normalizeSidebarPathKey = (path?: string) => {
+  const raw = String(path || '').trim().toLocaleLowerCase('az');
+  if (!raw) return '';
+  if (raw === '/admin') return '/';
+  if (raw.startsWith('/admin?')) return `/${raw.slice('/admin'.length)}`;
+  if (raw.startsWith('/admin/')) return raw.slice('/admin'.length);
+  return raw;
 };
 
 type TranslationPair = { az: string; ru: string };
@@ -248,7 +264,7 @@ export const getSidebarUiLabel = (
 
 export const translateSidebarTitle = (title: string, path: string | undefined, lang: AdminLanguage) => {
   const normalizedTitle = normalizeText(title);
-  const normalizedPath = String(path || '').trim().toLocaleLowerCase('az');
+  const normalizedPath = normalizeSidebarPathKey(path);
 
   if (lang === 'ru') {
     const byPath = pathMapRu[normalizedPath];
