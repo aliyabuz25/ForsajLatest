@@ -511,6 +511,8 @@
 
     applyLanguageClass(currentLang);
     renderButtons();
+    // Always broadcast the effective language on boot so external pickers stay in sync.
+    setActive(currentLang);
 
     try {
       await loadScript();

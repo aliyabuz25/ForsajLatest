@@ -115,13 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const [isMobileLanguageModalOpen, setIsMobileLanguageModalOpen] = useState(false);
   const [mobileLanguage, setMobileLanguage] = useState<string>('az');
 
-  const readRuntimeLanguage = () => {
-    try {
-      const runtimeLang = (window as any).customGTranslateGetLang?.();
-      const lang = String(runtimeLang || 'az').toLowerCase();
-      return lang === 'ru' || lang === 'en' ? lang : 'az';
-    } catch { }
-
+  const readCookieLanguage = (): 'az' | 'ru' | 'en' => {
     try {
       const rawCookie = document.cookie
         .split(';')
@@ -133,6 +127,19 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
       return target === 'ru' || target === 'en' ? target : 'az';
     } catch {
       return 'az';
+    }
+  };
+
+  const readRuntimeLanguage = (): 'az' | 'ru' | 'en' => {
+    const cookieLang = readCookieLanguage();
+    try {
+      const runtimeLang = (window as any).customGTranslateGetLang?.();
+      const lang = String(runtimeLang || '').toLowerCase();
+      if (lang === 'ru' || lang === 'en') return lang;
+      if (lang === 'az' && cookieLang !== 'az') return cookieLang;
+      return 'az';
+    } catch {
+      return cookieLang;
     }
   };
 
