@@ -406,12 +406,20 @@
     return false;
   }
 
+  function hasNavbarTranslatedSignal() {
+    const navbar = document.querySelector('[data-cg-navbar="true"]');
+    if (!navbar) return false;
+    if (/\btranslated-(ltr|rtl)\b/i.test(navbar.className || "")) return true;
+    if (navbar.querySelector('font[style*="vertical-align: inherit"]')) return true;
+    return false;
+  }
+
   async function waitForRenderedTranslation(targetLang) {
     if (!targetLang || targetLang === DEFAULT_LANG) return true;
     const started = Date.now();
     while (Date.now() - started < SWITCH_TIMEOUT_MS + 4000) {
       const langApplied = getCurrentTranslatorLang() === targetLang;
-      if (langApplied && hasTranslatedDomSignal()) return true;
+      if (langApplied && hasTranslatedDomSignal() && hasNavbarTranslatedSignal()) return true;
       await new Promise((r) => setTimeout(r, 180));
     }
     return false;

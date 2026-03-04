@@ -238,7 +238,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/5 px-6 lg:px-20 py-4 flex items-center justify-between shadow-2xl">
+      <nav
+        data-cg-navbar="true"
+        className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/5 px-6 lg:px-20 py-4 flex items-center justify-between shadow-2xl"
+      >
         <div
           className="flex items-center gap-3 cursor-pointer group lg:min-w-[170px]"
           onClick={() => {
