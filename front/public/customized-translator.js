@@ -152,6 +152,18 @@
     }, Math.max(POST_RELOAD_FADE_DURATION_MS, POST_RELOAD_COVER_FADE_MS) + 350);
   }
 
+  function startInitialFadeIn() {
+    const body = document.body;
+    if (!body || body.classList.contains(POST_RELOAD_PENDING_CLASS)) return;
+    body.classList.add(POST_RELOAD_PENDING_CLASS);
+    body.classList.remove(POST_RELOAD_READY_CLASS);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        markPostReloadReady();
+      });
+    });
+  }
+
   function applyLanguageClass(lang) {
     const body = document.body;
     if (!body) return;
@@ -475,6 +487,9 @@
 
   async function init() {
     const hasPostReloadFade = applyPostReloadFade();
+    if (!hasPostReloadFade) {
+      startInitialFadeIn();
+    }
 
     window.gtranslateSettings = {
       default_language: DEFAULT_LANG,
