@@ -1,0 +1,398 @@
+[
+  {
+    "id": 1,
+    "title": "Yeni Offroad Mövsümü Başlayırm",
+    "date": "2024-03-20",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yeni mövsümdə sizi daha maraqlı yarışlar və sınaqlar gözləyir. Bütün iştirakçıları hazır olmağa çağırırıq!",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 2,
+    "title": "Forsaj Club Beynəlxalq Yarışlarda",
+    "date": "2024-04-15",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Klubumuzun pilotları beynəlxalq dərəcəli offroad ralli yarışlarında iştirak etmək üçün dəvət alıblar.",
+    "category": "UĞURLARIMIZ",
+    "status": "published"
+  },
+  {
+    "id": 3,
+    "title": "Kross-kantri üzrə Azərbaycan Çempionatı",
+    "date": "2024-05-10",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Ölkənin ən güclü pilotları çempionluq uğrunda mübarizəyə qoşulur. Yarışlar 3 mərhələdən ibarət olacaq.",
+    "category": "YARIŞLAR",
+    "status": "published"
+  },
+  {
+    "id": 4,
+    "title": "Offroad Texnikasına Necə Qulluq Etməli?",
+    "date": "2024-05-25",
+    "img": "https://images.unsplash.com/photo-1485291571150-772bcfc10da5?q=80&w=2070&auto=format&fit=crop",
+    "description": "Çətin yol şəraitində avtomobilinizi qorumaq üçün lazım olan vacib məsləhətlər.",
+    "category": "MƏSLƏHƏTLƏR",
+    "status": "published"
+  },
+  {
+    "id": 5,
+    "title": "Forsaj Club Gənc Pilotlar Layihəsi",
+    "date": "2024-06-05",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Gənc nəslin motorsporta cəlb edilməsi üçün yeni təlim mərkəzimiz fəaliyyətə başlayır.",
+    "category": "LAYİHƏLƏR",
+    "status": "published"
+  },
+  {
+    "id": 6,
+    "title": "Yeni Ekspedisiya: Şahdağ Yüksəklikləri",
+    "date": "2024-06-20",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Klub üzvləri Şahdağın ən çətin zirvələrinə doğru yola çıxırlar.",
+    "category": "EKSPEDİSİYA",
+    "status": "published"
+  },
+  {
+    "id": 301,
+    "title": "2026 Mövsüm Təqvimi Açıqlandı",
+    "date": "2026-02-20",
+    "img": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=2070&auto=format&fit=crop",
+    "description": "Forsaj Club 2026 mövsümü üçün tədbir təqvimini təqdim etdi. Qeydiyyat mərhələləri mart ayından başlayır.",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 302,
+    "title": "Texniki Komissiya Yenilənmiş Qaydaları Paylaşdı",
+    "date": "2026-02-18",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Təhlükəsizlik və təkər standartları üzrə yenilənmiş qaydalar iştirakçılara göndərildi.",
+    "category": "QAYDALAR",
+    "status": "published"
+  },
+  {
+    "id": 303,
+    "title": "Yeni Sürücü Qeydiyyatı Rekordu",
+    "date": "2026-02-16",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Bu həftə ərzində rekord sayda yeni pilot ilkin qeydiyyatdan keçib.",
+    "category": "ANONS",
+    "status": "published"
+  },
+  {
+    "id": 304,
+    "title": "Qobustan Səhrasında Yeni Marşrut Testi",
+    "date": "2026-03-01",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Qobustan Səhrasında Yeni Marşrut Testi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 305,
+    "title": "Pilotlar üçün Təhlükəsizlik Brifinqi Keçirildi",
+    "date": "2026-03-03",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Pilotlar üçün Təhlükəsizlik Brifinqi Keçirildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "ANONS",
+    "status": "published"
+  },
+  {
+    "id": 306,
+    "title": "Komanda Mexanikləri üçün Praktik Seminar",
+    "date": "2026-03-05",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Komanda Mexanikləri üçün Praktik Seminar ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "YARIŞLAR",
+    "status": "published"
+  },
+  {
+    "id": 307,
+    "title": "Forsaj Club-da Media Günü Təşkil Olundu",
+    "date": "2026-03-07",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Forsaj Club-da Media Günü Təşkil Olundu ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TEXNİKİ",
+    "status": "published"
+  },
+  {
+    "id": 308,
+    "title": "Yeni Nəsil Navigasiya Sistemi Sınaqdan Keçdi",
+    "date": "2026-03-09",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yeni Nəsil Navigasiya Sistemi Sınaqdan Keçdi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏLİM",
+    "status": "published"
+  },
+  {
+    "id": 309,
+    "title": "Şimal Zonasında Yağışlı Trasa Hazırlıq",
+    "date": "2026-03-11",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Şimal Zonasında Yağışlı Trasa Hazırlıq ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "KLUB",
+    "status": "published"
+  },
+  {
+    "id": 310,
+    "title": "Gənc Pilotlar üçün Qəbul Mərhələsi Başladı",
+    "date": "2026-03-13",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Gənc Pilotlar üçün Qəbul Mərhələsi Başladı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "UĞURLARIMIZ",
+    "status": "published"
+  },
+  {
+    "id": 311,
+    "title": "Sponsorluk Proqramı üzrə Yeni Razılaşma",
+    "date": "2026-03-15",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Sponsorluk Proqramı üzrə Yeni Razılaşma ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏHLÜKƏSİZLİK",
+    "status": "published"
+  },
+  {
+    "id": 312,
+    "title": "Klubun Servis Parkı Yenidən Quruldu",
+    "date": "2026-03-17",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Klubun Servis Parkı Yenidən Quruldu ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "MƏSLƏHƏTLƏR",
+    "status": "published"
+  },
+  {
+    "id": 313,
+    "title": "Dağlıq Etap üçün Logistika Planı Təsdiqləndi",
+    "date": "2026-03-19",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Dağlıq Etap üçün Logistika Planı Təsdiqləndi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "EKSPEDİSİYA",
+    "status": "published"
+  },
+  {
+    "id": 314,
+    "title": "Məşq Yarışında Rekord Nəticə Qeyd Olundu",
+    "date": "2026-03-21",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Məşq Yarışında Rekord Nəticə Qeyd Olundu ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 315,
+    "title": "Qarışıq Örtük Trasında Təkər Testləri Aparıldı",
+    "date": "2026-03-23",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Qarışıq Örtük Trasında Təkər Testləri Aparıldı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "ANONS",
+    "status": "published"
+  },
+  {
+    "id": 316,
+    "title": "Peşəkar Hakimlər Heyəti Mövsümə Hazırdır",
+    "date": "2026-03-25",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Peşəkar Hakimlər Heyəti Mövsümə Hazırdır ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "YARIŞLAR",
+    "status": "published"
+  },
+  {
+    "id": 317,
+    "title": "Qadın Pilotlar üçün Dəstək Proqramı Elan Edildi",
+    "date": "2026-03-27",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Qadın Pilotlar üçün Dəstək Proqramı Elan Edildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TEXNİKİ",
+    "status": "published"
+  },
+  {
+    "id": 318,
+    "title": "Forsaj Academy İlk Məzunlarını Təqdim Etdi",
+    "date": "2026-03-29",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Forsaj Academy İlk Məzunlarını Təqdim Etdi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏLİM",
+    "status": "published"
+  },
+  {
+    "id": 319,
+    "title": "Yüksək Sürət Bölməsində Yeni Təhlükəsizlik Standartı",
+    "date": "2026-03-31",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yüksək Sürət Bölməsində Yeni Təhlükəsizlik Standartı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "KLUB",
+    "status": "published"
+  },
+  {
+    "id": 320,
+    "title": "Bakı Ətrafında Gece Etabı Uğurla Tamamlandı",
+    "date": "2026-04-02",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Bakı Ətrafında Gece Etabı Uğurla Tamamlandı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "UĞURLARIMIZ",
+    "status": "published"
+  },
+  {
+    "id": 321,
+    "title": "Yay Kuboku üçün İştirakçı Siyahısı Açıqlanıb",
+    "date": "2026-04-04",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yay Kuboku üçün İştirakçı Siyahısı Açıqlanıb ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏHLÜKƏSİZLİK",
+    "status": "published"
+  },
+  {
+    "id": 322,
+    "title": "Texniki Yoxlamada Yeni Rəqəmsal Sistem İstifadə Olunur",
+    "date": "2026-04-06",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Texniki Yoxlamada Yeni Rəqəmsal Sistem İstifadə Olunur ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "MƏSLƏHƏTLƏR",
+    "status": "published"
+  },
+  {
+    "id": 323,
+    "title": "Komanda Kapitanları ilə Strateji Görüş Keçirildi",
+    "date": "2026-04-08",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Komanda Kapitanları ilə Strateji Görüş Keçirildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "EKSPEDİSİYA",
+    "status": "published"
+  },
+  {
+    "id": 324,
+    "title": "Marşal Qrupu üçün Təlim Toplantısı Təşkil Edildi",
+    "date": "2026-04-10",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Marşal Qrupu üçün Təlim Toplantısı Təşkil Edildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 325,
+    "title": "Yardımçı Heyət Üçün Operativ Rabitə Yeniləndi",
+    "date": "2026-04-12",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Yardımçı Heyət Üçün Operativ Rabitə Yeniləndi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "ANONS",
+    "status": "published"
+  },
+  {
+    "id": 326,
+    "title": "Yeni Offroad Kamera Zonaları Aktivləşdirildi",
+    "date": "2026-04-14",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yeni Offroad Kamera Zonaları Aktivləşdirildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "YARIŞLAR",
+    "status": "published"
+  },
+  {
+    "id": 327,
+    "title": "Pilot Reytinqi üzrə Aralıq Nəticələr Paylaşıldı",
+    "date": "2026-04-16",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Pilot Reytinqi üzrə Aralıq Nəticələr Paylaşıldı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TEXNİKİ",
+    "status": "published"
+  },
+  {
+    "id": 328,
+    "title": "Çempionatın 2-ci mərhələsi üçün Qeydiyyat Artır",
+    "date": "2026-04-18",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Çempionatın 2-ci mərhələsi üçün Qeydiyyat Artır ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏLİM",
+    "status": "published"
+  },
+  {
+    "id": 329,
+    "title": "Küləkli Hava Şəraitində Sınaq Sürüşləri Keçirildi",
+    "date": "2026-04-20",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Küləkli Hava Şəraitində Sınaq Sürüşləri Keçirildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "KLUB",
+    "status": "published"
+  },
+  {
+    "id": 330,
+    "title": "Tamaşaçılar üçün Yeni Təhlükəsizlik Xətti Çəkildi",
+    "date": "2026-04-22",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Tamaşaçılar üçün Yeni Təhlükəsizlik Xətti Çəkildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "UĞURLARIMIZ",
+    "status": "published"
+  },
+  {
+    "id": 331,
+    "title": "Sponsor Village Sahəsi Genişləndirildi",
+    "date": "2026-04-24",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Sponsor Village Sahəsi Genişləndirildi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏHLÜKƏSİZLİK",
+    "status": "published"
+  },
+  {
+    "id": 332,
+    "title": "Ralli Radiosu üçün Yeni Yayım Tezliyi Quruldu",
+    "date": "2026-04-26",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Ralli Radiosu üçün Yeni Yayım Tezliyi Quruldu ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "MƏSLƏHƏTLƏR",
+    "status": "published"
+  },
+  {
+    "id": 333,
+    "title": "Texniki Komissiya Sürətli Yoxlama Protokolu Təsdiqlədi",
+    "date": "2026-04-28",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Texniki Komissiya Sürətli Yoxlama Protokolu Təsdiqlədi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "EKSPEDİSİYA",
+    "status": "published"
+  },
+  {
+    "id": 334,
+    "title": "Yeni Sezonda Elektron Start Sistemi İstifadə Olunacaq",
+    "date": "2026-04-30",
+    "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    "description": "Yeni Sezonda Elektron Start Sistemi İstifadə Olunacaq ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "XƏBƏRLƏR",
+    "status": "published"
+  },
+  {
+    "id": 335,
+    "title": "Qış Sınaqlarının Nəticələri İctimaiyyətə Açıqlandı",
+    "date": "2026-05-02",
+    "img": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=2055&auto=format&fit=crop",
+    "description": "Qış Sınaqlarının Nəticələri İctimaiyyətə Açıqlandı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "ANONS",
+    "status": "published"
+  },
+  {
+    "id": 336,
+    "title": "Komandalararası Dostluq Etabı Yüksək Maraqla Keçdi",
+    "date": "2026-05-04",
+    "img": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Komandalararası Dostluq Etabı Yüksək Maraqla Keçdi ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "YARIŞLAR",
+    "status": "published"
+  },
+  {
+    "id": 337,
+    "title": "Marafon Formatı üzrə İlk Təlim Günü Başa Çatdı",
+    "date": "2026-05-06",
+    "img": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2070&auto=format&fit=crop",
+    "description": "Marafon Formatı üzrə İlk Təlim Günü Başa Çatdı ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TEXNİKİ",
+    "status": "published"
+  },
+  {
+    "id": 338,
+    "title": "Final Mərhələsi Önəsi Ümumi Təhlükəsizlik Xatırlatması",
+    "date": "2026-05-08",
+    "img": "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    "description": "Final Mərhələsi Önəsi Ümumi Təhlükəsizlik Xatırlatması ilə bağlı yenilənmiş məlumatlar komandalar və iştirakçılarla paylaşıldı. Detallar yaxın günlərdə rəsmi kanallarda dərc olunacaq.",
+    "category": "TƏLİM",
+    "status": "published"
+  }
+]

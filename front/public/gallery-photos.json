@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "url": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&fit=crop",
+    "title": "Sumqayıt Challenge 2024",
+    "category": "Yarışlar"
+  },
+  {
+    "id": 2,
+    "url": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&fit=crop",
+    "title": "Xızı Dağları",
+    "category": "Ekspedisiya"
+  },
+  {
+    "id": 3,
+    "url": "https://images.unsplash.com/photo-1547038577-da80abbc4f19?q=80&w=800&fit=crop",
+    "title": "Naxçıvan Səhra Yarışı",
+    "category": "Yarışlar"
+  },
+  {
+    "id": 4,
+    "url": "https://images.unsplash.com/photo-1533558701576-23c65e0272fb?q=80&w=800&fit=crop",
+    "title": "Gecə Traili",
+    "category": "Ekspedisiya"
+  },
+  {
+    "id": 5,
+    "url": "https://images.unsplash.com/photo-1541447271487-09612b3f49f7?q=80&w=800&fit=crop",
+    "title": "Qış Kuboku",
+    "category": "Yarışlar"
+  },
+  {
+    "id": 6,
+    "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&fit=crop",
+    "title": "Şəki Panoraması",
+    "category": "Ekspedisiya"
+  },
+  {
+    "id": 501,
+    "title": "Qobu start xətti",
+    "url": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop",
+    "album": "QOBU OFFROAD CHALLENGE 2026",
+    "eventId": 101
+  },
+  {
+    "id": 502,
+    "title": "Qobu su keçidi",
+    "url": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=2070&auto=format&fit=crop",
+    "album": "QOBU OFFROAD CHALLENGE 2026",
+    "eventId": 101
+  },
+  {
+    "id": 503,
+    "title": "Qobu finiş",
+    "url": "https://images.unsplash.com/photo-1529429617124-aee711d416e4?q=80&w=2068&auto=format&fit=crop",
+    "album": "QOBU OFFROAD CHALLENGE 2026",
+    "eventId": 101
+  },
+  {
+    "id": 504,
+    "title": "Şamaxı səhər dumanı",
+    "url": "https://images.unsplash.com/photo-1471295253337-3ceaaedca402?q=80&w=2070&auto=format&fit=crop",
+    "album": "ŞAMAXI HILL CLIMB WEEKEND",
+    "eventId": 102
+  },
+  {
+    "id": 505,
+    "title": "Şamaxı qalxma hissəsi",
+    "url": "https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=2070&auto=format&fit=crop",
+    "album": "ŞAMAXI HILL CLIMB WEEKEND",
+    "eventId": 102
+  },
+  {
+    "id": 506,
+    "title": "Şamaxı podium",
+    "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop",
+    "album": "ŞAMAXI HILL CLIMB WEEKEND",
+    "eventId": 102
+  },
+  {
+    "id": 507,
+    "title": "Lənkəran palçıq zonası",
+    "url": "https://images.unsplash.com/photo-1518655048521-f130df041f66?q=80&w=2070&auto=format&fit=crop",
+    "album": "LƏNKƏRAN MUD FEST 2025",
+    "eventId": 103
+  },
+  {
+    "id": 508,
+    "title": "Lənkəran komanda şəkli",
+    "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2070&auto=format&fit=crop",
+    "album": "LƏNKƏRAN MUD FEST 2025",
+    "eventId": 103
+  },
+  {
+    "id": 509,
+    "title": "Lənkəran finiş",
+    "url": "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2070&auto=format&fit=crop",
+    "album": "LƏNKƏRAN MUD FEST 2025",
+    "eventId": 103
+  },
+  {
+    "id": 510,
+    "title": "Gədəbəy qaya mərhələsi",
+    "url": "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070&auto=format&fit=crop",
+    "album": "GƏDƏBƏY ROCK TRAIL 2025",
+    "eventId": 104
+  },
+  {
+    "id": 511,
+    "title": "Gədəbəy dar keçid",
+    "url": "https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2070&auto=format&fit=crop",
+    "album": "GƏDƏBƏY ROCK TRAIL 2025",
+    "eventId": 104
+  },
+  {
+    "id": 512,
+    "title": "Gədəbəy qrup foto",
+    "url": "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2070&auto=format&fit=crop",
+    "album": "GƏDƏBƏY ROCK TRAIL 2025",
+    "eventId": 104
+  }
+]

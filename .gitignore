@@ -1,0 +1,11 @@
+node_modules/
+**/node_modules/
+.DS_Store
+.vscode/
+*.log
+QA_TEST_REPORT_*.txt
+.env
+front/.env
+.vite/
+front/.vite/
+server.log

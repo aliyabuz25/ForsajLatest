@@ -1,0 +1,17 @@
+# Build stage
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY front/package*.json ./
+RUN npm install
+COPY front/ ./
+
+RUN npm run build \
+    && MAIN_JS_PATH="$(sed -n 's|.*<script type=\"module\" crossorigin src=\"\(/assets/[^\" ]*\.js\)\".*|\1|p' dist/index.html | head -n 1)" \
+    && if [ -n "$MAIN_JS_PATH" ] && [ ! -f dist/assets/index.js ]; then cp "dist${MAIN_JS_PATH}" dist/assets/index.js; fi
+
+# Serve stage
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

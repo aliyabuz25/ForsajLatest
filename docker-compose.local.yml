@@ -1,0 +1,98 @@
+services:
+  forsaj-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "forsaj_root_local"
+      MYSQL_DATABASE: "forsaj_admin"
+      MYSQL_USER: "forsaj_user"
+      MYSQL_PASSWORD: "forsaj_password_99"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.data/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  forsaj-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      WEB_DATA_DIR: "/app/data/web-data"
+      ADMIN_PUBLIC_DIR: "/app/data/web-data"
+      UPLOAD_DIR: "/app/data/uploads"
+      MYSQL_HOST: "forsaj-db"
+      MYSQL_USER: "forsaj_user"
+      MYSQL_PASSWORD: "forsaj_password_99"
+      MYSQL_DATABASE: "forsaj_admin"
+      REQUIRE_DB_HEALTH: "true"
+    volumes:
+      - ./.data/app:/app/data
+    ports:
+      - "5000:5000"
+    depends_on:
+      forsaj-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:5000/api/health >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+  forsaj-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: unless-stopped
+    depends_on:
+      forsaj-backend:
+        condition: service_healthy
+    ports:
+      - "3000:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/ >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+  forsaj-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+    restart: unless-stopped
+    depends_on:
+      forsaj-backend:
+        condition: service_healthy
+    ports:
+      - "3001:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/admin/ >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+  forsaj-db-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: "forsaj-db"
+    depends_on:
+      forsaj-db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+
+volumes:
+  mysql_data:
+    driver: local
+  app_data:
+    driver: local

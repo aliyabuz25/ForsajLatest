@@ -1,0 +1,12 @@
+FROM phpmyadmin/phpmyadmin:latest
+
+# Install tools to download and extract themes
+RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
+
+# Download and install a modern dark theme (DarkWolf for 5.2)
+RUN wget https://files.phpmyadmin.net/themes/darkwolf/5.2/darkwolf-5.2.zip -O /tmp/theme.zip \
+    && unzip /tmp/theme.zip -d /var/www/html/themes/ \
+    && rm /tmp/theme.zip
+
+# Create a custom config to set the theme as default
+RUN echo "<?php \$cfg['ThemeDefault'] = 'darkwolf';" > /etc/phpmyadmin/config.user.inc.php
