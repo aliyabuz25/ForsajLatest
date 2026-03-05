@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Calendar, Facebook, Send, Twitter, MessageCircle } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 import { bbcodeToHtml } from '../utils/bbcode';
+import { getLocalizedNewsField, normalizeNewsWithLocalization, type NewsLanguageCode, type NewsTranslations } from '../utils/newsLocalization';
 
 interface NewsItem {
   id: number;
@@ -10,6 +11,7 @@ interface NewsItem {
   desc: string;
   img: string;
   content: string;
+  translations?: NewsTranslations;
 }
 
 const SELECTED_NEWS_ID_KEY = 'forsaj_selected_news_id';
@@ -40,7 +42,8 @@ const getShareExcerpt = (value: unknown, limit = 140) => {
 };
 
 const NewsPage: React.FC = () => {
-  const { getText } = useSiteContent('newspage');
+  const { getText, language } = useSiteContent('newspage');
+  const newsLanguage: NewsLanguageCode = language === 'RU' ? 'RU' : language === 'ENG' ? 'ENG' : 'AZ';
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
@@ -59,14 +62,23 @@ const NewsPage: React.FC = () => {
             .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
           const mapped = filtered.map((item: any) => ({
+            ...normalizeNewsWithLocalization(item || {}),
             id: item.id,
-            title: item.title,
             date: item.date,
-            desc: normalizeRichTextSpacing(item.description),
             img: item.img,
-            content: normalizeRichTextSpacing(item.description)
+            title: getLocalizedNewsField(item, 'title', newsLanguage),
+            desc: normalizeRichTextSpacing(getLocalizedNewsField(item, 'description', newsLanguage)),
+            content: normalizeRichTextSpacing(getLocalizedNewsField(item, 'description', newsLanguage))
           }));
           setNewsData(mapped);
+
+          const currentSelectedId = selectedNews?.id;
+          if (currentSelectedId) {
+            const selectedMapped = mapped.find((item: NewsItem) => item.id === currentSelectedId);
+            if (selectedMapped) {
+              setSelectedNews(selectedMapped);
+            }
+          }
 
           try {
             const rawRequestedId = sessionStorage.getItem(SELECTED_NEWS_ID_KEY);
@@ -89,7 +101,7 @@ const NewsPage: React.FC = () => {
       }
     };
     loadNews();
-  }, []);
+  }, [newsLanguage]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

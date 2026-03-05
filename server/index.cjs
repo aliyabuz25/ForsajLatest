@@ -673,6 +673,87 @@ const normalizeEventItems = (list) => {
     return list.map((item) => normalizeSingleEventItem(item));
 };
 
+const NEWS_TRANSLATABLE_FIELDS = ['title', 'category', 'description'];
+const createEmptyNewsLocalizedFields = () => ({
+    title: '',
+    category: '',
+    description: ''
+});
+const getLegacyNewsFieldByLanguage = (rawNews, field, lang) => {
+    if (lang === 'AZ') return '';
+
+    const suffixes = lang === 'RU'
+        ? ['Ru', 'RU', 'Rus', 'RUS', '_ru', '_RU', '_rus', '_RUS']
+        : ['En', 'EN', 'Eng', 'ENG', '_en', '_EN', '_eng', '_ENG'];
+
+    for (const suffix of suffixes) {
+        const key = `${field}${suffix}`;
+        const value = rawNews?.[key];
+        if (value !== undefined && value !== null && String(value) !== '') {
+            return String(value);
+        }
+    }
+
+    return '';
+};
+const normalizeNewsTranslations = (rawNews) => {
+    const source = isPlainObject(rawNews) ? rawNews : {};
+    const rawTranslations = isPlainObject(source.translations)
+        ? source.translations
+        : (isPlainObject(source.i18n) ? source.i18n : {});
+
+    const langSources = {
+        AZ: isPlainObject(rawTranslations.AZ)
+            ? rawTranslations.AZ
+            : (isPlainObject(rawTranslations.az) ? rawTranslations.az : undefined),
+        RU: isPlainObject(rawTranslations.RU)
+            ? rawTranslations.RU
+            : (isPlainObject(rawTranslations.ru)
+                ? rawTranslations.ru
+                : (isPlainObject(rawTranslations.RUS) ? rawTranslations.RUS : undefined)),
+        ENG: isPlainObject(rawTranslations.ENG)
+            ? rawTranslations.ENG
+            : (isPlainObject(rawTranslations.EN)
+                ? rawTranslations.EN
+                : (isPlainObject(rawTranslations.en) ? rawTranslations.en : undefined))
+    };
+
+    return EVENT_LANG_CODES.reduce((acc, lang) => {
+        const base = createEmptyNewsLocalizedFields();
+        const langSource = langSources[lang];
+
+        NEWS_TRANSLATABLE_FIELDS.forEach((field) => {
+            const fromLangMap = langSource ? toEventFieldString(langSource[field]) : '';
+            const azBase = toEventFieldString(source[field]);
+            if (lang === 'AZ') {
+                base[field] = fromLangMap || azBase;
+                return;
+            }
+            base[field] = fromLangMap || getLegacyNewsFieldByLanguage(source, field, lang);
+        });
+
+        acc[lang] = base;
+        return acc;
+    }, {});
+};
+const normalizeSingleNewsItem = (rawItem) => {
+    const item = isPlainObject(rawItem) ? { ...rawItem } : {};
+    const translations = normalizeNewsTranslations(item);
+    const az = translations.AZ || createEmptyNewsLocalizedFields();
+
+    return {
+        ...item,
+        title: az.title || toEventFieldString(item.title),
+        category: az.category || toEventFieldString(item.category),
+        description: az.description || toEventFieldString(item.description),
+        translations
+    };
+};
+const normalizeNewsItems = (list) => {
+    if (!Array.isArray(list)) return [];
+    return list.map((item) => normalizeSingleNewsItem(item));
+};
+
 const normalizeSettingId = (value) => String(value || '').trim().toUpperCase();
 const normalizeKeyToken = (value) => String(value || '')
     .trim()
@@ -1936,7 +2017,7 @@ app.post('/api/events', async (req, res) => {
 app.get('/api/news', async (req, res) => {
     try {
         const data = await getContent('news', []);
-        res.json(data);
+        res.json(normalizeNewsItems(data));
     } catch (error) {
         console.error('Error reading news:', error);
         res.status(500).json({ error: 'Failed to read news' });
@@ -1948,7 +2029,7 @@ app.get('/api/share/news/:id', async (req, res) => {
     try {
         const requestedId = Number(req.params.id);
         const newsList = await getContent('news', []);
-        const newsItems = Array.isArray(newsList) ? newsList : [];
+        const newsItems = normalizeNewsItems(newsList);
         const selectedNews = Number.isFinite(requestedId)
             ? newsItems.find((item) => Number(item?.id) === requestedId)
             : null;
@@ -2010,8 +2091,9 @@ app.get('/api/share/news/:id', async (req, res) => {
 // API: Save News
 app.post('/api/news', async (req, res) => {
     try {
-        const news = normalizeListPayload(req.body);
-        if (!news) return res.status(400).json({ error: 'Invalid news payload' });
+        const newsPayload = normalizeListPayload(req.body);
+        if (!newsPayload) return res.status(400).json({ error: 'Invalid news payload' });
+        const news = normalizeNewsItems(newsPayload);
         const ok = await saveContent('news', news);
         if (!ok) return res.status(500).json({ error: 'Failed to save news' });
         res.json({ success: true });

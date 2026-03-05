@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
+import { getLocalizedNewsField, normalizeNewsWithLocalization, type NewsLanguageCode, type NewsTranslations } from '../utils/newsLocalization';
 
 interface NewsItem {
   id: number;
@@ -8,6 +9,7 @@ interface NewsItem {
   date: string;
   img: string;
   description: string;
+  translations?: NewsTranslations;
 }
 
 interface NewsProps {
@@ -41,7 +43,8 @@ const getPreviewText = (value: unknown, limit: number) => {
 };
 
 const News: React.FC<NewsProps> = ({ onViewChange }) => {
-  const { getText } = useSiteContent('news');
+  const { getText, language } = useSiteContent('news');
+  const newsLanguage: NewsLanguageCode = language === 'RU' ? 'RU' : language === 'ENG' ? 'ENG' : 'AZ';
   const [newsData, setNewsData] = useState<NewsItem[]>([]);
 
   const openNews = (id?: number) => {
@@ -74,11 +77,12 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
             .slice(0, 3);
 
           const mapped = publishedNews.map((item: any) => ({
+            ...normalizeNewsWithLocalization(item || {}),
             id: item.id,
-            title: item.title,
             date: item.date,
             img: item.img,
-            description: getPreviewText(normalizeRichTextSpacing(item.description), 280)
+            title: getLocalizedNewsField(item, 'title', newsLanguage),
+            description: getPreviewText(normalizeRichTextSpacing(getLocalizedNewsField(item, 'description', newsLanguage)), 280)
           }));
 
           setNewsData(mapped);
@@ -88,7 +92,7 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
       }
     };
     loadNews();
-  }, []);
+  }, [newsLanguage]);
 
   if (newsData.length === 0) return null;
 

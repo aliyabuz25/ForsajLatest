@@ -36,6 +36,9 @@ type EventLanguageCode = 'AZ' | 'RU' | 'ENG';
 type EventLocalizedField = 'title' | 'location' | 'category' | 'description' | 'rules';
 type EventLocalizedFields = Record<EventLocalizedField, string>;
 type EventTranslations = Record<EventLanguageCode, EventLocalizedFields>;
+type NewsLocalizedField = 'title' | 'category' | 'description';
+type NewsLocalizedFields = Record<NewsLocalizedField, string>;
+type NewsTranslations = Record<EventLanguageCode, NewsLocalizedFields>;
 
 interface EventItem {
     id: number;
@@ -61,6 +64,7 @@ interface NewsItem {
     description: string;
     category?: string;
     status: 'published' | 'draft';
+    translations?: NewsTranslations;
 }
 
 interface DriverItem {
@@ -295,6 +299,140 @@ const applyEventLocalizedFieldUpdate = (
     }
 
     return syncEventWithAzTranslations(nextEvent);
+};
+
+const NEWS_LOCALIZED_FIELDS: NewsLocalizedField[] = ['title', 'category', 'description'];
+
+const createEmptyNewsLocalizedFields = (): NewsLocalizedFields => ({
+    title: '',
+    category: '',
+    description: ''
+});
+
+const getLegacyNewsFieldByLanguage = (
+    rawNews: Record<string, any>,
+    field: NewsLocalizedField,
+    lang: EventLanguageCode
+) => {
+    if (lang === 'AZ') return '';
+
+    const suffixes = lang === 'RU'
+        ? ['Ru', 'RU', 'Rus', 'RUS', '_ru', '_RU', '_rus', '_RUS']
+        : ['En', 'EN', 'Eng', 'ENG', '_en', '_EN', '_eng', '_ENG'];
+
+    for (const suffix of suffixes) {
+        const key = `${field}${suffix}`;
+        const value = rawNews[key];
+        if (value !== undefined && value !== null && String(value) !== '') {
+            return String(value);
+        }
+    }
+
+    return '';
+};
+
+const normalizeNewsTranslations = (rawNews: Partial<NewsItem> & Record<string, any>): NewsTranslations => {
+    const source = isObjectRecord(rawNews) ? rawNews : {};
+    const rawTranslations: Record<string, any> = isObjectRecord(source.translations)
+        ? (source.translations as Record<string, any>)
+        : (isObjectRecord(source.i18n) ? (source.i18n as Record<string, any>) : {});
+
+    const langSources: Partial<Record<EventLanguageCode, Record<string, any>>> = {
+        AZ: isObjectRecord(rawTranslations.AZ)
+            ? rawTranslations.AZ
+            : (isObjectRecord(rawTranslations.az) ? rawTranslations.az : undefined),
+        RU: isObjectRecord(rawTranslations.RU)
+            ? rawTranslations.RU
+            : (isObjectRecord(rawTranslations.ru)
+                ? rawTranslations.ru
+                : (isObjectRecord(rawTranslations.RUS) ? rawTranslations.RUS : undefined)),
+        ENG: isObjectRecord(rawTranslations.ENG)
+            ? rawTranslations.ENG
+            : (isObjectRecord(rawTranslations.EN)
+                ? rawTranslations.EN
+                : (isObjectRecord(rawTranslations.en) ? rawTranslations.en : undefined))
+    };
+
+    const normalized = EVENT_LANGUAGE_CODES.reduce((acc, lang) => {
+        const base = createEmptyNewsLocalizedFields();
+        const langSource = langSources[lang];
+
+        NEWS_LOCALIZED_FIELDS.forEach((field) => {
+            const fromLangMap = langSource ? toEventFieldString(langSource[field]) : '';
+            const azBase = toEventFieldString(source[field]);
+
+            if (lang === 'AZ') {
+                base[field] = fromLangMap || azBase;
+                return;
+            }
+
+            base[field] = fromLangMap || getLegacyNewsFieldByLanguage(source, field, lang);
+        });
+
+        acc[lang] = base;
+        return acc;
+    }, {} as NewsTranslations);
+
+    return normalized;
+};
+
+const syncNewsWithAzTranslations = (rawNews: Partial<NewsItem> & Record<string, any>): NewsItem => {
+    const source = isObjectRecord(rawNews) ? rawNews : {};
+    const translations = normalizeNewsTranslations(source);
+    const az = translations.AZ;
+
+    return {
+        ...(source as NewsItem),
+        title: az.title || toEventFieldString(source.title),
+        category: az.category || toEventFieldString(source.category),
+        description: az.description || toEventFieldString(source.description),
+        translations
+    };
+};
+
+const getNewsLocalizedFieldValue = (
+    rawNews: Partial<NewsItem> | null | undefined,
+    field: NewsLocalizedField,
+    lang: EventLanguageCode,
+    fallbackToAz = true
+) => {
+    if (!rawNews) return '';
+    const normalizedNews = syncNewsWithAzTranslations(rawNews as Partial<NewsItem> & Record<string, any>);
+    const directValue = toEventFieldString(normalizedNews.translations?.[lang]?.[field]);
+    if (directValue) return directValue;
+    if (!fallbackToAz && lang !== 'AZ') return '';
+    if (fallbackToAz && lang !== 'AZ') {
+        return toEventFieldString(normalizedNews.translations?.AZ?.[field]) || toEventFieldString(normalizedNews[field]);
+    }
+    return toEventFieldString(normalizedNews[field]);
+};
+
+const applyNewsLocalizedFieldUpdate = (
+    rawNews: Partial<NewsItem> & Record<string, any>,
+    field: NewsLocalizedField,
+    lang: EventLanguageCode,
+    value: string
+): NewsItem => {
+    const normalizedNews = syncNewsWithAzTranslations(rawNews);
+    const currentTranslations = normalizedNews.translations || normalizeNewsTranslations(normalizedNews);
+    const nextTranslations: NewsTranslations = {
+        ...currentTranslations,
+        [lang]: {
+            ...currentTranslations[lang],
+            [field]: value
+        }
+    };
+
+    const nextNews: NewsItem = {
+        ...normalizedNews,
+        translations: nextTranslations
+    };
+
+    if (lang === 'AZ') {
+        nextNews[field] = value;
+    }
+
+    return syncNewsWithAzTranslations(nextNews);
 };
 
 const isReservedPhotoAlbum = (value?: string) => {
@@ -862,6 +1000,7 @@ const VisualEditor: React.FC = () => {
     const [news, setNews] = useState<NewsItem[]>([]);
     const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
     const [newsForm, setNewsForm] = useState<Partial<NewsItem>>({});
+    const [newsFormLanguage, setNewsFormLanguage] = useState<EventLanguageCode>('AZ');
 
     // Video Mode State
     const [videos, setVideos] = useState<VideoItem[]>([]);
@@ -1746,10 +1885,11 @@ const VisualEditor: React.FC = () => {
             }
 
             if (Array.isArray(newsData)) {
-                setNews(newsData);
-                if (newsData.length > 0 && selectedNewsId === null) {
-                    setSelectedNewsId(newsData[0].id);
-                    setNewsForm({ ...newsData[0] });
+                const normalizedNews = newsData.map((item: any) => syncNewsWithAzTranslations(item));
+                setNews(normalizedNews);
+                if (normalizedNews.length > 0 && selectedNewsId === null) {
+                    setSelectedNewsId(normalizedNews[0].id);
+                    setNewsForm(syncNewsWithAzTranslations(normalizedNews[0]));
                 }
             }
 
@@ -3199,7 +3339,7 @@ const VisualEditor: React.FC = () => {
         const item = news.find(n => n.id === id);
         if (item) {
             setSelectedNewsId(id);
-            setNewsForm({ ...item });
+            setNewsForm(syncNewsWithAzTranslations(item));
         }
     };
 
@@ -3208,11 +3348,40 @@ const VisualEditor: React.FC = () => {
 
         setNewsForm(prev => {
             const isSame = !targetId || targetId === selectedNewsId;
-            const updatedForm = isSame ? { ...prev, [field]: value } as NewsItem : prev;
+            const updatedForm = isSame
+                ? syncNewsWithAzTranslations({ ...prev, [field]: value } as NewsItem)
+                : prev;
 
             if (activeId) {
-                setNews(oldNews => oldNews.map(n => n.id === activeId ? { ...n, [field]: value } : n));
+                setNews(oldNews => oldNews.map(n => (
+                    n.id === activeId
+                        ? syncNewsWithAzTranslations({ ...n, [field]: value } as NewsItem)
+                        : n
+                )));
             }
+
+            return updatedForm;
+        });
+    };
+
+    const handleNewsLocalizedChange = (
+        field: NewsLocalizedField,
+        value: string,
+        lang: EventLanguageCode,
+        targetId?: number
+    ) => {
+        const activeId = targetId || selectedNewsId;
+        if (!activeId) return;
+
+        setNewsForm(prev => {
+            const isSame = !targetId || targetId === selectedNewsId;
+            const updatedForm = isSame
+                ? applyNewsLocalizedFieldUpdate((prev as NewsItem), field, lang, value)
+                : prev;
+
+            setNews(oldNews => oldNews.map(n => (
+                n.id === activeId ? applyNewsLocalizedFieldUpdate(n, field, lang, value) : n
+            )));
 
             return updatedForm;
         });
@@ -3220,7 +3389,7 @@ const VisualEditor: React.FC = () => {
 
     const addNewNews = () => {
         const newId = news.length > 0 ? Math.max(...news.map(n => n.id)) + 1 : 1;
-        const newItem: NewsItem = {
+        const newItem: NewsItem = syncNewsWithAzTranslations({
             id: newId,
             title: 'Yeni Xəbər',
             date: new Date().toISOString().split('T')[0],
@@ -3228,7 +3397,7 @@ const VisualEditor: React.FC = () => {
             description: '',
             category: 'BLOQ',
             status: 'draft'
-        };
+        });
         setNews([...news, newItem]);
         setSelectedNewsId(newId);
         setNewsForm(newItem);
@@ -5077,7 +5246,7 @@ const VisualEditor: React.FC = () => {
                                             onClick={() => handleNewsSelect(item.id)}
                                             style={{ width: '100%', paddingRight: '40px', textAlign: 'left' }}
                                         >
-                                            <FileText size={14} /> {item.title}
+                                            <FileText size={14} /> {getNewsLocalizedFieldValue(item, 'title', 'AZ')}
                                             <div style={{ fontSize: '10px', color: '#999', marginLeft: '24px' }}>{item.date}</div>
                                         </button>
                                         <button
@@ -5100,16 +5269,40 @@ const VisualEditor: React.FC = () => {
                                     <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         <FileText size={22} /> Xəbəri Redaktə Et
                                     </h2>
-                                    <p style={{ color: '#64748b' }}>{newsForm.title} // ID: {newsForm.id}</p>
+                                    <p style={{ color: '#64748b' }}>
+                                        {getNewsLocalizedFieldValue(newsForm, 'title', newsFormLanguage, true) || 'Yeni Xəbər'} // ID: {newsForm.id}
+                                    </p>
+                                </div>
+
+                                <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem' }}>
+                                    {EVENT_LANGUAGE_TABS.map((tab) => {
+                                        const isActive = newsFormLanguage === tab.code;
+                                        return (
+                                            <button
+                                                key={tab.code}
+                                                type="button"
+                                                className="btn-secondary"
+                                                onClick={() => setNewsFormLanguage(tab.code)}
+                                                style={{
+                                                    minWidth: '72px',
+                                                    background: isActive ? '#FF4D00' : '#111',
+                                                    color: isActive ? '#000' : '#fff',
+                                                    border: isActive ? '1px solid #FF4D00' : '1px solid #e2e8f0'
+                                                }}
+                                            >
+                                                {tab.label}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
 
                                 <div className="edit-grid grid-2">
                                     <div className="form-group">
-                                        <label>BAŞLIQ (AZ)</label>
+                                        <label>BAŞLIQ ({newsFormLanguage})</label>
                                         <input
                                             type="text"
-                                            value={newsForm.title}
-                                            onChange={(e) => handleNewsChange('title', e.target.value, newsForm.id)}
+                                            value={getNewsLocalizedFieldValue(newsForm, 'title', newsFormLanguage, false)}
+                                            onChange={(e) => handleNewsLocalizedChange('title', e.target.value, newsFormLanguage, newsForm.id)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -5121,11 +5314,11 @@ const VisualEditor: React.FC = () => {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>KATEQORİYA</label>
+                                        <label>KATEQORİYA ({newsFormLanguage})</label>
                                         <input
                                             type="text"
-                                            value={newsForm.category}
-                                            onChange={(e) => handleNewsChange('category', e.target.value, newsForm.id)}
+                                            value={getNewsLocalizedFieldValue(newsForm, 'category', newsFormLanguage, false)}
+                                            onChange={(e) => handleNewsLocalizedChange('category', e.target.value, newsFormLanguage, newsForm.id)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -5169,11 +5362,11 @@ const VisualEditor: React.FC = () => {
                                         </div>
                                     </div>
                                     <div className="form-group full-span">
-                                        <label>MƏZMUN</label>
+                                        <label>MƏZMUN ({newsFormLanguage})</label>
                                         <QuillEditor
                                             id="news-full-desc"
-                                            value={bbcodeToHtmlForEditor(newsForm.description || '')}
-                                            onChange={(val: string) => handleNewsChange('description', val, newsForm.id)}
+                                            value={bbcodeToHtmlForEditor(getNewsLocalizedFieldValue(newsForm, 'description', newsFormLanguage, false))}
+                                            onChange={(val: string) => handleNewsLocalizedChange('description', val, newsFormLanguage, newsForm.id)}
                                         />
                                     </div>
                                 </div>
