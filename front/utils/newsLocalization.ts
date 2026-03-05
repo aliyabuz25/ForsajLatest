@@ -5,11 +5,48 @@ export type NewsTranslations = Record<NewsLanguageCode, NewsLocalizedFields>;
 
 const NEWS_LANGUAGE_CODES: NewsLanguageCode[] = ['AZ', 'RU', 'ENG'];
 const NEWS_LOCALIZED_FIELDS: NewsLocalizedField[] = ['title', 'category', 'description'];
+const NEWS_TRANSLATION_SOURCE_KEYS = ['translations', 'i18n', 'localized', 'localization', 'langs', 'languages'];
+const NEWS_LANGUAGE_SOURCE_KEYS: Record<NewsLanguageCode, string[]> = {
+  AZ: ['AZ', 'az', 'aze', 'azerbaijani', 'azerbaycanca', 'azerbaycan'],
+  RU: ['RU', 'ru', 'rus', 'russian', 'russkiy'],
+  ENG: ['ENG', 'EN', 'en', 'eng', 'english']
+};
+const NEWS_FIELD_ALIASES: Record<NewsLocalizedField, string[]> = {
+  title: ['title', 'name', 'headline'],
+  category: ['category', 'cat', 'type', 'tag'],
+  description: ['description', 'desc', 'content', 'body', 'text', 'details']
+};
 
 const isObjectRecord = (value: unknown): value is Record<string, any> =>
   !!value && typeof value === 'object' && !Array.isArray(value);
 
 const toNewsFieldString = (value: unknown) => (value === undefined || value === null ? '' : String(value));
+
+const normalizeKey = (value: unknown) =>
+  String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+
+const readObjectByKeys = (source: Record<string, any>, keys: string[]) => {
+  const wanted = new Set(keys.map(normalizeKey));
+  for (const [rawKey, rawValue] of Object.entries(source || {})) {
+    if (!isObjectRecord(rawValue)) continue;
+    if (!wanted.has(normalizeKey(rawKey))) continue;
+    return rawValue;
+  }
+  return undefined;
+};
+
+const readStringByKeys = (source: Record<string, any>, keys: string[]) => {
+  const wanted = new Set(keys.map(normalizeKey));
+  for (const [rawKey, rawValue] of Object.entries(source || {})) {
+    if (!wanted.has(normalizeKey(rawKey))) continue;
+    const next = toNewsFieldString(rawValue);
+    if (next) return next;
+  }
+  return '';
+};
 
 const createEmptyNewsLocalizedFields = (): NewsLocalizedFields => ({
   title: '',
@@ -27,12 +64,15 @@ const getLegacyNewsFieldByLanguage = (
   const suffixes = lang === 'RU'
     ? ['Ru', 'RU', 'Rus', 'RUS', '_ru', '_RU', '_rus', '_RUS']
     : ['En', 'EN', 'Eng', 'ENG', '_en', '_EN', '_eng', '_ENG'];
+  const fieldAliases = NEWS_FIELD_ALIASES[field] || [field];
 
-  for (const suffix of suffixes) {
-    const key = `${field}${suffix}`;
-    const value = rawNews[key];
-    if (value !== undefined && value !== null && String(value) !== '') {
-      return String(value);
+  for (const fieldAlias of fieldAliases) {
+    for (const suffix of suffixes) {
+      const key = `${fieldAlias}${suffix}`;
+      const value = rawNews[key];
+      if (value !== undefined && value !== null && String(value) !== '') {
+        return String(value);
+      }
     }
   }
 
@@ -41,40 +81,38 @@ const getLegacyNewsFieldByLanguage = (
 
 export const normalizeNewsTranslations = (rawNews: Record<string, any> | null | undefined): NewsTranslations => {
   const source = isObjectRecord(rawNews) ? rawNews : {};
-  const rawTranslations = isObjectRecord(source.translations)
-    ? source.translations
-    : (isObjectRecord(source.i18n) ? source.i18n : {});
+  const rawTranslations =
+    readObjectByKeys(source, NEWS_TRANSLATION_SOURCE_KEYS) ||
+    (isObjectRecord(source.translations) ? source.translations : {}) ||
+    (isObjectRecord(source.i18n) ? source.i18n : {});
 
   const langSources: Partial<Record<NewsLanguageCode, Record<string, any>>> = {
-    AZ: isObjectRecord(rawTranslations.AZ)
-      ? rawTranslations.AZ
-      : (isObjectRecord(rawTranslations.az) ? rawTranslations.az : undefined),
-    RU: isObjectRecord(rawTranslations.RU)
-      ? rawTranslations.RU
-      : (isObjectRecord(rawTranslations.ru)
-        ? rawTranslations.ru
-        : (isObjectRecord(rawTranslations.RUS) ? rawTranslations.RUS : undefined)),
-    ENG: isObjectRecord(rawTranslations.ENG)
-      ? rawTranslations.ENG
-      : (isObjectRecord(rawTranslations.EN)
-        ? rawTranslations.EN
-        : (isObjectRecord(rawTranslations.en) ? rawTranslations.en : undefined))
+    AZ: readObjectByKeys(rawTranslations, NEWS_LANGUAGE_SOURCE_KEYS.AZ),
+    RU: readObjectByKeys(rawTranslations, NEWS_LANGUAGE_SOURCE_KEYS.RU),
+    ENG: readObjectByKeys(rawTranslations, NEWS_LANGUAGE_SOURCE_KEYS.ENG)
   };
+
+  const fieldSources: Partial<Record<NewsLocalizedField, Record<string, any>>> = NEWS_LOCALIZED_FIELDS.reduce((acc, field) => {
+    const fieldSource = readObjectByKeys(rawTranslations, NEWS_FIELD_ALIASES[field]);
+    if (fieldSource) acc[field] = fieldSource;
+    return acc;
+  }, {} as Partial<Record<NewsLocalizedField, Record<string, any>>>);
 
   return NEWS_LANGUAGE_CODES.reduce((acc, lang) => {
     const langSource = langSources[lang];
     const base = createEmptyNewsLocalizedFields();
 
     NEWS_LOCALIZED_FIELDS.forEach((field) => {
-      const fromLangMap = langSource ? toNewsFieldString(langSource[field]) : '';
-      const azBase = toNewsFieldString(source[field]);
+      const fromLangMap = langSource ? readStringByKeys(langSource, NEWS_FIELD_ALIASES[field]) : '';
+      const fromFieldMap = fieldSources[field] ? readStringByKeys(fieldSources[field] as Record<string, any>, NEWS_LANGUAGE_SOURCE_KEYS[lang]) : '';
+      const azBase = readStringByKeys(source, NEWS_FIELD_ALIASES[field]);
 
       if (lang === 'AZ') {
-        base[field] = fromLangMap || azBase;
+        base[field] = fromLangMap || fromFieldMap || azBase;
         return;
       }
 
-      base[field] = fromLangMap || getLegacyNewsFieldByLanguage(source, field, lang);
+      base[field] = fromLangMap || fromFieldMap || getLegacyNewsFieldByLanguage(source, field, lang);
     });
 
     acc[lang] = base;

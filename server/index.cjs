@@ -680,23 +680,61 @@ const normalizeEventItems = (list) => {
 };
 
 const NEWS_TRANSLATABLE_FIELDS = ['title', 'category', 'description'];
+const NEWS_TRANSLATION_SOURCE_KEYS = ['translations', 'i18n', 'localized', 'localization', 'langs', 'languages'];
+const NEWS_LANGUAGE_SOURCE_KEYS = {
+    AZ: ['AZ', 'az', 'aze', 'azerbaijani', 'azerbaycanca', 'azerbaycan'],
+    RU: ['RU', 'ru', 'rus', 'russian', 'russkiy'],
+    ENG: ['ENG', 'EN', 'en', 'eng', 'english']
+};
+const NEWS_FIELD_ALIASES = {
+    title: ['title', 'name', 'headline'],
+    category: ['category', 'cat', 'type', 'tag'],
+    description: ['description', 'desc', 'content', 'body', 'text', 'details']
+};
 const createEmptyNewsLocalizedFields = () => ({
     title: '',
     category: '',
     description: ''
 });
+const normalizeNewsKeyToken = (value) => String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+const readNewsObjectByKeys = (source, keys) => {
+    if (!isPlainObject(source)) return undefined;
+    const wanted = new Set((keys || []).map(normalizeNewsKeyToken));
+    for (const [rawKey, rawValue] of Object.entries(source)) {
+        if (!isPlainObject(rawValue)) continue;
+        if (!wanted.has(normalizeNewsKeyToken(rawKey))) continue;
+        return rawValue;
+    }
+    return undefined;
+};
+const readNewsStringByKeys = (source, keys) => {
+    if (!isPlainObject(source)) return '';
+    const wanted = new Set((keys || []).map(normalizeNewsKeyToken));
+    for (const [rawKey, rawValue] of Object.entries(source)) {
+        if (!wanted.has(normalizeNewsKeyToken(rawKey))) continue;
+        const next = toEventFieldString(rawValue);
+        if (next) return next;
+    }
+    return '';
+};
 const getLegacyNewsFieldByLanguage = (rawNews, field, lang) => {
     if (lang === 'AZ') return '';
 
     const suffixes = lang === 'RU'
         ? ['Ru', 'RU', 'Rus', 'RUS', '_ru', '_RU', '_rus', '_RUS']
         : ['En', 'EN', 'Eng', 'ENG', '_en', '_EN', '_eng', '_ENG'];
+    const fieldAliases = NEWS_FIELD_ALIASES[field] || [field];
 
-    for (const suffix of suffixes) {
-        const key = `${field}${suffix}`;
-        const value = rawNews?.[key];
-        if (value !== undefined && value !== null && String(value) !== '') {
-            return String(value);
+    for (const fieldAlias of fieldAliases) {
+        for (const suffix of suffixes) {
+            const key = `${fieldAlias}${suffix}`;
+            const value = rawNews?.[key];
+            if (value !== undefined && value !== null && String(value) !== '') {
+                return String(value);
+            }
         }
     }
 
@@ -704,38 +742,35 @@ const getLegacyNewsFieldByLanguage = (rawNews, field, lang) => {
 };
 const normalizeNewsTranslations = (rawNews) => {
     const source = isPlainObject(rawNews) ? rawNews : {};
-    const rawTranslations = isPlainObject(source.translations)
-        ? source.translations
-        : (isPlainObject(source.i18n) ? source.i18n : {});
+    const rawTranslations =
+        readNewsObjectByKeys(source, NEWS_TRANSLATION_SOURCE_KEYS) ||
+        (isPlainObject(source.translations) ? source.translations : {}) ||
+        (isPlainObject(source.i18n) ? source.i18n : {});
 
     const langSources = {
-        AZ: isPlainObject(rawTranslations.AZ)
-            ? rawTranslations.AZ
-            : (isPlainObject(rawTranslations.az) ? rawTranslations.az : undefined),
-        RU: isPlainObject(rawTranslations.RU)
-            ? rawTranslations.RU
-            : (isPlainObject(rawTranslations.ru)
-                ? rawTranslations.ru
-                : (isPlainObject(rawTranslations.RUS) ? rawTranslations.RUS : undefined)),
-        ENG: isPlainObject(rawTranslations.ENG)
-            ? rawTranslations.ENG
-            : (isPlainObject(rawTranslations.EN)
-                ? rawTranslations.EN
-                : (isPlainObject(rawTranslations.en) ? rawTranslations.en : undefined))
+        AZ: readNewsObjectByKeys(rawTranslations, NEWS_LANGUAGE_SOURCE_KEYS.AZ),
+        RU: readNewsObjectByKeys(rawTranslations, NEWS_LANGUAGE_SOURCE_KEYS.RU),
+        ENG: readNewsObjectByKeys(rawTranslations, NEWS_LANGUAGE_SOURCE_KEYS.ENG)
     };
+    const fieldSources = NEWS_TRANSLATABLE_FIELDS.reduce((acc, field) => {
+        const fieldSource = readNewsObjectByKeys(rawTranslations, NEWS_FIELD_ALIASES[field] || [field]);
+        if (fieldSource) acc[field] = fieldSource;
+        return acc;
+    }, {});
 
     return EVENT_LANG_CODES.reduce((acc, lang) => {
         const base = createEmptyNewsLocalizedFields();
         const langSource = langSources[lang];
 
         NEWS_TRANSLATABLE_FIELDS.forEach((field) => {
-            const fromLangMap = langSource ? toEventFieldString(langSource[field]) : '';
-            const azBase = toEventFieldString(source[field]);
+            const fromLangMap = langSource ? readNewsStringByKeys(langSource, NEWS_FIELD_ALIASES[field] || [field]) : '';
+            const fromFieldMap = fieldSources[field] ? readNewsStringByKeys(fieldSources[field], NEWS_LANGUAGE_SOURCE_KEYS[lang] || []) : '';
+            const azBase = readNewsStringByKeys(source, NEWS_FIELD_ALIASES[field] || [field]);
             if (lang === 'AZ') {
-                base[field] = fromLangMap || azBase;
+                base[field] = fromLangMap || fromFieldMap || azBase;
                 return;
             }
-            base[field] = fromLangMap || getLegacyNewsFieldByLanguage(source, field, lang);
+            base[field] = fromLangMap || fromFieldMap || getLegacyNewsFieldByLanguage(source, field, lang);
         });
 
         acc[lang] = base;
