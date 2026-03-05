@@ -32,10 +32,19 @@ const decodeHtmlEntities = (value: string) =>
     .replace(/&quot;/gi, '"')
     .replace(/&#39;/gi, "'");
 
+const decodeHtmlEntitiesDeep = (value: string, maxPasses = 4) => {
+  let current = String(value || '');
+  for (let i = 0; i < maxPasses; i += 1) {
+    const decoded = decodeHtmlEntities(current);
+    if (decoded === current) break;
+    current = decoded;
+  }
+  return current;
+};
+
 const toPlainText = (value: unknown) =>
-  decodeHtmlEntities(String(value ?? ''))
+  decodeHtmlEntitiesDeep(String(value ?? ''))
     .replace(/\[[^\]]+\]/g, ' ')
-    .replace(/<[^>]*>/g, ' ')
     .replace(/<[^>]*>/g, ' ')
     .replace(/\u00a0/g, ' ')
     .replace(/\s+/g, ' ')

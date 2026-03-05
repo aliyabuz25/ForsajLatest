@@ -10,12 +10,22 @@ const decodeHtmlEntities = (value: string) =>
         .replace(/&quot;/gi, '"')
         .replace(/&#39;/gi, "'");
 
+const decodeHtmlEntitiesDeep = (value: string, maxPasses = 4) => {
+    let current = String(value || '');
+    for (let i = 0; i < maxPasses; i += 1) {
+        const decoded = decodeHtmlEntities(current);
+        if (decoded === current) break;
+        current = decoded;
+    }
+    return current;
+};
+
 export const bbcodeToHtml = (bbcode: string) => {
     if (!bbcode) return '';
 
     // Some legacy/admin payloads arrive as HTML-escaped strings (&lt;p&gt;...).
     // Decode first so both real HTML and BBCode render correctly.
-    let html = decodeHtmlEntities(bbcode);
+    let html = decodeHtmlEntitiesDeep(bbcode);
 
     // Handle escaped bracket forms coming from JSON/editor like \[/B] or \\[/B]
     html = html.replace(/\\+\[/g, '[').replace(/\\+\]/g, ']');
