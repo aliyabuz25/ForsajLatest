@@ -228,6 +228,14 @@ a {
   text-decoration: underline;
 }
 
+/* Prevent editor-injected black inline colors from making content unreadable on dark UI. */
+.quill-content [style*="color: rgb(0, 0, 0)"],
+.quill-content [style*="color:rgb(0,0,0)"],
+.quill-content [style*="color:#000"],
+.quill-content [style*="color: #000"] {
+  color: inherit !important;
+}
+
 /* Premium UI Polish */
 .btn-primary,
 .btn-secondary {
