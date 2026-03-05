@@ -681,7 +681,11 @@ const QuillEditor: React.FC<{ value: string, onChange: (val: string) => void, id
             <ReactQuill
                 theme="snow"
                 value={value || ''}
-                onChange={onChange}
+                onChange={(nextValue: string, _delta: unknown, source: string) => {
+                    // Ignore non-user updates triggered by controlled re-renders/tab switches.
+                    if (source !== 'user') return;
+                    onChange(nextValue);
+                }}
                 modules={readOnly ? { toolbar: false } : QUILL_MODULES}
                 readOnly={readOnly}
                 placeholder="Məzmunu daxil edin..."
