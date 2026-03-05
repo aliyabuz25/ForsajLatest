@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
+import AdminUiLocalization from './components/AdminUiLocalization';
 import Header from './components/Header';
 import VisualEditor from './pages/VisualEditor';
 import UsersManager from './pages/UsersManager';
@@ -421,6 +422,7 @@ const App: React.FC = () => {
   return (
     <Router basename={import.meta.env.PROD ? '/admin' : '/'}>
       <div className="app-container">
+        <AdminUiLocalization language={adminLanguage} />
         <Toaster containerStyle={{ zIndex: 10001 }} position="top-right" reverseOrder={false} />
         {!user ? (
           <Login onLogin={setUser} language={adminLanguage} onLanguageChange={handleLanguageChange} />
