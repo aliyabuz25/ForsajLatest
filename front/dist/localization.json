@@ -3503,6 +3503,118 @@
         "RU": "ГОНКА ЕЖЕГОДНО",
         "ENG": "RACE ANNUALLY"
       }
+    },
+    "admin_sidebar": {
+      "ADMIN_SIDEBAR_PRIMARY_NAVIGATION": {
+        "AZ": "ƏSAS NAVİQASİYA",
+        "RU": "ОСНОВНАЯ НАВИГАЦИЯ",
+        "ENG": "MAIN NAVIGATION"
+      },
+      "ADMIN_SIDEBAR_GROUP_CONTENT": {
+        "AZ": "SAYT MƏZMUNU",
+        "RU": "КОНТЕНТ САЙТА",
+        "ENG": "SITE CONTENT"
+      },
+      "ADMIN_SIDEBAR_GROUP_LEGAL": {
+        "AZ": "HÜQUQİ SƏHİFƏLƏR",
+        "RU": "ЮРИДИЧЕСКИЕ СТРАНИЦЫ",
+        "ENG": "LEGAL PAGES"
+      },
+      "ADMIN_SIDEBAR_GROUP_MANAGEMENT": {
+        "AZ": "İDARƏETMƏ",
+        "RU": "УПРАВЛЕНИЕ",
+        "ENG": "MANAGEMENT"
+      },
+      "ADMIN_SIDEBAR_EMPTY_MENU": {
+        "AZ": "Menyu boşdur",
+        "RU": "Меню пустое",
+        "ENG": "Menu is empty"
+      },
+      "ADMIN_SIDEBAR_LOGOUT": {
+        "AZ": "Çıxış",
+        "RU": "Выход",
+        "ENG": "Exit"
+      },
+      "ADMIN_SIDEBAR_HOME": {
+        "AZ": "Ana Səhifə",
+        "RU": "Главная",
+        "ENG": "Home Page"
+      },
+      "ADMIN_SIDEBAR_ABOUT": {
+        "AZ": "Haqqımızda",
+        "RU": "О нас",
+        "ENG": "About Us"
+      },
+      "ADMIN_SIDEBAR_NEWS": {
+        "AZ": "Xəbərlər",
+        "RU": "Новости",
+        "ENG": "News"
+      },
+      "ADMIN_SIDEBAR_EVENTS": {
+        "AZ": "Tədbirlər",
+        "RU": "События",
+        "ENG": "Events"
+      },
+      "ADMIN_SIDEBAR_DRIVERS": {
+        "AZ": "Sürücülər",
+        "RU": "Пилоты",
+        "ENG": "Drivers"
+      },
+      "ADMIN_SIDEBAR_GALLERY": {
+        "AZ": "Qalereya",
+        "RU": "Галерея",
+        "ENG": "Gallery"
+      },
+      "ADMIN_SIDEBAR_RULES": {
+        "AZ": "Qaydalar",
+        "RU": "Правила",
+        "ENG": "Rules"
+      },
+      "ADMIN_SIDEBAR_CONTACT": {
+        "AZ": "Əlaqə",
+        "RU": "Контакты",
+        "ENG": "Contact"
+      },
+      "ADMIN_SIDEBAR_PRIVACY_POLICY": {
+        "AZ": "Məxfilik Siyasəti",
+        "RU": "Политика конфиденциальности",
+        "ENG": "Privacy Policy"
+      },
+      "ADMIN_SIDEBAR_TERMS_OF_SERVICE": {
+        "AZ": "Xidmət Şərtləri",
+        "RU": "Условия использования",
+        "ENG": "Terms of Service"
+      },
+      "ADMIN_SIDEBAR_USER_MANAGEMENT": {
+        "AZ": "İstifadəçi İdarəsi",
+        "RU": "Управление пользователями",
+        "ENG": "User Management"
+      },
+      "ADMIN_SIDEBAR_SYSTEM_SETTINGS": {
+        "AZ": "Sistem Ayarları",
+        "RU": "Системные настройки",
+        "ENG": "System Settings"
+      },
+      "ADMIN_SIDEBAR_SOCIAL_MEDIA": {
+        "AZ": "Sosial Media",
+        "RU": "Соцсети",
+        "ENG": "Social Media"
+      },
+      "ADMIN_SIDEBAR_WHATSAPP": {
+        "AZ": "WhatsApp Integration",
+        "RU": "Интеграция WhatsApp",
+        "ENG": "WhatsApp Integration"
+      },
+      "ADMIN_SIDEBAR_TRANSLATIONS": {
+        "AZ": "Tərcümələr",
+        "RU": "Переводы",
+        "ENG": "Translations"
+      },
+      "ADMIN_SIDEBAR_APPLICATIONS": {
+        "AZ": "Müraciətlər",
+        "RU": "Заявки",
+        "ENG": "Applications"
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
     Layout,
@@ -32,6 +32,11 @@ import {
 import type { SidebarItem } from '../types/navigation';
 import type { AdminLanguage } from '../utils/adminLanguage';
 import { getSidebarUiLabel, translateSidebarTitle } from '../utils/adminLanguage';
+import {
+    getAdminSidebarLocalizedText,
+    parseAdminSidebarLocalization,
+    type SidebarLocalizationMap
+} from '../utils/sidebarLocalization';
 import './Sidebar.css';
 
 interface SidebarProps {
@@ -43,16 +48,122 @@ interface SidebarProps {
 }
 
 type SidebarGroupKey = 'content' | 'legal' | 'management';
+type SidebarUiLabelKey = 'primaryNavigation' | 'groupContent' | 'groupLegal' | 'groupManagement' | 'emptyMenu' | 'logout';
+
+const SIDEBAR_UI_LOCALIZATION_KEYS: Record<SidebarUiLabelKey, string> = {
+    primaryNavigation: 'ADMIN_SIDEBAR_PRIMARY_NAVIGATION',
+    groupContent: 'ADMIN_SIDEBAR_GROUP_CONTENT',
+    groupLegal: 'ADMIN_SIDEBAR_GROUP_LEGAL',
+    groupManagement: 'ADMIN_SIDEBAR_GROUP_MANAGEMENT',
+    emptyMenu: 'ADMIN_SIDEBAR_EMPTY_MENU',
+    logout: 'ADMIN_SIDEBAR_LOGOUT'
+};
+
+const normalizeSidebarLookupText = (value: string) =>
+    (value || '')
+        .toLocaleLowerCase('az')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/ə/g, 'e')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ü/g, 'u')
+        .replace(/ğ/g, 'g')
+        .replace(/ş/g, 's')
+        .replace(/ç/g, 'c')
+        .trim();
+
+const normalizeSidebarPathKey = (path?: string) => {
+    const raw = String(path || '').trim().toLocaleLowerCase('az');
+    if (!raw) return '';
+    if (raw === '/admin') return '/';
+    if (raw.startsWith('/admin?')) return `/${raw.slice('/admin'.length)}`;
+    if (raw.startsWith('/admin/')) return raw.slice('/admin'.length);
+    return raw;
+};
+
+const getSidebarItemLocalizationKey = (title: string, path?: string) => {
+    const pathKey = normalizeSidebarPathKey(path);
+
+    if (pathKey.includes('page=home')) return 'ADMIN_SIDEBAR_HOME';
+    if (pathKey.includes('page=about')) return 'ADMIN_SIDEBAR_ABOUT';
+    if (pathKey.includes('mode=news')) return 'ADMIN_SIDEBAR_NEWS';
+    if (pathKey.includes('mode=events')) return 'ADMIN_SIDEBAR_EVENTS';
+    if (pathKey.includes('mode=drivers')) return 'ADMIN_SIDEBAR_DRIVERS';
+    if (pathKey.includes('mode=videos')) return 'ADMIN_SIDEBAR_GALLERY';
+    if (pathKey.includes('page=rulespage')) return 'ADMIN_SIDEBAR_RULES';
+    if (pathKey.includes('page=contactpage')) return 'ADMIN_SIDEBAR_CONTACT';
+    if (pathKey.includes('page=privacypolicypage')) return 'ADMIN_SIDEBAR_PRIVACY_POLICY';
+    if (pathKey.includes('page=termsofservicepage')) return 'ADMIN_SIDEBAR_TERMS_OF_SERVICE';
+    if (pathKey.startsWith('/users-management')) return 'ADMIN_SIDEBAR_USER_MANAGEMENT';
+    if (pathKey.includes('tab=general')) return 'ADMIN_SIDEBAR_SYSTEM_SETTINGS';
+    if (pathKey.includes('tab=social')) return 'ADMIN_SIDEBAR_SOCIAL_MEDIA';
+    if (pathKey.includes('tab=whatsapp')) return 'ADMIN_SIDEBAR_WHATSAPP';
+    if (pathKey.startsWith('/translations')) return 'ADMIN_SIDEBAR_TRANSLATIONS';
+    if (pathKey.startsWith('/applications')) return 'ADMIN_SIDEBAR_APPLICATIONS';
+
+    const titleKey = normalizeSidebarLookupText(title);
+    if (titleKey === 'ana sehife' || titleKey === 'ana sehife / naviqasiya / footer') return 'ADMIN_SIDEBAR_HOME';
+    if (titleKey === 'haqqimizda') return 'ADMIN_SIDEBAR_ABOUT';
+    if (titleKey === 'xeberler') return 'ADMIN_SIDEBAR_NEWS';
+    if (titleKey === 'tedbirler') return 'ADMIN_SIDEBAR_EVENTS';
+    if (titleKey === 'suruculer') return 'ADMIN_SIDEBAR_DRIVERS';
+    if (titleKey === 'qalereya') return 'ADMIN_SIDEBAR_GALLERY';
+    if (titleKey === 'qaydalar') return 'ADMIN_SIDEBAR_RULES';
+    if (titleKey === 'elaqe') return 'ADMIN_SIDEBAR_CONTACT';
+    if (titleKey === 'privacy policy') return 'ADMIN_SIDEBAR_PRIVACY_POLICY';
+    if (titleKey === 'terms of service') return 'ADMIN_SIDEBAR_TERMS_OF_SERVICE';
+    if (titleKey === 'istifadeci idaresi') return 'ADMIN_SIDEBAR_USER_MANAGEMENT';
+    if (titleKey === 'sistem ayarlari') return 'ADMIN_SIDEBAR_SYSTEM_SETTINGS';
+    if (titleKey === 'sosial media' || titleKey === 'sosyal') return 'ADMIN_SIDEBAR_SOCIAL_MEDIA';
+    if (titleKey === 'whatsapp integration') return 'ADMIN_SIDEBAR_WHATSAPP';
+    if (titleKey === 'translations') return 'ADMIN_SIDEBAR_TRANSLATIONS';
+    if (titleKey === 'muracietler') return 'ADMIN_SIDEBAR_APPLICATIONS';
+
+    return '';
+};
 
 const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, onLanguageChange }) => {
     const userRole = user?.role || 'secondary';
     const location = useLocation();
+    const [sidebarLocalization, setSidebarLocalization] = useState<SidebarLocalizationMap>({});
     const normalizeText = (value: string) =>
         (value || '')
             .toLocaleLowerCase('az')
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .trim();
+
+    useEffect(() => {
+        let cancelled = false;
+
+        const loadSidebarLocalization = async () => {
+            try {
+                const response = await fetch('/api/localization', { cache: 'no-store' });
+                if (!response.ok) return;
+                const data: unknown = await response.json();
+                const normalized = parseAdminSidebarLocalization(data);
+                if (!cancelled) {
+                    setSidebarLocalization(normalized);
+                }
+            } catch {
+                // keep static fallback labels
+            }
+        };
+
+        void loadSidebarLocalization();
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    const getLocalizedSidebarUiLabel = (key: SidebarUiLabelKey) =>
+        getAdminSidebarLocalizedText(
+            sidebarLocalization,
+            SIDEBAR_UI_LOCALIZATION_KEYS[key],
+            language,
+            getSidebarUiLabel(language, key)
+        );
 
     const normalizePath = (path?: string) => {
         if (!path) return path;
@@ -211,9 +322,9 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
     };
 
     const groupLabels: Record<SidebarGroupKey, string> = {
-        content: getSidebarUiLabel(language, 'groupContent'),
-        legal: getSidebarUiLabel(language, 'groupLegal'),
-        management: getSidebarUiLabel(language, 'groupManagement')
+        content: getLocalizedSidebarUiLabel('groupContent'),
+        legal: getLocalizedSidebarUiLabel('groupLegal'),
+        management: getLocalizedSidebarUiLabel('groupManagement')
     };
 
     const preparedItems = useMemo(
@@ -262,7 +373,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
             </div>
 
             <div className="sidebar-content">
-                <div className="sidebar-section-label">{getSidebarUiLabel(language, 'primaryNavigation')}</div>
+                <div className="sidebar-section-label">{getLocalizedSidebarUiLabel('primaryNavigation')}</div>
                 {(['content', 'legal', 'management'] as SidebarGroupKey[]).map((groupKey) => {
                     const items = groupedItems[groupKey];
                     if (!items.length) return null;
@@ -274,9 +385,13 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
                                     const fallbackChildPath = item.children?.find(child => !!child.path)?.path;
                                     const effectivePath = item.path || fallbackChildPath;
                                     const translatedTitle = translateSidebarTitle(item.title, effectivePath, language);
+                                    const localizationKey = getSidebarItemLocalizationKey(item.title, effectivePath);
+                                    const localizedTitle = localizationKey
+                                        ? getAdminSidebarLocalizedText(sidebarLocalization, localizationKey, language, translatedTitle)
+                                        : translatedTitle;
                                     return (
                                         <React.Fragment key={`${item.title}-${effectivePath || 'no-path'}`}>
-                                            {renderLinkItem({ ...item, title: translatedTitle }, item.icon, effectivePath)}
+                                            {renderLinkItem({ ...item, title: localizedTitle }, item.icon, effectivePath)}
                                         </React.Fragment>
                                     );
                                 })}
@@ -286,7 +401,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
                 })}
                 {preparedItems.length === 0 && (
                     <div className="empty-sidebar-msg">
-                        <p>{getSidebarUiLabel(language, 'emptyMenu')}</p>
+                        <p>{getLocalizedSidebarUiLabel('emptyMenu')}</p>
                     </div>
                 )}
             </div>
@@ -294,7 +409,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
             <div className="sidebar-footer">
                 <button className="logout-btn" onClick={onLogout}>
                     <LogOut size={18} />
-                    <span>{getSidebarUiLabel(language, 'logout')}</span>
+                    <span>{getLocalizedSidebarUiLabel('logout')}</span>
                 </button>
             </div>
         </aside>
