@@ -15,6 +15,8 @@ interface NewsItem {
 }
 
 const SELECTED_NEWS_ID_KEY = 'forsaj_selected_news_id';
+const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
+const NEWS_REFRESH_INTERVAL_MS = 12000;
 
 const normalizeRichTextSpacing = (value: unknown) =>
   String(value ?? '')
@@ -48,6 +50,8 @@ const NewsPage: React.FC = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
   useEffect(() => {
+    let mounted = true;
+
     const loadNews = async () => {
       try {
         const response = await fetch(`/api/news?v=${Date.now()}`, { cache: 'no-store' });
@@ -55,7 +59,7 @@ const NewsPage: React.FC = () => {
 
         const data = await response.json();
 
-        if (data) {
+        if (Array.isArray(data) && mounted) {
           // Filter for published news and sort by date descending
           const filtered = data
             .filter((item: any) => item.status === 'published')
@@ -72,20 +76,13 @@ const NewsPage: React.FC = () => {
           }));
           setNewsData(mapped);
 
-          const currentSelectedId = selectedNews?.id;
-          if (currentSelectedId) {
-            const selectedMapped = mapped.find((item: NewsItem) => item.id === currentSelectedId);
-            if (selectedMapped) {
-              setSelectedNews(selectedMapped);
-            }
-          }
-
+          let requestedNews: NewsItem | null = null;
           try {
             const rawRequestedId = sessionStorage.getItem(SELECTED_NEWS_ID_KEY);
             if (rawRequestedId) {
               const requestedId = Number(rawRequestedId);
               if (Number.isFinite(requestedId)) {
-                const requestedNews = mapped.find((item: NewsItem) => item.id === requestedId);
+                requestedNews = mapped.find((item: NewsItem) => item.id === requestedId) || null;
                 if (requestedNews) {
                   setSelectedNews(requestedNews);
                 }
@@ -95,12 +92,51 @@ const NewsPage: React.FC = () => {
           } catch {
             // ignore storage access errors
           }
+
+          if (!requestedNews) {
+            setSelectedNews((prevSelected) => {
+              if (!prevSelected) return prevSelected;
+              return mapped.find((item: NewsItem) => item.id === prevSelected.id) || null;
+            });
+          }
         }
       } catch (err) {
         console.error('Failed to load news from API', err);
       }
     };
-    loadNews();
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === CONTENT_VERSION_KEY) {
+        void loadNews();
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void loadNews();
+      }
+    };
+    const onFocus = () => {
+      void loadNews();
+    };
+
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        void loadNews();
+      }
+    }, NEWS_REFRESH_INTERVAL_MS);
+
+    void loadNews();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, [newsLanguage]);
 
   useEffect(() => {

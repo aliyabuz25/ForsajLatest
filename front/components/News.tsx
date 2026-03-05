@@ -17,6 +17,8 @@ interface NewsProps {
 }
 
 const SELECTED_NEWS_ID_KEY = 'forsaj_selected_news_id';
+const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
+const NEWS_REFRESH_INTERVAL_MS = 12000;
 const normalizeRichTextSpacing = (value: unknown) =>
   String(value ?? '')
     .replace(/&nbsp;/gi, ' ')
@@ -61,15 +63,16 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
   };
 
   useEffect(() => {
+    let mounted = true;
+
     const loadNews = async () => {
       try {
-        const version = localStorage.getItem('forsaj_site_content_version') || '';
-        const response = await fetch(`/api/news?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
+        const response = await fetch(`/api/news?v=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Failed to fetch news');
 
         const data = await response.json();
 
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && mounted) {
           // Client-side filtering and sorting to match previous Supabase query
           const publishedNews = data
             .filter((item: any) => item.status === 'published')
@@ -91,7 +94,39 @@ const News: React.FC<NewsProps> = ({ onViewChange }) => {
         console.error('Failed to load news from API', err);
       }
     };
-    loadNews();
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === CONTENT_VERSION_KEY) {
+        void loadNews();
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void loadNews();
+      }
+    };
+    const onFocus = () => {
+      void loadNews();
+    };
+
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        void loadNews();
+      }
+    }, NEWS_REFRESH_INTERVAL_MS);
+
+    void loadNews();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, [newsLanguage]);
 
   if (newsData.length === 0) return null;

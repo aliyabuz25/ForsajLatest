@@ -39,13 +39,13 @@ let siteContentCacheAt = 0;
 let localizationCache: LocalizationMap | null = null;
 let localizationValueIndexCache: LocalizationValueIndex | null = null;
 let localizationInFlight: Promise<LocalizationMap> | null = null;
-const CACHE_TTL_MS = 60000;
+const CACHE_TTL_MS = 0;
 const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
 const SITE_LANG_KEY = 'forsaj_site_lang';
 const LOCALIZATION_READY_EVENT = 'forsaj-localization-ready';
 type SiteLang = 'AZ' | 'RU' | 'ENG';
 const FETCH_OPTIONS: RequestInit = {
-    cache: 'default'
+    cache: 'no-store'
 };
 
 const normalizeSiteLanguage = (rawValue?: string | null): SiteLang => {
@@ -566,10 +566,7 @@ export const useSiteContent = (scopePageId?: string) => {
 
         const onVisibility = () => {
             if (document.visibilityState !== 'visible') return;
-            const staleFor = Date.now() - siteContentCacheAt;
-            if (staleFor > 60000) {
-                refresh();
-            }
+            refresh();
         };
 
         window.addEventListener('storage', onStorage);

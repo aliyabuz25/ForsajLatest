@@ -29,6 +29,8 @@ interface ArchiveVideoItem {
 }
 
 const GALLERY_VERSION_KEY = 'forsaj_gallery_version';
+const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
+const ARCHIVE_REFRESH_INTERVAL_MS = 12000;
 
 const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
@@ -101,8 +103,7 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
 
     const loadVideos = async () => {
       try {
-        const version = localStorage.getItem('forsaj_site_content_version') || '';
-        const response = await fetch(`/api/events?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
+        const response = await fetch(`/api/events?v=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Failed to fetch events');
         const data = await response.json();
 
@@ -135,7 +136,7 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
     };
 
     const onStorage = (event: StorageEvent) => {
-      if (event.key === GALLERY_VERSION_KEY || event.key === 'forsaj_site_content_version') {
+      if (event.key === GALLERY_VERSION_KEY || event.key === CONTENT_VERSION_KEY) {
         loadVideos();
       }
     };
@@ -144,14 +145,26 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
         loadVideos();
       }
     };
+    const onFocus = () => {
+      loadVideos();
+    };
+
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        loadVideos();
+      }
+    }, ARCHIVE_REFRESH_INTERVAL_MS);
 
     loadVideos();
     window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
     document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
       mounted = false;
+      window.clearInterval(intervalId);
       window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
       document.removeEventListener('visibilitychange', onVisibilityChange);
     };
   }, [eventLanguage]);

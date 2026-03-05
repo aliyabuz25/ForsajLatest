@@ -4,6 +4,8 @@ import { useSiteContent } from '../hooks/useSiteContent';
 import { getLocalizedEventField, normalizeEventWithLocalization, type EventLanguageCode, type EventTranslations } from '../utils/eventLocalization';
 
 const EVENTS_TARGET_EVENT_KEY = 'forsaj_events_target_event';
+const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
+const EVENTS_REFRESH_INTERVAL_MS = 12000;
 
 interface NextRaceProps {
   onViewChange: (view: any) => void;
@@ -153,10 +155,11 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
   };
 
   useEffect(() => {
+    let mounted = true;
+
     const fetchEvents = async () => {
       try {
-        const version = localStorage.getItem('forsaj_site_content_version') || '';
-        const response = await fetch(`/api/events?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
+        const response = await fetch(`/api/events?v=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Failed to fetch events');
         const data = await response.json();
 
@@ -165,6 +168,7 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
           .filter((e: Event) => normalizeEventStatus(e.status) === 'planned')
           .sort((a: Event, b: Event) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
+        if (!mounted) return;
         if (upcoming.length > 0) {
           setNextEvent(upcoming[0]);
         } else {
@@ -175,7 +179,38 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
       }
     };
 
-    fetchEvents();
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === CONTENT_VERSION_KEY) {
+        void fetchEvents();
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void fetchEvents();
+      }
+    };
+    const onFocus = () => {
+      void fetchEvents();
+    };
+
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        void fetchEvents();
+      }
+    }, EVENTS_REFRESH_INTERVAL_MS);
+
+    void fetchEvents();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, []);
 
   const displayDate = nextEvent?.date || getText('RACE_DATE', '2024-07-20');

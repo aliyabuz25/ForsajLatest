@@ -7,6 +7,8 @@ import toast from 'react-hot-toast';
 import CsPlayer from './CsPlayer';
 
 const EVENTS_TARGET_EVENT_KEY = 'forsaj_events_target_event';
+const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
+const EVENTS_REFRESH_INTERVAL_MS = 12000;
 
 interface EventItem {
   id: number;
@@ -103,6 +105,8 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
   };
 
   useEffect(() => {
+    let mounted = true;
+
     const loadEvents = async () => {
       try {
         const eventsRes = await fetch(`/api/events?v=${Date.now()}`, { cache: 'no-store' });
@@ -122,7 +126,9 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
             const sortedEvents = normalizedEvents.sort((a: any, b: any) =>
               new Date(b.date).getTime() - new Date(a.date).getTime()
             );
-            setEventsData(sortedEvents as any);
+            if (mounted) {
+              setEventsData(sortedEvents as any);
+            }
           }
         }
 
@@ -130,7 +136,39 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
         console.error('Failed to load events from API', err);
       }
     };
-    loadEvents();
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === CONTENT_VERSION_KEY) {
+        void loadEvents();
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void loadEvents();
+      }
+    };
+    const onFocus = () => {
+      void loadEvents();
+    };
+
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        void loadEvents();
+      }
+    }, EVENTS_REFRESH_INTERVAL_MS);
+
+    void loadEvents();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, []);
 
   const [activeTab, setActiveTab] = useState<'planned' | 'past'>('planned');
@@ -204,6 +242,20 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
       setActiveTab('past');
     }
   }, [eventsData, selectedEvent, activeTab]);
+
+  useEffect(() => {
+    if (!selectedEvent) return;
+    const refreshedSelected = eventsData.find((event) => event.id === selectedEvent.id);
+    if (!refreshedSelected) {
+      setSelectedEvent(null);
+      setRegStep(null);
+      setPlayingVideoId(null);
+      return;
+    }
+    if (JSON.stringify(refreshedSelected) !== JSON.stringify(selectedEvent)) {
+      setSelectedEvent(refreshedSelected);
+    }
+  }, [eventsData, selectedEvent]);
 
   const VideoModal = () => {
     if (!playingVideoId) return null;

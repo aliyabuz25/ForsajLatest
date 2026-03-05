@@ -435,6 +435,13 @@ const applyNewsLocalizedFieldUpdate = (
     return syncNewsWithAzTranslations(nextNews);
 };
 
+const normalizeRichEditorValue = (value: string) => {
+    const normalized = String(value ?? '').trim();
+    if (!normalized) return '';
+    if (normalized === '<p><br></p>' || normalized === '<p></p>') return '';
+    return value;
+};
+
 const isReservedPhotoAlbum = (value?: string) => {
     const normalized = normalizePhotoAlbum(value)
         .toLocaleLowerCase('az')
@@ -3284,15 +3291,18 @@ const VisualEditor: React.FC = () => {
     ) => {
         const activeId = targetId || selectedEventId;
         if (!activeId) return;
+        const normalizedValue = (field === 'description' || field === 'rules')
+            ? normalizeRichEditorValue(value)
+            : value;
 
         setEventForm(prev => {
             const isSameEvent = !targetId || targetId === selectedEventId;
             const updatedForm = isSameEvent
-                ? applyEventLocalizedFieldUpdate((prev as EventItem), field, lang, value)
+                ? applyEventLocalizedFieldUpdate((prev as EventItem), field, lang, normalizedValue)
                 : prev;
 
             setEvents(oldEvents => oldEvents.map(e => (
-                e.id === activeId ? applyEventLocalizedFieldUpdate(e, field, lang, value) : e
+                e.id === activeId ? applyEventLocalizedFieldUpdate(e, field, lang, normalizedValue) : e
             )));
 
             return updatedForm;
@@ -3372,15 +3382,18 @@ const VisualEditor: React.FC = () => {
     ) => {
         const activeId = targetId || selectedNewsId;
         if (!activeId) return;
+        const normalizedValue = field === 'description'
+            ? normalizeRichEditorValue(value)
+            : value;
 
         setNewsForm(prev => {
             const isSame = !targetId || targetId === selectedNewsId;
             const updatedForm = isSame
-                ? applyNewsLocalizedFieldUpdate((prev as NewsItem), field, lang, value)
+                ? applyNewsLocalizedFieldUpdate((prev as NewsItem), field, lang, normalizedValue)
                 : prev;
 
             setNews(oldNews => oldNews.map(n => (
-                n.id === activeId ? applyNewsLocalizedFieldUpdate(n, field, lang, value) : n
+                n.id === activeId ? applyNewsLocalizedFieldUpdate(n, field, lang, normalizedValue) : n
             )));
 
             return updatedForm;
@@ -3396,7 +3409,7 @@ const VisualEditor: React.FC = () => {
             img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop',
             description: '',
             category: 'BLOQ',
-            status: 'draft'
+            status: 'published'
         });
         setNews([...news, newItem]);
         setSelectedNewsId(newId);
@@ -5364,7 +5377,8 @@ const VisualEditor: React.FC = () => {
                                     <div className="form-group full-span">
                                         <label>MƏZMUN ({newsFormLanguage})</label>
                                         <QuillEditor
-                                            id="news-full-desc"
+                                            key={`news-full-desc-${newsForm.id}-${newsFormLanguage}`}
+                                            id={`news-full-desc-${newsForm.id}-${newsFormLanguage}`}
                                             value={bbcodeToHtmlForEditor(getNewsLocalizedFieldValue(newsForm, 'description', newsFormLanguage, false))}
                                             onChange={(val: string) => handleNewsLocalizedChange('description', val, newsFormLanguage, newsForm.id)}
                                         />
@@ -5659,7 +5673,8 @@ const VisualEditor: React.FC = () => {
                                             <div className="form-group full-span">
                                                 <label>TƏSVİR ({eventFormLanguage})</label>
                                                 <QuillEditor
-                                                    id="event-full-desc"
+                                                    key={`event-full-desc-${eventForm.id}-${eventFormLanguage}`}
+                                                    id={`event-full-desc-${eventForm.id}-${eventFormLanguage}`}
                                                     value={bbcodeToHtmlForEditor(getEventLocalizedFieldValue(eventForm, 'description', eventFormLanguage, false))}
                                                     onChange={(val: string) => handleEventLocalizedChange('description', val, eventFormLanguage, eventForm.id)}
                                                 />
@@ -5700,7 +5715,8 @@ const VisualEditor: React.FC = () => {
                                             <div className="form-group full-span">
                                                 <label>QAYDALAR ({eventFormLanguage})</label>
                                                 <QuillEditor
-                                                    id="event-full-rules"
+                                                    key={`event-full-rules-${eventForm.id}-${eventFormLanguage}`}
+                                                    id={`event-full-rules-${eventForm.id}-${eventFormLanguage}`}
                                                     value={bbcodeToHtmlForEditor(getEventLocalizedFieldValue(eventForm, 'rules', eventFormLanguage, false))}
                                                     onChange={(val: string) => handleEventLocalizedChange('rules', val, eventFormLanguage, eventForm.id)}
                                                 />

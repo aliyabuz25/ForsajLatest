@@ -15,6 +15,9 @@ interface LeaderCard {
   img: string;
 }
 
+const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
+const LEADERS_REFRESH_INTERVAL_MS = 12000;
+
 const CategoryLeaders: React.FC<CategoryLeadersProps> = ({ onViewChange }) => {
   const { getText, language } = useSiteContent('categoryleaders');
   const leaderSuffixDefaultByLanguage: Record<string, string> = {
@@ -37,15 +40,16 @@ const CategoryLeaders: React.FC<CategoryLeadersProps> = ({ onViewChange }) => {
   }, [leaderSuffix]);
 
   React.useEffect(() => {
+    let mounted = true;
+
     const loadLeaders = async () => {
       try {
-        const version = localStorage.getItem('forsaj_site_content_version') || '';
-        const response = await fetch(`/api/drivers?v=${encodeURIComponent(version)}`, { cache: 'no-cache' });
+        const response = await fetch(`/api/drivers?v=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Failed to fetch drivers');
 
         const data = await response.json();
 
-        if (data) {
+        if (Array.isArray(data) && mounted) {
           const topLeaders: LeaderCard[] = data.map((cat: any) => {
             const drivers = Array.isArray(cat.drivers) ? cat.drivers : [];
             const topDriver = [...drivers].sort((a: any, b: any) => a.rank - b.rank)[0];
@@ -64,7 +68,39 @@ const CategoryLeaders: React.FC<CategoryLeadersProps> = ({ onViewChange }) => {
         console.error('Leaders fetch failed from API:', err);
       }
     };
-    loadLeaders();
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === CONTENT_VERSION_KEY) {
+        void loadLeaders();
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void loadLeaders();
+      }
+    };
+    const onFocus = () => {
+      void loadLeaders();
+    };
+
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        void loadLeaders();
+      }
+    }, LEADERS_REFRESH_INTERVAL_MS);
+
+    void loadLeaders();
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, [emptyName, emptyTeam]);
 
   return (
