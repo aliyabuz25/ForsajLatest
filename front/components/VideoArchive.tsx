@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PlayCircle, ArrowRight, X } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
+import { getLocalizedEventField, normalizeEventWithLocalization, type EventLanguageCode, type EventTranslations } from '../utils/eventLocalization';
 import CsPlayer from './CsPlayer';
 
 interface VideoArchiveProps {
@@ -16,6 +17,7 @@ interface EventItem {
   youtube_url?: string;
   url?: string;
   status?: string;
+  translations?: EventTranslations;
 }
 
 interface ArchiveVideoItem {
@@ -31,7 +33,8 @@ const GALLERY_VERSION_KEY = 'forsaj_gallery_version';
 const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [videos, setVideos] = useState<ArchiveVideoItem[]>([]);
-  const { getText } = useSiteContent('videoarchive');
+  const { getText, language } = useSiteContent('videoarchive');
+  const eventLanguage: EventLanguageCode = language === 'RU' ? 'RU' : language === 'ENG' ? 'ENG' : 'AZ';
 
   const parseEventDateStart = (rawValue: unknown): Date | null => {
     const value = String(rawValue || '').trim();
@@ -105,7 +108,8 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
 
         if (Array.isArray(data) && mounted) {
           const mapped = data
-            .map((event: EventItem) => {
+            .map((rawEvent: EventItem) => {
+              const event = normalizeEventWithLocalization(rawEvent || {});
               const status = normalizeEventStatus(event?.status, event?.date);
               const youtubeUrl = String(event?.youtubeUrl || event?.youtube_url || event?.url || '').trim();
               const videoId = extractYoutubeId(youtubeUrl);
@@ -113,7 +117,7 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
 
               return {
                 id: Number(event?.id || 0),
-                title: String(event?.title || 'Tədbir').trim() || 'Tədbir',
+                title: String(getLocalizedEventField(event, 'title', eventLanguage) || event?.title || 'Tədbir').trim() || 'Tədbir',
                 date: String(event?.date || '').trim(),
                 videoId,
                 thumbnail: String(event?.img || '').trim() || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
@@ -150,7 +154,7 @@ const VideoArchive: React.FC<VideoArchiveProps> = ({ onViewChange }) => {
       window.removeEventListener('storage', onStorage);
       document.removeEventListener('visibilitychange', onVisibilityChange);
     };
-  }, []);
+  }, [eventLanguage]);
 
   const VideoModal = () => {
     if (!playingVideoId) return null;

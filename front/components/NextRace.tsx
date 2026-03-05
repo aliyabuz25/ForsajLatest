@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, ChevronRight } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
+import { getLocalizedEventField, normalizeEventWithLocalization, type EventLanguageCode, type EventTranslations } from '../utils/eventLocalization';
 
 const EVENTS_TARGET_EVENT_KEY = 'forsaj_events_target_event';
 
@@ -16,6 +17,7 @@ interface Event {
   category: string;
   img: string;
   status: string;
+  translations?: EventTranslations;
 }
 
 const normalizeEventStatus = (rawStatus: unknown): 'planned' | 'past' => {
@@ -25,7 +27,8 @@ const normalizeEventStatus = (rawStatus: unknown): 'planned' | 'past' => {
 };
 
 const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
-  const { getText, getUrl, getImage, getPage } = useSiteContent('nextrace');
+  const { getText, getUrl, getImage, getPage, language } = useSiteContent('nextrace');
+  const eventLanguage: EventLanguageCode = language === 'RU' ? 'RU' : language === 'ENG' ? 'ENG' : 'AZ';
   const [nextEvent, setNextEvent] = useState<Event | null>(null);
   const nextRacePage = getPage('nextrace');
   const viewIds = new Set(['home', 'about', 'news', 'events', 'drivers', 'gallery', 'rules', 'contact', 'privacy', 'terms']);
@@ -137,7 +140,7 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
           EVENTS_TARGET_EVENT_KEY,
           JSON.stringify({
             id: nextEvent.id,
-            title: nextEvent.title,
+            title: getLocalizedEventField(nextEvent, 'title', eventLanguage),
             date: nextEvent.date
           })
         );
@@ -158,6 +161,7 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
         const data = await response.json();
 
         const upcoming = (Array.isArray(data) ? data : [])
+          .map((item: any) => normalizeEventWithLocalization(item || {}))
           .filter((e: Event) => normalizeEventStatus(e.status) === 'planned')
           .sort((a: Event, b: Event) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
@@ -175,9 +179,9 @@ const NextRace: React.FC<NextRaceProps> = ({ onViewChange }) => {
   }, []);
 
   const displayDate = nextEvent?.date || getText('RACE_DATE', '2024-07-20');
-  const displayTitle = nextEvent?.title || getText('RACE_LOCATION', 'SUMQAYIT SAHİL TRASI // SECTOR 04');
-  const displayLocation = nextEvent?.location || getText('RACE_CITY', 'SUMQAYIT');
-  const displayCategory = nextEvent?.category || getText('RACE_TYPE', 'CHALLENGE');
+  const displayTitle = (nextEvent ? getLocalizedEventField(nextEvent, 'title', eventLanguage) : '') || getText('RACE_LOCATION', 'SUMQAYIT SAHİL TRASI // SECTOR 04');
+  const displayLocation = (nextEvent ? getLocalizedEventField(nextEvent, 'location', eventLanguage) : '') || getText('RACE_CITY', 'SUMQAYIT');
+  const displayCategory = (nextEvent ? getLocalizedEventField(nextEvent, 'category', eventLanguage) : '') || getText('RACE_TYPE', 'CHALLENGE');
   const raceFallbackImage = getImage('race-bg', 'https://images.unsplash.com/photo-1541447271487-09612b3f49f7?q=80&w=1974&auto=format&fit=crop');
   const configuredNextRaceImage = (nextRacePage?.images || []).find((img) => (img.path || '').trim())?.path || '';
   const displayImage = configuredNextRaceImage || nextEvent?.img || raceFallbackImage.path;

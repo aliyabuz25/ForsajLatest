@@ -32,6 +32,11 @@ interface PageContent {
     images: PageImage[];
 }
 
+type EventLanguageCode = 'AZ' | 'RU' | 'ENG';
+type EventLocalizedField = 'title' | 'location' | 'category' | 'description' | 'rules';
+type EventLocalizedFields = Record<EventLocalizedField, string>;
+type EventTranslations = Record<EventLanguageCode, EventLocalizedFields>;
+
 interface EventItem {
     id: number;
     title: string;
@@ -45,6 +50,7 @@ interface EventItem {
     pdfUrl?: string;
     status: 'planned' | 'past';
     registrationEnabled?: boolean;
+    translations?: EventTranslations;
 }
 
 interface NewsItem {
@@ -139,6 +145,156 @@ const normalizeEventRegistrationEnabled = (rawValue: unknown) => {
         return false;
     }
     return true;
+};
+
+const EVENT_LANGUAGE_CODES: EventLanguageCode[] = ['AZ', 'RU', 'ENG'];
+const EVENT_LANGUAGE_TABS: Array<{ code: EventLanguageCode; label: string }> = [
+    { code: 'AZ', label: 'AZ' },
+    { code: 'RU', label: 'RU' },
+    { code: 'ENG', label: 'ENG' }
+];
+const EVENT_LOCALIZED_FIELDS: EventLocalizedField[] = ['title', 'location', 'category', 'description', 'rules'];
+
+const isObjectRecord = (value: unknown): value is Record<string, any> =>
+    !!value && typeof value === 'object' && !Array.isArray(value);
+
+const toEventFieldString = (value: unknown) => (value === undefined || value === null ? '' : String(value));
+
+const createEmptyEventLocalizedFields = (): EventLocalizedFields => ({
+    title: '',
+    location: '',
+    category: '',
+    description: '',
+    rules: ''
+});
+
+const getLegacyEventFieldByLanguage = (
+    rawEvent: Record<string, any>,
+    field: EventLocalizedField,
+    lang: EventLanguageCode
+) => {
+    if (lang === 'AZ') return '';
+
+    const suffixes = lang === 'RU'
+        ? ['Ru', 'RU', 'Rus', 'RUS', '_ru', '_RU', '_rus', '_RUS']
+        : ['En', 'EN', 'Eng', 'ENG', '_en', '_EN', '_eng', '_ENG'];
+
+    for (const suffix of suffixes) {
+        const key = suffix.startsWith('_') ? `${field}${suffix}` : `${field}${suffix}`;
+        const value = rawEvent[key];
+        if (value !== undefined && value !== null && String(value) !== '') {
+            return String(value);
+        }
+    }
+
+    return '';
+};
+
+const normalizeEventTranslations = (rawEvent: Partial<EventItem> & Record<string, any>): EventTranslations => {
+    const source = isObjectRecord(rawEvent) ? rawEvent : {};
+    const rawTranslations: Record<string, any> = isObjectRecord(source.translations)
+        ? (source.translations as Record<string, any>)
+        : (isObjectRecord(source.i18n) ? (source.i18n as Record<string, any>) : {});
+
+    const langSources: Partial<Record<EventLanguageCode, Record<string, any>>> = {
+        AZ: isObjectRecord(rawTranslations.AZ)
+            ? rawTranslations.AZ
+            : (isObjectRecord(rawTranslations.az) ? rawTranslations.az : undefined),
+        RU: isObjectRecord(rawTranslations.RU)
+            ? rawTranslations.RU
+            : (isObjectRecord(rawTranslations.ru)
+                ? rawTranslations.ru
+                : (isObjectRecord(rawTranslations.RUS) ? rawTranslations.RUS : undefined)),
+        ENG: isObjectRecord(rawTranslations.ENG)
+            ? rawTranslations.ENG
+            : (isObjectRecord(rawTranslations.EN)
+                ? rawTranslations.EN
+                : (isObjectRecord(rawTranslations.en) ? rawTranslations.en : undefined))
+    };
+
+    const normalized = EVENT_LANGUAGE_CODES.reduce((acc, lang) => {
+        const langSource = langSources[lang];
+        const base = createEmptyEventLocalizedFields();
+
+        EVENT_LOCALIZED_FIELDS.forEach((field) => {
+            const fromLangMap = langSource ? toEventFieldString(langSource[field]) : '';
+            const fromLegacy = getLegacyEventFieldByLanguage(source, field, lang);
+            const azBase = toEventFieldString(source[field]);
+
+            if (lang === 'AZ') {
+                base[field] = fromLangMap || azBase;
+                return;
+            }
+
+            base[field] = fromLangMap || fromLegacy;
+        });
+
+        acc[lang] = base;
+        return acc;
+    }, {} as EventTranslations);
+
+    return normalized;
+};
+
+const syncEventWithAzTranslations = (rawEvent: Partial<EventItem> & Record<string, any>): EventItem => {
+    const source = isObjectRecord(rawEvent) ? rawEvent : {};
+    const translations = normalizeEventTranslations(source);
+    const az = translations.AZ;
+
+    return {
+        ...(source as EventItem),
+        title: az.title || toEventFieldString(source.title),
+        location: az.location || toEventFieldString(source.location),
+        category: az.category || toEventFieldString(source.category),
+        description: az.description || toEventFieldString(source.description),
+        rules: az.rules || toEventFieldString(source.rules),
+        translations
+    };
+};
+
+const getEventLocalizedFieldValue = (
+    rawEvent: Partial<EventItem> | null | undefined,
+    field: EventLocalizedField,
+    lang: EventLanguageCode,
+    fallbackToAz = true
+) => {
+    if (!rawEvent) return '';
+    const normalizedEvent = syncEventWithAzTranslations(rawEvent as Partial<EventItem> & Record<string, any>);
+    const directValue = toEventFieldString(normalizedEvent.translations?.[lang]?.[field]);
+    if (directValue) return directValue;
+    if (!fallbackToAz && lang !== 'AZ') return '';
+    if (fallbackToAz && lang !== 'AZ') {
+        return toEventFieldString(normalizedEvent.translations?.AZ?.[field]) || toEventFieldString(normalizedEvent[field]);
+    }
+    return toEventFieldString(normalizedEvent[field]);
+};
+
+const applyEventLocalizedFieldUpdate = (
+    rawEvent: Partial<EventItem> & Record<string, any>,
+    field: EventLocalizedField,
+    lang: EventLanguageCode,
+    value: string
+): EventItem => {
+    const normalizedEvent = syncEventWithAzTranslations(rawEvent);
+    const currentTranslations = normalizedEvent.translations || normalizeEventTranslations(normalizedEvent);
+    const nextTranslations: EventTranslations = {
+        ...currentTranslations,
+        [lang]: {
+            ...currentTranslations[lang],
+            [field]: value
+        }
+    };
+
+    const nextEvent: EventItem = {
+        ...normalizedEvent,
+        translations: nextTranslations
+    };
+
+    if (lang === 'AZ') {
+        nextEvent[field] = value;
+    }
+
+    return syncEventWithAzTranslations(nextEvent);
 };
 
 const isReservedPhotoAlbum = (value?: string) => {
@@ -700,6 +856,7 @@ const VisualEditor: React.FC = () => {
     const [events, setEvents] = useState<EventItem[]>([]);
     const [selectedEventId, setSelectedEventId] = useState<number | null>(null);
     const [eventForm, setEventForm] = useState<Partial<EventItem>>({});
+    const [eventFormLanguage, setEventFormLanguage] = useState<EventLanguageCode>('AZ');
 
     // News Mode State
     const [news, setNews] = useState<NewsItem[]>([]);
@@ -1572,16 +1729,19 @@ const VisualEditor: React.FC = () => {
             if (imagesData?.local) setAllAvailableImages(imagesData.local);
 
             if (Array.isArray(eventsData)) {
-                const normalizedEvents = eventsData.map((item: any) => ({
-                    ...item,
-                    status: normalizeEventStatus(item?.status, item?.date),
-                    youtubeUrl: String(item?.youtubeUrl || item?.youtube_url || item?.url || '').trim(),
-                    registrationEnabled: normalizeEventRegistrationEnabled(item?.registrationEnabled ?? item?.registration_enabled)
-                }));
+                const normalizedEvents = eventsData.map((item: any) => {
+                    const normalizedEvent = syncEventWithAzTranslations(item);
+                    return {
+                        ...normalizedEvent,
+                        status: normalizeEventStatus(item?.status, item?.date),
+                        youtubeUrl: String(item?.youtubeUrl || item?.youtube_url || item?.url || '').trim(),
+                        registrationEnabled: normalizeEventRegistrationEnabled(item?.registrationEnabled ?? item?.registration_enabled)
+                    };
+                });
                 setEvents(normalizedEvents);
                 if (normalizedEvents.length > 0 && selectedEventId === null) {
                     setSelectedEventId(normalizedEvents[0].id);
-                    setEventForm(normalizedEvents[0]);
+                    setEventForm(syncEventWithAzTranslations(normalizedEvents[0]));
                 }
             }
 
@@ -2948,7 +3108,7 @@ const VisualEditor: React.FC = () => {
         const evt = events.find(e => e.id === id);
         if (evt) {
             setSelectedEventId(id);
-            setEventForm({ ...evt });
+            setEventForm(syncEventWithAzTranslations(evt));
         }
     };
 
@@ -2959,12 +3119,41 @@ const VisualEditor: React.FC = () => {
             // Only update local form if the ID matches what we are currently looking at
             // or if it's a field like 'title' that doesn't use targetId
             const isSameEvent = !targetId || targetId === selectedEventId;
-            const updatedForm = isSameEvent ? { ...prev, [field]: value } as EventItem : prev;
+            const updatedForm = isSameEvent
+                ? syncEventWithAzTranslations({ ...(prev as EventItem), [field]: value } as EventItem)
+                : prev;
 
             // ALWAYS update the master events list using the correct ID
             if (activeId) {
-                setEvents(oldEvents => oldEvents.map(e => e.id === activeId ? { ...e, [field]: value } : e));
+                setEvents(oldEvents => oldEvents.map(e => (
+                    e.id === activeId
+                        ? syncEventWithAzTranslations({ ...e, [field]: value } as EventItem)
+                        : e
+                )));
             }
+
+            return updatedForm;
+        });
+    };
+
+    const handleEventLocalizedChange = (
+        field: EventLocalizedField,
+        value: string,
+        lang: EventLanguageCode,
+        targetId?: number
+    ) => {
+        const activeId = targetId || selectedEventId;
+        if (!activeId) return;
+
+        setEventForm(prev => {
+            const isSameEvent = !targetId || targetId === selectedEventId;
+            const updatedForm = isSameEvent
+                ? applyEventLocalizedFieldUpdate((prev as EventItem), field, lang, value)
+                : prev;
+
+            setEvents(oldEvents => oldEvents.map(e => (
+                e.id === activeId ? applyEventLocalizedFieldUpdate(e, field, lang, value) : e
+            )));
 
             return updatedForm;
         });
@@ -2972,7 +3161,7 @@ const VisualEditor: React.FC = () => {
 
     const addNewEvent = () => {
         const newId = events.length > 0 ? Math.max(...events.map(e => e.id)) + 1 : 1;
-        const newEvent: EventItem = {
+        const newEvent: EventItem = syncEventWithAzTranslations({
             id: newId,
             title: 'Yeni Tədbir',
             date: new Date().toISOString().split('T')[0],
@@ -2984,7 +3173,7 @@ const VisualEditor: React.FC = () => {
             youtubeUrl: '',
             status: 'planned',
             registrationEnabled: true
-        };
+        });
         setEvents([...events, newEvent]);
         setSelectedEventId(newId);
         setEventForm(newEvent);
@@ -5093,7 +5282,7 @@ const VisualEditor: React.FC = () => {
                                             onClick={() => handleEventSelect(evt.id)}
                                             style={{ width: '100%', paddingRight: '40px', textAlign: 'left' }}
                                         >
-                                            <Calendar size={14} /> {evt.title}
+                                            <Calendar size={14} /> {getEventLocalizedFieldValue(evt, 'title', 'AZ')}
                                             <div style={{ fontSize: '10px', color: '#999', marginLeft: '24px' }}>{evt.date}</div>
                                         </button>
                                         <button
@@ -5116,16 +5305,40 @@ const VisualEditor: React.FC = () => {
                                     <h2 style={{ fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         <Calendar size={22} /> Tədbiri Redaktə Et
                                     </h2>
-                                    <p style={{ color: '#64748b' }}>{eventForm.title} // ID: {eventForm.id}</p>
+                                    <p style={{ color: '#64748b' }}>
+                                        {getEventLocalizedFieldValue(eventForm, 'title', eventFormLanguage, true) || 'Yeni Tədbir'} // ID: {eventForm.id}
+                                    </p>
+                                </div>
+
+                                <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem' }}>
+                                    {EVENT_LANGUAGE_TABS.map((tab) => {
+                                        const isActive = eventFormLanguage === tab.code;
+                                        return (
+                                            <button
+                                                key={tab.code}
+                                                type="button"
+                                                className="btn-secondary"
+                                                onClick={() => setEventFormLanguage(tab.code)}
+                                                style={{
+                                                    minWidth: '72px',
+                                                    background: isActive ? '#FF4D00' : '#111',
+                                                    color: isActive ? '#000' : '#fff',
+                                                    border: isActive ? '1px solid #FF4D00' : '1px solid #e2e8f0'
+                                                }}
+                                            >
+                                                {tab.label}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
 
                                 <div className="edit-grid grid-2">
                                     <div className="form-group">
-                                        <label>TƏDBİR ADI</label>
+                                        <label>TƏDBİR ADI ({eventFormLanguage})</label>
                                         <input
                                             type="text"
-                                            value={eventForm.title}
-                                            onChange={(e) => handleEventChange('title', e.target.value, eventForm.id)}
+                                            value={getEventLocalizedFieldValue(eventForm, 'title', eventFormLanguage, false)}
+                                            onChange={(e) => handleEventLocalizedChange('title', e.target.value, eventFormLanguage, eventForm.id)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -5137,19 +5350,19 @@ const VisualEditor: React.FC = () => {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>MƏKAN</label>
+                                        <label>MƏKAN ({eventFormLanguage})</label>
                                         <input
                                             type="text"
-                                            value={eventForm.location}
-                                            onChange={(e) => handleEventChange('location', e.target.value, eventForm.id)}
+                                            value={getEventLocalizedFieldValue(eventForm, 'location', eventFormLanguage, false)}
+                                            onChange={(e) => handleEventLocalizedChange('location', e.target.value, eventFormLanguage, eventForm.id)}
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>KATEQORİYA</label>
+                                        <label>KATEQORİYA ({eventFormLanguage})</label>
                                         <input
                                             type="text"
-                                            value={eventForm.category}
-                                            onChange={(e) => handleEventChange('category', e.target.value, eventForm.id)}
+                                            value={getEventLocalizedFieldValue(eventForm, 'category', eventFormLanguage, false)}
+                                            onChange={(e) => handleEventLocalizedChange('category', e.target.value, eventFormLanguage, eventForm.id)}
                                         />
                                     </div>
                                     <div className="form-group">
@@ -5251,11 +5464,11 @@ const VisualEditor: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className="form-group full-span">
-                                                <label>TƏSVİR</label>
+                                                <label>TƏSVİR ({eventFormLanguage})</label>
                                                 <QuillEditor
                                                     id="event-full-desc"
-                                                    value={bbcodeToHtmlForEditor(eventForm.description || '')}
-                                                    onChange={(val: string) => handleEventChange('description', val, eventForm.id)}
+                                                    value={bbcodeToHtmlForEditor(getEventLocalizedFieldValue(eventForm, 'description', eventFormLanguage, false))}
+                                                    onChange={(val: string) => handleEventLocalizedChange('description', val, eventFormLanguage, eventForm.id)}
                                                 />
                                             </div>
                                             <div className="form-group full-span">
@@ -5292,11 +5505,11 @@ const VisualEditor: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className="form-group full-span">
-                                                <label>QAYDALAR</label>
+                                                <label>QAYDALAR ({eventFormLanguage})</label>
                                                 <QuillEditor
                                                     id="event-full-rules"
-                                                    value={bbcodeToHtmlForEditor(eventForm.rules || '')}
-                                                    onChange={(val: string) => handleEventChange('rules', val, eventForm.id)}
+                                                    value={bbcodeToHtmlForEditor(getEventLocalizedFieldValue(eventForm, 'rules', eventFormLanguage, false))}
+                                                    onChange={(val: string) => handleEventLocalizedChange('rules', val, eventFormLanguage, eventForm.id)}
                                                 />
                                             </div>
                                         </>

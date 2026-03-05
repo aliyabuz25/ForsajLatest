@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Calendar, MapPin, X, Car, Users as UsersIcon, Download, FileText, ChevronDown, PlayCircle } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 import { bbcodeToHtml } from '../utils/bbcode';
+import { getLocalizedEventField, normalizeEventWithLocalization, type EventLanguageCode, type EventTranslations } from '../utils/eventLocalization';
 import toast from 'react-hot-toast';
 import CsPlayer from './CsPlayer';
 
@@ -24,6 +25,7 @@ interface EventItem {
   pdfURL?: string;
   status: 'planned' | 'past';
   registrationEnabled?: boolean;
+  translations?: EventTranslations;
 }
 
 interface EventsPageProps {
@@ -33,6 +35,7 @@ interface EventsPageProps {
 
 const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'default' }) => {
   const { getText, language, getPage } = useSiteContent('eventspage');
+  const eventLanguage: EventLanguageCode = language === 'RU' ? 'RU' : language === 'ENG' ? 'ENG' : 'AZ';
   const requiredFieldsToast = getText('PILOT_FORM_TOAST_REQUIRED', 'Zəhmət olmasa bütün sahələri doldurun.');
   const submitSuccessToast = getText('PILOT_FORM_TOAST_SUCCESS', 'Qeydiyyat müraciətiniz uğurla göndərildi!');
   const submitErrorToast = getText('PILOT_FORM_TOAST_ERROR', 'Gondərilmə zamanı xəta baş verdi.');
@@ -107,12 +110,15 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
         if (eventsRes.ok) {
           const data = await eventsRes.json();
           if (Array.isArray(data)) {
-            const normalizedEvents = data.map((item: any) => ({
-              ...item,
-              status: normalizeEventStatus(item?.status, item?.date),
-              youtubeUrl: String(item?.youtubeUrl || item?.youtube_url || item?.url || '').trim(),
-              registrationEnabled: normalizeRegistrationEnabled(item?.registrationEnabled ?? item?.registration_enabled)
-            }));
+            const normalizedEvents = data.map((item: any) => {
+              const localized = normalizeEventWithLocalization(item || {});
+              return {
+                ...localized,
+                status: normalizeEventStatus(item?.status, item?.date),
+                youtubeUrl: String(item?.youtubeUrl || item?.youtube_url || item?.url || '').trim(),
+                registrationEnabled: normalizeRegistrationEnabled(item?.registrationEnabled ?? item?.registration_enabled)
+              };
+            });
             const sortedEvents = normalizedEvents.sort((a: any, b: any) =>
               new Date(b.date).getTime() - new Date(a.date).getTime()
             );
@@ -174,8 +180,9 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
       const byId = targetId ? eventsData.find((event) => event.id === targetId) : null;
       const byTitleDate = !byId
         ? eventsData.find((event) => {
-            const title = (event.title || '').trim().toLocaleLowerCase('az');
-            return (!!targetTitle && title === targetTitle) || (!!targetDate && event.date === targetDate);
+            const localizedTitle = getLocalizedEventField(event, 'title', eventLanguage).trim().toLocaleLowerCase('az');
+            const azTitle = getLocalizedEventField(event, 'title', 'AZ').trim().toLocaleLowerCase('az');
+            return (!!targetTitle && (localizedTitle === targetTitle || azTitle === targetTitle)) || (!!targetDate && event.date === targetDate);
           })
         : null;
       const match = byId || byTitleDate;
@@ -187,7 +194,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
     } catch {
       // ignore storage access errors
     }
-  }, [eventsData, openMode]);
+  }, [eventsData, openMode, eventLanguage]);
 
   useEffect(() => {
     if (!eventsData.length || selectedEvent) return;
@@ -236,6 +243,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
 
   const renderRegistrationModal = () => {
     if (!regStep) return null;
+    const selectedEventTitle = selectedEvent ? getLocalizedEventField(selectedEvent, 'title', eventLanguage) : '';
 
     const defaultClubOptions = [
       'Fərdi İştirakçı',
@@ -284,7 +292,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
             <div className="text-center animate-in fade-in zoom-in-95 duration-300">
               <h2 className="text-5xl md:text-8xl font-black italic text-white uppercase tracking-tighter mb-2 leading-none">{getText('MODAL_TITLE', 'YARIŞDA İŞTİRAK')}</h2>
               <p className="text-[#FF4D00] font-black italic text-xs uppercase tracking-[0.3em] mb-16">
-                {selectedEvent?.title || getText('EVENT_NAME_LABEL', 'YENİ TƏDBİR')}
+                {selectedEventTitle || getText('EVENT_NAME_LABEL', 'YENİ TƏDBİR')}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -354,7 +362,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                   type: 'Pilot Registration',
                   content: JSON.stringify({
                     eventId: selectedEvent?.id,
-                    event: selectedEvent?.title,
+                    event: selectedEventTitle,
                     locale: language,
                     whatsapp,
                     car,
@@ -435,6 +443,10 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
 
   if (selectedEvent) {
     const isSelectedEventRegistrationEnabled = isEventRegistrationEnabled(selectedEvent as Partial<EventItem> & Record<string, unknown>);
+    const selectedTitle = getLocalizedEventField(selectedEvent, 'title', eventLanguage);
+    const selectedLocation = getLocalizedEventField(selectedEvent, 'location', eventLanguage);
+    const selectedDescription = getLocalizedEventField(selectedEvent, 'description', eventLanguage);
+    const selectedRules = getLocalizedEventField(selectedEvent, 'rules', eventLanguage);
 
     return (
       <div className="bg-[#0A0A0A] min-h-screen pb-20 text-white animate-in fade-in duration-500">
@@ -455,7 +467,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
             <img
               src={selectedEvent.img}
               className="w-full h-full object-cover grayscale brightness-[0.2] transition-transform duration-1000 group-hover:scale-105"
-              alt={selectedEvent.title}
+              alt={selectedTitle}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent"></div>
 
@@ -465,11 +477,11 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                   <span className="transform skew-x-12 block tracking-widest uppercase font-black">{selectedEvent.status === 'planned' ? getText('STATUS_UPCOMING', 'GƏLƏCƏK YARIŞ') : getText('STATUS_PAST', 'BAŞA ÇATIB')}</span>
                 </span>
                 <h1 className="text-5xl md:text-[100px] font-black italic text-white uppercase tracking-tighter leading-[0.8] mb-6">
-                  {selectedEvent.title}
+                  {selectedTitle}
                 </h1>
                 <div className="flex flex-wrap gap-8 text-gray-500 font-black italic text-xs uppercase tracking-widest">
                   <span className="flex items-center gap-2"><Calendar size={14} className="text-[#FF4D00]" /> {selectedEvent.date}</span>
-                  <span className="flex items-center gap-2"><MapPin size={14} className="text-[#FF4D00]" /> {selectedEvent.location}</span>
+                  <span className="flex items-center gap-2"><MapPin size={14} className="text-[#FF4D00]" /> {selectedLocation}</span>
                 </div>
               </div>
 
@@ -506,7 +518,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                 </h3>
                 <div
                   className="text-gray-400 font-bold italic text-xl md:text-2xl leading-relaxed tracking-wide space-y-4 quill-content break-words overflow-hidden [overflow-wrap:anywhere] [&_*]:max-w-full [&_*]:whitespace-normal [&_*]:break-words"
-                  dangerouslySetInnerHTML={{ __html: bbcodeToHtml(selectedEvent.description || getText('DESC_PLACEHOLDER', 'Bu tədbir haqqında ətraflı məlumat tezliklə paylaşılacaq.')) }}
+                  dangerouslySetInnerHTML={{ __html: bbcodeToHtml(selectedDescription || getText('DESC_PLACEHOLDER', 'Bu tədbir haqqında ətraflı məlumat tezliklə paylaşılacaq.')) }}
                 />
               </div>
 
@@ -540,7 +552,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                 <div className="bg-[#111] p-12 border-l-4 border-[#FF4D00] shadow-2xl">
                   <div
                     className="text-gray-300 font-bold italic text-lg md:text-xl tracking-widest leading-loose quill-content break-words overflow-hidden [overflow-wrap:anywhere] [&_*]:max-w-full [&_*]:whitespace-normal [&_*]:break-words"
-                    dangerouslySetInnerHTML={{ __html: bbcodeToHtml(selectedEvent.rules || getText('RULES_PLACEHOLDER', 'Yarış qaydaları iştirakçılara brifinq zamanı elan ediləcək.')) }}
+                    dangerouslySetInnerHTML={{ __html: bbcodeToHtml(selectedRules || getText('RULES_PLACEHOLDER', 'Yarış qaydaları iştirakçılara brifinq zamanı elan ediləcək.')) }}
                   />
                 </div>
               </div>
@@ -622,7 +634,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
           <img
             src={featuredEvent.img}
             className="w-full h-full object-cover grayscale opacity-40 transition-transform duration-1000 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-75"
-            alt={featuredEvent.title}
+            alt={getLocalizedEventField(featuredEvent, 'title', eventLanguage)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/20 to-transparent"></div>
           <div className="absolute bottom-16 left-16 right-16">
@@ -630,7 +642,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
               <span className="transform skew-x-12 block tracking-widest uppercase font-black">{getText('LABEL_FEATURED', 'OFFROAD FEATURED')}</span>
             </div>
             <h3 className="text-6xl md:text-[140px] font-black italic text-white leading-[0.75] uppercase tracking-tighter mb-10">
-              {featuredEvent.title}
+              {getLocalizedEventField(featuredEvent, 'title', eventLanguage)}
             </h3>
             <button className="flex items-center gap-4 text-white font-black italic text-2xl hover:translate-x-6 transition-transform uppercase tracking-tighter">
               {getText('BTN_MORE_INFO', 'DAHA ƏTRAFLI')} <ArrowRight size={36} className="text-[#FF4D00]" />
@@ -651,14 +663,14 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                 <img
                   src={event.img}
                   className="w-full h-full object-cover grayscale opacity-50 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110"
-                  alt={event.title}
+                  alt={getLocalizedEventField(event, 'title', eventLanguage)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="text-[#FF4D00] font-black italic text-[10px] mb-2 uppercase tracking-widest">{event.date}</div>
                   <h4 className="text-3xl font-black italic text-white uppercase leading-none tracking-tighter group-hover:text-[#FF4D00] transition-colors">
-                    {event.title}
+                    {getLocalizedEventField(event, 'title', eventLanguage)}
                   </h4>
                   <div className="mt-6 bg-white/5 border border-white/10 text-white px-5 py-2 font-black italic text-[8px] inline-block transform -skew-x-12 group-hover:bg-[#FF4D00] group-hover:text-black transition-all">
                     <span className="transform skew-x-12 block uppercase tracking-[0.2em]">{getText('BTN_VIEW_DETAILS', 'ƏTRAFLI BAX')}</span>
@@ -694,7 +706,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                   <img
                     src={event.thumbnail}
                     className="w-full h-full object-cover grayscale opacity-40 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-90 group-hover:scale-105"
-                    alt={event.title}
+                    alt={getLocalizedEventField(event, 'title', eventLanguage)}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -712,7 +724,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ onViewChange, openMode = 'defau
                   <div className="absolute bottom-8 left-8 right-8">
                     <div className="text-gray-400 font-black italic text-[10px] mb-2 uppercase tracking-widest">{event.date}</div>
                     <h4 className="text-3xl font-black italic text-white uppercase leading-none tracking-tighter group-hover:text-[#FF4D00] transition-colors">
-                      {event.title}
+                      {getLocalizedEventField(event, 'title', eventLanguage)}
                     </h4>
                     <div className="mt-6 bg-white/5 border border-white/10 text-white px-5 py-2 font-black italic text-[8px] inline-block transform -skew-x-12 group-hover:bg-[#FF4D00] group-hover:text-black transition-all">
                       <span className="transform skew-x-12 block uppercase tracking-[0.2em]">

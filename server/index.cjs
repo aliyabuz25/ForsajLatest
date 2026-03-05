@@ -584,12 +584,93 @@ const isRegistrationEnabled = (rawValue, fallback = true) => {
     return true;
 };
 
+const EVENT_LANG_CODES = ['AZ', 'RU', 'ENG'];
+const EVENT_TRANSLATABLE_FIELDS = ['title', 'location', 'category', 'description', 'rules'];
+const createEmptyEventLocalizedFields = () => ({
+    title: '',
+    location: '',
+    category: '',
+    description: '',
+    rules: ''
+});
+const toEventFieldString = (value) => (value === undefined || value === null ? '' : String(value));
+const getLegacyEventFieldByLanguage = (rawEvent, field, lang) => {
+    if (lang === 'AZ') return '';
+
+    const suffixes = lang === 'RU'
+        ? ['Ru', 'RU', 'Rus', 'RUS', '_ru', '_RU', '_rus', '_RUS']
+        : ['En', 'EN', 'Eng', 'ENG', '_en', '_EN', '_eng', '_ENG'];
+
+    for (const suffix of suffixes) {
+        const key = `${field}${suffix}`;
+        const value = rawEvent?.[key];
+        if (value !== undefined && value !== null && String(value) !== '') {
+            return String(value);
+        }
+    }
+
+    return '';
+};
+const normalizeEventTranslations = (rawEvent) => {
+    const source = isPlainObject(rawEvent) ? rawEvent : {};
+    const rawTranslations = isPlainObject(source.translations)
+        ? source.translations
+        : (isPlainObject(source.i18n) ? source.i18n : {});
+
+    const langSources = {
+        AZ: isPlainObject(rawTranslations.AZ)
+            ? rawTranslations.AZ
+            : (isPlainObject(rawTranslations.az) ? rawTranslations.az : undefined),
+        RU: isPlainObject(rawTranslations.RU)
+            ? rawTranslations.RU
+            : (isPlainObject(rawTranslations.ru)
+                ? rawTranslations.ru
+                : (isPlainObject(rawTranslations.RUS) ? rawTranslations.RUS : undefined)),
+        ENG: isPlainObject(rawTranslations.ENG)
+            ? rawTranslations.ENG
+            : (isPlainObject(rawTranslations.EN)
+                ? rawTranslations.EN
+                : (isPlainObject(rawTranslations.en) ? rawTranslations.en : undefined))
+    };
+
+    return EVENT_LANG_CODES.reduce((acc, lang) => {
+        const base = createEmptyEventLocalizedFields();
+        const langSource = langSources[lang];
+
+        EVENT_TRANSLATABLE_FIELDS.forEach((field) => {
+            const fromLangMap = langSource ? toEventFieldString(langSource[field]) : '';
+            const azBase = toEventFieldString(source[field]);
+            if (lang === 'AZ') {
+                base[field] = fromLangMap || azBase;
+                return;
+            }
+            base[field] = fromLangMap || getLegacyEventFieldByLanguage(source, field, lang);
+        });
+
+        acc[lang] = base;
+        return acc;
+    }, {});
+};
+const normalizeSingleEventItem = (rawItem) => {
+    const item = isPlainObject(rawItem) ? { ...rawItem } : {};
+    const translations = normalizeEventTranslations(item);
+    const az = translations.AZ || createEmptyEventLocalizedFields();
+
+    return {
+        ...item,
+        title: az.title || toEventFieldString(item.title),
+        location: az.location || toEventFieldString(item.location),
+        category: az.category || toEventFieldString(item.category),
+        description: az.description || toEventFieldString(item.description),
+        rules: az.rules || toEventFieldString(item.rules),
+        translations,
+        registrationEnabled: isRegistrationEnabled(item?.registrationEnabled ?? item?.registration_enabled, true)
+    };
+};
+
 const normalizeEventItems = (list) => {
     if (!Array.isArray(list)) return [];
-    return list.map((item) => ({
-        ...(isPlainObject(item) ? item : {}),
-        registrationEnabled: isRegistrationEnabled(item?.registrationEnabled ?? item?.registration_enabled, true)
-    }));
+    return list.map((item) => normalizeSingleEventItem(item));
 };
 
 const normalizeSettingId = (value) => String(value || '').trim().toUpperCase();
