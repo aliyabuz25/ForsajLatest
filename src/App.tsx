@@ -147,7 +147,7 @@ const App: React.FC = () => {
   };
 
   const handleLanguageChange = (lang: AdminLanguage) => {
-    if (adminLanguage !== lang && lang === 'az') {
+    if (lang === 'az') {
       // Force a clean re-mount of translatable admin content when returning to AZ.
       // This removes stale Google Translate DOM wrappers without a full page reload.
       setTranslateResetKey((prev) => prev + 1);
@@ -444,7 +444,7 @@ const App: React.FC = () => {
               setUser(null);
             }} language={adminLanguage} onLanguageChange={handleLanguageChange} />
             <main
-              key={`admin-main-${translateResetKey}`}
+              key={`admin-main-${adminLanguage}-${translateResetKey}`}
               className="main-content admin-translatable"
               translate="yes"
               data-admin-translatable-root="true"
