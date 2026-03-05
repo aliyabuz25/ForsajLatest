@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { type AdminLanguage } from '../utils/adminLanguage';
 
 interface AdminAutoTranslateProps {
@@ -90,6 +91,7 @@ const initGoogleTranslate = (language: AdminLanguage) => {
 };
 
 const AdminAutoTranslate: React.FC<AdminAutoTranslateProps> = ({ language }) => {
+  const location = useLocation();
   const retriesRef = useRef<number[]>([]);
   const currentLanguageRef = useRef<AdminLanguage>(language);
   const isInitializedRef = useRef(false);
@@ -152,7 +154,35 @@ const AdminAutoTranslate: React.FC<AdminAutoTranslateProps> = ({ language }) => 
   useEffect(() => {
     scheduleApplyLanguage(language);
     return () => clearRetries();
-  }, [language]);
+  }, [language, location.pathname, location.search, location.hash]);
+
+  useEffect(() => {
+    if (language === 'az') return;
+
+    const root =
+      document.querySelector<HTMLElement>('[data-admin-translatable-root="true"]') ||
+      document.querySelector<HTMLElement>('.main-content');
+    if (!root) return;
+
+    let debounceTimer: number | null = null;
+    const observer = new MutationObserver(() => {
+      if (debounceTimer) window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => {
+        scheduleApplyLanguage(currentLanguageRef.current);
+      }, 180);
+    });
+
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+
+    return () => {
+      if (debounceTimer) window.clearTimeout(debounceTimer);
+      observer.disconnect();
+    };
+  }, [language, location.pathname, location.search, location.hash]);
 
   useEffect(() => {
     return () => {

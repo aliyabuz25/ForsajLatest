@@ -432,9 +432,9 @@ const App: React.FC = () => {
               clearAdminSession();
               setUser(null);
             }} language={adminLanguage} onLanguageChange={handleLanguageChange} />
-            <main className="main-content">
+            <main className="main-content admin-translatable" translate="yes" data-admin-translatable-root="true">
               <Header user={user} language={adminLanguage} />
-              <div className="content-body">
+              <div className="content-body" translate="yes">
                 <Routes>
                   {isSitemapEmpty ? (
                     <Route path="*" element={<SetupGuide language={adminLanguage} />} />
