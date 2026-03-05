@@ -1,0 +1,3418 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-03-05T07:08:41.251Z",
+  "languages": [
+    "AZ",
+    "RU",
+    "ENG"
+  ],
+  "pages": {
+    "about": {
+      "attr-forsaj-club-detail-405": {
+        "AZ": "Forsaj Club Detail",
+        "RU": "Деталь клуба «Форсаж»",
+        "ENG": "Fast and Furious Club Detail"
+      },
+      "HAQQIMIZDA": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "lbl--sas-d-y-rl-ri-m-994": {
+        "AZ": "ƏSAS DƏYƏRLƏRİMİZ",
+        "RU": "НАШИ ОСНОВНЫЕ ЦЕННОСТИ",
+        "ENG": "OUR CORE VALUES"
+      },
+      "lbl-az-rbaycan-n-h--532": {
+        "AZ": "Azərbaycanın hər bir guşəsində offroad idmanını təbliğ etmək, yerli pilotları beynəlxalq standartlara uyğun yetişdirmək və təbiəti qoruyaraq ekstremal adrenalin təcrübəsi bəxş etmək.",
+        "RU": "Продвижение внедорожных видов спорта во всех уголках Азербайджана, подготовка местных пилотов в соответствии с международными стандартами и предоставление экстремальных адреналиновых впечатлений при защите природы.",
+        "ENG": "Promoting offroad sports in every corner of Azerbaijan, training local pilots according to international standards and providing extreme adrenaline experience while protecting nature."
+      },
+      "lbl-bi-z-offroad-ed--342": {
+        "AZ": "BİZ OFFROAD EDƏRKƏN TƏBİƏTƏ ZƏRƏR VERMƏMƏYİ ÖZÜMÜZƏ BORC BİLİRİK. EKOLOJİ BALANS BİZİM ÜÇÜN MÜQƏDDƏSDİR.",
+        "RU": "МЫ ЗНАЕМ, ЧТО ДОСТУПНО НЕ НАВРЕДИТЬ ПРИРОДЕ ПРИ ДВИЖЕНИИ ПО БЕЗДОРОЖИЮ. ЭКОЛОГИЧЕСКИЙ БАЛАНС СВЯЩЕН ДЛЯ НАС.",
+        "ENG": "WE KNOW IT IS OBTAINED TO NOT HARM THE NATURE WHILE GOING OFFROAD. ECOLOGICAL BALANCE IS SACRED TO US."
+      },
+      "lbl-bi-zi-m-baxi-imiz-459": {
+        "AZ": "BİZİM BAXIŞIMIZ",
+        "RU": "НАШ ВЗГЛЯД",
+        "ENG": "OUR VIEW"
+      },
+      "lbl-bi-zi-m-mi-ssi-yami-445": {
+        "AZ": "BİZİM MİSSİYAMIZ",
+        "RU": "НАША МИССИЯ",
+        "ENG": "OUR MISSION"
+      },
+      "lbl-ekstremal-i-dman-908": {
+        "AZ": "EKSTREMAL İDMANDA CAN SAĞLIĞI BİZİM BİR NÖMRƏLİ QAYDAMIZDIR. BÜTÜN TEXNİKALARIMIZ FIA STANDARTLARINA UYĞUN YOXLANILIR.",
+        "RU": "ЗДОРОВЬЕ – НАШЕ ПРАВИЛО НОМЕР ОДИН В ЭКСТРЕМАЛЬНОМ СПОРТЕ. ВСЕ НАШИ ТЕХНИКИ ПРОВЕРЯЮТСЯ СОГЛАСНО СТАНДАРТАМ FIA.",
+        "ENG": "HEALTH IS OUR NUMBER ONE RULE IN EXTREME SPORTS. ALL OUR TECHNIQUES ARE INSPECTED ACCORDING TO FIA STANDARDS."
+      },
+      "lbl-forsaj-bi-r-klub-174": {
+        "AZ": "FORSAJ BİR KLUBDAN DAHA ÇOX, SADİQ VƏ BÖYÜK BİR AİLƏDİR. BİRİMİZ HAMIMIZ, HAMIMIZ BİRİMİZ ÜÇÜN!",
+        "RU": "ФОРСАЙ – ЭТО БОЛЬШЕ, ЧЕМ КЛУБ, ЭТО ВЕРНАЯ И БОЛЬШАЯ СЕМЬЯ. МЫ ВСЕ ОДИН, ВСЕ ЗА ОДНОГО!",
+        "ENG": "FORSAJ IS MORE THAN A CLUB, IT IS A LOYAL AND BIG FAMILY. WE ARE ALL ONE, ALL FOR ONE!"
+      },
+      "lbl-forsaj-club-494": {
+        "AZ": "FORSAJ CLUB",
+        "RU": "ФАСТ КЛУБ",
+        "ENG": "FAST CLUB"
+      },
+      "lbl-fundamental-pri--211": {
+        "AZ": "FUNDAMENTAL PRİNSİPLƏR",
+        "RU": "ОСНОВНЫЕ ПРИНЦИПЫ",
+        "ENG": "FUNDAMENTAL PRINCIPLES"
+      },
+      "lbl-g-ncl-r-76": {
+        "AZ": "GƏNCLƏR",
+        "RU": "МОЛОДЫЕ ЛЮДИ",
+        "ENG": "THE YOUNG PEOPLE"
+      },
+      "lbl-h-d-fi-mi-z-daka-157": {
+        "AZ": "HƏDƏFİMİZ: DAKAR RALLİ 2026",
+        "RU": "НАША ЦЕЛЬ: РАЛЛИ ДАКАР 2026",
+        "ENG": "OUR GOAL: DAKAR RALLY 2026"
+      },
+      "lbl-h-r-yari-da-h--238": {
+        "AZ": "HƏR YARIŞDA, HƏR DÖNGƏDƏ DAHA YAXŞI OLMAĞA ÇALIŞIRIQ. TƏLİMLƏRİMİZ PEŞƏKAR İNSTRUKTORLAR TƏRƏFİNDƏN İDARƏ OLUNUR.",
+        "RU": "МЫ СТАРАЕМСЯ БЫТЬ ЛУЧШЕ В КАЖДОЙ ГОНКЕ, КАЖДОЙ ГУБЕ. НАШЕ ОБУЧЕНИЕ ПРОВОДЯТ ПРОФЕССИОНАЛЬНЫЕ ИНСТРУКТОРЫ.",
+        "ENG": "WE TRY TO BE BETTER IN EVERY RACE, EVERY LIP. OUR TRAINING IS LEADED BY PROFESSIONAL INSTRUCTORS."
+      },
+      "lbl-haqqimizda-16": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "lbl-klubumuz-sad-c--90": {
+        "AZ": "Klubumuz sadəcə bir həvəskar qrupu deyil, ölkəmizi beynəlxalq ralli xəritəsinə daxil etməyi hədəfləyən rəsmi və peşəkar bir platformadır. 2018-ci ildən bəri biz 50-dən çox rəsmi yarış, 100-dən çox ekspedisiya və saysız-hesabsız adrenalin dolu anlar yaşamışıq.",
+        "RU": "Наш клуб – это не просто любительская группа, а официальная и профессиональная платформа, цель которой – вывести нашу страну на международную карту ралли. С 2018 года мы пережили более 50 официальных гонок, более 100 экспедиций и бесчисленное количество наполненных адреналином моментов.",
+        "ENG": "Our club is not just an amateur group, but an official and professional platform that aims to put our country on the international rally map. Since 2018, we have experienced more than 50 official races, more than 100 expeditions and countless adrenaline-filled moments."
+      },
+      "lbl-m-k-mm-lli-k-223": {
+        "AZ": "MÜKƏMMƏLLİK",
+        "RU": "СОВЕРШЕНСТВО",
+        "ENG": "PERFECTION"
+      },
+      "lbl-pi-lotlar-842": {
+        "AZ": "PİLOTLAR",
+        "RU": "ПИЛОТЫ",
+        "ENG": "PILOTS"
+      },
+      "lbl-qafqazin-li-der--28": {
+        "AZ": "QAFQAZIN LİDER KLUBUNA ÇEVRİLMƏK",
+        "RU": "СТАНЬТЕ ЛИДЕРОМ КЛУБА КАВКАЗА",
+        "ENG": "BECOME A LEADER CLUB OF THE CAUCASUS"
+      },
+      "lbl-regionun-n-b-y-759": {
+        "AZ": "Regionun ən böyük motorsport hubuna çevrilmək, rəqəmsal və fiziki infrastrukturlarla pilotlarımızı dəstəkləmək və motorsportu hər kəs üçün əlçatan bir ehtirasa çevirmək.",
+        "RU": "Стать крупнейшим центром автоспорта в регионе, поддерживая наших водителей цифровой и физической инфраструктурой и делая автоспорт доступным увлечением для каждого.",
+        "ENG": "To become the largest motorsport hub in the region, supporting our drivers with digital and physical infrastructures and making motorsport an accessible passion for everyone."
+      },
+      "lbl-stats-pilots-12": {
+        "AZ": "STATS_PILOTS",
+        "RU": "STATS_PILOTS",
+        "ENG": "STATS_PILOTS"
+      },
+      "lbl-stats-races-570": {
+        "AZ": "STATS_RACES",
+        "RU": "STATS_RACES",
+        "ENG": "STATS_RACES"
+      },
+      "lbl-stats-youth-230": {
+        "AZ": "STATS_YOUTH",
+        "RU": "STATS_YOUTH",
+        "ENG": "STATS_YOUTH"
+      },
+      "lbl-t-bi-ti-qoru-361": {
+        "AZ": "TƏBİƏTİ QORU",
+        "RU": "ЗАЩИЩАТЬ ПРИРОДУ",
+        "ENG": "PROTECT NATURE"
+      },
+      "lbl-t-hl-k-si-zli-k-479": {
+        "AZ": "TƏHLÜKƏSİZLİK",
+        "RU": "БЕЗОПАСНОСТЬ",
+        "ENG": "SECURITY"
+      },
+      "lbl-yari-lar-107": {
+        "AZ": "YARIŞLAR",
+        "RU": "СОРЕВНОВАНИЯ",
+        "ENG": "COMPETITIONS"
+      },
+      "STATS_PILOTS": {
+        "AZ": "STATS_PILOTS",
+        "RU": "STATS_PILOTS",
+        "ENG": "STATS_PILOTS"
+      },
+      "STATS_RACES": {
+        "AZ": "STATS_RACES",
+        "RU": "STATS_RACES",
+        "ENG": "STATS_RACES"
+      },
+      "STATS_YOUTH": {
+        "AZ": "STATS_YOUTH",
+        "RU": "STATS_YOUTH",
+        "ENG": "STATS_YOUTH"
+      },
+      "txt-bi-zi-m-hekay-mi-z-m-888": {
+        "AZ": "BİZİM HEKAYƏMİZ // MİSSİYAMIZ VƏ GƏLƏCƏYİMİZ",
+        "RU": "НАША ИСТОРИЯ // МИССИЯ И БУДУЩЕЕ",
+        "ENG": "OUR STORY // MISSION AND FUTURE"
+      },
+      "txt-g-ncl-r-value-123": {
+        "AZ": "20+",
+        "RU": "20+",
+        "ENG": "20+"
+      },
+      "txt-haqqimizda-904": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "txt-pi-lotlar-value-123": {
+        "AZ": "140+",
+        "RU": "140+",
+        "ENG": "140+"
+      },
+      "txt-yari-lar-value-123": {
+        "AZ": "50+",
+        "RU": "50+",
+        "ENG": "50+"
+      }
+    },
+    "app": {
+      "lbl-seo-bing-verifi-562": {
+        "AZ": "SEO_BING_VERIFICATION",
+        "RU": "SEO_BING_VERIFICATION",
+        "ENG": "SEO_BING_VERIFICATION"
+      },
+      "lbl-seo-canonical-u-224": {
+        "AZ": "SEO_CANONICAL_URL",
+        "RU": "SEO_CANONICAL_URL",
+        "ENG": "SEO_CANONICAL_URL"
+      },
+      "lbl-seo-description-878": {
+        "AZ": "SEO_DESCRIPTION",
+        "RU": "SEO_DESCRIPTION",
+        "ENG": "SEO_DESCRIPTION"
+      },
+      "lbl-seo-google-veri-225": {
+        "AZ": "SEO_GOOGLE_VERIFICATION",
+        "RU": "SEO_GOOGLE_VERIFICATION",
+        "ENG": "SEO_GOOGLE_VERIFICATION"
+      },
+      "lbl-seo-keywords-372": {
+        "AZ": "SEO_KEYWORDS",
+        "RU": "SEO_KEYWORDS",
+        "ENG": "SEO_KEYWORDS"
+      },
+      "lbl-seo-language-178": {
+        "AZ": "SEO_LANGUAGE",
+        "RU": "SEO_LANGUAGE",
+        "ENG": "SEO_LANGUAGE"
+      },
+      "lbl-seo-og-descript-797": {
+        "AZ": "SEO_OG_DESCRIPTION",
+        "RU": "SEO_OG_DESCRIPTION",
+        "ENG": "SEO_OG_DESCRIPTION"
+      },
+      "lbl-seo-og-image-535": {
+        "AZ": "SEO_OG_IMAGE",
+        "RU": "SEO_OG_IMAGE",
+        "ENG": "SEO_OG_IMAGE"
+      },
+      "lbl-seo-og-title-973": {
+        "AZ": "SEO_OG_TITLE",
+        "RU": "SEO_OG_TITLE",
+        "ENG": "SEO_OG_TITLE"
+      },
+      "lbl-seo-og-url-692": {
+        "AZ": "SEO_OG_URL",
+        "RU": "SEO_OG_URL",
+        "ENG": "SEO_OG_URL"
+      },
+      "lbl-seo-robots-923": {
+        "AZ": "SEO_ROBOTS",
+        "RU": "SEO_ROBOTS",
+        "ENG": "SEO_ROBOTS"
+      },
+      "lbl-seo-title-479": {
+        "AZ": "SEO_TITLE",
+        "RU": "SEO_TITLE",
+        "ENG": "SEO_TITLE"
+      },
+      "lbl-seo-twitter-car-598": {
+        "AZ": "SEO_TWITTER_CARD",
+        "RU": "SEO_TWITTER_CARD",
+        "ENG": "SEO_TWITTER_CARD"
+      },
+      "lbl-seo-twitter-cre-963": {
+        "AZ": "SEO_TWITTER_CREATOR",
+        "RU": "SEO_TWITTER_CREATOR",
+        "ENG": "SEO_TWITTER_CREATOR"
+      },
+      "lbl-seo-twitter-sit-35": {
+        "AZ": "SEO_TWITTER_SITE",
+        "RU": "SEO_TWITTER_SITE",
+        "ENG": "SEO_TWITTER_SITE"
+      },
+      "lbl-seo-yandex-veri-272": {
+        "AZ": "SEO_YANDEX_VERIFICATION",
+        "RU": "SEO_YANDEX_VERIFICATION",
+        "ENG": "SEO_YANDEX_VERIFICATION"
+      },
+      "SEO_AUTHOR": {
+        "AZ": "Forsaj Club",
+        "RU": "Клуб Форсажа",
+        "ENG": "Fast and Furious Club"
+      },
+      "SEO_BING_VERIFICATIO...": {
+        "AZ": "SEO_BING_VERIFICATION",
+        "RU": "SEO_BING_VERIFICATION",
+        "ENG": "SEO_BING_VERIFICATION"
+      },
+      "SEO_CANONICAL_URL": {
+        "AZ": "SEO_CANONICAL_URL",
+        "RU": "SEO_CANONICAL_URL",
+        "ENG": "SEO_CANONICAL_URL"
+      },
+      "SEO_DESCRIPTION": {
+        "AZ": "SEO_DESCRIPTION",
+        "RU": "SEO_DESCRIPTION",
+        "ENG": "SEO_DESCRIPTION"
+      },
+      "SEO_GOOGLE_VERIFICAT...": {
+        "AZ": "SEO_GOOGLE_VERIFICATION",
+        "RU": "SEO_GOOGLE_VERIFICATION",
+        "ENG": "SEO_GOOGLE_VERIFICATION"
+      },
+      "SEO_KEYWORDS": {
+        "AZ": "SEO_KEYWORDS",
+        "RU": "SEO_KEYWORDS",
+        "ENG": "SEO_KEYWORDS"
+      },
+      "SEO_LANGUAGE": {
+        "AZ": "az",
+        "RU": "ru",
+        "ENG": "en"
+      },
+      "SEO_OG_DESCRIPTION": {
+        "AZ": "SEO_OG_DESCRIPTION",
+        "RU": "SEO_OG_DESCRIPTION",
+        "ENG": "SEO_OG_DESCRIPTION"
+      },
+      "SEO_OG_IMAGE": {
+        "AZ": "SEO_OG_IMAGE",
+        "RU": "SEO_OG_IMAGE",
+        "ENG": "SEO_OG_IMAGE"
+      },
+      "SEO_OG_TITLE": {
+        "AZ": "SEO_OG_TITLE",
+        "RU": "SEO_OG_TITLE",
+        "ENG": "SEO_OG_TITLE"
+      },
+      "SEO_OG_URL": {
+        "AZ": "SEO_OG_URL",
+        "RU": "SEO_OG_URL",
+        "ENG": "SEO_OG_URL"
+      },
+      "SEO_ROBOTS": {
+        "AZ": "index,follow",
+        "RU": "индекс, следовать",
+        "ENG": "index, follow"
+      },
+      "SEO_TITLE": {
+        "AZ": "Forsaj Club - Offroad Motorsport Hub",
+        "RU": "Forsaj Club - Центр внедорожного автоспорта",
+        "ENG": "Forsaj Club - Offroad Motorsport Hub"
+      },
+      "SEO_TWITTER_CARD": {
+        "AZ": "summary_large_image",
+        "RU": "summary_large_image",
+        "ENG": "summary_large_image"
+      },
+      "SEO_TWITTER_CREATOR": {
+        "AZ": "SEO_TWITTER_CREATOR",
+        "RU": "SEO_TWITTER_CREATOR",
+        "ENG": "SEO_TWITTER_CREATOR"
+      },
+      "SEO_TWITTER_SITE": {
+        "AZ": "SEO_TWITTER_SITE",
+        "RU": "SEO_TWITTER_SITE",
+        "ENG": "SEO_TWITTER_SITE"
+      },
+      "SEO_YANDEX_VERIFICAT...": {
+        "AZ": "SEO_YANDEX_VERIFICATION",
+        "RU": "SEO_YANDEX_VERIFICATION",
+        "ENG": "SEO_YANDEX_VERIFICATION"
+      }
+    },
+    "categoryleaders": {
+      "EMPTY_DRIVER_NAME": {
+        "AZ": "---",
+        "RU": "---",
+        "ENG": "---"
+      },
+      "EMPTY_DRIVER_TEAM": {
+        "AZ": "---",
+        "RU": "---",
+        "ENG": "---"
+      },
+      "lbl-score-label-618": {
+        "AZ": "SCORE_LABEL",
+        "RU": "SCORE_LABEL",
+        "ENG": "SCORE_LABEL"
+      },
+      "lbl-section-subtitl-440": {
+        "AZ": "SECTION_SUBTITLE",
+        "RU": "SECTION_SUBTITLE",
+        "ENG": "SECTION_SUBTITLE"
+      },
+      "lbl-section-title-237": {
+        "AZ": "SECTION_TITLE",
+        "RU": "SECTION_TITLE",
+        "ENG": "SECTION_TITLE"
+      },
+      "lbl-view-all-btn-127": {
+        "AZ": "VIEW_ALL_BTN",
+        "RU": "VIEW_ALL_BTN",
+        "ENG": "VIEW_ALL_BTN"
+      },
+      "LEADER_TITLE_SUFFIX": {
+        "AZ": "LİDERİ",
+        "RU": "ЛИДЕР",
+        "ENG": "THE LEADER"
+      },
+      "SCORE_LABEL": {
+        "AZ": "XAL",
+        "RU": "ОЧКИ",
+        "ENG": "POINTS"
+      },
+      "SECTION_SUBTITLE": {
+        "AZ": "HƏR KLASS ÜZRƏ MÖVSÜMÜN ƏN GÜCLÜ PİLOTLARI",
+        "RU": "СИЛЬНЕЙШИЕ ПИОНЕРЫ СЕЗОНА В КАЖДОМ КЛАССЕ",
+        "ENG": "SEASON'S STRONGEST DRIVERS IN EACH CLASS"
+      },
+      "SECTION_TITLE": {
+        "AZ": "KATEQORİYA LİDƏRLƏRİ",
+        "RU": "ЛИДЕРЫ КАТЕГОРИЙ",
+        "ENG": "CATEGORY LEADERS"
+      },
+      "VIEW_ALL_BTN": {
+        "AZ": "BÜTÜN REYTİNG",
+        "RU": "ВСЕ РЕЙТИНГИ",
+        "ENG": "ALL RATING"
+      }
+    },
+    "contactpage": {
+      "ADDRESS_LINE_1": {
+        "AZ": "AZADLIQ 102, BAKI",
+        "RU": "СВОБОДА 102, БАКУ",
+        "ENG": "FREEDOM 102, BAKU"
+      },
+      "ADDRESS_LINE_2": {
+        "AZ": "ADDRESS_LINE_2",
+        "RU": "ADDRESS_LINE_2",
+        "ENG": "ADDRESS_LINE_2"
+      },
+      "BTN_SEND": {
+        "AZ": "MESAJI GÖNDƏR",
+        "RU": "ОТПРАВИТЬ СООБЩЕНИЕ",
+        "ENG": "SEND MESSAGE"
+      },
+      "CONTACT_ADDRESS_1": {
+        "AZ": "CONTACT_ADDRESS_1",
+        "RU": "CONTACT_ADDRESS_1",
+        "ENG": "CONTACT_ADDRESS_1"
+      },
+      "CONTACT_ADDRESS_2": {
+        "AZ": "CONTACT_ADDRESS_2",
+        "RU": "CONTACT_ADDRESS_2",
+        "ENG": "CONTACT_ADDRESS_2"
+      },
+      "CONTACT_EMAIL": {
+        "AZ": "CONTACT_EMAIL",
+        "RU": "CONTACT_EMAIL",
+        "ENG": "CONTACT_EMAIL"
+      },
+      "CONTACT_HOURS": {
+        "AZ": "CONTACT_HOURS",
+        "RU": "CONTACT_HOURS",
+        "ENG": "CONTACT_HOURS"
+      },
+      "CONTACT_PHONE": {
+        "AZ": "CONTACT_PHONE",
+        "RU": "CONTACT_PHONE",
+        "ENG": "CONTACT_PHONE"
+      },
+      "Content-Type": {
+        "AZ": "Content-Type",
+        "RU": "Тип контента",
+        "ENG": "Content-Type"
+      },
+      "DEPT_HQ_DESC": {
+        "AZ": "ÜMUMİ SORĞULAR VƏ İDARƏETMƏ",
+        "RU": "ОБЩИЕ СПРАВКИ И АДМИНИСТРАЦИЯ",
+        "ENG": "GENERAL INQUIRIES AND ADMINISTRATION"
+      },
+      "DEPT_HQ_EMAIL": {
+        "AZ": "DEPT_HQ_EMAIL",
+        "RU": "DEPT_HQ_EMAIL",
+        "ENG": "DEPT_HQ_EMAIL"
+      },
+      "DEPT_HQ_TITLE": {
+        "AZ": "BAŞ OFİS",
+        "RU": "ГОЛОВНОЙ ОФИС",
+        "ENG": "HEAD OFFICE"
+      },
+      "DEPT_PR_DESC": {
+        "AZ": "MƏTBUAT VƏ ƏMƏKDAŞLIQ",
+        "RU": "ПРЕССА И СОТРУДНИЧЕСТВО",
+        "ENG": "PRESS AND COOPERATION"
+      },
+      "DEPT_PR_EMAIL": {
+        "AZ": "DEPT_PR_EMAIL",
+        "RU": "DEPT_PR_EMAIL",
+        "ENG": "DEPT_PR_EMAIL"
+      },
+      "DEPT_PR_TITLE": {
+        "AZ": "MEDİA VƏ PR",
+        "RU": "СМИ И ПР",
+        "ENG": "MEDIA AND PR"
+      },
+      "DEPT_TECH_DESC": {
+        "AZ": "PİLOTLAR ÜÇÜN TEXNİKİ YARDIM",
+        "RU": "ТЕХНИЧЕСКАЯ ПОМОЩЬ ПИЛОТАМ",
+        "ENG": "TECHNICAL ASSISTANCE FOR PILOTS"
+      },
+      "DEPT_TECH_EMAIL": {
+        "AZ": "DEPT_TECH_EMAIL",
+        "RU": "DEPT_TECH_EMAIL",
+        "ENG": "DEPT_TECH_EMAIL"
+      },
+      "DEPT_TECH_TITLE": {
+        "AZ": "TEXNİKİ DƏSTƏK",
+        "RU": "ТЕХНИЧЕСКАЯ ПОДДЕРЖКА",
+        "ENG": "TECHNICAL SUPPORT"
+      },
+      "EMAIL_Address": {
+        "AZ": "PROTOCOL@FORSAJ.AZ",
+        "RU": "PROTOCOL@FORSAJ.AZ",
+        "ENG": "PROTOCOL@FORSAJ.AZ"
+      },
+      "EMAIL_LABEL": {
+        "AZ": "E-POÇT ÜNVANI",
+        "RU": "АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ",
+        "ENG": "EMAIL ADDRESS"
+      },
+      "FIELD_CONTACT_LABEL": {
+        "AZ": "ƏLAQƏ VASİTƏSİ",
+        "RU": "СРЕДСТВА СВЯЗИ",
+        "ENG": "MEANS OF COMMUNICATION"
+      },
+      "FIELD_CONTACT_PLACEH...": {
+        "AZ": "FIELD_CONTACT_PLACEHOLDER",
+        "RU": "FIELD_CONTACT_PLACEHOLDER",
+        "ENG": "FIELD_CONTACT_PLACEHOLDER"
+      },
+      "FIELD_CONTACT_PLACEHOLDER": {
+        "AZ": "TELEFON VƏ YA EMAIL",
+        "RU": "ТЕЛЕФОН ИЛИ ЭЛЕКТРОННАЯ ПОЧТА",
+        "ENG": "PHONE OR EMAIL"
+      },
+      "FIELD_MESSAGE_LABEL": {
+        "AZ": "MESAJINIZ",
+        "RU": "ВАШЕ СООБЩЕНИЕ",
+        "ENG": "YOUR MESSAGE"
+      },
+      "FIELD_MESSAGE_PLACEH...": {
+        "AZ": "FIELD_MESSAGE_PLACEHOLDER",
+        "RU": "FIELD_MESSAGE_PLACEHOLDER",
+        "ENG": "FIELD_MESSAGE_PLACEHOLDER"
+      },
+      "FIELD_MESSAGE_PLACEHOLDER": {
+        "AZ": "BURADA YAZIN...",
+        "RU": "ПИШИТЕ ЗДЕСЬ...",
+        "ENG": "WRITE HERE..."
+      },
+      "FIELD_NAME_LABEL": {
+        "AZ": "AD VƏ SOYAD",
+        "RU": "ИМЯ И ФАМИЛИЯ",
+        "ENG": "NAME AND SURNAME"
+      },
+      "FIELD_NAME_PLACEHOLD...": {
+        "AZ": "FIELD_NAME_PLACEHOLDER",
+        "RU": "FIELD_NAME_PLACEHOLDER",
+        "ENG": "FIELD_NAME_PLACEHOLDER"
+      },
+      "FIELD_NAME_PLACEHOLDER": {
+        "AZ": "AD SOYAD DAXİL EDİN",
+        "RU": "ВВЕДИТЕ ИМЯ",
+        "ENG": "ENTER FIRST NAME"
+      },
+      "FIELD_TOPIC_LABEL": {
+        "AZ": "MÜRACİƏT İSTİQAMƏTİ",
+        "RU": "НАПРАВЛЕНИЕ ПРИМЕНЕНИЯ",
+        "ENG": "APPLICATION DIRECTION"
+      },
+      "FORM_CONTENT_TYPE": {
+        "AZ": "application/json",
+        "RU": "приложение/json",
+        "ENG": "application/json"
+      },
+      "FORM_METHOD": {
+        "AZ": "POST",
+        "RU": "POST",
+        "ENG": "POST"
+      },
+      "FORM_STATUS_LABEL": {
+        "AZ": "STATUS: ONLINE",
+        "RU": "СТАТУС: ОНЛАЙН",
+        "ENG": "STATUS: ONLINE"
+      },
+      "FORM_TITLE": {
+        "AZ": "MÜRACİƏT FORMU",
+        "RU": "ЗАЯВКА",
+        "ENG": "APPLICATION FORM"
+      },
+      "FORM_TOAST_ERROR": {
+        "AZ": "Gondərilmə zamanı xəta baş verdi.",
+        "RU": "При отправке произошла ошибка.",
+        "ENG": "An error occurred while sending."
+      },
+      "FORM_TOAST_REQUIRED": {
+        "AZ": "Zəhmət olmasa bütün sahələri doldurun.",
+        "RU": "Пожалуйста, заполните все поля.",
+        "ENG": "Please fill in all fields."
+      },
+      "FORM_TOAST_SUCCESS": {
+        "AZ": "Müraciətiniz uğurla göndərildi!",
+        "RU": "Ваш запрос успешно отправлен!",
+        "ENG": "Your request has been successfully sent!"
+      },
+      "lbl-ad-soyad-513": {
+        "AZ": "AD SOYAD",
+        "RU": "ИМЯ ФАМИЛИЯ",
+        "ENG": "FIRST NAME SURNAME"
+      },
+      "lbl-address-line-1-35": {
+        "AZ": "ADDRESS_LINE_1",
+        "RU": "ADDRESS_LINE_1",
+        "ENG": "ADDRESS_LINE_1"
+      },
+      "lbl-address-line-2-740": {
+        "AZ": "ADDRESS_LINE_2",
+        "RU": "ADDRESS_LINE_2",
+        "ENG": "ADDRESS_LINE_2"
+      },
+      "lbl-btn-send-374": {
+        "AZ": "BTN_SEND",
+        "RU": "BTN_SEND",
+        "ENG": "BTN_SEND"
+      },
+      "lbl-contact-address-391": {
+        "AZ": "CONTACT_ADDRESS_2",
+        "RU": "CONTACT_ADDRESS_2",
+        "ENG": "CONTACT_ADDRESS_2"
+      },
+      "lbl-contact-address-599": {
+        "AZ": "CONTACT_ADDRESS_1",
+        "RU": "CONTACT_ADDRESS_1",
+        "ENG": "CONTACT_ADDRESS_1"
+      },
+      "lbl-contact-email-289": {
+        "AZ": "CONTACT_EMAIL",
+        "RU": "CONTACT_EMAIL",
+        "ENG": "CONTACT_EMAIL"
+      },
+      "lbl-contact-hours-602": {
+        "AZ": "CONTACT_HOURS",
+        "RU": "CONTACT_HOURS",
+        "ENG": "CONTACT_HOURS"
+      },
+      "lbl-contact-phone-446": {
+        "AZ": "CONTACT_PHONE",
+        "RU": "CONTACT_PHONE",
+        "ENG": "CONTACT_PHONE"
+      },
+      "lbl-content-type-241": {
+        "AZ": "Content-Type",
+        "RU": "Тип контента",
+        "ENG": "Content-Type"
+      },
+      "lbl-dept-hq-desc-774": {
+        "AZ": "DEPT_HQ_DESC",
+        "RU": "DEPT_HQ_DESC",
+        "ENG": "DEPT_HQ_DESC"
+      },
+      "lbl-dept-hq-email-666": {
+        "AZ": "DEPT_HQ_EMAIL",
+        "RU": "DEPT_HQ_EMAIL",
+        "ENG": "DEPT_HQ_EMAIL"
+      },
+      "lbl-dept-hq-title-722": {
+        "AZ": "DEPT_HQ_TITLE",
+        "RU": "DEPT_HQ_TITLE",
+        "ENG": "DEPT_HQ_TITLE"
+      },
+      "lbl-dept-pr-desc-510": {
+        "AZ": "DEPT_PR_DESC",
+        "RU": "DEPT_PR_DESC",
+        "ENG": "DEPT_PR_DESC"
+      },
+      "lbl-dept-pr-email-731": {
+        "AZ": "DEPT_PR_EMAIL",
+        "RU": "DEPT_PR_EMAIL",
+        "ENG": "DEPT_PR_EMAIL"
+      },
+      "lbl-dept-pr-title-555": {
+        "AZ": "DEPT_PR_TITLE",
+        "RU": "DEPT_PR_TITLE",
+        "ENG": "DEPT_PR_TITLE"
+      },
+      "lbl-dept-tech-desc-154": {
+        "AZ": "DEPT_TECH_DESC",
+        "RU": "DEPT_TECH_DESC",
+        "ENG": "DEPT_TECH_DESC"
+      },
+      "lbl-dept-tech-email-542": {
+        "AZ": "DEPT_TECH_EMAIL",
+        "RU": "DEPT_TECH_EMAIL",
+        "ENG": "DEPT_TECH_EMAIL"
+      },
+      "lbl-dept-tech-title-154": {
+        "AZ": "DEPT_TECH_TITLE",
+        "RU": "DEPT_TECH_TITLE",
+        "ENG": "DEPT_TECH_TITLE"
+      },
+      "lbl-email-address-947": {
+        "AZ": "EMAIL_Address",
+        "RU": "Адрес электронной почты",
+        "ENG": "EMAIL_Address"
+      },
+      "lbl-email-label-748": {
+        "AZ": "EMAIL_LABEL",
+        "RU": "EMAIL_LABEL",
+        "ENG": "EMAIL_LABEL"
+      },
+      "lbl-field-contact-l-843": {
+        "AZ": "FIELD_CONTACT_LABEL",
+        "RU": "FIELD_CONTACT_LABEL",
+        "ENG": "FIELD_CONTACT_LABEL"
+      },
+      "lbl-field-contact-p-528": {
+        "AZ": "FIELD_CONTACT_PLACEHOLDER",
+        "RU": "FIELD_CONTACT_PLACEHOLDER",
+        "ENG": "FIELD_CONTACT_PLACEHOLDER"
+      },
+      "lbl-field-message-l-571": {
+        "AZ": "FIELD_MESSAGE_LABEL",
+        "RU": "FIELD_MESSAGE_LABEL",
+        "ENG": "FIELD_MESSAGE_LABEL"
+      },
+      "lbl-field-message-p-835": {
+        "AZ": "FIELD_MESSAGE_PLACEHOLDER",
+        "RU": "FIELD_MESSAGE_PLACEHOLDER",
+        "ENG": "FIELD_MESSAGE_PLACEHOLDER"
+      },
+      "lbl-field-name-labe-259": {
+        "AZ": "FIELD_NAME_LABEL",
+        "RU": "FIELD_NAME_LABEL",
+        "ENG": "FIELD_NAME_LABEL"
+      },
+      "lbl-field-name-plac-159": {
+        "AZ": "FIELD_NAME_PLACEHOLDER",
+        "RU": "FIELD_NAME_PLACEHOLDER",
+        "ENG": "FIELD_NAME_PLACEHOLDER"
+      },
+      "lbl-field-topic-lab-327": {
+        "AZ": "FIELD_TOPIC_LABEL",
+        "RU": "FIELD_TOPIC_LABEL",
+        "ENG": "FIELD_TOPIC_LABEL"
+      },
+      "lbl-form-title-803": {
+        "AZ": "FORM_TITLE",
+        "RU": "FORM_TITLE",
+        "ENG": "FORM_TITLE"
+      },
+      "lbl-gond-rilm-zama-610": {
+        "AZ": "Gondərilmə zamanı xəta baş verdi.",
+        "RU": "При отправке произошла ошибка.",
+        "ENG": "An error occurred while sending."
+      },
+      "lbl-m-raci-tiniz-u--93": {
+        "AZ": "Müraciətiniz uğurla göndərildi!",
+        "RU": "Ваш запрос успешно отправлен!",
+        "ENG": "Your request has been successfully sent!"
+      },
+      "lbl-office-label-492": {
+        "AZ": "OFFICE_LABEL",
+        "RU": "OFFICE_LABEL",
+        "ENG": "OFFICE_LABEL"
+      },
+      "lbl-page-subtitle-966": {
+        "AZ": "PAGE_SUBTITLE",
+        "RU": "PAGE_SUBTITLE",
+        "ENG": "PAGE_SUBTITLE"
+      },
+      "lbl-page-title-8": {
+        "AZ": "PAGE_TITLE",
+        "RU": "PAGE_TITLE",
+        "ENG": "PAGE_TITLE"
+      },
+      "lbl-phone-label-81": {
+        "AZ": "PHONE_LABEL",
+        "RU": "PHONE_LABEL",
+        "ENG": "PHONE_LABEL"
+      },
+      "lbl-post-905": {
+        "AZ": "POST",
+        "RU": "POST",
+        "ENG": "POST"
+      },
+      "lbl-social-facebook-941": {
+        "AZ": "SOCIAL_FACEBOOK",
+        "RU": "SOCIAL_FACEBOOK",
+        "ENG": "SOCIAL_FACEBOOK"
+      },
+      "lbl-social-instagra-175": {
+        "AZ": "SOCIAL_INSTAGRAM",
+        "RU": "SOCIAL_INSTAGRAM",
+        "ENG": "SOCIAL_INSTAGRAM"
+      },
+      "lbl-social-youtube-478": {
+        "AZ": "SOCIAL_YOUTUBE",
+        "RU": "SOCIAL_YOUTUBE",
+        "ENG": "SOCIAL_YOUTUBE"
+      },
+      "lbl-telefon-212": {
+        "AZ": "TELEFON",
+        "RU": "ТЕЛЕФОН",
+        "ENG": "PHONE"
+      },
+      "lbl-topic-general-621": {
+        "AZ": "TOPIC_GENERAL",
+        "RU": "TOPIC_GENERAL",
+        "ENG": "TOPIC_GENERAL"
+      },
+      "lbl-topic-pilot-542": {
+        "AZ": "TOPIC_PILOT",
+        "RU": "TOPIC_PILOT",
+        "ENG": "TOPIC_PILOT"
+      },
+      "lbl-topic-tech-334": {
+        "AZ": "TOPIC_TECH",
+        "RU": "TOPIC_TECH",
+        "ENG": "TOPIC_TECH"
+      },
+      "lbl-work-hours-73": {
+        "AZ": "WORK_HOURS",
+        "RU": "WORK_HOURS",
+        "ENG": "WORK_HOURS"
+      },
+      "OFFICE_LABEL": {
+        "AZ": "BAŞ OFİS",
+        "RU": "ГОЛОВНОЙ ОФИС",
+        "ENG": "HEAD OFFICE"
+      },
+      "ONLINE": {
+        "AZ": "ONLINE",
+        "RU": "ONLINE",
+        "ENG": "ONLINE"
+      },
+      "ONLINE_STATUS_LABEL": {
+        "AZ": "ONLINE",
+        "RU": "ONLINE",
+        "ENG": "ONLINE"
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "GET IN TOUCH // CONTACT CENTER",
+        "RU": "СВЯЗАТЬСЯ // КОНТАКТ-ЦЕНТР",
+        "ENG": "GET IN TOUCH // CONTACT CENTER"
+      },
+      "PAGE_TITLE": {
+        "AZ": "ƏLAQƏ",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "PHONE_LABEL": {
+        "AZ": "ƏLAQƏ NÖMRƏSİ",
+        "RU": "КОНТАКТНЫЙ НОМЕР",
+        "ENG": "CONTACT NO"
+      },
+      "POST": {
+        "AZ": "POST",
+        "RU": "POST",
+        "ENG": "POST"
+      },
+      "SOCIAL_FACEBOOK": {
+        "AZ": "SOCIAL_FACEBOOK",
+        "RU": "SOCIAL_FACEBOOK",
+        "ENG": "SOCIAL_FACEBOOK"
+      },
+      "SOCIAL_INSTAGRAM": {
+        "AZ": "SOCIAL_INSTAGRAM",
+        "RU": "SOCIAL_INSTAGRAM",
+        "ENG": "SOCIAL_INSTAGRAM"
+      },
+      "SOCIAL_YOUTUBE": {
+        "AZ": "SOCIAL_YOUTUBE",
+        "RU": "SOCIAL_YOUTUBE",
+        "ENG": "SOCIAL_YOUTUBE"
+      },
+      "TELEFON": {
+        "AZ": "TELEFON",
+        "RU": "ТЕЛЕФОН",
+        "ENG": "PHONE"
+      },
+      "TOPIC_GENERAL": {
+        "AZ": "ÜMUMİ SORĞU",
+        "RU": "ОБЩИЙ ЗАПРОС",
+        "ENG": "GENERAL INQUIRY"
+      },
+      "TOPIC_PILOT": {
+        "AZ": "PİLOT QEYDİYYATI",
+        "RU": "РЕГИСТРАЦИЯ ПИЛОТА",
+        "ENG": "PILOT REGISTRATION"
+      },
+      "TOPIC_TECH": {
+        "AZ": "TEXNİKİ YARDIM",
+        "RU": "ТЕХНИЧЕСКАЯ ПОМОЩЬ",
+        "ENG": "TECHNICAL ASSISTANCE"
+      },
+      "txt-online-352": {
+        "AZ": "ONLINE",
+        "RU": "ONLINE",
+        "ENG": "ONLINE"
+      },
+      "WORK_HOURS": {
+        "AZ": "WORK_HOURS",
+        "RU": "WORK_HOURS",
+        "ENG": "WORK_HOURS"
+      }
+    },
+    "driverspage": {
+      "BACK_BUTTON": {
+        "AZ": "GERİ QAYIT",
+        "RU": "ВОЗВРАЩАТЬСЯ",
+        "ENG": "GO BACK"
+      },
+      "CAT_RANKING_SUFFIX": {
+        "AZ": "REYTİNQ",
+        "RU": "РЕЙТИНГ",
+        "ENG": "RATING"
+      },
+      "CAT_SUBTITLE": {
+        "AZ": "BÜTÜN PİLOTLARIN RƏSMİ SIRALAMASI // 2024",
+        "RU": "ОФИЦИАЛЬНЫЙ РЕЙТИНГ ВСЕХ ПИЛОТОВ // 2024",
+        "ENG": "OFFICIAL RANKING OF ALL PILOTS // 2024"
+      },
+      "FULL_STANDINGS_SUB": {
+        "AZ": "BÜTÜN PİLOTLAR",
+        "RU": "ВСЕ ПИЛОТЫ",
+        "ENG": "ALL PILOTS"
+      },
+      "FULL_STANDINGS_TITLE": {
+        "AZ": "TAM SIRALAMA",
+        "RU": "ПОЛНЫЙ РЕЙТИНГ",
+        "ENG": "COMPLETE RANKING"
+      },
+      "GRID_LABEL": {
+        "AZ": "TOP 10 GRID",
+        "RU": "ТОП-10 СЕТКИ",
+        "ENG": "TOP 10 GRID"
+      },
+      "lbl-back-button-902": {
+        "AZ": "BACK_BUTTON",
+        "RU": "BACK_BUTTON",
+        "ENG": "BACK_BUTTON"
+      },
+      "lbl-cat-ranking-suf-233": {
+        "AZ": "CAT_RANKING_SUFFIX",
+        "RU": "CAT_RANKING_SUFFIX",
+        "ENG": "CAT_RANKING_SUFFIX"
+      },
+      "lbl-cat-subtitle-813": {
+        "AZ": "CAT_SUBTITLE",
+        "RU": "CAT_SUBTITLE",
+        "ENG": "CAT_SUBTITLE"
+      },
+      "lbl-full-standings--76": {
+        "AZ": "FULL_STANDINGS_TITLE",
+        "RU": "FULL_STANDINGS_TITLE",
+        "ENG": "FULL_STANDINGS_TITLE"
+      },
+      "lbl-full-standings--929": {
+        "AZ": "FULL_STANDINGS_SUB",
+        "RU": "FULL_STANDINGS_SUB",
+        "ENG": "FULL_STANDINGS_SUB"
+      },
+      "lbl-grid-label-335": {
+        "AZ": "GRID_LABEL",
+        "RU": "GRID_LABEL",
+        "ENG": "GRID_LABEL"
+      },
+      "lbl-page-subtitle-660": {
+        "AZ": "PAGE_SUBTITLE",
+        "RU": "PAGE_SUBTITLE",
+        "ENG": "PAGE_SUBTITLE"
+      },
+      "lbl-page-title-59": {
+        "AZ": "PAGE_TITLE",
+        "RU": "PAGE_TITLE",
+        "ENG": "PAGE_TITLE"
+      },
+      "lbl-podium-label-948": {
+        "AZ": "PODIUM_LABEL",
+        "RU": "PODIUM_LABEL",
+        "ENG": "PODIUM_LABEL"
+      },
+      "lbl-points-label-114": {
+        "AZ": "POINTS_LABEL",
+        "RU": "POINTS_LABEL",
+        "ENG": "POINTS_LABEL"
+      },
+      "lbl-pts-label-922": {
+        "AZ": "PTS_LABEL",
+        "RU": "PTS_LABEL",
+        "ENG": "PTS_LABEL"
+      },
+      "lbl-view-all-btn-662": {
+        "AZ": "VIEW_ALL_BTN",
+        "RU": "VIEW_ALL_BTN",
+        "ENG": "VIEW_ALL_BTN"
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "OFFICIAL PILOT STANDINGS // SEASON 2024",
+        "RU": "ОФИЦИАЛЬНЫЙ РЕЗУЛЬТАТ ПИЛОТОВ // СЕЗОН 2024 ГОДА",
+        "ENG": "OFFICIAL PILOT STANDINGS // SEASON 2024"
+      },
+      "PAGE_TITLE": {
+        "AZ": "SÜRÜCÜLƏR",
+        "RU": "ПИЛОТЫ",
+        "ENG": "DRIVERS"
+      },
+      "PODIUM_LABEL": {
+        "AZ": "PODIUM LEADERS",
+        "RU": "ЛИДЕРЫ ПОДИУМА",
+        "ENG": "PODIUM LEADERS"
+      },
+      "POINTS_LABEL": {
+        "AZ": "XAL",
+        "RU": "ОЧКИ",
+        "ENG": "POINTS"
+      },
+      "PTS_LABEL": {
+        "AZ": "PTS",
+        "RU": "PTS",
+        "ENG": "PTS"
+      },
+      "VIEW_ALL_BTN": {
+        "AZ": "HAMISINA BAX",
+        "RU": "ПОСМОТРЕТЬ ВСЕ",
+        "ENG": "SEE ALL"
+      }
+    },
+    "eventspage": {
+      "BTN_BACK": {
+        "AZ": "GERİ QAYIT",
+        "RU": "ВОЗВРАЩАТЬСЯ",
+        "ENG": "GO BACK"
+      },
+      "BTN_COMPLETE_REG": {
+        "AZ": "QEYDİYYATI TAMAMLA",
+        "RU": "ПОЛНАЯ РЕГИСТРАЦИЯ",
+        "ENG": "COMPLETE REGISTRATION"
+      },
+      "BTN_CONTACT": {
+        "AZ": "ƏLAQƏ",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "BTN_DOWNLOAD_PDF": {
+        "AZ": "PDF YÜKLƏ",
+        "RU": "СКАЧАТЬ PDF",
+        "ENG": "DOWNLOAD PDF"
+      },
+      "BTN_JOIN_EVENT": {
+        "AZ": "TƏDBİRƏ QOŞUL",
+        "RU": "ПРИСОЕДИНЯЙТЕСЬ К СОБЫТИЮ",
+        "ENG": "JOIN THE EVENT"
+      },
+      "BTN_JOIN_EVENT_UNAVAILABLE": {
+        "AZ": "Qeydiyyat aktiv deyil",
+        "RU": "Регистрация не активна",
+        "ENG": "Registration is not active"
+      },
+      "BTN_MORE_INFO": {
+        "AZ": "DAHA ƏTRAFLI",
+        "RU": "ПОДРОБНЕЕ",
+        "ENG": "MORE DETAILS"
+      },
+      "BTN_VIEW_DETAILS": {
+        "AZ": "ƏTRAFLI BAX",
+        "RU": "УЗНАТЬ БОЛЬШЕ",
+        "ENG": "SEE MORE"
+      },
+      "BTN_WATCH_VIDEO": {
+        "AZ": "VİDEONU OYNAT",
+        "RU": "ВОСПРОИЗВЕСТИ ВИДЕО",
+        "ENG": "PLAY VIDEO"
+      },
+      "Content-Type": {
+        "AZ": "Content-Type",
+        "RU": "Тип контента",
+        "ENG": "Content-Type"
+      },
+      "DESC_PLACEHOLDER": {
+        "AZ": "Bu tədbir haqqında ətraflı məlumat tezliklə paylaşılacaq.",
+        "RU": "Более подробная информация об этом событии будет предоставлена ​​в ближайшее время.",
+        "ENG": "More information about this event will be shared soon."
+      },
+      "DOWNLOAD_DESC": {
+        "AZ": "YARIŞA HAZIRLIQ VƏ TEXNİKİ REQLAMENT HAQQINDA BÜTÜN MƏLUMATLAR BU SƏNƏDDƏ QEYD OLUNUB.",
+        "RU": "ВСЯ ИНФОРМАЦИЯ О ПОДГОТОВКЕ К ГОНЕ И ТЕХНИЧЕСКОМ РЕГЛАМЕНТЕ ПЕРЕДАНА В ЭТОМ ДОКУМЕНТЕ.",
+        "ENG": "ALL INFORMATION ABOUT RACE PREPARATION AND TECHNICAL REGULATIONS IS LISTED IN THIS DOCUMENT."
+      },
+      "DOWNLOAD_TITLE": {
+        "AZ": "TƏLİMATI YÜKLƏ",
+        "RU": "СКАЧАТЬ РУКОВОДСТВО",
+        "ENG": "DOWNLOAD MANUAL"
+      },
+      "EVENT_NAME_LABEL": {
+        "AZ": "YENİ TƏDBİR",
+        "RU": "НОВОЕ СОБЫТИЕ",
+        "ENG": "NEW EVENT"
+      },
+      "FIELD_CAR_MODEL": {
+        "AZ": "AVTOMOBİLİN MARKA/MODELİ",
+        "RU": "МАРКА/МОДЕЛЬ АВТОМОБИЛЯ",
+        "ENG": "VEHICLE MAKE/MODEL"
+      },
+      "FIELD_CLUB": {
+        "AZ": "TƏMSİL ETDİYİ KLUB",
+        "RU": "КЛУБ, КОТОРЫЙ ОН ПРЕДСТАВЛЯЕТ",
+        "ENG": "THE CLUB HE REPRESENTS"
+      },
+      "FIELD_ENGINE": {
+        "AZ": "MÜHƏRRİK HƏCMİ",
+        "RU": "ОБЪЕМ ДВИГАТЕЛЯ",
+        "ENG": "ENGINE VOLUME"
+      },
+      "FIELD_NAME": {
+        "AZ": "AD VƏ SOYAD",
+        "RU": "ИМЯ И ФАМИЛИЯ",
+        "ENG": "NAME AND SURNAME"
+      },
+      "FIELD_PHONE": {
+        "AZ": "WHATSAPP NÖMRƏSİ",
+        "RU": "НОМЕР ВАТСАПП",
+        "ENG": "WHATSAPP NUMBER"
+      },
+      "FIELD_TIRE_SIZE": {
+        "AZ": "TƏKƏR ÖLÇÜSÜ",
+        "RU": "РАЗМЕР КОЛЕСА",
+        "ENG": "WHEEL SIZE"
+      },
+      "JOIN_AS_PILOT": {
+        "AZ": "PİLOT KİMİ QATIL",
+        "RU": "ПРИСОЕДИНЯЙТЕСЬ КАК ПИЛОТО",
+        "ENG": "JOIN AS A PILOT"
+      },
+      "JOIN_AS_SPECTATOR": {
+        "AZ": "İZLƏYİCİ KİMİ QATIL",
+        "RU": "ПРИСОЕДИНЯЙТЕСЬ КАК ПОДПИСЧИК",
+        "ENG": "JOIN AS A FOLLOWER"
+      },
+      "JOIN_PILOT_DESC": {
+        "AZ": "TEXNİKİ REQLAMENTƏ UYĞUN OLARAQ",
+        "RU": "ПО ТЕХНИЧЕСКОМУ РЕГЛАМЕНТУ",
+        "ENG": "ACCORDING TO THE TECHNICAL REGULATION"
+      },
+      "JOIN_SPECTATOR_DESC": {
+        "AZ": "YARIŞI TRİBUNADAN İZLƏ",
+        "RU": "СМОТРИТЕ ГОНКУ С ТРИБУН",
+        "ENG": "WATCH THE RACE FROM THE STANDS"
+      },
+      "LABEL_FEATURED": {
+        "AZ": "OFFROAD FEATURED",
+        "RU": "ВНЕДОРОЖНЫЕ",
+        "ENG": "OFFROAD FEATURED"
+      },
+      "lbl-btn-back-167": {
+        "AZ": "BTN_BACK",
+        "RU": "BTN_BACK",
+        "ENG": "BTN_BACK"
+      },
+      "lbl-btn-complete-re-938": {
+        "AZ": "BTN_COMPLETE_REG",
+        "RU": "BTN_COMPLETE_REG",
+        "ENG": "BTN_COMPLETE_REG"
+      },
+      "lbl-btn-contact-115": {
+        "AZ": "BTN_CONTACT",
+        "RU": "BTN_CONTACT",
+        "ENG": "BTN_CONTACT"
+      },
+      "lbl-btn-download-pd-425": {
+        "AZ": "BTN_DOWNLOAD_PDF",
+        "RU": "BTN_DOWNLOAD_PDF",
+        "ENG": "BTN_DOWNLOAD_PDF"
+      },
+      "lbl-btn-more-info-464": {
+        "AZ": "BTN_MORE_INFO",
+        "RU": "BTN_MORE_INFO",
+        "ENG": "BTN_MORE_INFO"
+      },
+      "lbl-btn-view-detail-269": {
+        "AZ": "BTN_VIEW_DETAILS",
+        "RU": "BTN_VIEW_DETAILS",
+        "ENG": "BTN_VIEW_DETAILS"
+      },
+      "lbl-club-4x4-413": {
+        "AZ": "Club 4X4",
+        "RU": "Клуб 4X4",
+        "ENG": "Club 4X4"
+      },
+      "lbl-content-type-745": {
+        "AZ": "Content-Type",
+        "RU": "Тип контента",
+        "ENG": "Content-Type"
+      },
+      "lbl-desc-placeholde-267": {
+        "AZ": "DESC_PLACEHOLDER",
+        "RU": "DESC_PLACEHOLDER",
+        "ENG": "DESC_PLACEHOLDER"
+      },
+      "lbl-download-desc-218": {
+        "AZ": "DOWNLOAD_DESC",
+        "RU": "DOWNLOAD_DESC",
+        "ENG": "DOWNLOAD_DESC"
+      },
+      "lbl-download-title-367": {
+        "AZ": "DOWNLOAD_TITLE",
+        "RU": "DOWNLOAD_TITLE",
+        "ENG": "DOWNLOAD_TITLE"
+      },
+      "lbl-extreme-4x4-347": {
+        "AZ": "Extreme 4X4",
+        "RU": "Экстремальный 4X4",
+        "ENG": "Extreme 4X4"
+      },
+      "lbl-f-rdi-i-tirak--578": {
+        "AZ": "Fərdi İştirakçı",
+        "RU": "Индивидуальный участник",
+        "ENG": "Individual Participant"
+      },
+      "lbl-field-car-model-313": {
+        "AZ": "FIELD_CAR_MODEL",
+        "RU": "FIELD_CAR_MODEL",
+        "ENG": "FIELD_CAR_MODEL"
+      },
+      "lbl-field-club-83": {
+        "AZ": "FIELD_CLUB",
+        "RU": "FIELD_CLUB",
+        "ENG": "FIELD_CLUB"
+      },
+      "lbl-field-engine-420": {
+        "AZ": "FIELD_ENGINE",
+        "RU": "FIELD_ENGINE",
+        "ENG": "FIELD_ENGINE"
+      },
+      "lbl-field-name-142": {
+        "AZ": "FIELD_NAME",
+        "RU": "FIELD_NAME",
+        "ENG": "FIELD_NAME"
+      },
+      "lbl-field-phone-118": {
+        "AZ": "FIELD_PHONE",
+        "RU": "FIELD_PHONE",
+        "ENG": "FIELD_PHONE"
+      },
+      "lbl-field-tire-size-394": {
+        "AZ": "FIELD_TIRE_SIZE",
+        "RU": "FIELD_TIRE_SIZE",
+        "ENG": "FIELD_TIRE_SIZE"
+      },
+      "lbl-forsaj-club-438": {
+        "AZ": "Forsaj Club",
+        "RU": "Клуб Форсажа",
+        "ENG": "Fast and Furious Club"
+      },
+      "lbl-gond-rilm-zama-490": {
+        "AZ": "Gondərilmə zamanı xəta baş verdi.",
+        "RU": "При отправке произошла ошибка.",
+        "ENG": "An error occurred while sending."
+      },
+      "lbl-label-featured-18": {
+        "AZ": "LABEL_FEATURED",
+        "RU": "LABEL_FEATURED",
+        "ENG": "LABEL_FEATURED"
+      },
+      "lbl-modal-title-998": {
+        "AZ": "MODAL_TITLE",
+        "RU": "MODAL_TITLE",
+        "ENG": "MODAL_TITLE"
+      },
+      "lbl-offroad-az-117": {
+        "AZ": "Offroad.az",
+        "RU": "Offroad.az",
+        "ENG": "Offroad.az"
+      },
+      "lbl-overland-4x4-638": {
+        "AZ": "Overland 4X4",
+        "RU": "Оверленд 4X4",
+        "ENG": "Overland 4X4"
+      },
+      "lbl-page-subtitle-369": {
+        "AZ": "PAGE_SUBTITLE",
+        "RU": "PAGE_SUBTITLE",
+        "ENG": "PAGE_SUBTITLE"
+      },
+      "lbl-page-title-830": {
+        "AZ": "PAGE_TITLE",
+        "RU": "PAGE_TITLE",
+        "ENG": "PAGE_TITLE"
+      },
+      "lbl-patrolclub-az-358": {
+        "AZ": "PatrolClub.az",
+        "RU": "PatrolClub.az",
+        "ENG": "PatrolClub.az"
+      },
+      "lbl-pilot-reg-title-768": {
+        "AZ": "PILOT_REG_TITLE",
+        "RU": "PILOT_REG_TITLE",
+        "ENG": "PILOT_REG_TITLE"
+      },
+      "lbl-pilot-registrat-94": {
+        "AZ": "Pilot Registration",
+        "RU": "Регистрация пилота",
+        "ENG": "Pilot Registration"
+      },
+      "lbl-placeholder-car-909": {
+        "AZ": "PLACEHOLDER_CAR",
+        "RU": "PLACEHOLDER_CAR",
+        "ENG": "PLACEHOLDER_CAR"
+      },
+      "lbl-placeholder-eng-907": {
+        "AZ": "PLACEHOLDER_ENGINE",
+        "RU": "PLACEHOLDER_ENGINE",
+        "ENG": "PLACEHOLDER_ENGINE"
+      },
+      "lbl-placeholder-nam-107": {
+        "AZ": "PLACEHOLDER_NAME",
+        "RU": "PLACEHOLDER_NAME",
+        "ENG": "PLACEHOLDER_NAME"
+      },
+      "lbl-placeholder-tir-382": {
+        "AZ": "PLACEHOLDER_TIRE",
+        "RU": "PLACEHOLDER_TIRE",
+        "ENG": "PLACEHOLDER_TIRE"
+      },
+      "lbl-post-911": {
+        "AZ": "POST",
+        "RU": "POST",
+        "ENG": "POST"
+      },
+      "lbl-qeydiyyat-m-rac-212": {
+        "AZ": "Qeydiyyat müraciətiniz uğurla göndərildi!",
+        "RU": "Ваш запрос на регистрацию успешно отправлен!",
+        "ENG": "Your registration request has been successfully sent!"
+      },
+      "lbl-rules-placehold-395": {
+        "AZ": "RULES_PLACEHOLDER",
+        "RU": "RULES_PLACEHOLDER",
+        "ENG": "RULES_PLACEHOLDER"
+      },
+      "lbl-section-desc-294": {
+        "AZ": "SECTION_DESC",
+        "RU": "SECTION_DESC",
+        "ENG": "SECTION_DESC"
+      },
+      "lbl-section-rules-516": {
+        "AZ": "SECTION_RULES",
+        "RU": "SECTION_RULES",
+        "ENG": "SECTION_RULES"
+      },
+      "lbl-sidebar-questio-757": {
+        "AZ": "SIDEBAR_QUESTION_DESC",
+        "RU": "SIDEBAR_QUESTION_DESC",
+        "ENG": "SIDEBAR_QUESTION_DESC"
+      },
+      "lbl-sidebar-questio-985": {
+        "AZ": "SIDEBAR_QUESTION_TITLE",
+        "RU": "SIDEBAR_QUESTION_TITLE",
+        "ENG": "SIDEBAR_QUESTION_TITLE"
+      },
+      "lbl-tab-past-360": {
+        "AZ": "TAB_PAST",
+        "RU": "TAB_PAST",
+        "ENG": "TAB_PAST"
+      },
+      "lbl-tab-planned-900": {
+        "AZ": "TAB_PLANNED",
+        "RU": "TAB_PLANNED",
+        "ENG": "TAB_PLANNED"
+      },
+      "lbl-tam-ad-583": {
+        "AZ": "Tam ad",
+        "RU": "Полное имя",
+        "ENG": "Full name"
+      },
+      "lbl-toyota-578": {
+        "AZ": "Toyota",
+        "RU": "Тойота",
+        "ENG": "Toyota"
+      },
+      "lbl-victory-club-693": {
+        "AZ": "Victory Club",
+        "RU": "Клуб Победы",
+        "ENG": "Victory Club"
+      },
+      "lbl-z-f-r-4x4-club-32": {
+        "AZ": "Zəfər 4X4 Club",
+        "RU": "Клуб Победы 4X4",
+        "ENG": "Victory 4X4 Club"
+      },
+      "MODAL_TITLE": {
+        "AZ": "YARIŞDA İŞTİRAK",
+        "RU": "УЧАСТИЕ В ЗАГОНЕ",
+        "ENG": "PARTICIPATION IN THE RACE"
+      },
+      "NO_PAST_EVENT_VIDEOS": {
+        "AZ": "KEÇMİŞ TƏDBİR VİDEOSU TAPILMADI",
+        "RU": "ВИДЕО ПРОШЛОГО СОБЫТИЯ НЕ НАЙДЕНО",
+        "ENG": "NO PAST EVENT VIDEO FOUND"
+      },
+      "NO_PLANNED_EVENTS": {
+        "AZ": "PLANLANAN TƏDBİR YOXDUR",
+        "RU": "МЕРОПРИЯТИЯ НЕ ЗАПЛАНИРОВАНЫ",
+        "ENG": "NO EVENT SCHEDULED"
+      },
+      "NO_PLANNED_EVENTS_HINT": {
+        "AZ": "YENİ TƏDBİRLƏR ƏLAVƏ OLUNDUQDA BURADA GÖRÜNƏCƏK",
+        "RU": "ЗДЕСЬ ПОЯВЛЯЮТСЯ НОВЫЕ СОБЫТИЯ ПО мере их добавления.",
+        "ENG": "NEW EVENTS WILL APPEAR HERE AS THEY ARE ADDED"
+      },
+      "Offroad.az": {
+        "AZ": "Offroad.az",
+        "RU": "Offroad.az",
+        "ENG": "Offroad.az"
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "OFFICIAL EVENT CALENDAR // FORSAJ CLUB",
+        "RU": "ОФИЦИАЛЬНЫЙ КАЛЕНДАРЬ МЕРОПРИЯТИЙ // ФОРСАЙ КЛУБ",
+        "ENG": "OFFICIAL EVENT CALENDAR // FORSAJ CLUB"
+      },
+      "PAGE_TITLE": {
+        "AZ": "TƏDBİRLƏR",
+        "RU": "СОБЫТИЯ",
+        "ENG": "EVENTS"
+      },
+      "PatrolClub.az": {
+        "AZ": "PatrolClub.az",
+        "RU": "PatrolClub.az",
+        "ENG": "PatrolClub.az"
+      },
+      "PILOT_FORM_TOAST_ERROR": {
+        "AZ": "Gondərilmə zamanı xəta baş verdi.",
+        "RU": "При отправке произошла ошибка.",
+        "ENG": "An error occurred while sending."
+      },
+      "PILOT_FORM_TOAST_REG_CLOSED": {
+        "AZ": "Bu tədbir üçün qeydiyyat hazırda bağlıdır.",
+        "RU": "Регистрация на это мероприятие на данный момент закрыта.",
+        "ENG": "Registration for this event is currently closed."
+      },
+      "PILOT_FORM_TOAST_REQUIRED": {
+        "AZ": "Zəhmət olmasa bütün sahələri doldurun.",
+        "RU": "Пожалуйста, заполните все поля.",
+        "ENG": "Please fill in all fields."
+      },
+      "PILOT_FORM_TOAST_SUCCESS": {
+        "AZ": "Qeydiyyat müraciətiniz uğurla göndərildi!",
+        "RU": "Ваш запрос на регистрацию успешно отправлен!",
+        "ENG": "Your registration request has been successfully sent!"
+      },
+      "PILOT_FORM_TOAST_WHATSAPP_REQUIRED": {
+        "AZ": "WhatsApp nömrəsini düzgün formatda daxil edin.",
+        "RU": "Введите номер WhatsApp в правильном формате.",
+        "ENG": "Enter the WhatsApp number in the correct format."
+      },
+      "PILOT_REG_TITLE": {
+        "AZ": "PİLOT QEYDİYYATI",
+        "RU": "РЕГИСТРАЦИЯ ПИЛОТА",
+        "ENG": "PILOT REGISTRATION"
+      },
+      "PLACEHOLDER_CAR": {
+        "AZ": "Məs: Toyota LC 105",
+        "RU": "Например: Тойота ЛК 105.",
+        "ENG": "Eg: Toyota LC 105"
+      },
+      "PLACEHOLDER_ENGINE": {
+        "AZ": "Məs: 4.4L",
+        "RU": "Например: 4,4 л.",
+        "ENG": "Eg: 4.4L"
+      },
+      "PLACEHOLDER_NAME": {
+        "AZ": "Tam ad daxil edin",
+        "RU": "Введите полное имя",
+        "ENG": "Enter full name"
+      },
+      "PLACEHOLDER_PHONE": {
+        "AZ": "+994 50 123 45 67",
+        "RU": "+994 50 123 45 67",
+        "ENG": "+994 50 123 45 67"
+      },
+      "PLACEHOLDER_TIRE": {
+        "AZ": "Məs: 35 DÜYM",
+        "RU": "Например: 35 ДЮЙМОВ",
+        "ENG": "Eg: 35 INCHES"
+      },
+      "POST": {
+        "AZ": "POST",
+        "RU": "POST",
+        "ENG": "POST"
+      },
+      "RULES_PLACEHOLDER": {
+        "AZ": "Yarış qaydaları iştirakçılara brifinq zamanı elan ediləcək.",
+        "RU": "Правила конкурса будут объявлены участникам во время брифинга.",
+        "ENG": "The competition rules will be announced to the participants during the briefing."
+      },
+      "SECTION_DESC": {
+        "AZ": "TƏSVİR",
+        "RU": "ОПИСАНИЕ",
+        "ENG": "DESCRIPTION"
+      },
+      "SECTION_RULES": {
+        "AZ": "QAYDALAR VƏ TƏLƏBLƏR",
+        "RU": "ПРАВИЛА И ТРЕБОВАНИЯ",
+        "ENG": "RULES AND REQUIREMENTS"
+      },
+      "SIDEBAR_QUESTION_DES...": {
+        "AZ": "SIDEBAR_QUESTION_DESC",
+        "RU": "SIDEBAR_QUESTION_DESC",
+        "ENG": "SIDEBAR_QUESTION_DESC"
+      },
+      "SIDEBAR_QUESTION_DESC": {
+        "AZ": "YARIŞLA BAĞLI ƏLAVƏ SUALLARINIZ ÜÇÜN BİZİMLƏ ƏLAQƏ SAXLAYIN.",
+        "RU": "СВЯЖИТЕСЬ С НАМИ ПО ВСЕМ ДОПОЛНИТЕЛЬНЫМ ВОПРОСАМ О ГОНКЕ.",
+        "ENG": "CONTACT US FOR ANY FURTHER QUESTIONS ABOUT THE RACE."
+      },
+      "SIDEBAR_QUESTION_TIT...": {
+        "AZ": "SIDEBAR_QUESTION_TITLE",
+        "RU": "SIDEBAR_QUESTION_TITLE",
+        "ENG": "SIDEBAR_QUESTION_TITLE"
+      },
+      "SIDEBAR_QUESTION_TITLE": {
+        "AZ": "SUALINIZ VAR?",
+        "RU": "ЕСТЬ ВОПРОС?",
+        "ENG": "HAVE A QUESTION?"
+      },
+      "SPECTATOR_TICKET_URL": {
+        "AZ": "https://iticket.az",
+        "RU": "https://iticket.az",
+        "ENG": "https://iticket.az"
+      },
+      "STATUS_PAST": {
+        "AZ": "BAŞA ÇATIB",
+        "RU": "ВСЕ КОНЧЕНО",
+        "ENG": "IT'S OVER"
+      },
+      "STATUS_UPCOMING": {
+        "AZ": "GƏLƏCƏK YARIŞ",
+        "RU": "ПРЕДСТОЯЩАЯ ГОНКА",
+        "ENG": "UPCOMING RACE"
+      },
+      "TAB_PAST": {
+        "AZ": "KEÇMİŞ TƏDBİRLƏR",
+        "RU": "ПРОШЕДШИЕ СОБЫТИЯ",
+        "ENG": "PAST EVENTS"
+      },
+      "TAB_PLANNED": {
+        "AZ": "PLANLANAN TƏDBİRLƏR",
+        "RU": "ПЛАНИРУЕМЫЕ МЕРОПРИЯТИЯ",
+        "ENG": "PLANNED EVENTS"
+      },
+      "Toyota": {
+        "AZ": "Toyota",
+        "RU": "Тойота",
+        "ENG": "Toyota"
+      }
+    },
+    "footer": {
+      "attr-email-daxi-l-edi--293": {
+        "AZ": "EMAIL DAXİL EDİN",
+        "RU": "ВВЕДИТЕ ЭЛЕКТРОННУЮ ПОЧТУ",
+        "ENG": "ENTER EMAIL"
+      },
+      "attr-forsaj-logo-395": {
+        "AZ": "Forsaj Logo",
+        "RU": "Логотип Форсажа",
+        "ENG": "Fast and Furious Logo"
+      },
+      "CLUB": {
+        "AZ": "CLUB",
+        "RU": "CLUB",
+        "ENG": "CLUB"
+      },
+      "CONTACT_ADDRESS_1": {
+        "AZ": "CONTACT_ADDRESS_1",
+        "RU": "CONTACT_ADDRESS_1",
+        "ENG": "CONTACT_ADDRESS_1"
+      },
+      "CONTACT_PHONE": {
+        "AZ": "CONTACT_PHONE",
+        "RU": "CONTACT_PHONE",
+        "ENG": "CONTACT_PHONE"
+      },
+      "FOOTER_ABOUT_TEXT": {
+        "AZ": "Azərbaycanın ən prestijli motorsport mərkəzi. Sərhədsiz offroad həyəcanını bizimlə yaşayın.",
+        "RU": "Самый престижный автоспортивный центр Азербайджана. Испытайте безграничное удовольствие от бездорожья вместе с нами.",
+        "ENG": "The most prestigious motorsport center of Azerbaijan. Experience unlimited offroad excitement with us."
+      },
+      "FOOTER_ADDRESS_LABEL": {
+        "AZ": "ÜNVAN",
+        "RU": "АДРЕС",
+        "ENG": "ADDRESS"
+      },
+      "FOOTER_COPYRIGHT": {
+        "AZ": "© 2024 FORSAJ CLUB. ALL RIGHTS RESERVED.",
+        "RU": "© 2024 ФОРСАЙ КЛУБ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.",
+        "ENG": "© 2024 FORSAJ CLUB. ALL RIGHTS RESERVED."
+      },
+      "FOOTER_LOGO_ALT": {
+        "AZ": "Forsaj Logo",
+        "RU": "Логотип Форсажа",
+        "ENG": "Fast and Furious Logo"
+      },
+      "FOOTER_MOTORSPORT_TITLE": {
+        "AZ": "MOTORSPORT",
+        "RU": "MOTORSPORT",
+        "ENG": "MOTORSPORT"
+      },
+      "FOOTER_NAV_TITLE": {
+        "AZ": "NAVİQASİYA",
+        "RU": "НАВИГАЦИЯ",
+        "ENG": "NAVIGATION"
+      },
+      "FOOTER_NEWSLETTER_APP_NAME": {
+        "AZ": "NEWSLETTER ABUNƏSİ",
+        "RU": "ПОДПИСКА НА РАССЫЛКУ",
+        "ENG": "NEWSLETTER SUBSCRIPTION"
+      },
+      "FOOTER_NEWSLETTER_APP_TYPE": {
+        "AZ": "Newsletter Subscription",
+        "RU": "Подписка на рассылку",
+        "ENG": "Newsletter Subscription"
+      },
+      "FOOTER_NEWSLETTER_DESC": {
+        "AZ": "Yarış təqvimi və xəbərlərdən anında xəbərdar olmaq üçün abunə olun.",
+        "RU": "Подпишитесь, чтобы получать мгновенные обновления календаря гонок и новостей.",
+        "ENG": "Subscribe to get instant updates on the race calendar and news."
+      },
+      "FOOTER_NEWSLETTER_PLACEHOLDER": {
+        "AZ": "EMAIL DAXİL EDİN",
+        "RU": "ВВЕДИТЕ ЭЛЕКТРОННУЮ ПОЧТУ",
+        "ENG": "ENTER EMAIL"
+      },
+      "FOOTER_NEWSLETTER_TITLE": {
+        "AZ": "XƏBƏRDAR OL",
+        "RU": "БУДЬТЕ ПРЕДУПРЕЖДЕНЫ",
+        "ENG": "BE WARNED"
+      },
+      "FOOTER_NEWSLETTER_TOAST_ERROR": {
+        "AZ": "Abunə zamanı xəta baş verdi.",
+        "RU": "Во время подписки произошла ошибка.",
+        "ENG": "An error occurred during subscription."
+      },
+      "FOOTER_NEWSLETTER_TOAST_REQUIRED": {
+        "AZ": "Zəhmət olmasa düzgün email daxil edin.",
+        "RU": "Пожалуйста, введите действительный адрес электронной почты.",
+        "ENG": "Please enter a valid email."
+      },
+      "FOOTER_NEWSLETTER_TOAST_SUCCESS": {
+        "AZ": "Abunəliyiniz uğurla qeydə alındı!",
+        "RU": "Ваша подписка успешно зарегистрирована!",
+        "ENG": "Your subscription has been successfully registered!"
+      },
+      "FORSAJ": {
+        "AZ": "FORSAJ",
+        "RU": "FORSAJ",
+        "ENG": "FORSAJ"
+      },
+      "lbl-azadliq-102-ba-73": {
+        "AZ": "AZADLIQ 102, BAKI",
+        "RU": "СВОБОДА 102, БАКУ",
+        "ENG": "FREEDOM 102, BAKU"
+      },
+      "lbl-contact-address-200": {
+        "AZ": "CONTACT_ADDRESS_1",
+        "RU": "CONTACT_ADDRESS_1",
+        "ENG": "CONTACT_ADDRESS_1"
+      },
+      "lbl-contact-phone-498": {
+        "AZ": "CONTACT_PHONE",
+        "RU": "CONTACT_PHONE",
+        "ENG": "CONTACT_PHONE"
+      },
+      "lbl-site-logo-light-57": {
+        "AZ": "SITE_LOGO_LIGHT",
+        "RU": "SITE_LOGO_LIGHT",
+        "ENG": "SITE_LOGO_LIGHT"
+      },
+      "lbl-social-facebook-788": {
+        "AZ": "SOCIAL_FACEBOOK",
+        "RU": "SOCIAL_FACEBOOK",
+        "ENG": "SOCIAL_FACEBOOK"
+      },
+      "lbl-social-instagra-34": {
+        "AZ": "SOCIAL_INSTAGRAM",
+        "RU": "SOCIAL_INSTAGRAM",
+        "ENG": "SOCIAL_INSTAGRAM"
+      },
+      "lbl-social-youtube-776": {
+        "AZ": "SOCIAL_YOUTUBE",
+        "RU": "SOCIAL_YOUTUBE",
+        "ENG": "SOCIAL_YOUTUBE"
+      },
+      "MOTORSPORT": {
+        "AZ": "MOTORSPORT",
+        "RU": "MOTORSPORT",
+        "ENG": "MOTORSPORT"
+      },
+      "SITE_LOGO_LIGHT": {
+        "AZ": "SITE_LOGO_LIGHT",
+        "RU": "SITE_LOGO_LIGHT",
+        "ENG": "SITE_LOGO_LIGHT"
+      },
+      "SOCIAL_FACEBOOK": {
+        "AZ": "SOCIAL_FACEBOOK",
+        "RU": "SOCIAL_FACEBOOK",
+        "ENG": "SOCIAL_FACEBOOK"
+      },
+      "SOCIAL_INSTAGRAM": {
+        "AZ": "SOCIAL_INSTAGRAM",
+        "RU": "SOCIAL_INSTAGRAM",
+        "ENG": "SOCIAL_INSTAGRAM"
+      },
+      "SOCIAL_YOUTUBE": {
+        "AZ": "SOCIAL_YOUTUBE",
+        "RU": "SOCIAL_YOUTUBE",
+        "ENG": "SOCIAL_YOUTUBE"
+      },
+      "txt--2024-forsaj-c-32": {
+        "AZ": "© 2024 FORSAJ CLUB. ALL RIGHTS RESERVED.",
+        "RU": "© 2024 ФОРСАЙ КЛУБ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.",
+        "ENG": "© 2024 FORSAJ CLUB. ALL RIGHTS RESERVED."
+      },
+      "txt--laq--161": {
+        "AZ": "ƏLAQƏ",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "txt--nvan-155": {
+        "AZ": "ÜNVAN",
+        "RU": "АДРЕС",
+        "ENG": "ADDRESS"
+      },
+      "txt-ana-s-h-f-744": {
+        "AZ": "ANA SƏHİFƏ",
+        "RU": "ГЛАВНАЯ",
+        "ENG": "HOME"
+      },
+      "txt-az-rbaycan-n-n-249": {
+        "AZ": "Azərbaycanın ən prestijli motorsport mərkəzi. Sərhədsiz offroad həyəcanını bizimlə yaşayın.",
+        "RU": "Самый престижный автоспортивный центр Азербайджана. Испытайте безграничное удовольствие от бездорожья вместе с нами.",
+        "ENG": "The most prestigious motorsport center of Azerbaijan. Experience unlimited offroad excitement with us."
+      },
+      "txt-club-442": {
+        "AZ": "CLUB",
+        "RU": "CLUB",
+        "ENG": "CLUB"
+      },
+      "txt-ekoloji-m-suli-yy-612": {
+        "AZ": "EKOLOJİ MƏSULİYYƏT",
+        "RU": "ЭКОЛОГИЧЕСКАЯ ОТВЕТСТВЕННОСТЬ",
+        "ENG": "ENVIRONMENTAL RESPONSIBILITY"
+      },
+      "txt-forsaj-773": {
+        "AZ": "FORSAJ",
+        "RU": "FORSAJ",
+        "ENG": "FORSAJ"
+      },
+      "txt-haqqimizda-942": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "txt-laq-452": {
+        "AZ": "ƏLAQƏ",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "txt-motorsport-590": {
+        "AZ": "MOTORSPORT",
+        "RU": "MOTORSPORT",
+        "ENG": "MOTORSPORT"
+      },
+      "txt-navi-qasi-ya-133": {
+        "AZ": "NAVİQASİYA",
+        "RU": "НАВИГАЦИЯ",
+        "ENG": "NAVIGATION"
+      },
+      "txt-pi-lot-protokolu-31": {
+        "AZ": "PİLOT PROTOKOLU",
+        "RU": "ПИЛОТНЫЙ ПРОТОКОЛ",
+        "ENG": "PILOT PROTOCOL"
+      },
+      "txt-privacy-policy-517": {
+        "AZ": "Privacy Policy",
+        "RU": "политика конфиденциальности",
+        "ENG": "Privacy Policy"
+      },
+      "txt-qalereya-112": {
+        "AZ": "QALEREYA",
+        "RU": "ГАЛЕРЕЯ",
+        "ENG": "GALLERY"
+      },
+      "txt-s-r-c-l-r-931": {
+        "AZ": "SÜRÜCÜLƏR",
+        "RU": "ПИЛОТЫ",
+        "ENG": "DRIVERS"
+      },
+      "txt-t-dbi-rl-r-62": {
+        "AZ": "TƏDBİRLƏR",
+        "RU": "СОБЫТИЯ",
+        "ENG": "EVENTS"
+      },
+      "txt-t-hl-k-si-zli-k-q-121": {
+        "AZ": "TƏHLÜKƏSİZLİK QAYDALARI",
+        "RU": "ПРАВИЛА БЕЗОПАСНОСТИ",
+        "ENG": "SAFETY RULES"
+      },
+      "txt-terms-of-servic-731": {
+        "AZ": "Terms of Service",
+        "RU": "Условия использования",
+        "ENG": "Terms of Service"
+      },
+      "txt-texni-ki-normati-712": {
+        "AZ": "TEXNİKİ NORMATİVLƏR",
+        "RU": "ТЕХНИЧЕСКИЙ РЕГЛАМЕНТ",
+        "ENG": "TECHNICAL REGULATIONS"
+      },
+      "txt-x-b-rdar-ol-578": {
+        "AZ": "XƏBƏRDAR OL",
+        "RU": "БУДЬТЕ ПРЕДУПРЕЖДЕНЫ",
+        "ENG": "BE WARNED"
+      },
+      "txt-x-b-rl-r-431": {
+        "AZ": "XƏBƏRLƏR",
+        "RU": "НОВОСТИ",
+        "ENG": "NEWS"
+      },
+      "txt-yar-t-qvimi-v-414": {
+        "AZ": "Yarış təqvimi və xəbərlərdən anında xəbərdar olmaq üçün abunə olun.",
+        "RU": "Подпишитесь, чтобы получать мгновенные обновления календаря гонок и новостей.",
+        "ENG": "Subscribe to get instant updates on the race calendar and news."
+      }
+    },
+    "gallerypage": {
+      "BTN_BACK": {
+        "AZ": "GERİ QAYIT",
+        "RU": "ВОЗВРАЩАТЬСЯ",
+        "ENG": "GO BACK"
+      },
+      "DYNAMIC_COLLECTION": {
+        "AZ": "CANLI ARXİV // YENİLƏNƏN MƏZMUN",
+        "RU": "ЖИВОЙ АРХИВ // ОБНОВЛЕННЫЙ СОДЕРЖИМЫЙ",
+        "ENG": "LIVE ARCHIVE // UPDATED CONTENT"
+      },
+      "lbl-dynamic-collect-613": {
+        "AZ": "DYNAMIC_COLLECTION",
+        "RU": "DYNAMIC_COLLECTION",
+        "ENG": "DYNAMIC_COLLECTION"
+      },
+      "lbl-no-photos-55": {
+        "AZ": "NO_PHOTOS",
+        "RU": "NO_PHOTOS",
+        "ENG": "NO_PHOTOS"
+      },
+      "lbl-no-videos-748": {
+        "AZ": "NO_VIDEOS",
+        "RU": "NO_VIDEOS",
+        "ENG": "NO_VIDEOS"
+      },
+      "lbl-page-subtitle-902": {
+        "AZ": "PAGE_SUBTITLE",
+        "RU": "PAGE_SUBTITLE",
+        "ENG": "PAGE_SUBTITLE"
+      },
+      "lbl-page-title-717": {
+        "AZ": "PAGE_TITLE",
+        "RU": "PAGE_TITLE",
+        "ENG": "PAGE_TITLE"
+      },
+      "lbl-tab-photos-507": {
+        "AZ": "TAB_PHOTOS",
+        "RU": "TAB_PHOTOS",
+        "ENG": "TAB_PHOTOS"
+      },
+      "lbl-tab-videos-736": {
+        "AZ": "TAB_VIDEOS",
+        "RU": "TAB_VIDEOS",
+        "ENG": "TAB_VIDEOS"
+      },
+      "lbl-total-label-269": {
+        "AZ": "TOTAL_LABEL",
+        "RU": "TOTAL_LABEL",
+        "ENG": "TOTAL_LABEL"
+      },
+      "lbl-type-photo-514": {
+        "AZ": "TYPE_PHOTO",
+        "RU": "TYPE_PHOTO",
+        "ENG": "TYPE_PHOTO"
+      },
+      "lbl-type-video-779": {
+        "AZ": "TYPE_VIDEO",
+        "RU": "TYPE_VIDEO",
+        "ENG": "TYPE_VIDEO"
+      },
+      "NO_PHOTOS": {
+        "AZ": "HƏLƏ Kİ FOTO ƏLAVƏ EDİLMƏYİB",
+        "RU": "ФОТО ПОКА НЕ ДОБАВЛЕНО",
+        "ENG": "NO PHOTO ADDED YET"
+      },
+      "NO_VIDEOS": {
+        "AZ": "HƏLƏ Kİ VİDEO ƏLAVƏ EDİLMƏYİB",
+        "RU": "ВИДЕО ЕЩЕ НЕ ДОБАВЛЕНО",
+        "ENG": "THE VIDEO HAS NOT BEEN ADDED YET"
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "XRONOLOJİ MOTORSPORT ARXİVİ // FORSAJ CLUB",
+        "RU": "ХРОНОЛОГИЧЕСКИЙ АРХИВ АВТОСПОРТА // ФОРСАЙ КЛУБ",
+        "ENG": "CHRONOLOGICAL MOTORSPORT ARCHIVE // FORSAJ CLUB"
+      },
+      "PAGE_TITLE": {
+        "AZ": "QALEREYA",
+        "RU": "ГАЛЕРЕЯ",
+        "ENG": "GALLERY"
+      },
+      "TAB_PHOTOS": {
+        "AZ": "FOTOLAR",
+        "RU": "ФОТО",
+        "ENG": "PHOTOS"
+      },
+      "TAB_VIDEOS": {
+        "AZ": "VİDEOLAR",
+        "RU": "ВИДЕО",
+        "ENG": "VIDEOS"
+      },
+      "TOTAL_LABEL": {
+        "AZ": "TOPLAM",
+        "RU": "ИТОГО",
+        "ENG": "TOTAL"
+      },
+      "TYPE_PHOTO": {
+        "AZ": "FOTO",
+        "RU": "ФОТО",
+        "ENG": "PHOTO"
+      },
+      "TYPE_VIDEO": {
+        "AZ": "VİDEO",
+        "RU": "ВИДЕО",
+        "ENG": "VIDEO"
+      }
+    },
+    "general": {
+      "SEO_AUTHOR": {
+        "AZ": "Forsaj Club",
+        "RU": "Клуб Форсажа",
+        "ENG": "Fast and Furious Club"
+      },
+      "SEO_BING_VERIFICATION": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_DESCRIPTION": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_GOOGLE_VERIFICATION": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_KEYWORDS": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_LANGUAGE": {
+        "AZ": "az",
+        "RU": "ru",
+        "ENG": "en"
+      },
+      "SEO_OG_IMAGE": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_ROBOTS": {
+        "AZ": "index,follow",
+        "RU": "индекс, следовать",
+        "ENG": "index, follow"
+      },
+      "SEO_TITLE": {
+        "AZ": "Forsaj Club - Offroad Motorsport Hub",
+        "RU": "Forsaj Club - Центр внедорожного автоспорта",
+        "ENG": "Forsaj Club - Offroad Motorsport Hub"
+      },
+      "SEO_TWITTER_CARD": {
+        "AZ": "summary_large_image",
+        "RU": "summary_large_image",
+        "ENG": "summary_large_image"
+      },
+      "SEO_TWITTER_CREATOR": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_TWITTER_SITE": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SEO_YANDEX_VERIFICATION": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "SMTP_FROM": {
+        "AZ": "aliyabuz30@gmail.com",
+        "RU": "aliyabuz30@gmail.com",
+        "ENG": "aliyabuz30@gmail.com"
+      },
+      "SMTP_HOST": {
+        "AZ": "smtp.gmail.com",
+        "RU": "smtp.gmail.com",
+        "ENG": "smtp.gmail.com"
+      },
+      "SMTP_PASS": {
+        "AZ": "bqvm drzu ywve eijv",
+        "RU": "bqvm drzu ywve eijv",
+        "ENG": "bqvm drzu ywve eijv"
+      },
+      "SMTP_TO": {
+        "AZ": "aliyabuz30@gmail.com,tural.rahim99@gmail.com",
+        "RU": "aliyabuz30@gmail.com, tural.rahim99@gmail.com",
+        "ENG": "aliyabuz30@gmail.com, tural.rahim99@gmail.com"
+      },
+      "SMTP_USER": {
+        "AZ": "aliyabuz30@gmail.com",
+        "RU": "aliyabuz30@gmail.com",
+        "ENG": "aliyabuz30@gmail.com"
+      }
+    },
+    "hero": {
+      "text-0": {
+        "AZ": "AZERBAIJAN OFFROAD MOTORSPORT HUB",
+        "RU": "ХАБ ВНЕДОРОЖНОГО АВТОСПОРТА АЗЕРБАЙДЖАНА",
+        "ENG": "AZERBAIJAN OFFROAD MOTORSPORT HUB"
+      },
+      "text-1": {
+        "AZ": "SƏRHƏDSİZ OFFROAD HƏYƏCANI",
+        "RU": "БЕЗГРАНИЧНОЕ ВНЕДОРОЖНОЕ УДОВОЛЬСТВИЕ",
+        "ENG": "LIMITLESS OFFROAD EXCITEMENT"
+      },
+      "text-2": {
+        "AZ": "Azərbaycanın ən çətin yollarında peşəkar yarışlar və adrenalin dolu anlar.",
+        "RU": "Профессиональные гонки и наполненные адреналином моменты на самых сложных дорогах Азербайджана.",
+        "ENG": "Professional races and adrenaline filled moments on the most difficult roads of Azerbaijan."
+      },
+      "text-3": {
+        "AZ": "YARIŞLARA BAX",
+        "RU": "ПОСМОТРЕТЬ ГОНКИ",
+        "ENG": "SEE THE RACES"
+      },
+      "text-4": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      }
+    },
+    "marquee": {
+      "lbl-forsaj-club-40": {
+        "AZ": "FORSAJ CLUB",
+        "RU": "ФАСТ КЛУБ",
+        "ENG": "FAST CLUB"
+      },
+      "MARQUEE_TEXT": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      }
+    },
+    "navbar": {
+      "attr-forsaj-logo-65": {
+        "AZ": "Forsaj Logo",
+        "RU": "Логотип Форсажа",
+        "ENG": "Fast and Furious Logo"
+      },
+      "HAQQIMIZDA": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "lbl--laq--270": {
+        "AZ": "ƏLAQƏ",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "lbl-ana-s-hi-f--462": {
+        "AZ": "ANA SƏHİFƏ",
+        "RU": "ГЛАВНАЯ",
+        "ENG": "HOME"
+      },
+      "lbl-haqqimizda-78": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "lbl-qalereya-403": {
+        "AZ": "QALEREYA",
+        "RU": "ГАЛЕРЕЯ",
+        "ENG": "GALLERY"
+      },
+      "lbl-qaydalar-555": {
+        "AZ": "QAYDALAR",
+        "RU": "ПРАВИЛА",
+        "ENG": "RULES"
+      },
+      "lbl-s-r-c-l-r-927": {
+        "AZ": "SÜRÜCÜLƏR",
+        "RU": "ПИЛОТЫ",
+        "ENG": "DRIVERS"
+      },
+      "lbl-site-logo-light-358": {
+        "AZ": "SITE_LOGO_LIGHT",
+        "RU": "SITE_LOGO_LIGHT",
+        "ENG": "SITE_LOGO_LIGHT"
+      },
+      "lbl-t-dbi-rl-r-316": {
+        "AZ": "TƏDBİRLƏR",
+        "RU": "СОБЫТИЯ",
+        "ENG": "EVENTS"
+      },
+      "lbl-x-b-rl-r-639": {
+        "AZ": "XƏBƏRLƏR",
+        "RU": "НОВОСТИ",
+        "ENG": "NEWS"
+      },
+      "MOBILE_LANGUAGE_CLOSE": {
+        "AZ": "Dil seçimini kapat",
+        "RU": "Закрыть выбор языка",
+        "ENG": "Close language selection"
+      },
+      "MOBILE_LANGUAGE_OPEN": {
+        "AZ": "Dil seçimi",
+        "RU": "Выбор языка",
+        "ENG": "Language selection"
+      },
+      "MOBILE_MENU_CLOSE": {
+        "AZ": "Menyunu bağla",
+        "RU": "Закрыть меню",
+        "ENG": "Close the menu"
+      },
+      "MOBILE_MENU_OPEN": {
+        "AZ": "Menyunu aç",
+        "RU": "Открыть меню",
+        "ENG": "Open the menu"
+      },
+      "NAV_ABOUT": {
+        "AZ": "HAQQIMIZDA",
+        "RU": "О НАС",
+        "ENG": "ABOUT US"
+      },
+      "NAV_CONTACT": {
+        "AZ": "ƏLAQƏ",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "NAV_DRIVERS": {
+        "AZ": "SÜRÜCÜLƏR",
+        "RU": "ПИЛОТЫ",
+        "ENG": "DRIVERS"
+      },
+      "NAV_EVENTS": {
+        "AZ": "TƏDBİRLƏR",
+        "RU": "СОБЫТИЯ",
+        "ENG": "EVENTS"
+      },
+      "NAV_GALLERY": {
+        "AZ": "QALEREYA",
+        "RU": "ГАЛЕРЕЯ",
+        "ENG": "GALLERY"
+      },
+      "NAV_HOME": {
+        "AZ": "ANA SƏHİFƏ",
+        "RU": "ГЛАВНАЯ",
+        "ENG": "HOME"
+      },
+      "NAV_NEWS": {
+        "AZ": "XƏBƏRLƏR",
+        "RU": "НОВОСТИ",
+        "ENG": "NEWS"
+      },
+      "NAV_RULES": {
+        "AZ": "QAYDALAR",
+        "RU": "ПРАВИЛА",
+        "ENG": "RULES"
+      },
+      "QALEREYA": {
+        "AZ": "QALEREYA",
+        "RU": "ГАЛЕРЕЯ",
+        "ENG": "GALLERY"
+      },
+      "QAYDALAR": {
+        "AZ": "QAYDALAR",
+        "RU": "ПРАВИЛА",
+        "ENG": "RULES"
+      },
+      "SITE_LOGO_LIGHT": {
+        "AZ": "SITE_LOGO_LIGHT",
+        "RU": "SITE_LOGO_LIGHT",
+        "ENG": "SITE_LOGO_LIGHT"
+      }
+    },
+    "news": {
+      "FEATURED_LABEL": {
+        "AZ": "SON XƏBƏR",
+        "RU": "ПОСЛЕДНИЕ НОВОСТИ",
+        "ENG": "BREAKING NEWS"
+      },
+      "lbl-featured-label-994": {
+        "AZ": "FEATURED_LABEL",
+        "RU": "FEATURED_LABEL",
+        "ENG": "FEATURED_LABEL"
+      },
+      "lbl-section-subtitl-190": {
+        "AZ": "SECTION_SUBTITLE",
+        "RU": "SECTION_SUBTITLE",
+        "ENG": "SECTION_SUBTITLE"
+      },
+      "lbl-section-title-921": {
+        "AZ": "SECTION_TITLE",
+        "RU": "SECTION_TITLE",
+        "ENG": "SECTION_TITLE"
+      },
+      "lbl-view-all-btn-459": {
+        "AZ": "VIEW_ALL_BTN",
+        "RU": "VIEW_ALL_BTN",
+        "ENG": "VIEW_ALL_BTN"
+      },
+      "SECTION_SUBTITLE": {
+        "AZ": "Motorsport və Offroad dünyasından yeniliklər",
+        "RU": "Новости из мира автоспорта и бездорожья",
+        "ENG": "News from the world of Motorsport and Offroad"
+      },
+      "SECTION_TITLE": {
+        "AZ": "SON XƏBƏRLƏR",
+        "RU": "ПОСЛЕДНИЕ НОВОСТИ",
+        "ENG": "LATEST NEWS"
+      },
+      "VIEW_ALL_BTN": {
+        "AZ": "HAMISI",
+        "RU": "ВСЕ",
+        "ENG": "ALL"
+      }
+    },
+    "newspage": {
+      "BTN_ALL_NEWS": {
+        "AZ": "BÜTÜN XƏBƏRLƏR",
+        "RU": "ВСЕ НОВОСТИ",
+        "ENG": "ALL THE NEWS"
+      },
+      "BTN_BACK": {
+        "AZ": "GERİ QAYIT",
+        "RU": "ВОЗВРАЩАТЬСЯ",
+        "ENG": "GO BACK"
+      },
+      "BTN_READ": {
+        "AZ": "OXU",
+        "RU": "ЧИТАТЬ",
+        "ENG": "READ"
+      },
+      "BTN_READ_NEWS": {
+        "AZ": "XƏBƏRİ OXU",
+        "RU": "ЧИТАЙТЕ НОВОСТИ",
+        "ENG": "READ THE NEWS"
+      },
+      "LABEL_LATEST": {
+        "AZ": "SON XƏBƏR",
+        "RU": "ПОСЛЕДНИЕ НОВОСТИ",
+        "ENG": "BREAKING NEWS"
+      },
+      "lbl-btn-all-news-107": {
+        "AZ": "BTN_ALL_NEWS",
+        "RU": "BTN_ALL_NEWS",
+        "ENG": "BTN_ALL_NEWS"
+      },
+      "lbl-btn-back-203": {
+        "AZ": "BTN_BACK",
+        "RU": "BTN_BACK",
+        "ENG": "BTN_BACK"
+      },
+      "lbl-btn-read-511": {
+        "AZ": "BTN_READ",
+        "RU": "BTN_READ",
+        "ENG": "BTN_READ"
+      },
+      "lbl-btn-read-news-847": {
+        "AZ": "BTN_READ_NEWS",
+        "RU": "BTN_READ_NEWS",
+        "ENG": "BTN_READ_NEWS"
+      },
+      "lbl-label-latest-417": {
+        "AZ": "LABEL_LATEST",
+        "RU": "LABEL_LATEST",
+        "ENG": "LABEL_LATEST"
+      },
+      "lbl-no-news-15": {
+        "AZ": "NO_NEWS",
+        "RU": "NO_NEWS",
+        "ENG": "NO_NEWS"
+      },
+      "lbl-other-news-401": {
+        "AZ": "OTHER_NEWS",
+        "RU": "OTHER_NEWS",
+        "ENG": "OTHER_NEWS"
+      },
+      "lbl-page-subtitle-932": {
+        "AZ": "PAGE_SUBTITLE",
+        "RU": "PAGE_SUBTITLE",
+        "ENG": "PAGE_SUBTITLE"
+      },
+      "lbl-page-title-82": {
+        "AZ": "PAGE_TITLE",
+        "RU": "PAGE_TITLE",
+        "ENG": "PAGE_TITLE"
+      },
+      "lbl-share-label-927": {
+        "AZ": "SHARE_LABEL",
+        "RU": "SHARE_LABEL",
+        "ENG": "SHARE_LABEL"
+      },
+      "NO_NEWS": {
+        "AZ": "HƏLƏ Kİ XƏBƏR YOXDUR",
+        "RU": "НОВОСТЕЙ ПОКА НЕТ",
+        "ENG": "NO NEWS YET"
+      },
+      "OTHER_NEWS": {
+        "AZ": "DİGƏR XƏBƏRLƏR",
+        "RU": "ДРУГИЕ НОВОСТИ",
+        "ENG": "OTHER NEWS"
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "MOTORSPORT MAGAZINE // SEASON 2024",
+        "RU": "ЖУРНАЛ «МОТОСПОРТ» // СЕЗОН 2024 ГОДА",
+        "ENG": "MOTORSPORT MAGAZINE // SEASON 2024"
+      },
+      "PAGE_TITLE": {
+        "AZ": "XƏBƏRLƏR",
+        "RU": "НОВОСТИ",
+        "ENG": "NEWS"
+      },
+      "SHARE_LABEL": {
+        "AZ": "BU XƏBƏRİ PAYLAŞIN",
+        "RU": "ПОДЕЛИТЕСЬ ЭТОЙ НОВОСТЬЮ",
+        "ENG": "SHARE THIS NEWS"
+      }
+    },
+    "nextrace": {
+      "attr-next-race-781": {
+        "AZ": "Next Race",
+        "RU": "Следующая гонка",
+        "ENG": "Next Race"
+      },
+      "lbl-race-city-117": {
+        "AZ": "RACE_CITY",
+        "RU": "RACE_CITY",
+        "ENG": "RACE_CITY"
+      },
+      "lbl-race-date-269": {
+        "AZ": "RACE_DATE",
+        "RU": "RACE_DATE",
+        "ENG": "RACE_DATE"
+      },
+      "lbl-race-location-215": {
+        "AZ": "RACE_LOCATION",
+        "RU": "RACE_LOCATION",
+        "ENG": "RACE_LOCATION"
+      },
+      "lbl-race-location-b-844": {
+        "AZ": "RACE_LOCATION_BG",
+        "RU": "RACE_LOCATION_BG",
+        "ENG": "RACE_LOCATION_BG"
+      },
+      "lbl-race-type-531": {
+        "AZ": "RACE_TYPE",
+        "RU": "RACE_TYPE",
+        "ENG": "RACE_TYPE"
+      },
+      "lbl-register-btn-873": {
+        "AZ": "REGISTER_BTN",
+        "RU": "REGISTER_BTN",
+        "ENG": "REGISTER_BTN"
+      },
+      "lbl-section-subtitl-186": {
+        "AZ": "SECTION_SUBTITLE",
+        "RU": "SECTION_SUBTITLE",
+        "ENG": "SECTION_SUBTITLE"
+      },
+      "lbl-section-title-998": {
+        "AZ": "SECTION_TITLE",
+        "RU": "SECTION_TITLE",
+        "ENG": "SECTION_TITLE"
+      },
+      "lbl-view-all-btn-340": {
+        "AZ": "VIEW_ALL_BTN",
+        "RU": "VIEW_ALL_BTN",
+        "ENG": "VIEW_ALL_BTN"
+      },
+      "RACE_CITY": {
+        "AZ": "SUMQAYIT",
+        "RU": "СУМГАИТ",
+        "ENG": "SUMGAYIT"
+      },
+      "RACE_DATE": {
+        "AZ": "2024-07-20",
+        "RU": "2024-07-20",
+        "ENG": "2024-07-20"
+      },
+      "RACE_IMAGE_ALT": {
+        "AZ": "Next Race",
+        "RU": "Следующая гонка",
+        "ENG": "Next Race"
+      },
+      "RACE_LOCATION": {
+        "AZ": "SUMQAYIT SAHİL TRASI // SECTOR 04",
+        "RU": "СУМГАИТСКАЯ ПРИБРЕЖНАЯ ТРОПА // СЕКТОР 04",
+        "ENG": "SUMGAYIT COASTAL TRACK // SECTOR 04"
+      },
+      "RACE_LOCATION_BG": {
+        "AZ": "RACE_LOCATION_BG",
+        "RU": "RACE_LOCATION_BG",
+        "ENG": "RACE_LOCATION_BG"
+      },
+      "RACE_TYPE": {
+        "AZ": "CHALLENGE",
+        "RU": "CHALLENGE",
+        "ENG": "CHALLENGE"
+      },
+      "REGISTER_BTN": {
+        "AZ": "QATILMAQ ÜÇÜN QEYDİYYAT",
+        "RU": "ЗАРЕГИСТРИРУЙТЕСЬ ДЛЯ УЧАСТИЯ",
+        "ENG": "REGISTER TO ATTEND"
+      },
+      "SECTION_SUBTITLE": {
+        "AZ": "LİVE REGİSTRATİON OPEN",
+        "RU": "РЕГИСТРАЦИЯ ОТКРЫТА",
+        "ENG": "LIVE REGISTRATION OPEN"
+      },
+      "SECTION_TITLE": {
+        "AZ": "NÖVBƏTİ YARIŞ",
+        "RU": "СЛЕДУЮЩАЯ ГОНКА",
+        "ENG": "NEXT RACE"
+      },
+      "VIEW_ALL_BTN": {
+        "AZ": "TAM TƏQVİM",
+        "RU": "ПОЛНЫЙ КАЛЕНДАРЬ",
+        "ENG": "COMPLETE CALENDAR"
+      }
+    },
+    "partners": {
+      "AZMF": {
+        "AZ": "AZMF",
+        "RU": "AZMF",
+        "ENG": "AZMF"
+      },
+      "lbl-azmf-945": {
+        "AZ": "AZMF",
+        "RU": "AZMF",
+        "ENG": "AZMF"
+      },
+      "lbl-global-4x4-941": {
+        "AZ": "GLOBAL 4X4",
+        "RU": "ГЛОБАЛЬНЫЙ 4X4",
+        "ENG": "GLOBAL 4X4"
+      },
+      "lbl-official-partne-160": {
+        "AZ": "OFFICIAL PARTNER",
+        "RU": "ОФИЦИАЛЬНЫЙ ПАРТНЕР",
+        "ENG": "OFFICIAL PARTNER"
+      },
+      "lbl-offroad-az-536": {
+        "AZ": "OFFROAD AZ",
+        "RU": "ВНЕДОРОЖЬЕ AZ",
+        "ENG": "OFFROAD AZ"
+      },
+      "lbl-race-tech-482": {
+        "AZ": "RACE TECH",
+        "RU": "ГОНОЧНЫЕ ТЕХНИКИ",
+        "ENG": "RACE TECH"
+      },
+      "lbl-section-title-152": {
+        "AZ": "SECTION_TITLE",
+        "RU": "SECTION_TITLE",
+        "ENG": "SECTION_TITLE"
+      },
+      "SECTION_TITLE": {
+        "AZ": "RƏSMİ TƏRƏFDAŞLARIMIZ",
+        "RU": "НАШИ ОФИЦИАЛЬНЫЕ ПАРТНЕРЫ",
+        "ENG": "OUR OFFICIAL PARTNERS"
+      }
+    },
+    "privacypolicypage": {
+      "CONTACT_EMAIL": {
+        "AZ": "info@forsaj.az",
+        "RU": "info@forsaj.az",
+        "ENG": "info@forsaj.az"
+      },
+      "CONTACT_TITLE": {
+        "AZ": "Əlaqə",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "CONTACT_WEBSITE": {
+        "AZ": "https://forsaj.az",
+        "RU": "https://forsaj.az",
+        "ENG": "https://forsaj.az"
+      },
+      "INTRO_TEXT": {
+        "AZ": "Bu siyasət forsaj.az saytından istifadə zamanı toplanan məlumatların necə işlənməsini və qorunmasını izah edir.",
+        "RU": "Эта политика объясняет, как обрабатывать и защищать данные, собранные при использовании веб-сайта forsaj.az.",
+        "ENG": "This policy explains how to process and protect data collected while using the forsaj.az website."
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "MƏLUMATLARIN QORUNMASI VƏ İSTİFADƏ ŞƏRTLƏRİ",
+        "RU": "ЗАЩИТА ДАННЫХ И УСЛОВИЯ ИСПОЛЬЗОВАНИЯ",
+        "ENG": "DATA PROTECTION AND TERMS OF USE"
+      },
+      "PAGE_TITLE": {
+        "AZ": "MƏXFİLİK SİYASƏTİ (PRIVACY POLICY)",
+        "RU": "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ",
+        "ENG": "PRIVACY POLICY"
+      },
+      "SECTION_1_BODY": {
+        "AZ": "Bu Məxfilik Siyasəti forsaj.az (“Sayt”, “biz”, “bizim”) tərəfindən istifadəçilərdən toplanan məlumatların növlərini, istifadə qaydasını və qorunmasını izah edir. Saytdan istifadə etməklə bu siyasətin şərtlərini qəbul etmiş olursunuz.",
+        "RU": "В настоящей Политике конфиденциальности объясняются типы, использование и защита информации, собираемой forsaj.az от пользователей («Сайт», «мы», «наш»). Используя сайт, вы принимаете условия данной политики.",
+        "ENG": "This Privacy Policy explains the types, usage and protection of information collected from users by forsaj.az (\"Site\", \"we\", \"our\"). By using the site, you accept the terms of this policy."
+      },
+      "SECTION_1_TITLE": {
+        "AZ": "1. Ümumi Məlumat",
+        "RU": "1. Общая информация",
+        "ENG": "1. General Information"
+      },
+      "SECTION_2_BODY": {
+        "AZ": "Şəxsi məlumatlar:\n- Ad və soyad\n- Elektron poçt ünvanı\n- Telefon nömrəsi (təqdim edildiyi halda)\n\nTexniki məlumatlar:\n- IP ünvan\n- Brauzer növü və cihaz məlumatları\n- Saytda fəaliyyət məlumatları (baxışlar, kliklər və s.)",
+        "RU": "Личная информация:\n- Имя и фамилия\n- Адрес электронной почты\n- Номер телефона (если указан)\n\nТехнические данные:\n- IP-адрес\n- Тип браузера и информация об устройстве\n- Данные об активности сайта (просмотры, клики и т. д.)",
+        "ENG": "Personal information:\n- Name and surname\n- Email address\n- Phone number (if provided)\n\nTechnical data:\n- IP address\n- Browser type and device information\n- Site activity data (views, clicks, etc.)"
+      },
+      "SECTION_2_TITLE": {
+        "AZ": "2. Toplanan Məlumatlar",
+        "RU": "2. Собираемая информация",
+        "ENG": "2. Information Collected"
+      },
+      "SECTION_3_BODY": {
+        "AZ": "Toplanan məlumatlar aşağıdakı məqsədlərlə istifadə olunur:\n- Xidmətlərin təqdim edilməsi və inkişaf etdirilməsi\n- İstifadəçi sorğularına cavab verilməsi\n- Təhlükəsizliyin təmin olunması\n- Statistik və analitik təhlillər aparılması",
+        "RU": "Собранные данные используются для следующих целей:\n- Предоставление и развитие услуг.\n- Отвечать на запросы пользователей\n- Обеспечение безопасности\n- Проведение статистического и аналитического анализа.",
+        "ENG": "The collected data is used for the following purposes:\n- Providing and developing services\n- Responding to user inquiries\n- Ensuring security\n- Conducting statistical and analytical analyses"
+      },
+      "SECTION_3_TITLE": {
+        "AZ": "3. Məlumatların İstifadə Məqsədi",
+        "RU": "3. Цель использования данных",
+        "ENG": "3. Purpose of Data Use"
+      },
+      "SECTION_4_BODY": {
+        "AZ": "Sayt istifadəçi təcrübəsini yaxşılaşdırmaq üçün kukilərdən istifadə edə bilər. İstifadəçi brauzer vasitəsilə kukiləri deaktiv edə bilər.",
+        "RU": "Сайт может использовать файлы cookie для улучшения пользовательского опыта. Пользователь может отключить файлы cookie через браузер.",
+        "ENG": "The site may use cookies to improve user experience. The user can disable cookies through the browser."
+      },
+      "SECTION_4_TITLE": {
+        "AZ": "4. Cookies (Kukilər)",
+        "RU": "4. Файлы cookie",
+        "ENG": "4. Cookies"
+      },
+      "SECTION_5_BODY": {
+        "AZ": "Şəxsi məlumatlar yalnız aşağı hallarda üçüncü tərəflərlə paylaşıla bilər:\n- Qanunvericiliyin tələbi olduqda\n- Texniki və xidmət tərəfdaşları ilə əməkdaşlıq çərçivəsində\n- İstifadəçinin razılığı ilə",
+        "RU": "Персональные данные могут быть переданы третьим лицам только в следующих случаях:\n- Когда того требует закон\n- В сотрудничестве с техническими и сервисными партнерами.\n- С согласия пользователя",
+        "ENG": "Personal data may only be shared with third parties in the following cases:\n- When required by law\n- In cooperation with technical and service partners\n- With the consent of the user"
+      },
+      "SECTION_5_TITLE": {
+        "AZ": "5. Məlumatların Üçüncü Tərəflərlə Paylaşılması",
+        "RU": "5. Обмен информацией с третьими лицами",
+        "ENG": "5. Sharing of Information with Third Parties"
+      },
+      "SECTION_6_BODY": {
+        "AZ": "Biz şəxsi məlumatların qorunması üçün müvafiq texniki və inzibati təhlükəsizlik tədbirləri tətbiq edirik.",
+        "RU": "Мы применяем соответствующие технические и административные меры безопасности для защиты персональных данных.",
+        "ENG": "We apply appropriate technical and administrative security measures to protect personal data."
+      },
+      "SECTION_6_TITLE": {
+        "AZ": "6. Məlumat Təhlükəsizliyi",
+        "RU": "6. Информационная безопасность",
+        "ENG": "6. Information Security"
+      },
+      "SECTION_7_BODY": {
+        "AZ": "İstifadəçilər:\n- Öz məlumatlarına çıxış tələb edə bilər\n- Düzəliş və ya silinmə tələb edə bilər\n- Məlumatların işlənməsinə etiraz edə bilər",
+        "RU": "Пользователи:\n- Может запросить доступ к своим данным\n- Может потребоваться исправление или удаление\n- Может возражать против обработки данных",
+        "ENG": "Users:\n- Can request access to their data\n- May require correction or deletion\n- Can object to data processing"
+      },
+      "SECTION_7_TITLE": {
+        "AZ": "7. İstifadəçi Hüquqları",
+        "RU": "7. Права пользователя",
+        "ENG": "7. User Rights"
+      },
+      "SECTION_8_BODY": {
+        "AZ": "Bu siyasət zaman-zaman yenilənə bilər. Yenilənmiş versiya saytda dərc edildiyi tarixdən qüvvəyə minir.",
+        "RU": "Эта политика может время от времени обновляться. Обновленная версия вступает в силу с момента ее публикации на сайте.",
+        "ENG": "This policy may be updated from time to time. The updated version takes effect from the date of its publication on the site."
+      },
+      "SECTION_8_TITLE": {
+        "AZ": "8. Siyasətdə Dəyişikliklər",
+        "RU": "8. Изменения в политике",
+        "ENG": "8. Changes to Policy"
+      },
+      "SECTION_9_BODY": {
+        "AZ": "Email: info@forsaj.az\nVeb sayt: https://forsaj.az",
+        "RU": "Электронная почта: info@forsaj.az\nСайт: https://forsaj.az.",
+        "ENG": "Email: info@forsaj.az\nWebsite: https://forsaj.az"
+      },
+      "SECTION_9_TITLE": {
+        "AZ": "9. Əlaqə",
+        "RU": "9. Общение",
+        "ENG": "9. Communication"
+      },
+      "UPDATED_DATE": {
+        "AZ": "18 Fevral 2026",
+        "RU": "18 февраля 2026 г.",
+        "ENG": "February 18, 2026"
+      },
+      "UPDATED_LABEL": {
+        "AZ": "Son yenilənmə tarixi",
+        "RU": "Дата последнего обновления",
+        "ENG": "Date last updated"
+      }
+    },
+    "rulespage": {
+      "BTN_DOWNLOAD_PDF": {
+        "AZ": "PDF YÜKLƏ",
+        "RU": "СКАЧАТЬ PDF",
+        "ENG": "DOWNLOAD PDF"
+      },
+      "DOC_DOWNLOAD_FILE_NAME": {
+        "AZ": "",
+        "RU": "",
+        "ENG": ""
+      },
+      "DOC_DOWNLOAD_LABEL": {
+        "AZ": "SƏNƏDİ YÜKLƏ",
+        "RU": "СКАЧАТЬ ДОКУМЕНТ",
+        "ENG": "DOWNLOAD THE DOCUMENT"
+      },
+      "lbl-btn-download-pd-186": {
+        "AZ": "BTN_DOWNLOAD_PDF",
+        "RU": "BTN_DOWNLOAD_PDF",
+        "ENG": "BTN_DOWNLOAD_PDF"
+      },
+      "lbl-doc-download-la-880": {
+        "AZ": "DOC_DOWNLOAD_LABEL",
+        "RU": "DOC_DOWNLOAD_LABEL",
+        "ENG": "DOC_DOWNLOAD_LABEL"
+      },
+      "lbl-leave-no-trace-745": {
+        "AZ": "LEAVE NO TRACE",
+        "RU": "НЕ ОСТАВЛЯЙТЕ СЛЕДОВ",
+        "ENG": "LEAVE NO TRACE"
+      },
+      "lbl-page-subtitle-264": {
+        "AZ": "PAGE_SUBTITLE",
+        "RU": "PAGE_SUBTITLE",
+        "ENG": "PAGE_SUBTITLE"
+      },
+      "lbl-page-title-609": {
+        "AZ": "PAGE_TITLE",
+        "RU": "PAGE_TITLE",
+        "ENG": "PAGE_TITLE"
+      },
+      "lbl-rules-eco-desc1-352": {
+        "AZ": "RULES_ECO_DESC1",
+        "RU": "RULES_ECO_DESC1",
+        "ENG": "RULES_ECO_DESC1"
+      },
+      "lbl-rules-eco-desc2-619": {
+        "AZ": "RULES_ECO_DESC2",
+        "RU": "RULES_ECO_DESC2",
+        "ENG": "RULES_ECO_DESC2"
+      },
+      "lbl-rules-eco-desc3-822": {
+        "AZ": "RULES_ECO_DESC3",
+        "RU": "RULES_ECO_DESC3",
+        "ENG": "RULES_ECO_DESC3"
+      },
+      "lbl-rules-eco-sub1-393": {
+        "AZ": "RULES_ECO_SUB1",
+        "RU": "RULES_ECO_SUB1",
+        "ENG": "RULES_ECO_SUB1"
+      },
+      "lbl-rules-eco-sub2-965": {
+        "AZ": "RULES_ECO_SUB2",
+        "RU": "RULES_ECO_SUB2",
+        "ENG": "RULES_ECO_SUB2"
+      },
+      "lbl-rules-eco-sub3-36": {
+        "AZ": "RULES_ECO_SUB3",
+        "RU": "RULES_ECO_SUB3",
+        "ENG": "RULES_ECO_SUB3"
+      },
+      "lbl-rules-eco-title-97": {
+        "AZ": "RULES_ECO_TITLE",
+        "RU": "RULES_ECO_TITLE",
+        "ENG": "RULES_ECO_TITLE"
+      },
+      "lbl-rules-pilot-des-497": {
+        "AZ": "RULES_PILOT_DESC2",
+        "RU": "RULES_PILOT_DESC2",
+        "ENG": "RULES_PILOT_DESC2"
+      },
+      "lbl-rules-pilot-des-707": {
+        "AZ": "RULES_PILOT_DESC1",
+        "RU": "RULES_PILOT_DESC1",
+        "ENG": "RULES_PILOT_DESC1"
+      },
+      "lbl-rules-pilot-des-98": {
+        "AZ": "RULES_PILOT_DESC3",
+        "RU": "RULES_PILOT_DESC3",
+        "ENG": "RULES_PILOT_DESC3"
+      },
+      "lbl-rules-pilot-sub-55": {
+        "AZ": "RULES_PILOT_SUB1",
+        "RU": "RULES_PILOT_SUB1",
+        "ENG": "RULES_PILOT_SUB1"
+      },
+      "lbl-rules-pilot-sub-64": {
+        "AZ": "RULES_PILOT_SUB2",
+        "RU": "RULES_PILOT_SUB2",
+        "ENG": "RULES_PILOT_SUB2"
+      },
+      "lbl-rules-pilot-sub-753": {
+        "AZ": "RULES_PILOT_SUB3",
+        "RU": "RULES_PILOT_SUB3",
+        "ENG": "RULES_PILOT_SUB3"
+      },
+      "lbl-rules-pilot-tit-627": {
+        "AZ": "RULES_PILOT_TITLE",
+        "RU": "RULES_PILOT_TITLE",
+        "ENG": "RULES_PILOT_TITLE"
+      },
+      "lbl-rules-safety-de-342": {
+        "AZ": "RULES_SAFETY_DESC3",
+        "RU": "RULES_SAFETY_DESC3",
+        "ENG": "RULES_SAFETY_DESC3"
+      },
+      "lbl-rules-safety-de-559": {
+        "AZ": "RULES_SAFETY_DESC1",
+        "RU": "RULES_SAFETY_DESC1",
+        "ENG": "RULES_SAFETY_DESC1"
+      },
+      "lbl-rules-safety-de-577": {
+        "AZ": "RULES_SAFETY_DESC2",
+        "RU": "RULES_SAFETY_DESC2",
+        "ENG": "RULES_SAFETY_DESC2"
+      },
+      "lbl-rules-safety-su-641": {
+        "AZ": "RULES_SAFETY_SUB1",
+        "RU": "RULES_SAFETY_SUB1",
+        "ENG": "RULES_SAFETY_SUB1"
+      },
+      "lbl-rules-safety-su-702": {
+        "AZ": "RULES_SAFETY_SUB3",
+        "RU": "RULES_SAFETY_SUB3",
+        "ENG": "RULES_SAFETY_SUB3"
+      },
+      "lbl-rules-safety-su-719": {
+        "AZ": "RULES_SAFETY_SUB2",
+        "RU": "RULES_SAFETY_SUB2",
+        "ENG": "RULES_SAFETY_SUB2"
+      },
+      "lbl-rules-safety-ti-950": {
+        "AZ": "RULES_SAFETY_TITLE",
+        "RU": "RULES_SAFETY_TITLE",
+        "ENG": "RULES_SAFETY_TITLE"
+      },
+      "lbl-rules-tech-desc-196": {
+        "AZ": "RULES_TECH_DESC3",
+        "RU": "RULES_TECH_DESC3",
+        "ENG": "RULES_TECH_DESC3"
+      },
+      "lbl-rules-tech-desc-349": {
+        "AZ": "RULES_TECH_DESC2",
+        "RU": "RULES_TECH_DESC2",
+        "ENG": "RULES_TECH_DESC2"
+      },
+      "lbl-rules-tech-desc-633": {
+        "AZ": "RULES_TECH_DESC1",
+        "RU": "RULES_TECH_DESC1",
+        "ENG": "RULES_TECH_DESC1"
+      },
+      "lbl-rules-tech-sub1-225": {
+        "AZ": "RULES_TECH_SUB1",
+        "RU": "RULES_TECH_SUB1",
+        "ENG": "RULES_TECH_SUB1"
+      },
+      "lbl-rules-tech-sub2-132": {
+        "AZ": "RULES_TECH_SUB2",
+        "RU": "RULES_TECH_SUB2",
+        "ENG": "RULES_TECH_SUB2"
+      },
+      "lbl-rules-tech-sub3-81": {
+        "AZ": "RULES_TECH_SUB3",
+        "RU": "RULES_TECH_SUB3",
+        "ENG": "RULES_TECH_SUB3"
+      },
+      "lbl-rules-tech-titl-698": {
+        "AZ": "RULES_TECH_TITLE",
+        "RU": "RULES_TECH_TITLE",
+        "ENG": "RULES_TECH_TITLE"
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "FORSAJ MOTORSPORT OFFICIAL RULES",
+        "RU": "ОФИЦИАЛЬНЫЕ ПРАВИЛА FORSAJ MOTORSPORT",
+        "ENG": "FORSAJ MOTORSPORT OFFICIAL RULES"
+      },
+      "PAGE_TITLE": {
+        "AZ": "QAYDALAR",
+        "RU": "ПРАВИЛА",
+        "ENG": "RULES"
+      },
+      "RULE_TAB_1_DOC_BUTTON": {
+        "AZ": "PDF YUKLE",
+        "RU": "СКАЧАТЬ PDF",
+        "ENG": "DOWNLOAD PDF"
+      },
+      "RULE_TAB_1_DOC_NAME": {
+        "AZ": "PILOT_PROTOKOLU.PDF",
+        "RU": "PILOT_PROTOKOLU.PDF",
+        "ENG": "PILOT_PROTOKOLU.PDF"
+      },
+      "RULE_TAB_1_DOC_URL": {
+        "AZ": "Sekme 1 Sened Linki",
+        "RU": "Вкладка 1. Ссылка на документ.",
+        "ENG": "Tab 1 Document Link"
+      },
+      "RULE_TAB_1_ICON": {
+        "AZ": "Info",
+        "RU": "Информация",
+        "ENG": "Info"
+      },
+      "RULE_TAB_1_ID": {
+        "AZ": "pilot",
+        "RU": "пилот",
+        "ENG": "the pilot"
+      },
+      "RULE_TAB_1_ITEM_1_DESC": {
+        "AZ": "HƏR BİR İŞTİRAKÇI FEDERASİYANIN MÜƏYYƏN ETDİYİ BÜTÜN TEXNİKİ VƏ ETİK NORMALARI QEYD-ŞƏRTSİZ QƏBUL EDİR.",
+        "RU": "КАЖДЫЙ УЧАСТНИК БЕЗУСЛОВНО ПРИНИМАЕТ ВСЕ ТЕХНИЧЕСКИЕ И ЭТИЧЕСКИЕ СТАНДАРТЫ, ОПРЕДЕЛЕННЫЕ ФЕДЕРАЦИЕЙ.",
+        "ENG": "EACH PARTICIPANT UNCONDITIONALLY ACCEPTS ALL TECHNICAL AND ETHICAL STANDARDS DETERMINED BY THE FEDERATION."
+      },
+      "RULE_TAB_1_ITEM_1_TITLE": {
+        "AZ": "İSTİFADƏÇİ ÖHDƏLİKLƏRİ",
+        "RU": "ОБЯЗАННОСТИ ПОЛЬЗОВАТЕЛЯ",
+        "ENG": "USER OBLIGATIONS"
+      },
+      "RULE_TAB_1_ITEM_2_DESC": {
+        "AZ": "PROTOKOLDAN KƏNARA ÇIXMAQ VƏ YA HAKİM QƏRARLARINA ETİRAZ ETMƏK DƏRHAL DİSKVALİFİKASİYA İLƏ NƏTİCƏLƏNƏ BİLƏR.",
+        "RU": "ОТКЛОНЕНИЕ ОТ ПРОТОКОЛА ИЛИ ОСпаривание РЕШЕНИЙ СУДЬИ МОГУТ ПРИВЕСТИ К НЕМЕДЛЕННОЙ ДИСКВАЛИФИКАЦИИ.",
+        "ENG": "DEVIATION OF PROTOCOL OR CHALLENGING REFEREE DECISIONS MAY RESULT IN IMMEDIATE DISQUALIFICATION."
+      },
+      "RULE_TAB_1_ITEM_2_TITLE": {
+        "AZ": "DİSKVALİFİKASİYA",
+        "RU": "ДИСКВАЛИФИКАЦИЯ",
+        "ENG": "DISQUALIFICATION"
+      },
+      "RULE_TAB_1_ITEM_3_DESC": {
+        "AZ": "BÜTÜN AVADANLIQLAR YARIŞDAN 24 SAAT ƏVVƏL TEXNİKİ KOMİSSİYA TƏRƏFİNDƏN YOXLANILMALI VƏ TƏHLÜKƏSİZLİK SERTİFİKATI İLƏ TƏMİN EDİLMƏLİDİR.",
+        "RU": "ВСЕ ОБОРУДОВАНИЕ ДОЛЖНО БЫТЬ ПРОВЕРЕНО ТЕХНИЧЕСКИМ КОМИТЕТОМ ЗА 24 ЧАСА ДО ГОНКЫ И ОБЕСПЕЧЕНО СЕРТИФИКАТОМ БЕЗОПАСНОСТИ.",
+        "ENG": "ALL EQUIPMENT MUST BE INSPECTED BY THE TECHNICAL COMMITTEE 24 HOURS PRIOR TO THE RACE AND PROVIDED WITH A SAFETY CERTIFICATE."
+      },
+      "RULE_TAB_1_ITEM_3_TITLE": {
+        "AZ": "TEXNİKİ TƏLƏBLƏR",
+        "RU": "ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ",
+        "ENG": "TECHNICAL REQUIREMENTS"
+      },
+      "RULE_TAB_1_TITLE": {
+        "AZ": "PİLOT PROTOKOLU",
+        "RU": "ПИЛОТНЫЙ ПРОТОКОЛ",
+        "ENG": "PILOT PROTOCOL"
+      },
+      "RULE_TAB_2_DOC_BUTTON": {
+        "AZ": "PDF YUKLE",
+        "RU": "СКАЧАТЬ PDF",
+        "ENG": "DOWNLOAD PDF"
+      },
+      "RULE_TAB_2_DOC_NAME": {
+        "AZ": "TECHNICAL_PROTOKOLU.PDF",
+        "RU": "TECHNICAL_PROTOKOLU.PDF",
+        "ENG": "TECHNICAL_PROTOKOLU.PDF"
+      },
+      "RULE_TAB_2_DOC_URL": {
+        "AZ": "Sekme 2 Sened Linki",
+        "RU": "Вкладка 2. Ссылка на документ.",
+        "ENG": "Tab 2 Document Link"
+      },
+      "RULE_TAB_2_ICON": {
+        "AZ": "Settings",
+        "RU": "Настройки",
+        "ENG": "Settings"
+      },
+      "RULE_TAB_2_ID": {
+        "AZ": "technical",
+        "RU": "технический",
+        "ENG": "technical"
+      },
+      "RULE_TAB_2_ITEM_1_DESC": {
+        "AZ": "PRO CLASS ÜÇÜN MAKSİMUM TƏKƏR ÖLÇÜSÜ 37 DÜYM, AMATEUR CLASS ÜÇÜN İSƏ 33 DÜYM OLARAQ MÜƏYYƏN EDİLMİŞDİR.",
+        "RU": "МАКСИМАЛЬНЫЙ РАЗМЕР КОЛЕСА ДЛЯ ПРОФЕССИОНАЛЬНОГО КЛАССА СОСТАВЛЯЕТ 37 ДЮЙМОВ, А ДЛЯ ЛЮБИТЕЛЬСКОГО КЛАССА 33 ДЮЙМА.",
+        "ENG": "MAXIMUM WHEEL SIZE FOR PRO CLASS IS 37 INCHES AND FOR AMATEUR CLASS 33 INCHES."
+      },
+      "RULE_TAB_2_ITEM_1_TITLE": {
+        "AZ": "TƏKƏR ÖLÇÜLƏRİ",
+        "RU": "РАЗМЕРЫ КОЛЕСА",
+        "ENG": "WHEEL DIMENSIONS"
+      },
+      "RULE_TAB_2_ITEM_2_DESC": {
+        "AZ": "MÜHƏRRİK ÜZƏRİNDƏ APARILAN MODİFİKASİYALAR KATEQORİYA ÜZRƏ LİMİTLƏRİ AŞMAMALIDIR. TURBO SİSTEMLƏRİ YALNIZ XÜSUSİ KLASLARDA İCAZƏLİDİR.",
+        "RU": "МОДИФИКАЦИИ ДВИГАТЕЛЯ НЕ ДОЛЖНЫ ПРЕВЫШАТЬ ПРЕДЕЛЫ КАТЕГОРИЙ. ТУРБО-СИСТЕМЫ РАЗРЕШЕНЫ ТОЛЬКО В СПЕЦИАЛЬНЫХ КЛАССАХ.",
+        "ENG": "ENGINE MODIFICATIONS SHOULD NOT EXCEED CATEGORY LIMITS. TURBO SYSTEMS ARE ALLOWED IN SPECIAL CLASSES ONLY."
+      },
+      "RULE_TAB_2_ITEM_2_TITLE": {
+        "AZ": "MÜHƏRRİK GÜCÜ",
+        "RU": "МОЩНОСТЬ ДВИГАТЕЛЯ",
+        "ENG": "ENGINE POWER"
+      },
+      "RULE_TAB_2_ITEM_3_DESC": {
+        "AZ": "AVTOMOBILIN KLIRENSI VE ASQI ARTIKULYASIYASI TEHLUKESIZLIK STANDARTLARINA UYGUN OLMALIDIR.",
+        "RU": "КЛИренс АВТОМОБИЛЯ И СОЕДИНЕНИЯ ПОДВЕСКИ ДОЛЖНЫ СООТВЕТСТВОВАТЬ СТАНДАРТАМ БЕЗОПАСНОСТИ.",
+        "ENG": "VEHICLE CLEARANCE AND SUSPENSION ARTICULATION SHOULD COMPLY WITH SAFETY STANDARDS."
+      },
+      "RULE_TAB_2_ITEM_3_TITLE": {
+        "AZ": "ASQI SİSTEMİ",
+        "RU": "СИСТЕМА ПОДВЕСКИ",
+        "ENG": "SUSPENSION SYSTEM"
+      },
+      "RULE_TAB_2_TITLE": {
+        "AZ": "TEXNİKİ NORMARTİVLƏR",
+        "RU": "ТЕХНИЧЕСКИЙ РЕГЛАМЕНТ",
+        "ENG": "TECHNICAL REGULATIONS"
+      },
+      "RULE_TAB_3_DOC_BUTTON": {
+        "AZ": "PDF YUKLE",
+        "RU": "СКАЧАТЬ PDF",
+        "ENG": "DOWNLOAD PDF"
+      },
+      "RULE_TAB_3_DOC_NAME": {
+        "AZ": "SAFETY_PROTOKOLU.PDF",
+        "RU": "SAFETY_PROTOKOLU.PDF",
+        "ENG": "SAFETY_PROTOKOLU.PDF"
+      },
+      "RULE_TAB_3_DOC_URL": {
+        "AZ": "Sekme 3 Sened Linki",
+        "RU": "Вкладка 3. Ссылка на документ.",
+        "ENG": "Tab 3 Document Link"
+      },
+      "RULE_TAB_3_ICON": {
+        "AZ": "ShieldAlert",
+        "RU": "ЩитАлерт",
+        "ENG": "ShieldAlert"
+      },
+      "RULE_TAB_3_ID": {
+        "AZ": "safety",
+        "RU": "безопасность",
+        "ENG": "safety"
+      },
+      "RULE_TAB_3_ITEM_1_DESC": {
+        "AZ": "BUTUN ACIQ VE YA MODIFIKASIYA OLUNMUS AVTOMOBILLERDE FIA STANDARTLARINA UYGUN TEHLUKESIZLIK KARKASI MECBURIDIR.",
+        "RU": "СТАНДАРТЫ FIA СОГЛАСНО КРОНШТЕЙНУ БЕЗОПАСНОСТИ ЯВЛЯЮТСЯ ОБЯЗАТЕЛЬНЫМИ НА АВТОМОБИЛЯХ С ОТКРЫТЫМ ИЛИ МОДИФИЦИРОВАННЫМ БАГАЖНИКОМ.",
+        "ENG": "FIA STANDARDS ACCORDING TO SAFETY BRACKET IS MANDATORY ON BOOT OPEN OR MODIFIED VEHICLES."
+      },
+      "RULE_TAB_3_ITEM_1_TITLE": {
+        "AZ": "KARKAS TƏLƏBİ",
+        "RU": "ТРЕБОВАНИЯ К РАМКЕ",
+        "ENG": "FRAME REQUIREMENT"
+      },
+      "RULE_TAB_3_ITEM_2_DESC": {
+        "AZ": "HƏR BİR AVTOMOBİLDƏ ƏN AZI 2 KİLOQRAMLIQ, ASAN ƏLÇATAN YERDƏ YERLƏŞƏN YANĞINSÖNDÜRƏN BALON OLMALIDIR.",
+        "RU": "КАЖДОЕ АВТОМОБИЛЬ ДОЛЖНО ИМЕТЬ ЛЕГКО ДОСТУПНЫЙ БАЛЛОН ОГНЕТУШИТЕЛЯ МИНИМАЛЬНОЙ 2 КГ.",
+        "ENG": "EACH VEHICLE SHOULD HAVE A MINIMUM 2 KG FIRE EXTINGUISHER CYLINDER, EASILY ACCESSIBLE."
+      },
+      "RULE_TAB_3_ITEM_2_TITLE": {
+        "AZ": "YANĞIN SÖNDÜRMƏ",
+        "RU": "ПОЖАРОТУШЕНИЕ",
+        "ENG": "FIRE EXTINGUISHING"
+      },
+      "RULE_TAB_3_ITEM_3_DESC": {
+        "AZ": "5 NOQTELI TEHLUKESIZLIK KEMERLERI VE SERTIFIKATLI KASKALARIN ISTIFADESI BUTUN MERHELELERDE MECBURIDIR.",
+        "RU": "ИСПОЛЬЗОВАНИЕ 5-ТОЧЕЧНЫХ РЕМНЕЙ БЕЗОПАСНОСТИ И СЕРТИФИЦИРОВАННЫХ ШЛЕМОВ ОБЯЗАТЕЛЬНО НА ВСЕХ ЭТАПАХ.",
+        "ENG": "THE USE OF 5-POINT SAFETY BELTS AND CERTIFIED HELMETS IS MANDATORY AT ALL STAGES."
+      },
+      "RULE_TAB_3_ITEM_3_TITLE": {
+        "AZ": "KƏMƏR VƏ DƏBİLQƏ",
+        "RU": "РЕМЕНЬ И ШЛЕМ",
+        "ENG": "BELT AND HELMET"
+      },
+      "RULE_TAB_3_TITLE": {
+        "AZ": "TƏHLÜKƏSİZLİK QAYDALARI",
+        "RU": "ПРАВИЛА БЕЗОПАСНОСТИ",
+        "ENG": "SAFETY RULES"
+      },
+      "RULE_TAB_4_DOC_BUTTON": {
+        "AZ": "PDF YUKLE",
+        "RU": "СКАЧАТЬ PDF",
+        "ENG": "DOWNLOAD PDF"
+      },
+      "RULE_TAB_4_DOC_NAME": {
+        "AZ": "ECO_PROTOKOLU.PDF",
+        "RU": "ECO_PROTOKOLU.PDF",
+        "ENG": "ECO_PROTOKOLU.PDF"
+      },
+      "RULE_TAB_4_DOC_URL": {
+        "AZ": "Sekme 4 Sened Linki",
+        "RU": "Вкладка 4. Ссылка на документ.",
+        "ENG": "Tab 4 Document Link"
+      },
+      "RULE_TAB_4_ICON": {
+        "AZ": "Leaf",
+        "RU": "Лист",
+        "ENG": "Leaf"
+      },
+      "RULE_TAB_4_ID": {
+        "AZ": "eco",
+        "RU": "эко",
+        "ENG": "eco"
+      },
+      "RULE_TAB_4_ITEM_1_DESC": {
+        "AZ": "YARIS ERAZISINDE VE TRASDA HER HANSI BIR TULLANTININ ATILMASI QETI QADAGANDIR. ISTIRAKCILAR LEAVE NO TRACE PRINSIPINE EMEL ETMELIDIR.",
+        "RU": "СТРОГО ЗАПРЕЩЕНО ВЫБРАСЫВАТЬ ЛЮБЫЕ ОТХОДЫ НА РАЙОНЕ ЯРИСА И НА ТРАССУ. УЧАСТНИКИ ДОЛЖНЫ СОБЛЮДАТЬ ПРИНЦИП «НЕ ОСТАВЛЯТЬ СЛЕДОВ».",
+        "ENG": "IT IS STRICTLY PROHIBITED TO THROW ANY WASTE IN THE YARIS AREA AND ON THE TRACK. PARTICIPANTS MUST FOLLOW THE LEAVE NO TRACE PRINCIPLE."
+      },
+      "RULE_TAB_4_ITEM_1_TITLE": {
+        "AZ": "TULLANTILARIN İDARƏ EDİLMƏSİ",
+        "RU": "УПРАВЛЕНИЕ ОТХОДАМИ",
+        "ENG": "WASTE MANAGEMENT"
+      },
+      "RULE_TAB_4_ITEM_2_DESC": {
+        "AZ": "AVTOMOBİLDƏN YAĞ VƏ YA SOYUDUCU MAYE SIZMASI OLDUĞU TƏQDİRDƏ PİLOT DƏRHAL DAYANMALI VƏ ƏRAZİNİN ÇİRKLƏNMƏSİNİN QARŞISINI ALMALIDIR.",
+        "RU": "ЕСЛИ ИЗ АВТОМОБИЛЯ УТЕЧА МАСЛА ИЛИ ОХЛАЖДАЮЩЕЙ ЖИДКОСТИ, ПИЛОТУ СЛЕДУЕТ НЕМЕДЛЕННО ОСТАНОВИТЬСЯ И ИЗБЕГАТЬ ЗАГРЯЗНЕНИЯ ЗОНЫ.",
+        "ENG": "IF THE VEHICLE IS LEAKING OIL OR COOLANT, THE PILOT SHOULD STOP IMMEDIATELY AND AVOID CONTAMINATION OF THE AREA."
+      },
+      "RULE_TAB_4_ITEM_2_TITLE": {
+        "AZ": "MAYE SIZMALARI",
+        "RU": "УТЕЧКИ ЖИДКОСТИ",
+        "ENG": "FLUID LEAKS"
+      },
+      "RULE_TAB_4_ITEM_3_DESC": {
+        "AZ": "TƏBİİ ÖRTÜYÜ QORUMAQ MƏQSƏDİ İLƏ MÜƏYYƏN OLUNMUŞ TRASDANKƏNAR SÜRÜŞLƏR VƏ YA YAŞIL SAHƏLƏRƏ ZƏRƏR VERMƏK QADAĞANDIR.",
+        "RU": "ЗАПРЕЩАЕТСЯ ПОВРЕЖДАТЬ ВНЕДОРОЖНЫЕ ПРОЕЗДА ИЛИ ЗЕЛЕНЫЕ ЗОНЫ, ПРЕДНАЗНАЧЕННЫЕ ДЛЯ ЗАЩИТЫ ПРИРОДНОГО ПОКРЫТИЯ.",
+        "ENG": "IT IS PROHIBITED TO DAMAGE OFF-TRACK DRIVES OR GREEN AREAS DESIGNATED FOR THE PURPOSE OF PROTECTING THE NATURAL COVER."
+      },
+      "RULE_TAB_4_ITEM_3_TITLE": {
+        "AZ": "MARŞRUTDAN KƏNARA ÇIXMAMAQ",
+        "RU": "НЕ СХОДИТЕ С МАРШРУТА",
+        "ENG": "DO NOT GO OFF THE ROUTE"
+      },
+      "RULE_TAB_4_TITLE": {
+        "AZ": "EKOLOJİ MƏSULİYYƏT",
+        "RU": "ЭКОЛОГИЧЕСКАЯ ОТВЕТСТВЕННОСТЬ",
+        "ENG": "ENVIRONMENTAL RESPONSIBILITY"
+      },
+      "RULES_ECO_DESC1": {
+        "AZ": "YARIŞ ƏRAZİSİNDƏ VƏ TRASDA HƏR HANSI BİR TULLANTININ ATILMASI QƏTİ QADAĞANDIR. İŞTİRAKÇILAR \"LEAVE NO TRACE\" PRİNSİPİNƏ ƏMƏL ETMƏLİDİR.",
+        "RU": "УТИЛИЗАЦИЯ ЛЮБЫХ ОТХОДОВ НА ГОНОЧНОЙ ЗОНЕ И НА ТРАССЕ СТРОГО ЗАПРЕЩЕНА. УЧАСТНИКИ ДОЛЖНЫ СОБЛЮДАТЬ ПРИНЦИП «НЕ ОСТАВЛЯТЬ СЛЕДОВ».",
+        "ENG": "DISPOSAL OF ANY WASTE ON THE RACING AREA AND ON THE TRACK IS STRICTLY PROHIBITED. PARTICIPANTS SHOULD FOLLOW THE \"LEAVE NO TRACE\" PRINCIPLE."
+      },
+      "RULES_ECO_DESC2": {
+        "AZ": "AVTOMOBİLDƏN YAĞ VƏ YA SOYUDUCU MAYE SIZMASI OLDUĞU TƏQDİRDƏ PİLOT DƏRHAL DAYANMALI VƏ ƏRAZİNİN ÇİRKLƏNMƏSİNİN QARŞISINI ALMALIDIR.",
+        "RU": "ЕСЛИ ИЗ АВТОМОБИЛЯ УТЕЧА МАСЛА ИЛИ ОХЛАЖДАЮЩЕЙ ЖИДКОСТИ, ПИЛОТУ СЛЕДУЕТ НЕМЕДЛЕННО ОСТАНОВИТЬСЯ И ИЗБЕГАТЬ ЗАГРЯЗНЕНИЯ ЗОНЫ.",
+        "ENG": "IF THE VEHICLE IS LEAKING OIL OR COOLANT, THE PILOT SHOULD STOP IMMEDIATELY AND AVOID CONTAMINATION OF THE AREA."
+      },
+      "RULES_ECO_DESC3": {
+        "AZ": "TƏBİİ ÖRTÜYÜ QORUMAQ MƏQSƏDİ İLƏ MÜƏYYƏN OLUNMUŞ TRASDANKƏNAR SÜRÜŞLƏR VƏ YA YAŞIL SAHƏLƏRƏ ZƏRƏR VERMƏK QADAĞANDIR.",
+        "RU": "ЗАПРЕЩАЕТСЯ ПОВРЕЖДАТЬ ВНЕДОРОЖНЫЕ ПРОЕЗДА ИЛИ ЗЕЛЕНЫЕ ЗОНЫ, ПРЕДНАЗНАЧЕННЫЕ ДЛЯ ЗАЩИТЫ ПРИРОДНОГО ПОКРЫТИЯ.",
+        "ENG": "IT IS PROHIBITED TO DAMAGE OFF-TRACK DRIVES OR GREEN AREAS DESIGNATED FOR THE PURPOSE OF PROTECTING THE NATURAL COVER."
+      },
+      "RULES_ECO_SUB1": {
+        "AZ": "TULLANTILARIN İDARƏ EDİLMƏSİ",
+        "RU": "УПРАВЛЕНИЕ ОТХОДАМИ",
+        "ENG": "WASTE MANAGEMENT"
+      },
+      "RULES_ECO_SUB2": {
+        "AZ": "MAYE SIZMALARI",
+        "RU": "УТЕЧКИ ЖИДКОСТИ",
+        "ENG": "FLUID LEAKS"
+      },
+      "RULES_ECO_SUB3": {
+        "AZ": "MARŞRUTDAN KƏNARA ÇIXMAMAQ",
+        "RU": "НЕ СХОДИТЕ С МАРШРУТА",
+        "ENG": "DO NOT GO OFF THE ROUTE"
+      },
+      "RULES_ECO_TITLE": {
+        "AZ": "EKOLOJİ MƏSULİYYƏT",
+        "RU": "ЭКОЛОГИЧЕСКАЯ ОТВЕТСТВЕННОСТЬ",
+        "ENG": "ENVIRONMENTAL RESPONSIBILITY"
+      },
+      "RULES_PILOT_DESC1": {
+        "AZ": "HƏR BİR İŞTİRAKÇI FEDERASİYANIN MÜƏYYƏN ETDİYİ BÜTÜN TEXNİKİ VƏ ETİK NORMALARI QEYD-ŞƏRTSİZ QƏBUL EDİR.",
+        "RU": "КАЖДЫЙ УЧАСТНИК БЕЗУСЛОВНО ПРИНИМАЕТ ВСЕ ТЕХНИЧЕСКИЕ И ЭТИЧЕСКИЕ СТАНДАРТЫ, ОПРЕДЕЛЕННЫЕ ФЕДЕРАЦИЕЙ.",
+        "ENG": "EACH PARTICIPANT UNCONDITIONALLY ACCEPTS ALL TECHNICAL AND ETHICAL STANDARDS DETERMINED BY THE FEDERATION."
+      },
+      "RULES_PILOT_DESC2": {
+        "AZ": "PROTOKOLDAN KƏNARA ÇIXMAQ VƏ YA HAKİM QƏRARLARINA ETİRAZ ETMƏK DƏRHAL DİSKVALİFİKASİYA İLƏ NƏTİCƏLƏNƏ BİLƏR.",
+        "RU": "ОТКЛОНЕНИЕ ОТ ПРОТОКОЛА ИЛИ ОСпаривание РЕШЕНИЙ СУДЬИ МОГУТ ПРИВЕСТИ К НЕМЕДЛЕННОЙ ДИСКВАЛИФИКАЦИИ.",
+        "ENG": "DEVIATION OF PROTOCOL OR CHALLENGING REFEREE DECISIONS MAY RESULT IN IMMEDIATE DISQUALIFICATION."
+      },
+      "RULES_PILOT_DESC3": {
+        "AZ": "BÜTÜN AVADANLIQLAR YARIŞDAN 24 SAAT ƏVVƏL TEXNİKİ KOMİSSİYA TƏRƏFİNDƏN YOXLANILMALI VƏ TƏHLÜKƏSİZLİK SERTİFİKATI İLƏ TƏMİN EDİLMƏLİDİR.",
+        "RU": "ВСЕ ОБОРУДОВАНИЕ ДОЛЖНО БЫТЬ ПРОВЕРЕНО ТЕХНИЧЕСКИМ КОМИТЕТОМ ЗА 24 ЧАСА ДО ГОНКЫ И ОБЕСПЕЧЕНО СЕРТИФИКАТОМ БЕЗОПАСНОСТИ.",
+        "ENG": "ALL EQUIPMENT MUST BE INSPECTED BY THE TECHNICAL COMMITTEE 24 HOURS PRIOR TO THE RACE AND PROVIDED WITH A SAFETY CERTIFICATE."
+      },
+      "RULES_PILOT_SUB1": {
+        "AZ": "İSTİFADƏÇİ ÖHDƏLİKLƏRİ",
+        "RU": "ОБЯЗАННОСТИ ПОЛЬЗОВАТЕЛЯ",
+        "ENG": "USER OBLIGATIONS"
+      },
+      "RULES_PILOT_SUB2": {
+        "AZ": "DİSKVALİFİKASİYA",
+        "RU": "ДИСКВАЛИФИКАЦИЯ",
+        "ENG": "DISQUALIFICATION"
+      },
+      "RULES_PILOT_SUB3": {
+        "AZ": "TEXNİKİ TƏLƏBLƏR",
+        "RU": "ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ",
+        "ENG": "TECHNICAL REQUIREMENTS"
+      },
+      "RULES_PILOT_TITLE": {
+        "AZ": "PİLOT PROTOKOLU",
+        "RU": "ПИЛОТНЫЙ ПРОТОКОЛ",
+        "ENG": "PILOT PROTOCOL"
+      },
+      "RULES_SAFETY_DESC1": {
+        "AZ": "BÜTÜN AÇIQ VƏ YA MODİFİKASİYA OLUNMUŞ AVTOMOBİLLƏRDƏ FIA STANDARTLARINA UYĞUN TƏHLÜKƏSİZLİK KARKASI (ROLL CAGE) MƏCBURİDİR.",
+        "RU": "КОРПУС БЕЗОПАСНОСТИ, СООТВЕТСТВУЮЩИЙ СТАНДАРТАМ FIA, ОБЯЗАТЕЛЬНО НА ВСЕХ ОТКРЫТЫХ ИЛИ МОДИФИЦИРОВАННЫХ АВТОМОБИЛЯХ.",
+        "ENG": "A ROLL CAGE COMPLIANT TO FIA STANDARDS IS MANDATORY ON ALL OPEN OR MODIFIED VEHICLES."
+      },
+      "RULES_SAFETY_DESC2": {
+        "AZ": "HƏR BİR AVTOMOBİLDƏ ƏN AZI 2 KİLOQRAMLIQ, ASAN ƏLÇATAN YERDƏ YERLƏŞƏN YANĞINSÖNDÜRƏN BALON OLMALIDIR.",
+        "RU": "КАЖДОЕ АВТОМОБИЛЬ ДОЛЖНО ИМЕТЬ ЛЕГКО ДОСТУПНЫЙ БАЛЛОН ОГНЕТУШИТЕЛЯ МИНИМАЛЬНОЙ 2 КГ.",
+        "ENG": "EACH VEHICLE SHOULD HAVE A MINIMUM 2 KG FIRE EXTINGUISHER CYLINDER, EASILY ACCESSIBLE."
+      },
+      "RULES_SAFETY_DESC3": {
+        "AZ": "5 NÖQTƏLİ TƏHLÜKƏSİZLİK KƏMƏRLƏRİ VƏ SERTİFİKATLI KASKALARIN (DƏBİLQƏLƏRİN) İSTİFADƏSİ BÜTÜN MƏRHƏLƏLƏRDƏ MƏCBURİDİR.",
+        "RU": "ИСПОЛЬЗОВАНИЕ 5-ТОЧЕЧНЫХ РЕМНЕЙ БЕЗОПАСНОСТИ И СЕРТИФИЦИРОВАННЫХ ШЛЕМОВ (ШЛЕМ) ОБЯЗАТЕЛЬНО НА ВСЕХ ЭТАПАХ.",
+        "ENG": "USE OF 5-POINT SAFETY BELTS AND CERTIFIED HELMETS (HELMETS) IS MANDATORY AT ALL STAGES."
+      },
+      "RULES_SAFETY_SUB1": {
+        "AZ": "KARKAS TƏLƏBİ",
+        "RU": "ТРЕБОВАНИЯ К РАМКЕ",
+        "ENG": "FRAME REQUIREMENT"
+      },
+      "RULES_SAFETY_SUB2": {
+        "AZ": "YANĞIN SÖNDÜRMƏ",
+        "RU": "ПОЖАРОТУШЕНИЕ",
+        "ENG": "FIRE EXTINGUISHING"
+      },
+      "RULES_SAFETY_SUB3": {
+        "AZ": "KƏMƏR VƏ DƏBİLQƏ",
+        "RU": "РЕМЕНЬ И ШЛЕМ",
+        "ENG": "BELT AND HELMET"
+      },
+      "RULES_SAFETY_TITLE": {
+        "AZ": "TƏHLÜKƏSİZLİK QAYDALARI",
+        "RU": "ПРАВИЛА БЕЗОПАСНОСТИ",
+        "ENG": "SAFETY RULES"
+      },
+      "RULES_TECH_DESC1": {
+        "AZ": "PRO CLASS ÜÇÜN MAKSİMUM TƏKƏR ÖLÇÜSÜ 37 DÜYM, AMATEUR CLASS ÜÇÜN İSƏ 33 DÜYM OLARAQ MÜƏYYƏN EDİLMİŞDİR.",
+        "RU": "МАКСИМАЛЬНЫЙ РАЗМЕР КОЛЕСА ДЛЯ ПРОФЕССИОНАЛЬНОГО КЛАССА СОСТАВЛЯЕТ 37 ДЮЙМОВ, А ДЛЯ ЛЮБИТЕЛЬСКОГО КЛАССА 33 ДЮЙМА.",
+        "ENG": "MAXIMUM WHEEL SIZE FOR PRO CLASS IS 37 INCHES AND FOR AMATEUR CLASS 33 INCHES."
+      },
+      "RULES_TECH_DESC2": {
+        "AZ": "MÜHƏRRİK ÜZƏRİNDƏ APARILAN MODİFİKASİYALAR KATEQORİYA ÜZRƏ LİMİTLƏRİ AŞMAMALIDIR. TURBO SİSTEMLƏRİ YALNIZ XÜSUSİ KLASLARDA İCAZƏLİDİR.",
+        "RU": "МОДИФИКАЦИИ ДВИГАТЕЛЯ НЕ ДОЛЖНЫ ПРЕВЫШАТЬ ПРЕДЕЛЫ КАТЕГОРИЙ. ТУРБО-СИСТЕМЫ РАЗРЕШЕНЫ ТОЛЬКО В СПЕЦИАЛЬНЫХ КЛАССАХ.",
+        "ENG": "ENGINE MODIFICATIONS SHOULD NOT EXCEED CATEGORY LIMITS. TURBO SYSTEMS ARE ALLOWED IN SPECIAL CLASSES ONLY."
+      },
+      "RULES_TECH_DESC3": {
+        "AZ": "AVTOMOBİLİN KLİRENSİ (YERDƏN HÜNDÜRLÜYÜ) VƏ ASQI ARTIKULYASİYASI TƏHLÜKƏSİZLİK STANDARTLARINA UYĞUN OLMALIDIR.",
+        "RU": "ДЛИЕН ТРАНСПОРТНОГО СРЕДСТВА (ВЫСОТА ЗЕМЛИ) И СОДЕРЖАНИЕ ПОДВЕСКИ ДОЛЖНЫ СООТВЕТСТВОВАТЬ СТАНДАРТАМ БЕЗОПАСНОСТИ.",
+        "ENG": "VEHICLE CLEARANCE (GROUND HEIGHT) AND SUSPENSION ARTICULATION MUST COMPLY WITH SAFETY STANDARDS."
+      },
+      "RULES_TECH_SUB1": {
+        "AZ": "TƏKƏR ÖLÇÜLƏRİ",
+        "RU": "РАЗМЕРЫ КОЛЕСА",
+        "ENG": "WHEEL DIMENSIONS"
+      },
+      "RULES_TECH_SUB2": {
+        "AZ": "MÜHƏRRİK GÜCÜ",
+        "RU": "МОЩНОСТЬ ДВИГАТЕЛЯ",
+        "ENG": "ENGINE POWER"
+      },
+      "RULES_TECH_SUB3": {
+        "AZ": "ASQI SİSTEMİ",
+        "RU": "СИСТЕМА ПОДВЕСКИ",
+        "ENG": "SUSPENSION SYSTEM"
+      },
+      "RULES_TECH_TITLE": {
+        "AZ": "TEXNİKİ NORMARTİVLƏR",
+        "RU": "ТЕХНИЧЕСКИЙ РЕГЛАМЕНТ",
+        "ENG": "TECHNICAL REGULATIONS"
+      }
+    },
+    "termsofservicepage": {
+      "CONTACT_EMAIL": {
+        "AZ": "info@forsaj.az",
+        "RU": "info@forsaj.az",
+        "ENG": "info@forsaj.az"
+      },
+      "CONTACT_TITLE": {
+        "AZ": "Əlaqə",
+        "RU": "КОНТАКТЫ",
+        "ENG": "CONTACT"
+      },
+      "CONTACT_WEBSITE": {
+        "AZ": "https://forsaj.az",
+        "RU": "https://forsaj.az",
+        "ENG": "https://forsaj.az"
+      },
+      "INTRO_TEXT": {
+        "AZ": "forsaj.az platformasından istifadə qaydalarını və hüquqi çərçivəni müəyyən edən əsas şərtlər.",
+        "RU": "Основные условия, определяющие правила и правовую основу использования платформы forsaj.az.",
+        "ENG": "The basic conditions defining the rules and legal framework for using the forsaj.az platform."
+      },
+      "PAGE_SUBTITLE": {
+        "AZ": "İSTİFADƏ QAYDALARI VƏ HÜQUQİ ŞƏRTLƏR",
+        "RU": "УСЛОВИЯ ИСПОЛЬЗОВАНИЯ И ЮРИДИЧЕСКИЕ УСЛОВИЯ",
+        "ENG": "TERMS OF USE AND LEGAL TERMS"
+      },
+      "PAGE_TITLE": {
+        "AZ": "XİDMƏT ŞƏRTLƏRİ (TERMS OF SERVICE)",
+        "RU": "УСЛОВИЯ ОБСЛУЖИВАНИЯ",
+        "ENG": "TERMS OF SERVICE"
+      },
+      "SECTION_1_BODY": {
+        "AZ": "forsaj.az saytından istifadə etməklə siz bu Xidmət Şərtlərini qəbul etmiş olursunuz.",
+        "RU": "Используя сайт forsaj.az, вы принимаете настоящие Условия обслуживания.",
+        "ENG": "By using the forsaj.az website, you accept these Terms of Service."
+      },
+      "SECTION_1_TITLE": {
+        "AZ": "1. Qəbul",
+        "RU": "1. Прием",
+        "ENG": "1. Reception"
+      },
+      "SECTION_2_BODY": {
+        "AZ": "forsaj.az avtomobil, motorsport, off-road və Forsaj icması ilə bağlı məlumat, tədbir və digər rəqəmsal xidmətlər təqdim edir.",
+        "RU": "forsaj.az предоставляет информацию, мероприятия и другие цифровые услуги, связанные с автомобилями, автоспортом, бездорожьем и сообществом Forsaj.",
+        "ENG": "forsaj.az provides information, events and other digital services related to automobile, motorsport, off-road and Forsaj community."
+      },
+      "SECTION_2_TITLE": {
+        "AZ": "2. Xidmətin Təsviri",
+        "RU": "2. Описание услуги",
+        "ENG": "2. Description of Service"
+      },
+      "SECTION_3_BODY": {
+        "AZ": "İstifadəçi:\n- Saytdan yalnız qanuni məqsədlərlə istifadə etməlidir\n- Digər istifadəçilərin hüquqlarını pozmamalıdır\n- Saytın texniki sisteminə zərər verə biləcək hərəkətlər etməməlidir",
+        "RU": "Пользователь:\n- Необходимо использовать сайт только в законных целях.\n- Не должно нарушаться права других пользователей\n- Не следует совершать действия, которые могут повредить техническую систему сайта.",
+        "ENG": "User:\n- Must use the site only for legal purposes\n- Should not violate the rights of other users\n- Shouldn't do actions that could damage the site's technical system"
+      },
+      "SECTION_3_TITLE": {
+        "AZ": "3. İstifadə Qaydaları",
+        "RU": "3. Условия использования",
+        "ENG": "3. Terms of Use"
+      },
+      "SECTION_4_BODY": {
+        "AZ": "Saytda yerləşdirilən bütün məzmun (mətnlər, şəkillər, videolar, loqo və s.) müəllif hüquqları ilə qorunur və icazəsiz istifadə edilə bilməz.",
+        "RU": "Весь контент, размещенный на сайте (тексты, изображения, видео, логотипы и т.п.), защищен авторскими правами и не может быть использован без разрешения.",
+        "ENG": "All content posted on the site (texts, images, videos, logos, etc.) is protected by copyright and cannot be used without permission."
+      },
+      "SECTION_4_TITLE": {
+        "AZ": "4. Əqli Mülkiyyət Hüquqları",
+        "RU": "4. Права интеллектуальной собственности",
+        "ENG": "4. Intellectual Property Rights"
+      },
+      "SECTION_5_BODY": {
+        "AZ": "Sayt və xidmətlər “olduğu kimi” təqdim olunur. Texniki nasazlıq və ya fasilələrə görə sayt rəhbərliyi məsuliyyət daşımır.",
+        "RU": "Сайт и Услуги предоставляются «как есть». Администрация сайта не несет ответственности за технические неполадки или перебои в работе.",
+        "ENG": "The Site and Services are provided \"as is\". The site administration is not responsible for technical malfunctions or interruptions."
+      },
+      "SECTION_5_TITLE": {
+        "AZ": "5. Məsuliyyətin Məhdudlaşdırılması",
+        "RU": "5. Ограничение ответственности",
+        "ENG": "5. Limitation of Liability"
+      },
+      "SECTION_6_BODY": {
+        "AZ": "Biz bu şərtləri istənilən vaxt dəyişdirmək hüququnu özümüzdə saxlayırıq. Yenilənmiş versiya saytda dərc edildiyi tarixdən qüvvəyə minir.",
+        "RU": "Мы оставляем за собой право изменить эти условия в любое время. Обновленная версия вступает в силу с момента ее публикации на сайте.",
+        "ENG": "We reserve the right to change these terms at any time. The updated version takes effect from the date of its publication on the site."
+      },
+      "SECTION_6_TITLE": {
+        "AZ": "6. Dəyişiklik Hüququ",
+        "RU": "6. Право на внесение изменений",
+        "ENG": "6. Right of Amendment"
+      },
+      "SECTION_7_BODY": {
+        "AZ": "Bu Xidmət Şərtləri Azərbaycan Respublikasının qanunvericiliyinə uyğun tənzimlənir.",
+        "RU": "Настоящие Условия обслуживания регулируются законодательством Азербайджанской Республики.",
+        "ENG": "These Terms of Service are governed by the legislation of the Republic of Azerbaijan."
+      },
+      "SECTION_7_TITLE": {
+        "AZ": "7. Tətbiq Olunan Qanun",
+        "RU": "7. Применимое право",
+        "ENG": "7. Applicable Law"
+      },
+      "SECTION_8_BODY": {
+        "AZ": "Email: info@forsaj.az\nVeb sayt: https://forsaj.az",
+        "RU": "Электронная почта: info@forsaj.az\nСайт: https://forsaj.az.",
+        "ENG": "Email: info@forsaj.az\nWebsite: https://forsaj.az"
+      },
+      "SECTION_8_TITLE": {
+        "AZ": "8. Əlaqə",
+        "RU": "8. Общение",
+        "ENG": "8. Communication"
+      },
+      "UPDATED_DATE": {
+        "AZ": "18 Fevral 2026",
+        "RU": "18 февраля 2026 г.",
+        "ENG": "February 18, 2026"
+      },
+      "UPDATED_LABEL": {
+        "AZ": "Son yenilənmə tarixi",
+        "RU": "Дата последнего обновления",
+        "ENG": "Date last updated"
+      }
+    },
+    "videoarchive": {
+      "lbl-section-subtitl-117": {
+        "AZ": "SECTION_SUBTITLE",
+        "RU": "SECTION_SUBTITLE",
+        "ENG": "SECTION_SUBTITLE"
+      },
+      "lbl-section-title-745": {
+        "AZ": "SECTION_TITLE",
+        "RU": "SECTION_TITLE",
+        "ENG": "SECTION_TITLE"
+      },
+      "lbl-view-all-btn-426": {
+        "AZ": "VIEW_ALL_BTN",
+        "RU": "VIEW_ALL_BTN",
+        "ENG": "VIEW_ALL_BTN"
+      },
+      "NO_PAST_EVENT_VIDEOS": {
+        "AZ": "KEÇMİŞ TƏDBİR VİDEOSU TAPILMADI",
+        "RU": "ВИДЕО ПРОШЛОГО СОБЫТИЯ НЕ НАЙДЕНО",
+        "ENG": "NO PAST EVENT VIDEO FOUND"
+      },
+      "NO_PAST_EVENT_VIDEOS_HINT": {
+        "AZ": "KEÇMİŞ TƏDBİRƏ YOUTUBE LİNKİ ƏLAVƏ EDİN",
+        "RU": "ДОБАВИТЬ ССЫЛКУ НА YOUTUBE НА ПРОШЛОЕ СОБЫТИЕ",
+        "ENG": "ADD YOUTUBE LINK TO PAST EVENT"
+      },
+      "SECTION_SUBTITLE": {
+        "AZ": "Tarixi yarışların unudulmaz anları",
+        "RU": "Незабываемые моменты исторических гонок",
+        "ENG": "Unforgettable moments of historical races"
+      },
+      "SECTION_TITLE": {
+        "AZ": "VİDEO ARXİVİ",
+        "RU": "ВИДЕО АРХИВ",
+        "ENG": "VIDEO ARCHIVE"
+      },
+      "VIEW_ALL_BTN": {
+        "AZ": "BÜTÜN QALEREYA",
+        "RU": "ВСЯ ГАЛЕРЕЯ",
+        "ENG": "ENTIRE GALLERY"
+      }
+    },
+    "whatisoffroad": {
+      "attr-offroad-culture-928": {
+        "AZ": "Offroad Culture",
+        "RU": "Внедорожная культура",
+        "ENG": "Offroad Culture"
+      },
+      "lbl-texni--398": {
+        "AZ": "TEXNİ",
+        "RU": "ТЕХНИЧЕСКИЙ",
+        "ENG": "TECHNICAL"
+      },
+      "txt-adrenali-n-v-texni-ka-364": {
+        "AZ": "ADRENALİN VƏ TEXNİKANIN SİMBİOZU",
+        "RU": "СИМБИОЗ АДРЕНАЛИНА И ТЕХНОЛОГИЙ",
+        "ENG": "SYMBIOSIS OF ADRENALINE AND TECHNOLOGY"
+      },
+      "txt-ekstremal-g-c-112": {
+        "AZ": "EKSTREMAL GÜC",
+        "RU": "ЭКСТРЕМАЛЬНАЯ ПРОЧНОСТЬ",
+        "ENG": "EXTREME STRENGTH"
+      },
+      "txt-gps-v-x-ri-t-oxu-452": {
+        "AZ": "GPS və xəritə oxuma bacarığı offroad yarışlarında qalibiyyətin yarısıdır.",
+        "RU": "Навыки GPS и чтения карт — это половина успеха в гонках по бездорожью.",
+        "ENG": "GPS and map reading skills are half the battle in offroad racing."
+      },
+      "txt-h-r-bir-ma-i-n-x-456": {
+        "AZ": "Hər bir maşın xüsusi asqı sistemi və gücləndirilmiş mühərriklə təmin olunur.",
+        "RU": "Каждая машина оснащена специальной системой подвески и усиленным двигателем.",
+        "ENG": "Each machine is equipped with a special suspension system and a strengthened engine."
+      },
+      "txt-navi-qasi-ya-901": {
+        "AZ": "NAVİQASIYA",
+        "RU": "НАВИГАЦИЯ",
+        "ENG": "NAVIGATION"
+      },
+      "txt-offroad-n-dir-134": {
+        "AZ": "OFFROAD NƏDIR?",
+        "RU": "ЧТО ТАКОЕ БЕЗДОРОЖЬЕ?",
+        "ENG": "WHAT IS OFFROAD?"
+      },
+      "txt-offroad-yaln-z-yol-339": {
+        "AZ": "Offroad – yalnız yolsuzluq şəraitində hərəkət etmək deyil, həm də dözümlülük, strateji düşüncə və mühəndislik bacarığının sınağıdır. Azərbaycanın čətin dağlıq relyefi bu idman növü üçün dünyada ən maraqlı məkanlardan biri hesab olunur.",
+        "RU": "Offroad – это не только испытание вождения по бездорожью, но и проверка на выносливость, стратегическое мышление и инженерные навыки. Сложная горная местность Азербайджана считается одним из самых интересных мест в мире для этого вида спорта.",
+        "ENG": "Offroad is not only a test of off-road driving, but also a test of endurance, strategic thinking and engineering skills. The difficult mountainous terrain of Azerbaijan is considered one of the most interesting places in the world for this type of sport."
+      },
+      "txt-pi-lotlar-n-t-hl-k-112": {
+        "AZ": "Pilotların təhlükəsizliyi bizim üçün prioritetdir. Karkas və kəmərlər məcburidir.",
+        "RU": "Безопасность пилотов – наш приоритет. Рама и ремни обязательны.",
+        "ENG": "Pilot safety is our priority. Frame and belts are mandatory."
+      },
+      "txt-s-r-c-n-n-fi-zi-ki-912": {
+        "AZ": "Sürücünün fiziki hazırlığı ən az avtomobilin gücü qədər əhəmiyyətlidir.",
+        "RU": "Физическая подготовка водителя не менее важна, чем мощность автомобиля.",
+        "ENG": "The physical fitness of the driver is at least as important as the power of the car."
+      },
+      "txt-t-hl-k-si-zli-k-420": {
+        "AZ": "TƏHLÜKƏSİZLİK",
+        "RU": "БЕЗОПАСНОСТЬ",
+        "ENG": "SECURITY"
+      },
+      "txt-texni-ki-t-chi-z-856": {
+        "AZ": "TEXNİKİ TƏCHİZAT",
+        "RU": "ТЕХНИЧЕСКОЕ ОБОРУДОВАНИЕ",
+        "ENG": "TECHNICAL EQUIPMENT"
+      },
+      "txt-yar-i-llik-96": {
+        "AZ": "YARIŞ İLLIK",
+        "RU": "ГОНКА ЕЖЕГОДНО",
+        "ENG": "RACE ANNUALLY"
+      }
+    }
+  }
+}

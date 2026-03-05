@@ -23,18 +23,35 @@ interface PageContent {
     images: ImageSection[];
 }
 
+interface LocalizationEntry {
+    AZ?: string;
+    RU?: string;
+    ENG?: string;
+}
+
+type LocalizationPageMap = Record<string, LocalizationEntry>;
+type LocalizationMap = Record<string, LocalizationPageMap>;
+type LocalizationValueIndex = Record<string, LocalizationEntry>;
+
 let siteContentCache: PageContent[] | null = null;
 let siteContentInFlight: Promise<PageContent[]> | null = null;
 let siteContentCacheAt = 0;
-const CACHE_TTL_MS = 10000;
+let localizationCache: LocalizationMap | null = null;
+let localizationValueIndexCache: LocalizationValueIndex | null = null;
+let localizationInFlight: Promise<LocalizationMap> | null = null;
+const CACHE_TTL_MS = 60000;
 const CONTENT_VERSION_KEY = 'forsaj_site_content_version';
 const SITE_LANG_KEY = 'forsaj_site_lang';
 type SiteLang = 'AZ' | 'RU' | 'ENG';
-const NO_STORE_FETCH_OPTIONS: RequestInit = {
-    cache: 'no-store',
-    headers: {
-        'Cache-Control': 'no-cache'
-    }
+const FETCH_OPTIONS: RequestInit = {
+    cache: 'default'
+};
+
+const normalizeSiteLanguage = (rawValue?: string | null): SiteLang => {
+    const value = String(rawValue || '').trim().toUpperCase();
+    if (value === 'RU') return 'RU';
+    if (value === 'ENG' || value === 'EN') return 'ENG';
+    return 'AZ';
 };
 
 const normalizeContent = (data: any): PageContent[] => {
@@ -66,6 +83,27 @@ const normalizeToken = (value: string) =>
 
 const isKeyLikeValue = (value?: string) => /^[A-Z0-9_]+$/.test((value || '').trim());
 
+const stripLanguageAffixes = (rawKey: string | number) => {
+    const key = String(rawKey || '').trim();
+    if (!key) return '';
+
+    const suffixes = ['_RU', '_RUS', '.ru', '.rus', '_ENG', '_EN', '.eng', '.en'];
+    for (const suffix of suffixes) {
+        if (key.endsWith(suffix)) {
+            return key.slice(0, -suffix.length);
+        }
+    }
+
+    const prefixes = ['RU_', 'RUS_', 'ENG_', 'EN_'];
+    for (const prefix of prefixes) {
+        if (key.startsWith(prefix)) {
+            return key.slice(prefix.length);
+        }
+    }
+
+    return key;
+};
+
 const buildLanguageCandidates = (rawKey: string | number, lang: SiteLang) => {
     const key = String(rawKey || '').trim();
     if (!key) return [];
@@ -90,6 +128,160 @@ const buildLanguageCandidates = (rawKey: string | number, lang: SiteLang) => {
         `${key}.en`,
         key
     ];
+};
+
+const buildLocalizationCandidates = (rawKey: string | number, lang: SiteLang) => {
+    const key = String(rawKey || '').trim();
+    if (!key) return [];
+
+    const base = stripLanguageAffixes(key);
+    const candidates = [
+        key,
+        base,
+        ...buildLanguageCandidates(base || key, lang)
+    ];
+
+    return [...new Set(candidates.map(normalizeToken).filter(Boolean))];
+};
+
+const normalizeLocalization = (payload: any): LocalizationMap => {
+    const source = payload?.pages && typeof payload.pages === 'object' ? payload.pages : payload;
+    if (!source || typeof source !== 'object') return {};
+
+    const normalized: LocalizationMap = {};
+    for (const [rawPageId, rawPageValues] of Object.entries(source as Record<string, any>)) {
+        const pageId = String(rawPageId || '').trim().toLowerCase();
+        if (!pageId || !rawPageValues || typeof rawPageValues !== 'object') continue;
+
+        const pageMap: LocalizationPageMap = {};
+        for (const [rawKey, rawEntry] of Object.entries(rawPageValues as Record<string, any>)) {
+            const normalizedKey = normalizeToken(stripLanguageAffixes(rawKey));
+            if (!normalizedKey) continue;
+
+            const entry = rawEntry && typeof rawEntry === 'object'
+                ? rawEntry
+                : { AZ: String(rawEntry || '') };
+
+            pageMap[normalizedKey] = {
+                AZ: String(entry.AZ ?? entry.az ?? ''),
+                RU: String(entry.RU ?? entry.ru ?? ''),
+                ENG: String(entry.ENG ?? entry.EN ?? entry.en ?? '')
+            };
+        }
+
+        normalized[pageId] = pageMap;
+    }
+
+    return normalized;
+};
+
+const getEntryValue = (entry: LocalizationEntry, lang: SiteLang) => {
+    if (lang === 'AZ') return String(entry.AZ || '').trim();
+    if (lang === 'RU') return String(entry.RU || '').trim();
+    return String(entry.ENG || '').trim();
+};
+
+const scoreEntryValue = (entry: LocalizationEntry, lang: SiteLang) => {
+    const az = String(entry.AZ || '').trim();
+    const translated = getEntryValue(entry, lang);
+    if (!translated) return 0;
+    if (!az) return 2;
+    return normalizeToken(az) === normalizeToken(translated) ? 1 : 2;
+};
+
+const buildLocalizationValueIndex = (localization: LocalizationMap): LocalizationValueIndex => {
+    const index: LocalizationValueIndex = {};
+
+    for (const pageMap of Object.values(localization)) {
+        for (const entry of Object.values(pageMap)) {
+            const az = String(entry.AZ || '').trim();
+            const normalizedAz = normalizeToken(az);
+            if (!normalizedAz) continue;
+
+            const existing = index[normalizedAz];
+            if (!existing) {
+                index[normalizedAz] = {
+                    AZ: az,
+                    RU: String(entry.RU || '').trim(),
+                    ENG: String(entry.ENG || '').trim()
+                };
+                continue;
+            }
+
+            if (!existing.AZ && az) existing.AZ = az;
+
+            if (scoreEntryValue(entry, 'RU') > scoreEntryValue(existing, 'RU')) {
+                existing.RU = String(entry.RU || '').trim();
+            }
+            if (scoreEntryValue(entry, 'ENG') > scoreEntryValue(existing, 'ENG')) {
+                existing.ENG = String(entry.ENG || '').trim();
+            }
+        }
+    }
+
+    return index;
+};
+
+const resolveLocalizedText = (
+    localization: LocalizationMap,
+    localizationValueIndex: LocalizationValueIndex,
+    pageId: string,
+    key: string | number,
+    lang: SiteLang,
+    defaultValue: string
+) => {
+    if (lang === 'AZ' || typeof key === 'number') return '';
+
+    const pageMap = localization[pageId.toLowerCase()];
+    if (!pageMap) return '';
+
+    const keyCandidates = buildLocalizationCandidates(key, lang);
+    for (const normalizedKey of keyCandidates) {
+        const entry = pageMap[normalizedKey];
+        if (!entry) continue;
+
+        const preferred = (lang === 'RU' ? entry.RU : entry.ENG) || entry.AZ || '';
+        const value = String(preferred || '').trim();
+        if (!value) continue;
+
+        const normalizedValue = normalizeToken(value);
+        const normalizedEntryAz = normalizeToken(String(entry.AZ || '').trim());
+        if (isKeyLikeValue(value) && keyCandidates.includes(normalizedValue)) continue;
+
+        if (lang !== 'AZ' && normalizedEntryAz && normalizedEntryAz === normalizedValue) {
+            const byEntryAz = localizationValueIndex[normalizedEntryAz];
+            if (byEntryAz) {
+                const byEntryAzValue = String((lang === 'RU' ? byEntryAz.RU : byEntryAz.ENG) || '').trim();
+                if (byEntryAzValue && normalizeToken(byEntryAzValue) !== normalizedValue) {
+                    return byEntryAzValue;
+                }
+            }
+        }
+
+        if (defaultValue && normalizeToken(defaultValue) === normalizedValue) {
+            const byDefault = localizationValueIndex[normalizeToken(defaultValue)];
+            if (byDefault) {
+                const byDefaultValue = String((lang === 'RU' ? byDefault.RU : byDefault.ENG) || '').trim();
+                if (byDefaultValue && normalizeToken(byDefaultValue) !== normalizedValue) {
+                    return byDefaultValue;
+                }
+            }
+            return value;
+        }
+        return value;
+    }
+
+    if (defaultValue && !isKeyLikeValue(defaultValue)) {
+        const normalizedDefault = normalizeToken(defaultValue);
+        const byValue = localizationValueIndex[normalizedDefault];
+        if (byValue) {
+            const preferred = (lang === 'RU' ? byValue.RU : byValue.ENG) || byValue.AZ || '';
+            const value = String(preferred || '').trim();
+            if (value) return value;
+        }
+    }
+
+    return '';
 };
 
 const findSectionByKey = (sections: ContentSection[], key: string | number, lang: SiteLang) => {
@@ -122,14 +314,13 @@ const fetchSiteContentOnce = async (): Promise<PageContent[]> => {
 
     siteContentInFlight = (async () => {
         const version = localStorage.getItem(CONTENT_VERSION_KEY) || '';
-        const stamp = Date.now().toString();
         let data: any[] = [];
         let loadedFromStruct = false;
 
         try {
             const structResponse = await fetch(
-                `/api/site-new-struct?v=${encodeURIComponent(version)}&_ts=${encodeURIComponent(stamp)}`,
-                NO_STORE_FETCH_OPTIONS
+                `/api/site-new-struct?v=${encodeURIComponent(version)}`,
+                FETCH_OPTIONS
             );
             if (structResponse.ok) {
                 const struct = await structResponse.json();
@@ -145,8 +336,8 @@ const fetchSiteContentOnce = async (): Promise<PageContent[]> => {
 
         if (!loadedFromStruct) {
             const response = await fetch(
-                `/api/site-content?v=${encodeURIComponent(version)}&_ts=${encodeURIComponent(Date.now().toString())}`,
-                NO_STORE_FETCH_OPTIONS
+                `/api/site-content?v=${encodeURIComponent(version)}`,
+                FETCH_OPTIONS
             );
             if (!response.ok) throw new Error('Failed to fetch site content');
             data = await response.json();
@@ -163,27 +354,60 @@ const fetchSiteContentOnce = async (): Promise<PageContent[]> => {
     return siteContentInFlight;
 };
 
+const fetchLocalizationOnce = async (): Promise<LocalizationMap> => {
+    if (localizationCache) return localizationCache;
+    if (localizationInFlight) return localizationInFlight;
+
+    localizationInFlight = (async () => {
+        try {
+            const apiResponse = await fetch('/api/localization', FETCH_OPTIONS);
+            if (apiResponse.ok) {
+                const payload = await apiResponse.json();
+                const normalized = normalizeLocalization(payload);
+                localizationCache = normalized;
+                localizationValueIndexCache = buildLocalizationValueIndex(normalized);
+                return normalized;
+            }
+
+            const staticResponse = await fetch('/localization.json', FETCH_OPTIONS);
+            if (!staticResponse.ok) return {};
+            const payload = await staticResponse.json();
+            const normalized = normalizeLocalization(payload);
+            localizationCache = normalized;
+            localizationValueIndexCache = buildLocalizationValueIndex(normalized);
+            return normalized;
+        } catch {
+            return {};
+        }
+    })().finally(() => {
+        localizationInFlight = null;
+    });
+
+    return localizationInFlight;
+};
+
 export const useSiteContent = (scopePageId?: string) => {
     const [content, setContent] = useState<PageContent[]>([]);
+    const [localization, setLocalization] = useState<LocalizationMap>(() => localizationCache || {});
+    const [localizationValueIndex, setLocalizationValueIndex] = useState<LocalizationValueIndex>(() => localizationValueIndexCache || {});
     const [isLoading, setIsLoading] = useState(true);
-    const [language, setLanguage] = useState<SiteLang>(() => {
-        const saved = localStorage.getItem(SITE_LANG_KEY) as SiteLang | null;
-        if (saved === 'AZ' || saved === 'RU' || saved === 'ENG') return saved;
-        return 'AZ';
-    });
+    const [language, setLanguage] = useState<SiteLang>(() =>
+        normalizeSiteLanguage(localStorage.getItem(SITE_LANG_KEY))
+    );
 
     useEffect(() => {
         let isMounted = true;
 
         const loadContent = async () => {
             try {
-                if (siteContentCache) {
-                    if (isMounted) setContent(siteContentCache);
-                    return;
-                }
-
-                const mapped = await fetchSiteContentOnce();
-                if (isMounted) setContent(mapped as any);
+                const [mapped, localized] = await Promise.all([
+                    siteContentCache ? Promise.resolve(siteContentCache) : fetchSiteContentOnce(),
+                    fetchLocalizationOnce()
+                ]);
+                if (!isMounted) return;
+                setContent(mapped);
+                setLocalization(localized);
+                setLocalizationValueIndex(localizationValueIndexCache || buildLocalizationValueIndex(localized));
             } catch (err) {
                 console.error('Failed to load site content from API:', err);
             } finally {
@@ -207,10 +431,7 @@ export const useSiteContent = (scopePageId?: string) => {
 
         const onStorage = (event: StorageEvent) => {
             if (event.key === SITE_LANG_KEY) {
-                const next = (event.newValue || 'AZ') as SiteLang;
-                if (next === 'AZ' || next === 'RU' || next === 'ENG') {
-                    setLanguage(next);
-                }
+                setLanguage(normalizeSiteLanguage(event.newValue));
                 return;
             }
             if (event.key !== CONTENT_VERSION_KEY) return;
@@ -218,10 +439,7 @@ export const useSiteContent = (scopePageId?: string) => {
         };
 
         const onLangChange = () => {
-            const next = (localStorage.getItem(SITE_LANG_KEY) || 'AZ') as SiteLang;
-            if (next === 'AZ' || next === 'RU' || next === 'ENG') {
-                setLanguage(next);
-            }
+            setLanguage(normalizeSiteLanguage(localStorage.getItem(SITE_LANG_KEY)));
         };
 
         const onVisibility = () => {
@@ -266,6 +484,18 @@ export const useSiteContent = (scopePageId?: string) => {
         }
 
         if (!pageId) return defaultValue;
+
+        if (typeof sectionIdOrIndex !== 'number') {
+            const localized = resolveLocalizedText(
+                localization,
+                localizationValueIndex,
+                pageId,
+                sectionIdOrIndex,
+                language,
+                defaultValue
+            );
+            if (localized) return localized;
+        }
 
         const page = getPage(pageId);
         if (!page) return defaultValue;
@@ -348,7 +578,7 @@ export const useSiteContent = (scopePageId?: string) => {
     };
 
     const setSiteLanguage = (next: SiteLang) => {
-        const lang = next === 'AZ' || next === 'RU' || next === 'ENG' ? next : 'AZ';
+        const lang = normalizeSiteLanguage(next);
         localStorage.setItem(SITE_LANG_KEY, lang);
         setLanguage(lang);
         window.dispatchEvent(new CustomEvent('forsaj-language-changed'));

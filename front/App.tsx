@@ -183,35 +183,9 @@ const App: React.FC = () => {
     setCanonical(canonicalUrl);
   }, [getText]);
 
-
-
-  useEffect(() => {
-    const markTranslatorReady = () => {
-      document.body.classList.remove('cg-boot-pending');
-      document.body.classList.add('cg-boot-ready');
-    };
-    const fallbackTimer = window.setTimeout(markTranslatorReady, 9000);
-    window.addEventListener('custom-gtranslate-ready', markTranslatorReady as EventListener);
-
-    if (!document.getElementById('custom-gtranslate-script')) {
-      const script = document.createElement('script');
-      script.id = 'custom-gtranslate-script';
-      script.src = '/customized-translator.js';
-      script.defer = true;
-      script.onerror = markTranslatorReady;
-      document.body.appendChild(script);
-    }
-
-    return () => {
-      window.clearTimeout(fallbackTimer);
-      window.removeEventListener('custom-gtranslate-ready', markTranslatorReady as EventListener);
-    };
-  }, []);
-
   return (
     <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Toaster position="top-right" />
-      <div className="gtranslate_native_wrapper" />
       <Marquee />
       <Navbar currentView={currentView} onViewChange={(view) => handleViewChange(view, null)} />
       <main className="flex-grow w-full overflow-x-hidden">

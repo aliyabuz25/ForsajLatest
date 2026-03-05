@@ -70,6 +70,7 @@ const titleMapRu: Record<string, string> = {
   'marquee ayarlari': 'Настройки бегущей строки',
   'tetbiq ayarlari': 'Настройки приложения',
   'gizlenen ayarlar': 'Скрытые настройки',
+  translations: 'Переводы',
 };
 
 const titleMapAz: Record<string, string> = {
@@ -95,6 +96,7 @@ const pathMapRu: Record<string, string> = {
   '/general-settings?tab=marquee': 'Настройки бегущей строки',
   '/general-settings?tab=stats': 'Настройки приложения',
   '/general-settings?tab=hidden': 'Скрытые настройки',
+  '/translations': 'Переводы',
   '/?page=privacypolicypage': 'Политика конфиденциальности',
   '/?page=termsofservicepage': 'Условия использования',
 };
@@ -102,6 +104,7 @@ const pathMapRu: Record<string, string> = {
 const pathMapAz: Record<string, string> = {
   '/general-settings?tab=social': 'Sosial Media',
   '/general-settings?tab=whatsapp': 'WhatsApp Integration',
+  '/translations': 'Translations',
 };
 
 const normalizeSidebarPathKey = (path?: string) => {

@@ -163,6 +163,7 @@ const GALLERY_PHOTOS_FILE_PATH = path.join(FRONT_PUBLIC_DIR, 'gallery-photos.jso
 const VIDEOS_FILE_PATH = path.join(FRONT_PUBLIC_DIR, 'videos.json');
 const DRIVERS_FILE_PATH = path.join(FRONT_PUBLIC_DIR, 'drivers.json');
 const SUBSCRIBERS_FILE_PATH = path.join(WEB_DATA_DIR, 'subscribers.json');
+const LOCALIZATION_FILE_PATH = path.join(WEB_DATA_DIR, 'localization.json');
 const SITE_NEW_STRUCT_PATH = path.join(WEB_DATA_DIR, 'site-new-struct.json');
 const SITE_NEW_STRUCT_ID = 'site-new-struct';
 const SITE_NEW_STRUCT_RESOURCE_IDS = ['site-content', 'events', 'news', 'gallery-photos', 'videos', 'drivers', 'subscribers'];
@@ -188,7 +189,8 @@ const CONTENT_FILE_PATHS = {
     'gallery-photos': GALLERY_PHOTOS_FILE_PATH,
     'videos': VIDEOS_FILE_PATH,
     'drivers': DRIVERS_FILE_PATH,
-    'subscribers': SUBSCRIBERS_FILE_PATH
+    'subscribers': SUBSCRIBERS_FILE_PATH,
+    'localization': LOCALIZATION_FILE_PATH
 };
 
 let dbReady = false;
@@ -512,6 +514,46 @@ const saveContent = async (id, data) => {
 const normalizeListPayload = (value) => {
     if (!Array.isArray(value)) return null;
     return normalizeListResource(value);
+};
+
+const createDefaultLocalization = () => ({
+    schemaVersion: 1,
+    generatedAt: new Date().toISOString(),
+    languages: ['AZ', 'RU', 'ENG'],
+    pages: {}
+});
+
+const normalizeLocalizationPayload = (payload) => {
+    if (!isPlainObject(payload)) return null;
+    const pagesPayload = isPlainObject(payload.pages) ? payload.pages : {};
+    const pages = {};
+
+    for (const [rawPageId, rawEntries] of Object.entries(pagesPayload)) {
+        const pageId = String(rawPageId || '').trim().toLowerCase();
+        if (!pageId || !isPlainObject(rawEntries)) continue;
+
+        const entries = {};
+        for (const [rawKey, rawEntry] of Object.entries(rawEntries)) {
+            const key = String(rawKey || '').trim();
+            if (!key) continue;
+
+            const entry = isPlainObject(rawEntry) ? rawEntry : { AZ: String(rawEntry ?? '') };
+            entries[key] = {
+                AZ: String(entry.AZ ?? entry.az ?? ''),
+                RU: String(entry.RU ?? entry.ru ?? ''),
+                ENG: String(entry.ENG ?? entry.EN ?? entry.en ?? '')
+            };
+        }
+
+        pages[pageId] = entries;
+    }
+
+    return {
+        schemaVersion: Number(payload.schemaVersion) || 1,
+        generatedAt: String(payload.generatedAt || new Date().toISOString()),
+        languages: ['AZ', 'RU', 'ENG'],
+        pages
+    };
 };
 
 const isRegistrationEnabled = (rawValue, fallback = true) => {
@@ -1448,7 +1490,8 @@ const migrateFilesToDB = async () => {
         { id: 'gallery-photos', path: GALLERY_PHOTOS_FILE_PATH },
         { id: 'videos', path: VIDEOS_FILE_PATH },
         { id: 'drivers', path: DRIVERS_FILE_PATH },
-        { id: 'subscribers', path: SUBSCRIBERS_FILE_PATH }
+        { id: 'subscribers', path: SUBSCRIBERS_FILE_PATH },
+        { id: 'localization', path: LOCALIZATION_FILE_PATH }
     ];
 
     for (const file of filesToMigrate) {
@@ -2154,6 +2197,43 @@ app.get('/api/site-content', async (req, res) => {
     } catch (error) {
         console.error('Error reading site content:', error);
         res.status(500).json({ error: 'Failed to read site content' });
+    }
+});
+
+// API: Get Localization
+app.get('/api/localization', async (req, res) => {
+    try {
+        const data = await getContent('localization', createDefaultLocalization());
+        const normalized = normalizeLocalizationPayload(data) || createDefaultLocalization();
+        res.json(normalized);
+    } catch (error) {
+        console.error('Error reading localization:', error);
+        res.status(500).json({ error: 'Failed to read localization' });
+    }
+});
+
+// API: Save Localization (Auth)
+app.post('/api/localization', authenticateToken, async (req, res) => {
+    try {
+        const normalized = normalizeLocalizationPayload(req.body);
+        if (!normalized) return res.status(400).json({ error: 'Invalid localization payload' });
+
+        const current = await getContent('localization', createDefaultLocalization());
+        const currentVersion = Number(current?.schemaVersion) || 1;
+        const nextPayload = {
+            ...normalized,
+            schemaVersion: Math.max(currentVersion + 1, Number(normalized.schemaVersion) || 1),
+            generatedAt: new Date().toISOString()
+        };
+
+        const ok = await saveContent('localization', nextPayload);
+        if (!ok) return res.status(500).json({ error: 'Failed to save localization' });
+
+        const latest = await getContent('localization', createDefaultLocalization());
+        res.json({ success: true, data: latest });
+    } catch (error) {
+        console.error('Error saving localization:', error);
+        res.status(500).json({ error: 'Failed to save localization' });
     }
 });
 

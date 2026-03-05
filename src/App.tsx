@@ -9,6 +9,7 @@ import SetupGuide from './components/SetupGuide';
 import Login from './pages/Login';
 import ApplicationsManager from './pages/ApplicationsManager';
 import GeneralSettings from './pages/GeneralSettings';
+import TranslationsManager from './pages/TranslationsManager';
 import { Toaster } from 'react-hot-toast';
 import type { SidebarItem } from './types/navigation';
 import { ADMIN_USER_KEY, clearAdminSession, getAuthToken, SESSION_EXPIRED_EVENT } from './utils/session';
@@ -37,6 +38,7 @@ const titleMap: Record<string, string> = {
   'SİSTEM AYARLARI': 'Sistem Ayarları',
   SOSYAL: 'Sosyal',
   'WHATSAPP INTEGRATION': 'WhatsApp Integration',
+  TRANSLATIONS: 'Translations',
   'MƏXFİLİK SİYASƏTİ': 'PRIVACY POLICY',
   'XİDMƏT ŞƏRTLƏRİ': 'TERMS OF SERVICE',
 };
@@ -362,6 +364,10 @@ const App: React.FC = () => {
             { title: 'TERMS OF SERVICE', icon: 'FileText', path: '/?page=termsofservicepage' },
             ['PRIVACY POLICY']
           );
+          ensureShortcut(
+            { title: 'Translations', icon: 'Globe', path: '/translations' },
+            ['WhatsApp Integration', 'Sistem Ayarları']
+          );
 
           // Final guard against duplicate top-level menu names.
           const dedupedByTitle = new Map<string, SidebarItem>();
@@ -441,6 +447,8 @@ const App: React.FC = () => {
                       <Route path="/general-settings" element={<GeneralSettings />} />
 
                       <Route path="/users-management" element={<UsersManager currentUser={user} />} />
+
+                      <Route path="/translations" element={<TranslationsManager language={adminLanguage} />} />
 
                       <Route path="*" element={<div className="fade-in"><h1>{uiText.notFound}</h1></div>} />
                     </>

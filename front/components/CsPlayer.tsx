@@ -12,7 +12,27 @@ declare global {
 }
 
 const PLYR_SCRIPT_ID = 'forsaj-plyr-script';
+const PLYR_STYLE_ID = 'forsaj-plyr-style';
 let plyrLoadingPromise: Promise<boolean> | null = null;
+let plyrStyleLoadingPromise: Promise<boolean> | null = null;
+
+const ensurePlyrStylesLoaded = (): Promise<boolean> => {
+    if (typeof window === 'undefined') return Promise.resolve(false);
+    if (document.getElementById(PLYR_STYLE_ID)) return Promise.resolve(true);
+    if (plyrStyleLoadingPromise) return plyrStyleLoadingPromise;
+
+    plyrStyleLoadingPromise = new Promise<boolean>((resolve) => {
+        const link = document.createElement('link');
+        link.id = PLYR_STYLE_ID;
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.plyr.io/3.7.8/plyr.css';
+        link.onload = () => resolve(true);
+        link.onerror = () => resolve(false);
+        document.head.appendChild(link);
+    });
+
+    return plyrStyleLoadingPromise;
+};
 
 const ensurePlyrLoaded = (): Promise<boolean> => {
     if (typeof window === 'undefined') return Promise.resolve(false);
@@ -123,6 +143,7 @@ const CsPlayer: React.FC<CsPlayerProps> = ({ videoId, autoplay = false }) => {
         }, 1400);
 
         const bootstrap = async () => {
+            await ensurePlyrStylesLoaded();
             if (window.Plyr) {
                 initPlyr();
                 return;

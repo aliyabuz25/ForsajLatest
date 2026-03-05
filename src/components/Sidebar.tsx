@@ -182,7 +182,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
     const getGroupKey = (item: SidebarItem): SidebarGroupKey => {
         const path = normalizePath(item.path || '') || '';
         if (path.includes('page=privacypolicypage') || path.includes('page=termsofservicepage')) return 'legal';
-        if (path.startsWith('/users-management') || path.startsWith('/general-settings') || path.startsWith('/applications')) return 'management';
+        if (path.startsWith('/users-management') || path.startsWith('/general-settings') || path.startsWith('/applications') || path.startsWith('/translations')) return 'management';
         return 'content';
     };
 
@@ -204,6 +204,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, user, onLogout, language, 
         if (path.includes('tab=general')) return 120;
         if (path.includes('tab=social') || title === 'sosial media') return 130;
         if (path.includes('tab=whatsapp') || title === 'whatsapp integration') return 135;
+        if (path.startsWith('/translations')) return 138;
         if (path.startsWith('/applications')) return 140;
 
         return 999;

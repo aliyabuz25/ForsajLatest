@@ -1,0 +1,58 @@
+http:
+  routers:
+    forsaj-local-api:
+      entryPoints:
+        - web
+      rule: "(Host(`testai.octotech.az`) || Host(`localhost`)) && (PathPrefix(`/api`) || PathPrefix(`/uploads`))"
+      service: forsaj-local-api
+      priority: 1500
+
+    forsaj-local-admin:
+      entryPoints:
+        - web
+      rule: "(Host(`testai.octotech.az`) || Host(`localhost`)) && PathPrefix(`/admin`)"
+      service: forsaj-local-admin
+      priority: 1000
+
+    forsaj-local-dbadmin:
+      entryPoints:
+        - web
+      rule: "(Host(`testai.octotech.az`) || Host(`localhost`)) && PathPrefix(`/dbadmin`)"
+      middlewares:
+        - forsaj-local-dbadmin-strip
+      service: forsaj-local-dbadmin
+      priority: 3000
+
+    forsaj-local-frontend:
+      entryPoints:
+        - web
+      rule: "Host(`testai.octotech.az`) || Host(`localhost`)"
+      service: forsaj-local-frontend
+      priority: 500
+
+  middlewares:
+    forsaj-local-dbadmin-strip:
+      stripPrefix:
+        prefixes:
+          - /dbadmin
+
+  services:
+    forsaj-local-api:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:5005"
+
+    forsaj-local-admin:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:3011"
+
+    forsaj-local-dbadmin:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:8088"
+
+    forsaj-local-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://host.docker.internal:3010"

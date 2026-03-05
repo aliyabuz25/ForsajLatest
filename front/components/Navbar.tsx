@@ -109,39 +109,15 @@ const resolveNavTarget = (rawUrl: string, fallbackText: string, fallbackLabel: s
 };
 
 const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
-  const { getPage, getText } = useSiteContent('navbar');
+  const { getPage, getText, language, setSiteLanguage } = useSiteContent('navbar');
   const { getImage: getImageGeneral } = useSiteContent('general');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileLanguageModalOpen, setIsMobileLanguageModalOpen] = useState(false);
-  const [mobileLanguage, setMobileLanguage] = useState<string>('az');
-
-  const readCookieLanguage = (): 'az' | 'ru' | 'en' => {
-    try {
-      const rawCookie = document.cookie
-        .split(';')
-        .map((part) => part.trim())
-        .find((part) => part.startsWith('googtrans='));
-      if (!rawCookie) return 'az';
-      const cookieValue = decodeURIComponent(rawCookie.split('=').slice(1).join('='));
-      const target = (cookieValue.split('/').pop() || '').toLowerCase();
-      return target === 'ru' || target === 'en' ? target : 'az';
-    } catch {
-      return 'az';
-    }
-  };
-
-  const readRuntimeLanguage = (): 'az' | 'ru' | 'en' => {
-    const cookieLang = readCookieLanguage();
-    try {
-      const runtimeLang = (window as any).customGTranslateGetLang?.();
-      const lang = String(runtimeLang || '').toLowerCase();
-      if (lang === 'ru' || lang === 'en') return lang;
-      if (lang === 'az' && cookieLang !== 'az') return cookieLang;
-      return 'az';
-    } catch {
-      return cookieLang;
-    }
-  };
+  const [mobileLanguage, setMobileLanguage] = useState<string>(() => {
+    if (language === 'RU') return 'ru';
+    if (language === 'ENG') return 'en';
+    return 'az';
+  });
 
   const mobileLanguageOptions = [
     { code: 'az', label: 'AZ', flag: 'https://flagcdn.com/w40/az.png' },
@@ -170,25 +146,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   }, [isMobileMenuOpen, isMobileLanguageModalOpen]);
 
   useEffect(() => {
-    const syncFromRuntime = () => {
-      setMobileLanguage(readRuntimeLanguage());
-    };
-
-    const onLanguageChanged = (event: Event) => {
-      const next = String((event as CustomEvent)?.detail?.lang || '').toLowerCase();
-      if (next === 'az' || next === 'ru' || next === 'en') {
-        setMobileLanguage(next);
-      }
-    };
-
-    syncFromRuntime();
-    window.addEventListener('custom-gtranslate-language-changed', onLanguageChanged as EventListener);
-    window.addEventListener('custom-gtranslate-ready', syncFromRuntime as EventListener);
-    return () => {
-      window.removeEventListener('custom-gtranslate-language-changed', onLanguageChanged as EventListener);
-      window.removeEventListener('custom-gtranslate-ready', syncFromRuntime as EventListener);
-    };
-  }, []);
+    const next = language === 'RU' ? 'ru' : language === 'ENG' ? 'en' : 'az';
+    setMobileLanguage((prev) => (prev === next ? prev : next));
+  }, [language]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -206,14 +166,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
   const logoImg = getImageGeneral('SITE_LOGO_LIGHT').path;
 
   const defaultNavItems = [
-    { name: 'ANA SƏHİFƏ', target: { type: 'view', view: 'home' } as NavTarget, activeView: 'home' },
-    { name: 'HAQQIMIZDA', target: { type: 'view', view: 'about' } as NavTarget, activeView: 'about' },
-    { name: 'XƏBƏRLƏR', target: { type: 'view', view: 'news' } as NavTarget, activeView: 'news' },
-    { name: 'TƏDBİRLƏR', target: { type: 'view', view: 'events' } as NavTarget, activeView: 'events' },
-    { name: 'SÜRÜCÜLƏR', target: { type: 'view', view: 'drivers' } as NavTarget, activeView: 'drivers' },
-    { name: 'QALEREYA', target: { type: 'view', view: 'gallery' } as NavTarget, activeView: 'gallery' },
-    { name: 'QAYDALAR', target: { type: 'view', view: 'rules' } as NavTarget, activeView: 'rules' },
-    { name: 'ƏLAQƏ', target: { type: 'view', view: 'contact' } as NavTarget, activeView: 'contact' },
+    { name: getText('NAV_HOME', 'ANA SƏHİFƏ'), target: { type: 'view', view: 'home' } as NavTarget, activeView: 'home' },
+    { name: getText('NAV_ABOUT', 'HAQQIMIZDA'), target: { type: 'view', view: 'about' } as NavTarget, activeView: 'about' },
+    { name: getText('NAV_NEWS', 'XƏBƏRLƏR'), target: { type: 'view', view: 'news' } as NavTarget, activeView: 'news' },
+    { name: getText('NAV_EVENTS', 'TƏDBİRLƏR'), target: { type: 'view', view: 'events' } as NavTarget, activeView: 'events' },
+    { name: getText('NAV_DRIVERS', 'SÜRÜCÜLƏR'), target: { type: 'view', view: 'drivers' } as NavTarget, activeView: 'drivers' },
+    { name: getText('NAV_GALLERY', 'QALEREYA'), target: { type: 'view', view: 'gallery' } as NavTarget, activeView: 'gallery' },
+    { name: getText('NAV_RULES', 'QAYDALAR'), target: { type: 'view', view: 'rules' } as NavTarget, activeView: 'rules' },
+    { name: getText('NAV_CONTACT', 'ƏLAQƏ'), target: { type: 'view', view: 'contact' } as NavTarget, activeView: 'contact' },
   ];
 
   const navItems = (navbarPage?.sections || [])
@@ -263,11 +223,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
     const normalized = (lang || '').toLowerCase();
     if (normalized !== 'az' && normalized !== 'ru' && normalized !== 'en') return;
     setMobileLanguage(normalized);
+    setSiteLanguage(normalized === 'ru' ? 'RU' : normalized === 'en' ? 'ENG' : 'AZ');
     setIsMobileLanguageModalOpen(false);
-    const w = window as any;
-    if (typeof w.customGTranslateSetLang === 'function') {
-      w.customGTranslateSetLang(normalized);
-    }
   };
 
   return (
@@ -316,7 +273,24 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
         </div>
 
         <div className="flex items-center justify-end min-w-[170px]">
-          <div className="custom-gtranslate full notranslate hidden lg:block" translate="no" />
+          <div className="hidden lg:grid grid-cols-3 gap-2" translate="no">
+            {mobileLanguageOptions.map((option) => (
+              <button
+                key={`desktop-lang-${option.code}`}
+                type="button"
+                onClick={() => handleMobileLanguageSelect(option.code)}
+                translate="no"
+                className={`flex items-center justify-center gap-2 px-3 py-2 rounded-sm border transition-all font-black italic text-[11px] uppercase ${
+                  mobileLanguage === option.code
+                    ? 'bg-[#FF4D00] text-black border-[#FF4D00]'
+                    : 'bg-white/5 text-white border-white/10 hover:bg-white/10'
+                }`}
+              >
+                <img src={option.flag} alt={option.label} className="w-4 h-4 rounded-full object-cover border border-white/30" />
+                <span className="notranslate" translate="no">{option.label}</span>
+              </button>
+            ))}
+          </div>
           <button
             type="button"
             onClick={() => setIsMobileLanguageModalOpen(true)}
