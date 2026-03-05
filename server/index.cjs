@@ -13,9 +13,15 @@ const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const FORCED_MAIL_LOGO_URL = 'https://forsaj.octotech.az/uploads/1771427495257-714907240.png';
-const LIBRETRANSLATE_URL = String(process.env.LIBRETRANSLATE_URL || 'http://localhost:5001/translate').trim();
+const LIBRETRANSLATE_URL = String(process.env.LIBRETRANSLATE_URL || '').trim();
+const LIBRETRANSLATE_FALLBACK_URLS = String(process.env.LIBRETRANSLATE_FALLBACK_URLS || '')
+    .split(',')
+    .map((item) => String(item || '').trim())
+    .filter(Boolean);
+const TRANSLATE_PROVIDER_URLS = Array.from(new Set([LIBRETRANSLATE_URL, ...LIBRETRANSLATE_FALLBACK_URLS].filter(Boolean)));
 const LIBRETRANSLATE_API_KEY = String(process.env.LIBRETRANSLATE_API_KEY || '').trim();
-const LIBRETRANSLATE_TIMEOUT_MS = Number(process.env.LIBRETRANSLATE_TIMEOUT_MS || 15000);
+const LIBRETRANSLATE_TIMEOUT_MS = Number(process.env.LIBRETRANSLATE_TIMEOUT_MS || 7000);
+const GOOGLE_TRANSLATE_TIMEOUT_MS = Number(process.env.GOOGLE_TRANSLATE_TIMEOUT_MS || 10000);
 
 // ------------------------------------------
 // MYSQL CONFIGURATION
@@ -1774,13 +1780,141 @@ app.get('/api/health', (req, res) => {
     })();
 });
 
-// API: Frontend translation proxy (LibreTranslate compatible)
+const GOOGLE_TRANSLATE_ENDPOINT = 'https://translate.googleapis.com/translate_a/single';
+const HTML_TAG_REGEX = /^<[^>]+>$/;
+
+const parseGoogleTranslatedText = (rawBody) => {
+    try {
+        const payload = JSON.parse(rawBody);
+        if (!Array.isArray(payload) || !Array.isArray(payload[0])) return '';
+        return payload[0]
+            .map((segment) => (Array.isArray(segment) ? String(segment[0] ?? '') : ''))
+            .join('');
+    } catch {
+        return '';
+    }
+};
+
+const translateTextViaGoogleFree = async (inputText, source, target) => {
+    const sourceText = String(inputText ?? '');
+    if (!sourceText.trim()) return sourceText;
+
+    const params = new URLSearchParams({
+        client: 'gtx',
+        sl: String(source || 'auto').trim().toLowerCase() || 'auto',
+        tl: String(target || '').trim().toLowerCase(),
+        dt: 't',
+        q: sourceText
+    });
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), GOOGLE_TRANSLATE_TIMEOUT_MS);
+
+    try {
+        const response = await fetch(`${GOOGLE_TRANSLATE_ENDPOINT}?${params.toString()}`, {
+            method: 'GET',
+            signal: controller.signal
+        });
+        if (!response.ok) throw new Error(`google_status_${response.status}`);
+        const rawBody = await response.text();
+        const translated = parseGoogleTranslatedText(rawBody);
+        if (!translated) throw new Error('google_empty_response');
+        return translated;
+    } finally {
+        clearTimeout(timeoutId);
+    }
+};
+
+const translateHtmlViaGoogleFree = async (inputHtml, source, target) => {
+    const html = String(inputHtml ?? '');
+    if (!html.trim()) return html;
+
+    // Keep html tags as-is, translate only text nodes between tags.
+    const parts = html.split(/(<[^>]+>)/g);
+    const translatedParts = await Promise.all(parts.map(async (part) => {
+        if (!part || HTML_TAG_REGEX.test(part)) return part;
+        if (!String(part).trim()) return part;
+        return translateTextViaGoogleFree(part, source, target);
+    }));
+    return translatedParts.join('');
+};
+
+const shapeTranslateResponse = (isArrayInput, translatedList) =>
+    isArrayInput ? translatedList : String(translatedList[0] ?? '');
+
+const tryLibreTranslateProvider = async ({
+    endpoint,
+    requestPayload,
+    isArrayInput,
+    fallbackList
+}) => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), LIBRETRANSLATE_TIMEOUT_MS);
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestPayload),
+            signal: controller.signal
+        });
+
+        const rawBody = await response.text();
+        let payload = {};
+        try {
+            payload = rawBody ? JSON.parse(rawBody) : {};
+        } catch {
+            payload = {};
+        }
+
+        if (!response.ok) {
+            return {
+                ok: false,
+                reason: payload?.error || rawBody || response.statusText || 'upstream_error'
+            };
+        }
+
+        const upstreamTranslated = payload?.translatedText;
+        if (isArrayInput) {
+            if (Array.isArray(upstreamTranslated)) {
+                return {
+                    ok: true,
+                    translatedList: upstreamTranslated.map((item) => String(item ?? ''))
+                };
+            }
+
+            if (typeof upstreamTranslated === 'string') {
+                return {
+                    ok: true,
+                    translatedList: fallbackList.map(() => String(upstreamTranslated))
+                };
+            }
+
+            return { ok: false, reason: 'invalid_upstream_payload' };
+        }
+
+        if (typeof upstreamTranslated === 'string') {
+            return { ok: true, translatedList: [upstreamTranslated] };
+        }
+
+        return { ok: false, reason: 'invalid_upstream_payload' };
+    } catch (error) {
+        return {
+            ok: false,
+            reason: error?.name === 'AbortError' ? 'timeout' : (error?.message || 'request_failed')
+        };
+    } finally {
+        clearTimeout(timeoutId);
+    }
+};
+
+// API: Frontend translation proxy (free providers with failover)
 app.post('/api/translate', async (req, res) => {
     try {
         const body = req.body || {};
         const source = String(body.source || 'az').trim().toLowerCase() || 'az';
         const target = String(body.target || '').trim().toLowerCase();
-        const format = String(body.format || 'text').trim().toLowerCase() || 'text';
+        const format = String(body.format || 'text').trim().toLowerCase() === 'html' ? 'html' : 'text';
         const rawQ = body.q;
 
         if (!target) {
@@ -1791,94 +1925,77 @@ app.post('/api/translate', async (req, res) => {
         }
 
         const isArrayInput = Array.isArray(rawQ);
-        const normalizedQ = isArrayInput
-            ? rawQ.map((item) => String(item ?? ''))
-            : String(rawQ ?? '');
+        const normalizedList = (isArrayInput ? rawQ : [rawQ]).map((item) => String(item ?? ''));
 
-        if (isArrayInput && normalizedQ.length === 0) {
+        if (isArrayInput && normalizedList.length === 0) {
             return res.json({ translatedText: [] });
         }
 
         if (source === target) {
-            return res.json({ translatedText: normalizedQ });
+            return res.json({ translatedText: shapeTranslateResponse(isArrayInput, normalizedList) });
         }
 
-        const respondFallback = (reason) => {
-            return res.json({
-                translatedText: normalizedQ,
-                fallback: true,
-                reason
-            });
-        };
-
-        const payload = {
-            q: normalizedQ,
-            source,
-            target,
-            format
-        };
-
-        if (LIBRETRANSLATE_API_KEY) {
-            payload.api_key = LIBRETRANSLATE_API_KEY;
-        }
-
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), LIBRETRANSLATE_TIMEOUT_MS);
-
-        let upstreamResponse;
+        // 1) Primary free provider: Google public translate endpoint (no API key).
         try {
-            upstreamResponse = await fetch(LIBRETRANSLATE_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-                signal: controller.signal
-            });
-        } finally {
-            clearTimeout(timeoutId);
-        }
-
-        const upstreamText = await upstreamResponse.text();
-        let upstreamJson = {};
-        try {
-            upstreamJson = upstreamText ? JSON.parse(upstreamText) : {};
-        } catch {
-            upstreamJson = {};
-        }
-
-        if (!upstreamResponse.ok) {
-            return respondFallback(
-                upstreamJson?.error || upstreamText || upstreamResponse.statusText || 'upstream_error'
-            );
-        }
-
-        let translatedText;
-        if (isArrayInput) {
-            if (Array.isArray(upstreamJson?.translatedText)) {
-                translatedText = upstreamJson.translatedText.map((item) => String(item ?? ''));
-            } else {
-                translatedText = normalizedQ;
+            const googleTranslatedList = [];
+            for (const value of normalizedList) {
+                if (format === 'html') {
+                    googleTranslatedList.push(await translateHtmlViaGoogleFree(value, source, target));
+                } else {
+                    googleTranslatedList.push(await translateTextViaGoogleFree(value, source, target));
+                }
             }
-        } else {
-            translatedText = typeof upstreamJson?.translatedText === 'string'
-                ? upstreamJson.translatedText
-                : normalizedQ;
+
+            return res.json({
+                translatedText: shapeTranslateResponse(isArrayInput, googleTranslatedList),
+                provider: 'google-free'
+            });
+        } catch {
+            // fallback to optional libre-compatible providers below
         }
 
-        return res.json({ translatedText });
-    } catch (error) {
-        if (error?.name === 'AbortError') {
-            const rawQ = req.body?.q;
-            const normalizedQ = Array.isArray(rawQ)
-                ? rawQ.map((item) => String(item ?? ''))
-                : String(rawQ ?? '');
-            return res.json({ translatedText: normalizedQ, fallback: true, reason: 'timeout' });
+        // 2) Optional failover providers from env.
+        if (TRANSLATE_PROVIDER_URLS.length > 0) {
+            const requestPayload = {
+                q: isArrayInput ? normalizedList : normalizedList[0],
+                source,
+                target,
+                format
+            };
+            if (LIBRETRANSLATE_API_KEY) {
+                requestPayload.api_key = LIBRETRANSLATE_API_KEY;
+            }
+
+            for (const endpoint of TRANSLATE_PROVIDER_URLS) {
+                const providerResult = await tryLibreTranslateProvider({
+                    endpoint,
+                    requestPayload,
+                    isArrayInput,
+                    fallbackList: normalizedList
+                });
+                if (providerResult.ok) {
+                    return res.json({
+                        translatedText: shapeTranslateResponse(isArrayInput, providerResult.translatedList),
+                        provider: endpoint
+                    });
+                }
+            }
         }
+
+        return res.json({
+            translatedText: shapeTranslateResponse(isArrayInput, normalizedList),
+            fallback: true,
+            reason: 'all_providers_failed'
+        });
+    } catch (error) {
         console.error('Translation proxy error:', error);
         const rawQ = req.body?.q;
-        const normalizedQ = Array.isArray(rawQ)
-            ? rawQ.map((item) => String(item ?? ''))
-            : String(rawQ ?? '');
-        return res.json({ translatedText: normalizedQ, fallback: true, reason: 'internal_error' });
+        const normalizedList = (Array.isArray(rawQ) ? rawQ : [rawQ]).map((item) => String(item ?? ''));
+        return res.json({
+            translatedText: Array.isArray(rawQ) ? normalizedList : String(normalizedList[0] ?? ''),
+            fallback: true,
+            reason: error?.name === 'AbortError' ? 'timeout' : 'internal_error'
+        });
     }
 });
 
