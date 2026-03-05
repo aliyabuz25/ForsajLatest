@@ -7,6 +7,36 @@ import { resolveSocialLinks } from '../utils/socialLinks';
 const ContactPage: React.FC = () => {
   const { getPage, getText } = useSiteContent('contactpage');
   const { getText: getGeneralText } = useSiteContent('general');
+  const { getText: getFooterText } = useSiteContent('footer');
+  const normalizeComparable = (value: string) =>
+    (value || '')
+      .toLocaleLowerCase('az')
+      .replace(/ə/g, 'e')
+      .replace(/ı/g, 'i')
+      .replace(/ö/g, 'o')
+      .replace(/ü/g, 'u')
+      .replace(/ğ/g, 'g')
+      .replace(/ş/g, 's')
+      .replace(/ç/g, 'c')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '');
+  const pickSharedValue = (values: string[], defaultValue: string) => {
+    const normalizedDefault = normalizeComparable(defaultValue);
+    const hasMeaningfulOverride = (value: string) => {
+      const trimmed = String(value || '').trim();
+      if (!trimmed) return false;
+      const normalized = normalizeComparable(trimmed);
+      if (!normalized) return false;
+      return normalized !== normalizedDefault;
+    };
+
+    const firstOverride = values.find(hasMeaningfulOverride);
+    if (firstOverride) return String(firstOverride).trim();
+
+    const firstNonEmpty = values.find((value) => String(value || '').trim());
+    return String(firstNonEmpty || defaultValue || '').trim();
+  };
   const onlineLabel = getText('ONLINE_STATUS_LABEL', 'ONLINE');
   const formStatusLabel = getText('FORM_STATUS_LABEL', 'STATUS: ONLINE');
   const requiredFieldsToast = getText('FORM_TOAST_REQUIRED', 'Zəhmət olmasa bütün sahələri doldurun.');
@@ -56,14 +86,24 @@ const ContactPage: React.FC = () => {
       setSelectedType(topicOptions[0]);
     }
   }, [selectedType, topicOptions]);
-  const phoneNumber = getText(
-    'PHONE_NUMBER',
-    getText('CONTACT_PHONE', getGeneralText('CONTACT_PHONE') || '+994 50 123 45 67')
+  const defaultPhoneNumber = getGeneralText('CONTACT_PHONE') || '+994 50 123 45 67';
+  const phoneNumber = pickSharedValue(
+    [
+      getText('PHONE_NUMBER', ''),
+      getText('CONTACT_PHONE', ''),
+      getFooterText('CONTACT_PHONE', defaultPhoneNumber)
+    ],
+    defaultPhoneNumber
   );
   const phoneNumberSingleLine = phoneNumber.replace(/\s+/g, '\u00A0');
-  const addressLine1 = getText(
-    'ADDRESS_LINE_1',
-    getText('CONTACT_ADDRESS_1', getGeneralText('CONTACT_ADDRESS_1') || 'AZADLIQ 102, BAKI')
+  const defaultAddressLine1 = getGeneralText('CONTACT_ADDRESS_1') || 'AZADLIQ 102, BAKI';
+  const addressLine1 = pickSharedValue(
+    [
+      getText('ADDRESS_LINE_1', ''),
+      getText('CONTACT_ADDRESS_1', ''),
+      getFooterText('CONTACT_ADDRESS_1', defaultAddressLine1)
+    ],
+    defaultAddressLine1
   );
   const addressLine1SingleLine = addressLine1.replace(/\s+/g, '\u00A0');
   const officeEmail = 'PROTOCOL@FORSAJ.AZ';
