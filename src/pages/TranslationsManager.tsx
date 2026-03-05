@@ -106,6 +106,17 @@ const prettyPageName = (pageId: string) =>
         .trim()
         .replace(/\b\w/g, (char) => char.toUpperCase());
 
+const isUnderscorePlaceholder = (value: unknown) => {
+    const text = String(value || '').trim();
+    if (!text || !text.includes('_')) return false;
+    return /^[A-Za-z0-9_]+$/.test(text);
+};
+
+const shouldHideTranslationEntry = (entry?: LocalizationEntry | null) => {
+    if (!entry) return false;
+    return [entry.AZ, entry.RU, entry.ENG].some((value) => isUnderscorePlaceholder(value));
+};
+
 const TranslationsManager: React.FC<TranslationsManagerProps> = ({ language }) => {
     const [payload, setPayload] = useState<LocalizationPayload>(DEFAULT_PAYLOAD);
     const [loading, setLoading] = useState(true);
@@ -166,6 +177,7 @@ const TranslationsManager: React.FC<TranslationsManagerProps> = ({ language }) =
             .filter((key) => {
                 const entry = currentEntries[key];
                 if (!entry) return false;
+                if (shouldHideTranslationEntry(entry)) return false;
                 const currentValue = String(entry[selectedLang] || '').trim();
                 if (showOnlyMissing && currentValue) return false;
                 if (!query) return true;
