@@ -163,7 +163,7 @@ const normalizeSidebarPathKey = (path?: string) => {
   return raw;
 };
 
-type TranslationPair = { az: string; ru: string };
+type TranslationPair = { az: string; ru: string; en?: string };
 
 const ADMIN_TEXT_PAIRS: TranslationPair[] = [
   { az: 'Yüklənir...', ru: 'Загрузка...' },
@@ -299,31 +299,64 @@ const ADMIN_TEXT_PAIRS: TranslationPair[] = [
   { az: 'Aşağı', ru: 'Вниз' },
   { az: 'Yuxarı daşı', ru: 'Переместить вверх' },
   { az: 'Aşağı daşı', ru: 'Переместить вниз' },
+  { az: 'Sayta Bax', ru: 'Открыть сайт', en: 'Open Site' },
+  { az: 'Forsaj İdarəçisi', ru: 'Администратор Forsaj', en: 'Forsaj Administrator' },
+  { az: 'Baş Admin', ru: 'Главный админ', en: 'Super Admin' },
+  { az: 'Baş admin', ru: 'Главный админ', en: 'Super Admin' },
+  { az: 'Sayt Redaktoru', ru: 'Редактор сайта', en: 'Site Editor' },
+  { az: 'Profil', ru: 'Профиль', en: 'Profile' },
+  { az: 'Admin Panel', ru: 'Панель администратора', en: 'Admin Panel' },
+  { az: 'Geniş Rejim: Məcburi', ru: 'Широкий режим: обязателен', en: 'Wide Mode: Required' },
+  { az: 'Gizlədilənləri Aç', ru: 'Показать скрытые', en: 'Show Hidden' },
+  { az: 'Saxla', ru: 'Сохранить', en: 'Save' },
+  { az: 'Yadda Saxla', ru: 'Сохранить', en: 'Save' },
+  { az: 'Tədbir İdarəetməsi', ru: 'Управление мероприятиями', en: 'Event Management' },
+  { az: 'Tedbir Yönetimi', ru: 'Управление мероприятиями', en: 'Event Management' },
+  { az: 'Geniş rejim məcburi aktivdir: texniki ID, sıralama, silmə və gizlətmə alətləri hər zaman görünür.', ru: 'Расширенный режим включен принудительно: технический ID, сортировка, удаление и скрытие всегда отображаются.', en: 'Wide mode is enforced: technical ID, ordering, delete and hide tools are always visible.' },
+  { az: 'Hero Bölməsi', ru: 'Hero секция', en: 'Hero Section' },
+  { az: 'Ana səhifənin ilk ekranında görünən başlıq, alt başlıq və düymələr.', ru: 'Заголовок, подзаголовок и кнопки, отображаемые на первом экране главной страницы.', en: 'Heading, subheading and buttons shown on the first screen of the homepage.' },
+  { az: 'VƏZİYYƏT:', ru: 'СИТУАЦИЯ:', en: 'STATUS:' },
+  { az: 'Mətn Sahələri', ru: 'Текстовые поля', en: 'Text Fields' },
+  { az: 'Mətn Əlavə Et', ru: 'Добавить текст', en: 'Add Text' },
+  { az: 'Bu mətn saytda olduğu kimi göstərilir.', ru: 'Этот текст отображается на сайте в том виде, в котором он есть.', en: 'This text is displayed on the site as is.' },
+  { az: 'Açar mətn', ru: 'Ключевой текст', en: 'Key Text' },
+  { az: 'Link əlavə et', ru: 'Добавить ссылку', en: 'Add Link' },
+  { az: 'Yuxarı', ru: 'Вверх', en: 'Up' },
+  { az: 'Aşağı', ru: 'Вниз', en: 'Down' },
+  { az: 'Yuxarı daşı', ru: 'Переместить вверх', en: 'Move Up' },
+  { az: 'Aşağı daşı', ru: 'Переместить вниз', en: 'Move Down' },
+  { az: 'Paneldə gizlə', ru: 'Скрыть в панели', en: 'Hide In Panel' },
+  { az: 'Paneldə gizlədilən bütün bölmələri yenidən göstər', ru: 'Показать все разделы, скрытые в панели', en: 'Show all sections hidden in panel' },
+  { az: 'Bu section paneldə gizlidir. Yenidən göstərmək üçün “Paneldə gizlə” seçimini söndürün.', ru: 'Этот раздел скрыт в панели. Чтобы снова показать его, отключите опцию «Скрыть в панели».', en: 'This section is hidden in the panel. Disable “Hide In Panel” to show it again.' },
+  { az: 'Marquee bölməsi paneldə gizlədildi. Yuxarıdakı checkbox ilə geri aça bilərsiniz.', ru: 'Раздел Marquee скрыт в панели. Вы можете снова открыть его с помощью чекбокса выше.', en: 'Marquee section is hidden in panel. You can re-open it using the checkbox above.' },
 ];
 
-const buildLookup = (pairs: TranslationPair[], to: 'az' | 'ru') => {
+const buildLookup = (pairs: TranslationPair[], to: 'az' | 'ru' | 'en') => {
   const map = new Map<string, string>();
   pairs.forEach((pair) => {
-    map.set(pair.az, to === 'ru' ? pair.ru : pair.az);
-    map.set(pair.ru, to === 'ru' ? pair.ru : pair.az);
+    const enValue = pair.en || pair.az;
+    const localized = to === 'ru' ? pair.ru : to === 'en' ? enValue : pair.az;
+    map.set(pair.az, localized);
+    map.set(pair.ru, localized);
+    map.set(enValue, localized);
   });
   return map;
 };
 
 const TO_RU = buildLookup(ADMIN_TEXT_PAIRS, 'ru');
 const TO_AZ = buildLookup(ADMIN_TEXT_PAIRS, 'az');
+const TO_EN = buildLookup(ADMIN_TEXT_PAIRS, 'en');
 
 export const getLocalizedText = (lang: AdminLanguage, azText: string, ruText: string) =>
-  lang === 'ru' ? ruText : azText;
+  lang === 'ru' ? ruText : lang === 'en' ? translateAdminUiText('en', azText) : azText;
 
 export const translateAdminUiText = (lang: AdminLanguage, value: string): string => {
-  if (lang === 'en') return String(value ?? '');
   const input = String(value ?? '');
   if (!input) return input;
   const match = input.match(/^(\s*)([\s\S]*?)(\s*)$/);
   if (!match) return input;
   const [, prefix, core, suffix] = match;
-  const lookup = lang === 'ru' ? TO_RU : TO_AZ;
+  const lookup = lang === 'ru' ? TO_RU : lang === 'en' ? TO_EN : TO_AZ;
   const translated = lookup.get(core);
   if (!translated) {
     if (lang === 'ru') {
@@ -331,6 +364,10 @@ export const translateAdminUiText = (lang: AdminLanguage, value: string): string
       if (optionMatch) return `${prefix}Вариант ${optionMatch[1]}${suffix}`;
       const orderMatch = core.match(/^Sıra:\s*(\d+)$/i);
       if (orderMatch) return `${prefix}Ряд: ${orderMatch[1]}${suffix}`;
+      const optionFromEn = core.match(/^Option\s+(\d+)$/i);
+      if (optionFromEn) return `${prefix}Вариант ${optionFromEn[1]}${suffix}`;
+      const orderFromEn = core.match(/^Order:\s*(\d+)$/i);
+      if (orderFromEn) return `${prefix}Ряд: ${orderFromEn[1]}${suffix}`;
     }
 
     if (lang === 'az') {
@@ -338,6 +375,21 @@ export const translateAdminUiText = (lang: AdminLanguage, value: string): string
       if (optionMatch) return `${prefix}Seçim ${optionMatch[1]}${suffix}`;
       const orderMatch = core.match(/^Ряд:\s*(\d+)$/i);
       if (orderMatch) return `${prefix}Sıra: ${orderMatch[1]}${suffix}`;
+      const optionFromEn = core.match(/^Option\s+(\d+)$/i);
+      if (optionFromEn) return `${prefix}Seçim ${optionFromEn[1]}${suffix}`;
+      const orderFromEn = core.match(/^Order:\s*(\d+)$/i);
+      if (orderFromEn) return `${prefix}Sıra: ${orderFromEn[1]}${suffix}`;
+    }
+
+    if (lang === 'en') {
+      const optionFromAz = core.match(/^Seçim\s+(\d+)$/i);
+      if (optionFromAz) return `${prefix}Option ${optionFromAz[1]}${suffix}`;
+      const optionFromRu = core.match(/^Вариант\s+(\d+)$/i);
+      if (optionFromRu) return `${prefix}Option ${optionFromRu[1]}${suffix}`;
+      const orderFromAz = core.match(/^Sıra:\s*(\d+)$/i);
+      if (orderFromAz) return `${prefix}Order: ${orderFromAz[1]}${suffix}`;
+      const orderFromRu = core.match(/^Ряд:\s*(\d+)$/i);
+      if (orderFromRu) return `${prefix}Order: ${orderFromRu[1]}${suffix}`;
     }
 
     return input;
